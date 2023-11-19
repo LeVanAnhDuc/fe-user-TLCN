@@ -83,7 +83,7 @@ const Settings = () => {
                     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                         {/* start input FullName */}
                         <InputText
-                            labelInput="Name"
+                            labelInput="Họ và Tên"
                             errorInput={errors.name ? true : false}
                             isRequired
                             errorFormMessage={errors.name?.message}
@@ -97,7 +97,7 @@ const Settings = () => {
                         {/* end input FullName */}
                         {/* start input Username */}
                         <InputText
-                            labelInput="User Name"
+                            labelInput="Tên tài khoản"
                             errorInput={errors.username ? true : false}
                             isRequired
                             errorFormMessage={errors.username?.message}
@@ -150,7 +150,7 @@ const Settings = () => {
                         {/* end input gender */}
                         {/* start input phone */}
                         <InputText
-                            labelInput="Phone must contain 10 digits"
+                            labelInput="SDT"
                             typeInput="number"
                             errorInput={errors.phoneNumber ? true : false}
                             isRequired

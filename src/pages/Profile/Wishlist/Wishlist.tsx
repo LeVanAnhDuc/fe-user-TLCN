@@ -65,10 +65,10 @@ const Wishlist = () => {
                     <Table stickyHeader aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Products</TableCell>
-                                <TableCell align="left">Name</TableCell>
-                                <TableCell align="left">Price</TableCell>
-                                <TableCell>Actions</TableCell>
+                                <TableCell>Sản phẩm</TableCell>
+                                <TableCell align="left">Tên</TableCell>
+                                <TableCell align="left">Đơn giá</TableCell>
+                                <TableCell>Thao tác</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -88,7 +88,7 @@ const Wishlist = () => {
                                     <TableCell align="left">{item.price} $</TableCell>
                                     <TableCell align="left">
                                         <IconButton>
-                                            <ShoppingCartOutlined sx={{ fontSize: 26 }} />
+                                            +<ShoppingCartOutlined sx={{ fontSize: 26 }} />
                                         </IconButton>
                                         <IconButton>
                                             {isFavourite ? (

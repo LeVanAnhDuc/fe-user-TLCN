@@ -172,7 +172,11 @@ const DetailProduct = () => {
                 {/* Start info prođuct */}
                 <div className="col-span-12 md:col-span-6 lg:col-span-5 md:ml-10 ">
                     <div className="text-xl not-italic font-medium">{product?.name}</div>
-                    <div className="text-base not-italic font-medium">{product?.price} VNĐ</div>
+                    &nbsp;
+                    <div className="text-base not-italic font-medium">
+                        <span className='dong'> đ </span>
+                        <span className='price'> {product?.price} </span>
+                    </div>
 
                     {/* start sỉze */}
                     <div className="mt-10 mb-2">

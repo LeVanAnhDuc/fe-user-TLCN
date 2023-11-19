@@ -14,8 +14,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* font-size: 1.6rem; */
-    line-height: 1.5;
+    /* font-size: 1.5rem; */
+    /* line-height: 1.5; */
     /* Tối ưu tải phông chữ */
     text-rendering: optimizeSpeed;
 }
@@ -69,4 +69,68 @@ html *::-webkit-scrollbar-track {
     opacity: 0;
     transform: translateY(20px); /* Đổi animation tùy theo yêu cầu của bạn */
     animation-fill-mode: forwards; /* Giữ trạng thái cuối cùng của animation khi kết thúc */
+}
+
+/* Áp dụng cho chữ đ trước số tiền */
+.dong {
+    position: relative;
+    font-size: 12px; 
+    top: -3px; 
+    color: rgb(238,77,45);
+}
+
+/* Áp dụng cho giá tiền của sản phẩm */
+.price {
+    color: rgb(238,77,45);
+    font-size: 20px; 
+}
+
+.subtotal-price {
+    color: rgb(238,77,45);
+    font-size: 16px; 
+}
+
+
+/* Custom hiện thị tên sản phẩm */
+.two-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2; /* Số dòng cần hiển thị */
+    line-clamp: 2; /* Số dòng cần hiển thị */
+}
+
+.cart-image-size {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 144px;
+    overflow: hidden;
+}
+
+.cart-image {
+    object-fit: contain;
+    height: 120%; 
+    width: auto;
+}
+
+.video-container {
+    max-width: 91%; /* Điều chỉnh độ rộng tối đa */
+    height: auto; /* Để giữ tỷ lệ khung hình */
+    margin: 0 auto; /* Canh giữa theo chiều ngang */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-image {
+    max-width: 91.5%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

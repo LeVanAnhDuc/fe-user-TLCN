@@ -91,7 +91,7 @@ function Listproducts() {
                     {/* start navigation  */}
                     <Drawer anchor="right" open={openMenu} onClose={toggleMenu()}>
                         {/* Start Select Gender */}
-                        <div className="w-96">
+                        {/* <div className="w-96">
                             <Accordion defaultExpanded>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
@@ -108,7 +108,7 @@ function Listproducts() {
                                     </FormGroup>
                                 </AccordionDetails>
                             </Accordion>
-                        </div>
+                        </div> */}
                         {/* End Select Gender */}
                         {/* Start Select Category */}
                         <div>
@@ -137,7 +137,7 @@ function Listproducts() {
                         {/* End Select Category */}
                         {/* Start Select Filter */}
                         <div>
-                            <Accordion>
+                            <Accordion defaultExpanded>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-controls="panel1a-content"

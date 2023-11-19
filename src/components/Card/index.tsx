@@ -61,16 +61,23 @@ const Card = (props: { itemProduct: IProduct }) => {
             </div>
             <CardContent>
                 <div className="font-medium text-base mb-3 grid gap-1">
-                    <div>{itemProduct.name}</div>
+                    <div className="two-lines">
+                        {itemProduct.name}
+                    </div>
                     <div className="flex justify-between">
-                        <span>{itemProduct.price.toLocaleString('vi-VN')} VNĐ</span>
+                        <span>
+                            <span className="dong">đ</span>
+                            <span className='price'>
+                                {itemProduct.price.toLocaleString('vi-VN')}
+                            </span>
+                        </span>
                         <Rating defaultValue={itemProduct.rating} precision={0.5} readOnly />
                     </div>
                 </div>
             </CardContent>
             <CardActions>
                 <Button fullWidth variant="outlined" onClick={handleNextDetailPage}>
-                    <ShoppingCart />
+                    +<ShoppingCart />
                 </Button>
                 <Button onClick={handleChangeFavorite}>
                     {favourite ? <Favorite sx={{ color: 'black' }} /> : <FavoriteBorder sx={{ color: 'black' }} />}

@@ -56,12 +56,12 @@ const Profile = () => {
                 <TabContext value={valuePage}>
                     <Box sx={{ borderBottom: 2, borderColor: '#FFEEE8' }}>
                         <TabList onChange={handleChange} centered>
-                            <Tab label="Trang của bạn" value={config.PageInProfile.homeProfile} />
-                            <Tab label="Yêu thích" value={config.PageInProfile.favouriteProfile} />
-                            <Tab label="Địa chỉ" value={config.PageInProfile.addressProfile} />
-                            <Tab label="Lịch sử mua" value={config.PageInProfile.historyPaymentProfile} />
-                            <Tab label="Tài khoản" value={config.PageInProfile.accountProfile} />
-                            <Tab label="Mật khẩu" value={config.PageInProfile.passWordProfile} />
+                            <Tab sx={{ color: 'black' }} label="Trang của bạn" value={config.PageInProfile.homeProfile} />
+                            <Tab sx={{ color: 'black' }} label="Yêu thích" value={config.PageInProfile.favouriteProfile} />
+                            <Tab sx={{ color: 'black' }} label="Địa chỉ" value={config.PageInProfile.addressProfile} />
+                            <Tab sx={{ color: 'black' }} label="Lịch sử mua" value={config.PageInProfile.historyPaymentProfile} />
+                            <Tab sx={{ color: 'black' }} label="Hồ sơ" value={config.PageInProfile.accountProfile} />
+                            <Tab sx={{ color: 'black' }} label="Mật khẩu" value={config.PageInProfile.passWordProfile} />
                         </TabList>
                     </Box>
                     <TabPanel value={config.PageInProfile.homeProfile} sx={{ padding: 0 }}>

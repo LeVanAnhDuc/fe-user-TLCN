@@ -110,7 +110,7 @@ const Cart = () => {
                                         <TableCell></TableCell>
                                         <TableCell align="left">Tên</TableCell>
                                         <TableCell align="center">Số lượng</TableCell>
-                                        <TableCell align="left">Giá</TableCell>
+                                        <TableCell align="left">Đơn Giá</TableCell>
                                         <TableCell></TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -124,15 +124,18 @@ const Cart = () => {
                                                 component="th"
                                                 scope="row"
                                                 onClick={() => handleNextDetailPage(item.product.id)}
+                                                className='cart-image-size'
                                             >
                                                 <Image
                                                     src={item.imageUrl}
-                                                    className="sm:h-24 sm:w-24 lg:h-36 lg:w-36  h-16 w-16"
+                                                    alt="Ảnh sản phẩm"
+                                                    className="sm:h-24 sm:w-24 lg:h-36 lg:w-36  h-16 w-16 cart-image"
                                                 />
                                             </TableCell>
                                             <TableCell align="left">
-                                                <div>{item.product.name}</div>
+                                                <div className='two-lines'>{item.product.name}</div>
                                                 <span>
+                                                    Phân loại:&nbsp;
                                                     {item.sku?.optionValues?.map((option, index) => (
                                                         <React.Fragment key={index}>
                                                             {option.valueName}
@@ -148,7 +151,12 @@ const Cart = () => {
                                                     handleChangeItemQuantity={handleChangeItemQuantity}
                                                 />
                                             </TableCell>
-                                            <TableCell align="left">{item.subTotal.toLocaleString('vi-VN')}</TableCell>
+                                            <TableCell align="left">
+                                                <span className='dong'>đ</span>
+                                                <span  className='subtotal-price'>
+                                                    {item.subTotal.toLocaleString('vi-VN')}
+                                                </span>
+                                            </TableCell>
                                             <TableCell align="left">
                                                 <DeleteProduct
                                                     idItem={item.id}
@@ -182,12 +190,12 @@ const Cart = () => {
                     </div>
                     {totalProduct === 0 ? (
                         <Button variant="contained" fullWidth size="large" disabled>
-                            Thanh toán
+                            Mua hàng
                         </Button>
                     ) : (
                         <Link to={config.Routes.checkOut}>
                             <Button variant="contained" fullWidth color="primary" size="large">
-                                Thanh toán
+                                Mua hàng
                             </Button>
                         </Link>
                     )}

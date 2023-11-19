@@ -43,7 +43,7 @@ function Home() {
         <>
             {/* section banner */}
             <div
-                className="w-full h-full bg-cover bg-no-repeat bg-center py-80"
+                className="w-full h-full bg-cover bg-no-repeat bg-center py-80 bg-image"
                 style={{ backgroundImage: `url(${S1banner1})` }}
             >
                 <div className="flex flex-col pl-32 select-none">
@@ -151,7 +151,7 @@ function Home() {
             {/* Start section 5 */}
             <ScrollAnimationElement>
                 <div className="h-full mt-8 relative opacity-0">
-                    <video ref={videoRef} muted>
+                    <video ref={videoRef} muted className="video-container">
                         <source src={S5BanerVideo1} type="video/mp4" />
                     </video>
                     <div className="w-full flex flex-col absolute bottom-0 text-center mb-4">

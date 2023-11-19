@@ -91,7 +91,7 @@ function Header() {
                             <Image src={logo} className="h-full w-full" />
                         </Link>
                     </div>
-                    <form className="w-full h-full col-span-1 mt-2.5">
+                    <form className="w-full h-full col-span-2 mt-2.5">
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                             <Search className="mr-1 my-0.5" />
                             <TextField

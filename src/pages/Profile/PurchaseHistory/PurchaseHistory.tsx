@@ -10,6 +10,11 @@ import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import config from '../../../config';
+
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
@@ -25,6 +30,15 @@ function Row(props: { item: IOrder }) {
     const { item } = props;
     const [open, setOpen] = useState(false);
 
+    const navigate = useNavigate();
+    const handleNextDetailPage = (idProduct: number) => {
+        if (idProduct) {
+            navigate(config.Routes.detailProduct + '#' + idProduct);
+        } else {
+            toast.error('Đang bảo trì');
+        }
+    };
+
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' }, backgroundColor: open ? '#FFF8EA' : '' }}>
@@ -32,7 +46,13 @@ function Row(props: { item: IOrder }) {
                     {item.createdDate}
                 </TableCell>
                 <TableCell align="left">{item.totalItems}</TableCell>
-                <TableCell align="left">{item.total.toLocaleString('vi-VN')}</TableCell>
+                <TableCell align="left">
+                    <span className="dong">đ</span>
+                    <span className='price'>
+                        {item.total.toLocaleString('vi-VN')}
+                    </span>
+                    
+                </TableCell>
                 <TableCell align="left">{item.status}</TableCell>
                 <TableCell>
                     <Button variant="outlined" onClick={() => setOpen(!open)}>
@@ -71,7 +91,7 @@ function Row(props: { item: IOrder }) {
                                         <TableCell>Sản phẩm</TableCell>
                                         <TableCell align="left">Tên</TableCell>
                                         <TableCell align="left">Số lượng</TableCell>
-                                        <TableCell align="left">Giá</TableCell>
+                                        <TableCell align="left">Đơn Giá</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -84,21 +104,28 @@ function Row(props: { item: IOrder }) {
                                                 },
                                             }}
                                         >
-                                            <TableCell component="th" scope="row">
+                                            <TableCell component="th" scope="row" onClick={() => handleNextDetailPage(item2.product.id)}>
                                                 <Image
                                                     src={item2.imageUrl}
                                                     className="sm:h-24 sm:w-24 lg:h-36 lg:w-36  h-16 w-16"
                                                 />
                                             </TableCell>
                                             <TableCell align="left">
-                                                <div className="text-md font-medium">{item2.product.name}</div>
+                                                <div className="text-md font-medium two-lines">{item2.product.name}</div>
+                                                Phân loại:&nbsp;
                                                 {item2.sku.optionValues.map((item3, index3) => (
-                                                    <span key={index3}>{item3.valueName} </span>
+                                                    <span key={index3}>
+                                                        {item3.valueName} 
+                                                        {index3 < item2.sku.optionValues.length - 1 ? ' - ' : ''}
+                                                    </span>
                                                 ))}
                                             </TableCell>
                                             <TableCell align="left">{item2.quantity} </TableCell>
-                                            <TableCell align="left">
-                                                {item2.subTotal.toLocaleString('vi-VN')} VNĐ
+                                            <TableCell align="right">
+                                                <span className="dong">đ</span>
+                                                <span className='subtotal-price'>
+                                                    {item2.subTotal.toLocaleString('vi-VN')}
+                                                </span>
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -133,7 +160,7 @@ const PurchaseHistory = () => {
                             <TableRow>
                                 <TableCell>Ngày xuất đơn</TableCell>
                                 <TableCell align="left">Tổng sản phẩm</TableCell>
-                                <TableCell align="left">Tổng giá</TableCell>
+                                <TableCell align="left">Thành tiền</TableCell>
                                 <TableCell align="left">Trạng thái</TableCell>
                                 <TableCell>Chi tiết</TableCell>
                             </TableRow>
