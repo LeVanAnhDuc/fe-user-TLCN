@@ -36,7 +36,7 @@ const Settings = () => {
                     await setValue('email', response.data.email);
                     await setValue('phoneNumber', response.data.phoneNumber);
                     await setValue('gender', response.data.gender);
-
+                    await setValue('avatarUrl', response.data.avatarUrl);
                     await setGenderUser(response.data.gender);
                 } else {
                     toast.error(response.data.message);

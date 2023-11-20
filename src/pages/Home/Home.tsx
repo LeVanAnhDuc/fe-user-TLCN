@@ -1,4 +1,4 @@
-import S1banner1 from '../../assets/img/LandingPage/Section1.png';
+import S1banner1 from '../../assets/img/LandingPage/Section1.jpg';
 import S2Baner1 from '../../assets/img/LandingPage/section-2-1.png';
 import S2Baner2 from '../../assets/img/LandingPage/section-2-2.png';
 import S2Baner3 from '../../assets/img/LandingPage/section-2-3.png';
@@ -43,10 +43,12 @@ function Home() {
         <>
             {/* section banner */}
             <div
-                className="w-full h-full bg-cover bg-no-repeat bg-center py-80 bg-image"
-                style={{ backgroundImage: `url(${S1banner1})` }}
+                className="w-10/12 h-full bg-cover bg-no-repeat bg-center py-60 bg-image"
+                style={{ backgroundImage: `url(${S1banner1})`,
+                marginTop: '100px'
+             }}
             >
-                <div className="flex flex-col pl-32 select-none">
+                <div className="flex flex-col pl-32 select-none mt-top">
                     <span className="w-2/3 text-3xl font-medium not-italic tracking-widest text-white uppercase xl:text-7xl lg:text-5xl">
                         DISCOVER THE ART OF DRESSING UP
                     </span>
@@ -59,7 +61,7 @@ function Home() {
             {/* End section banner */}
 
             {/* Start content */}
-            <div className="mt-10 w-11/12 flex flex-col justify-center m-auto">
+            <div className="mt-10 w-10/12 flex flex-col justify-center m-auto">
                 {/* Section 2 */}
                 <div className="w-full flex flex-col justify-center items-center gap-1 mb-1">
                     <div className="bg-black h-1 w-3/12"></div>
@@ -150,8 +152,8 @@ function Home() {
             {/* End content */}
             {/* Start section 5 */}
             <ScrollAnimationElement>
-                <div className="h-full mt-8 relative opacity-0">
-                    <video ref={videoRef} muted className="video-container">
+                <div className="h-full w-10/12 mt-8 relative opacity-0 flex justify-center m-auto">
+                    <video ref={videoRef} muted>
                         <source src={S5BanerVideo1} type="video/mp4" />
                     </video>
                     <div className="w-full flex flex-col absolute bottom-0 text-center mb-4">

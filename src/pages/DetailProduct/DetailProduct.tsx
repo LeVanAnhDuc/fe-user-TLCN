@@ -20,6 +20,8 @@ import NavigateBefore from '@mui/icons-material/NavigateBefore';
 import NavigateNext from '@mui/icons-material/NavigateNext';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 
+import Rating from '@mui/material/Rating';
+
 import { getSingleProduct } from '../../apis/productApi';
 import IProduct from '../../interface/product';
 
@@ -68,9 +70,9 @@ const DetailProduct = () => {
     const [color, setColor] = useState<string>('');
     const [size, setSize] = useState<string>('');
 
-    const handleChangeSize = (event: { target: { value: SetStateAction<string> } }) => {
-        setSize(event.target.value);
-    };
+    // const handleChangeSize = (event: { target: { value: SetStateAction<string> } }) => {
+    //     setSize(event.target.value);
+    // };
 
     // handle handleAddCart
     const handleAddCart = async () => {
@@ -135,9 +137,13 @@ const DetailProduct = () => {
         setPicColor(pic.imageUrl);
         setColor(pic.valueName);
     };
+    // handle change size
+    const handleChangeSize = (size: { valueName: string }) => {
+        setSize(size.valueName);
+    };
 
     return (
-        <div className="w-11/12 m-auto pt-32">
+        <div className="w-10/12 m-auto pt-32">
             <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2">
                 {/* Start list image product */}
                 <div className=" hidden col-span-1 lg:flex flex-col gap-2 overflow-y-auto scroll-smooth hide-scrollbar h-144">
@@ -171,18 +177,17 @@ const DetailProduct = () => {
                 {/* End image product */}
                 {/* Start info prođuct */}
                 <div className="col-span-12 md:col-span-6 lg:col-span-5 md:ml-10 ">
-                    <div className="text-xl not-italic font-medium">{product?.name}</div>
-                    &nbsp;
+                    <div className="text-xl not-italic font-medium pb-8">{product?.name}</div>
                     <div className="text-base not-italic font-medium">
-                        <span className='dong'> đ </span>
-                        <span className='price'> {product?.price} </span>
+                        <span className='detail-dong'>đ</span>
+                        <span className='price'>{product?.price}</span>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <span className='rating-value'>{product?.rating}</span>&nbsp;
+                        <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.2rem' }}/>
                     </div>
 
                     {/* start sỉze */}
-                    <div className="mt-10 mb-2">
-                        <span>Chọn Size</span>
-                    </div>
-                    <FormControl fullWidth>
+                     {/* <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-helper-label">Kích cỡ</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
@@ -198,23 +203,50 @@ const DetailProduct = () => {
                                 </MenuItem>
                             ))}
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
                     {/* end sỉze */}
                     {/* start list color */}
-                    <div className="mt-10">
-                        <span>Chọn Màu</span>
+                    <div className="mt-8 mb-2">
+                        <span>Size</span>
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-2 xl:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-auto sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-auto gap-2 mb-8">
+                        {product?.options[1].values.map((item, index) => (
+                            <BootstrapButton key={index} onClick={() => handleChangeSize(item)}
+                                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                            >
+                                <Card key={index} 
+                                    sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}
+                                >
+                                    <Box sx={{
+                                            display: 'flex', flexDirection: 'column', fontSize: '16px', 
+                                            flex: '1 1 auto', height: '50px', maxWidth: 'fit-content'}}
+                                    >
+                                        <CardContent>{item.valueName}</CardContent>
+                                    </Box>
+                                </Card>
+                            </BootstrapButton>
+                        ))}
+                    </div>
+                    <div className="mt-10 mb-2">
+                        <span>Màu</span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 xl:grid-cols-2 gap-2 mb-8">
                         {product?.options[0].values.map((item, index) => (
                             <BootstrapButton key={index} onClick={() => handleChangePicColor(item)}>
                                 <Card
                                     key={index}
                                     sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
                                 >
-                                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                                     <Box sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        flex: '1 1 auto',
+                                        height: '50px', 
+                                        maxWidth: 'fit-content', 
+                                    }}>
                                         <CardContent>{item.valueName}</CardContent>
                                     </Box>
-                                    <Image className="h-16" src={item.imageUrl} alt={item.valueName} />
+                                    <Image className="h-14" src={item.imageUrl} alt={item.valueName} />
                                 </Card>
                             </BootstrapButton>
                         ))}
@@ -228,7 +260,7 @@ const DetailProduct = () => {
                         sx={{ height: 50, marginTop: 2 }}
                         onClick={handleAddCart}
                     >
-                        <ShoppingCart />
+                        +<ShoppingCart />
                     </Button>
                     <div className="pt-10">
                         <Accordion>

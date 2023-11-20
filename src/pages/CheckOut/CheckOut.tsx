@@ -103,11 +103,11 @@ const Pay = () => {
             dispatch(setToTalProductCart(0));
             const redirectURL = `http://localhost:8080/api/v1/vnpay/submit-order?amount=${total}&username=${useName}&addressId=${addressId}&note=${note}`;
 
-            window.location.href = redirectURL;
+            window.open(redirectURL, '_blank');
         }
     };
     return (
-        <div className="w-11/12 m-auto pt-32">
+        <div className="w-10/12 m-auto pt-32">
             <div className="grid sm:grid-cols-2 gap-10 sm:grid-row-2 lg:gap-20">
                 {/* start infomation */}
                 <div>
@@ -127,7 +127,9 @@ const Pay = () => {
                                     required: 'PaymentType is required',
                                 })}
                             >
-                                <MenuItem value={config.PaymentType.VNPay}>{config.PaymentType.VNPay}</MenuItem>
+                                <MenuItem value={config.PaymentType.VNPay}>
+                                    {config.PaymentType.VNPay}
+                                </MenuItem>
                                 <MenuItem value={config.PaymentType.CashOnDelivery}>
                                     {config.PaymentType.CashOnDelivery}
                                 </MenuItem>
@@ -201,16 +203,24 @@ const Pay = () => {
                     <h1 className="text-2xl font-semibold text-center">Tổng chi phí</h1>
                     <div className="grid grid-cols-3">
                         <span className="text-left col-span-2">Tổng tiền Sản phẩm</span>
-                        <span className="text-right">{totalPrice.toLocaleString('vi-VN')} VNĐ</span>
+                        <span className="text-right">
+                            <span className='black-dong'>đ</span>
+                            {totalPrice.toLocaleString('vi-VN')}
+                        </span>
                     </div>
                     <div className="grid grid-cols-3">
-                        <span className="text-left col-span-2">Dự kiến Giao hàng và Xử lý</span>
-                        <span className="text-right">Free</span>
+                        <span className="text-left col-span-2">Phí</span>
+                        <span className="text-right">Miễn phí</span>
                     </div>
                     <div className="grid grid-cols-3 relative py-10">
                         <span className="absolute left-0 top-5 h-0.5 bg-gray-200 w-full"></span>
-                        <span className="text-left col-span-2">Thành tiền</span>
-                        <span className="text-right">{totalPrice.toLocaleString('vi-VN')} VNĐ</span>
+                        <span className="text-left col-span-2">Tổng thanh toán</span>
+                        <span className="text-right">
+                            <span className='dong'>đ</span>
+                            <span className='price'>
+                                {totalPrice.toLocaleString('vi-VN')}
+                            </span>
+                        </span>
                         <span className="absolute left-0 bottom-5 h-0.5 bg-gray-200 w-full"></span>
                     </div>
                     <div className="text-center text-gray-400">

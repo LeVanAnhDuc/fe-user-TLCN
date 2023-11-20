@@ -7,6 +7,7 @@ import { ChangeEvent, useState } from 'react';
 import S2Baner1 from '../../../../assets/img/LandingPage/section-2-1.png';
 import Image from '../../../../components/Image';
 
+
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -19,6 +20,7 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 const UploadImage = () => {
+
     // handle change image
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 

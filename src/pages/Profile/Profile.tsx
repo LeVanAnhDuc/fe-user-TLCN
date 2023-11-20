@@ -33,26 +33,29 @@ const Profile = () => {
         },
         [valuePage],
     );
+
     let userName: string = '';
     let avatarUrl: string = '';
+    let name: string = '';
     const savedInfoUser = localStorage.getItem('infoUser');
     if (savedInfoUser) {
         const dataInfo = JSON.parse(savedInfoUser);
         userName = dataInfo.userName;
+        name = dataInfo.name;
         avatarUrl = dataInfo.avatarUrl;
     }
     return (
-        <div className="w-full m-auto pt-32">
-            <div className="bg-headerProfile h-60 flex place-items-end place-content-center">
-                <div className="w-11/12 bg-white h-3/4 flex place-items-center place-content-center border-2 border-headerProfile">
+        <div className="w-10/12 m-auto pt-32">
+            <div className="bg-headerProfile h-60 flex place-items-end place-content-center rounded-md">
+                <div className="w-10/12 bg-white h-3/4 flex place-items-center place-content-center border-2 border-headerProfile rounded-md">
                     <Avatar alt="Remy Sharp" src={avatarUrl} sx={{ width: 76, height: 76 }} />
                     <div className="ml-5">
                         <div className="uppercase font-semibold text-2xl">{userName}</div>
-                        <div className="text-sm text-gray-400">Khách hàng</div>
+                        <div className="text-sm text-gray-400">{name}</div>
                     </div>
                 </div>
             </div>
-            <div className="w-11/12 m-auto">
+            <div className="w-full m-auto">
                 <TabContext value={valuePage}>
                     <Box sx={{ borderBottom: 2, borderColor: '#FFEEE8' }}>
                         <TabList onChange={handleChange} centered>

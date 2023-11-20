@@ -83,9 +83,10 @@ function Header() {
             <div
                 className={`${
                     scroll ? 'bg-header shadow-xl fixed duration-200 ease-in ' : 'bg-transparent absolute '
-                } h-18 flex flex-col justify-center items-center w-full z-50`}
+                } h-18 flex flex-col justify-center items-center w-full z-50 top-0`}
+                style={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}
             >
-                <div className="w-11/12 grid grid-flow-col grid-cols-3 place-content-between ">
+                <div className="w-10/12 grid grid-flow-col grid-cols-3 place-content-between ">
                     <div className="h-full w-48 col-span-1">
                         <Link to={config.Routes.home}>
                             <Image src={logo} className="h-full w-full" />

@@ -15,6 +15,7 @@ import { useCallback, useState } from 'react';
 import config from '../../config';
 import IProduct from '../../interface/product';
 
+
 const Card = (props: { itemProduct: IProduct }) => {
     const { itemProduct } = props;
     const navigate = useNavigate();
@@ -36,11 +37,11 @@ const Card = (props: { itemProduct: IProduct }) => {
         }
     };
     return (
-        <div className="shadow-lg p-2 rounded-lg">
+        <div className="shadow-lg p-0 rounded-lg">
             <div onClick={handleNextDetailPage} className="cursor-pointer">
                 <Box
                     sx={{
-                        height: 270, // Chiều cao cố định
+                        height: '25vh', // Chiều cao cố định
                         overflow: 'hidden',
                         margin: 1,
                         '&:hover .image': {
@@ -60,18 +61,18 @@ const Card = (props: { itemProduct: IProduct }) => {
                 </Box>
             </div>
             <CardContent>
-                <div className="font-medium text-base mb-3 grid gap-1">
+                <div className="font-medium text-base grid gap-1 mb-0">
                     <div className="two-lines">
                         {itemProduct.name}
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between mt-3">
                         <span>
                             <span className="dong">đ</span>
-                            <span className='price'>
+                            <span className='list-price'>
                                 {itemProduct.price.toLocaleString('vi-VN')}
                             </span>
                         </span>
-                        <Rating defaultValue={itemProduct.rating} precision={0.5} readOnly />
+                        <Rating defaultValue={itemProduct.rating} precision={0.5} readOnly sx={{ fontSize: '1.2rem' }}/>
                     </div>
                 </div>
             </CardContent>

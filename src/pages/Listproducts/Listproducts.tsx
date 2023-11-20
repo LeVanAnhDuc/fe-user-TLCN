@@ -38,7 +38,7 @@ function Listproducts() {
     const [page, setPage] = useState<number>(1); // Trang hiện tại
     const [totalPages, setTotalPages] = useState<number>(0); // Tổng số trang
     const [totalProducts, setTotalProducts] = useState<number>(0); // Tổng số san pham
-    const itemsPerPage = 24;
+    const itemsPerPage = 25;
 
     const getAllProducts = async (pageNo: number) => {
         try {
@@ -69,7 +69,7 @@ function Listproducts() {
 
     return (
         <>
-            <div className="w-11/12 m-auto pt-32">
+            <div className="w-10/12 m-auto pt-32">
                 {/* start section 1 */}
                 <div
                     className={`${
@@ -162,7 +162,7 @@ function Listproducts() {
                     {/* start list item */}
                     <div className="col-span-5 px-3 xl:col-span-4 ">
                         {data.length !== 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                                 {data.map((item, index) => (
                                     <CardComp key={index} itemProduct={item} />
                                 ))}

@@ -21,8 +21,8 @@ const currentYear = new Date().getFullYear();
 
 function Footer() {
     return (
-        <div className="bg-footer text-white  pt-10 pb-5 bottom-0 left-0 mt-10">
-            <footer className="relative w-11/12 m-auto">
+        <div className="bg-footer text-white pt-10 pb-5 bottom-0 left-0 mt-10">
+            <footer className="relative w-10/12 m-auto">
                 <div className="mx-auto w-full">
                     <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
                         <Typography variant="h5" className="mb-6 flex justify-center lg:justify-start">

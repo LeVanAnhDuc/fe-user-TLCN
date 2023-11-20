@@ -89,7 +89,7 @@ const Cart = () => {
     }, [totalProductLocalStorage]);
 
     return (
-        <div className="w-11/12 m-auto pt-32">
+        <div className="w-10/12 m-auto pt-32">
             <div className="grid grid-cols-12 gap-2">
                 {/* start list product */}
                 <div className="col-span-12 lg:col-span-8 ">

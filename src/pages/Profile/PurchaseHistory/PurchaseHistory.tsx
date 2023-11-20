@@ -33,7 +33,7 @@ function Row(props: { item: IOrder }) {
     const navigate = useNavigate();
     const handleNextDetailPage = (idProduct: number) => {
         if (idProduct) {
-            navigate(config.Routes.detailProduct + '#' + idProduct);
+            navigate(config.Routes.detailProduct + '#' + idProduct);    
         } else {
             toast.error('Đang bảo trì');
         }
@@ -107,7 +107,7 @@ function Row(props: { item: IOrder }) {
                                             <TableCell component="th" scope="row" onClick={() => handleNextDetailPage(item2.product.id)}>
                                                 <Image
                                                     src={item2.imageUrl}
-                                                    className="sm:h-24 sm:w-24 lg:h-36 lg:w-36  h-16 w-16"
+                                                    className="sm:h-24 sm:w-24 lg:h-30 lg:w-30 h-16 w-16"
                                                 />
                                             </TableCell>
                                             <TableCell align="left">
