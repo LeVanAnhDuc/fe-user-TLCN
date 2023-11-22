@@ -107,8 +107,8 @@ const Pay = () => {
         }
     };
     return (
-        <div className="w-10/12 m-auto pt-32">
-            <div className="grid sm:grid-cols-2 gap-10 sm:grid-row-2 lg:gap-20">
+        <div className="w-10/12 m-auto pt-24">
+            <div className="grid sm:grid-cols-2 gap-10 sm:grid-row-2 lg:gap-20 bg-[#FFFF] p-5 m-auto rounded-md mb-18">
                 {/* start infomation */}
                 <div>
                     <div className="mb-5 font-semibold text-xl">Thông tin liên lạc của bạn ?</div>

@@ -46,7 +46,7 @@ const Profile = () => {
     }
     return (
         <div className="w-10/12 m-auto pt-32">
-            <div className="bg-headerProfile h-60 flex place-items-end place-content-center rounded-md">
+            <div className="bg-headerProfile h-60 flex place-items-end place-content-center rounded-md mb-6">
                 <div className="w-10/12 bg-white h-3/4 flex place-items-center place-content-center border-2 border-headerProfile rounded-md">
                     <Avatar alt="Remy Sharp" src={avatarUrl} sx={{ width: 76, height: 76 }} />
                     <div className="ml-5">
@@ -55,7 +55,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full m-auto">
+            <div className="w-full m-auto bg-[#FFFF] p-5 m-auto rounded-md mb-18">
                 <TabContext value={valuePage}>
                     <Box sx={{ borderBottom: 2, borderColor: '#FFEEE8' }}>
                         <TabList onChange={handleChange} centered>

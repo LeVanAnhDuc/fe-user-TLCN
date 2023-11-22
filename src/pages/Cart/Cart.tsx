@@ -89,11 +89,11 @@ const Cart = () => {
     }, [totalProductLocalStorage]);
 
     return (
-        <div className="w-[86%] m-auto pt-28">
-            <div className="grid grid-cols-12 gap-2">
+        <div className="w-10/12 m-auto pt-28">
+            <div className="grid grid-cols-12 gap-2 mb-6">
                 {/* start list product */}
-                <div className="col-span-12 lg:col-span-8 ">
-                    <div className="h-min bg-[#FFFF] px-6 py-3 mb-5 rounded">
+                <div className="col-span-12 lg:col-span-12 ">
+                    <div className="h-min bg-[#FFFF] px-6 py-3 mb-5 rounded border border-[#f2f2f2]">
                         <div className="font-semibold text-lg">Miễn phí vận chuyển</div>
                         <span className="text-sm text-gray-500">
                             Áp dụng cho đơn đặt hàng từ 5.000.000 VNĐ trở lên.
@@ -103,15 +103,16 @@ const Cart = () => {
                         </a>
                     </div>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <TableContainer sx={{ maxHeight: 610 }}>
+                        <TableContainer sx={{ maxHeight: 'auto' }}>
                             <Table stickyHeader aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell></TableCell>
-                                        <TableCell align="left">Tên</TableCell>
+                                        <TableCell align='center'>Sản phẩm</TableCell>
+                                        <TableCell align="center"></TableCell>
+                                        <TableCell align="right">Đơn giá</TableCell>
                                         <TableCell align="center">Số lượng</TableCell>
-                                        <TableCell align="left">Đơn Giá</TableCell>
-                                        <TableCell></TableCell>
+                                        <TableCell align="right">Số tiền</TableCell>
+                                        <TableCell align='center'>Thao tác</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -132,7 +133,7 @@ const Cart = () => {
                                                     className="sm:h-24 sm:w-24 lg:h-36 lg:w-36  h-16 w-16 cart-image"
                                                 />
                                             </TableCell>
-                                            <TableCell align="left">
+                                            <TableCell align="left" className='max-w-[360px]'>
                                                 <div className='two-lines'>{item.product.name}</div>
                                                 <span>
                                                     Phân loại:&nbsp;
@@ -144,20 +145,26 @@ const Cart = () => {
                                                     ))}
                                                 </span>
                                             </TableCell>
+                                            <TableCell align="right">
+                                                <span className='dong'>đ</span>
+                                                <span  className='subtotal-price'>
+                                                    {item.price.toLocaleString('vi-VN')}
+                                                </span>
+                                            </TableCell>
                                             <TableCell align="center">
-                                                <QuantityProduct
+                                                <QuantityProduct 
                                                     valueQuantity={item.quantity}
                                                     idItem={item.id}
                                                     handleChangeItemQuantity={handleChangeItemQuantity}
                                                 />
                                             </TableCell>
-                                            <TableCell align="left">
+                                            <TableCell align="right">
                                                 <span className='dong'>đ</span>
                                                 <span  className='subtotal-price'>
                                                     {item.subTotal.toLocaleString('vi-VN')}
                                                 </span>
                                             </TableCell>
-                                            <TableCell align="left">
+                                            <TableCell align="center">
                                                 <DeleteProduct
                                                     idItem={item.id}
                                                     handleDeleteProduct={handleDeleteProduct}
@@ -171,8 +178,12 @@ const Cart = () => {
                     </Paper>
                 </div>
                 {/* end list product */}
+               
+            </div>
+
+            <div className='grid grid-cols-12 gap-2 mb-6'>
                 {/* start bill */}
-                <div className="col-span-12 mt-10 lg:mt-0 lg:col-span-4 lg:ml-10 space-y-5 bg-[#FFFF] p-5 h-[50%] rounded">
+                <div className="col-span-12 lg:col-span-6 lg:col-start-9 space-y-5 bg-[#FFFF] p-5 rounded shadow">
                     <h1 className="text-2xl font-semibold text-center">Tổng chi phí</h1>
                     <div className="grid grid-cols-3">
                         <span className="text-left col-span-2">Tổng tiền Sản phẩm</span>
@@ -188,10 +199,10 @@ const Cart = () => {
                             {0}
                         </span>
                     </div>
-                    <div className="grid grid-cols-3 relative py-10">
+                    <div className="grid grid-cols-4 relative py-10">
                         <span className="absolute left-0 top-5 h-0.5 bg-gray-200 w-full"></span>
-                        <span className="text-left col-span-2">Thành tiền</span>
-                        <span className="text-right">
+                        <span className="text-left col-span-1">Thành tiền</span>
+                        <span className="text-right col-span-3">
                             <span className='detail-dong'>đ</span>
                             <span  className='detail-price'>
                                 {(totalPrice + 0).toLocaleString('vi-VN')}
@@ -212,7 +223,8 @@ const Cart = () => {
                     )}
                 </div>
                 {/* end bill */}
-            </div>
+
+             </div>
         </div>
     );
 };

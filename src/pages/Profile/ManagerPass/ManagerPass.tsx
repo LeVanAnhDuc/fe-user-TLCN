@@ -94,14 +94,14 @@ const ManagerPass = () => {
                     />
                     {/* end comfirm password */}
                     <Button
-                        style={{ float: 'right' }}
+                        style={{ float: 'right'}}
                         type="submit"
                         variant="contained"
                         color="primary"
                         size="large"
                         fullWidth
                     >
-                        Save
+                        Lưu
                     </Button>
                 </form>
             </div>

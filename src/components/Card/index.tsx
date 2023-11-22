@@ -37,7 +37,7 @@ const Card = (props: { itemProduct: IProduct }) => {
         }
     };
     return (
-        <div className="shadow-lg p-0 rounded-lg">
+        <div className="shadow-lg p-0 rounded-lg bg-[#FFFF]">
             <div onClick={handleNextDetailPage} className="cursor-pointer">
                 <Box
                     sx={{

@@ -41,7 +41,7 @@ function Row(props: { item: IOrder }) {
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' }, backgroundColor: open ? '#FFF8EA' : '' }}>
+            <TableRow  className='mb-10' sx={{ '& > *': { borderBottom: 'unset' }, backgroundColor: open ? '#FFF8EA' : '' }}>
                 <TableCell component="th" scope="row">
                     {item.createdDate}
                 </TableCell>
@@ -60,7 +60,7 @@ function Row(props: { item: IOrder }) {
                     </Button>
                 </TableCell>
             </TableRow>
-            <TableRow className='mb-10'>
+            <TableRow className='mb-20 '>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>

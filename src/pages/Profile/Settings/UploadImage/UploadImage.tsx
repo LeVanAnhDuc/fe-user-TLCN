@@ -37,10 +37,10 @@ const UploadImage = () => {
     };
     return (
         <>
-            <div className="w-full">
+           <div className="w-full">
                 <Button component="label" variant="text" fullWidth sx={{ borderRadius: '100%' }}>
                     <VisuallyHiddenInput type="file" onChange={handleImageChange} />
-                    <Image src={selectedImage || S2Baner1} className="w-full md:h-72 h-80 rounded-[100%] " />
+                    <Image src={selectedImage || S2Baner1} className="w-2/3 md|h-44 h-[172px] rounded-[100%]" />
                 </Button>
             </div>
         </>

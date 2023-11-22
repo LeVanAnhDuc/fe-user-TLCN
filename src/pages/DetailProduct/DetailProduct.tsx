@@ -2,6 +2,10 @@ import { SetStateAction, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import CardComp from '../../components/Card';
+import { getAllProductWithinPagination } from '../../apis/productApi';
+import IProduct from '../../interface/product';
+
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
@@ -25,6 +29,9 @@ import Rating from '@mui/material/Rating';
 
 import { getSingleProduct } from '../../apis/productApi';
 import IProduct from '../../interface/product';
+import ReviewItem from './Review';
+import RatingButton from './RatingButton';
+import Listproducts from '../Listproducts/Listproducts';
 
 import BootstrapButton from './BootstrapButton';
 import config from '../../config';
@@ -35,6 +42,61 @@ import { useDispatch } from 'react-redux';
 import { setToTalProductCart } from '../Cart/totalProducCartSlice';
 
 const DetailProduct = () => {
+    // change page
+    const [data, setData] = useState<Array<IProduct>>([]); // Dữ liệu từ API
+    const [page, setPage] = useState<number>(1); // Trang hiện tại
+    const [totalPages, setTotalPages] = useState<number>(0); // Tổng số trang
+    const [totalProducts, setTotalProducts] = useState<number>(0); // Tổng số san pham
+    const itemsPerPage = 10;
+
+    const getAllProducts = async (pageNo: number) => {
+        try {
+            const response = await getAllProductWithinPagination(pageNo, itemsPerPage);
+            const { content, totalPages, totalElements } = response.data;
+
+            setData(content);
+            setTotalPages(totalPages);
+            setTotalProducts(totalElements);
+        } catch (error) {
+            toast.error('Đang bảo trì quay lại sau');
+        }
+    };
+
+    useEffect(() => {
+        getAllProducts(page);
+    }, [page]);
+
+
+    const reviews = [
+        {
+          avatar: 'https://mcdn.coolmate.me/image/March2023/meme-meo-1.jpg',
+          username: 'User123',
+          rating: 4,
+          date: 'November 23, 2023',
+          sku: 'Trắng - L',
+          content: 'This product is amazing! Highly recommended.'
+        },
+        {
+            avatar: 'https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-102.jpg?fit=690%2C20000&quality=95&ssl=1',
+            username: 'User123',
+            rating: 5,
+            date: 'November 23, 2023',
+            sku: 'Đen - XXL',
+            content: 'This product is amazing! Highly recommended.'
+        },
+        {
+            avatar: 'https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-102.jpg?fit=690%2C20000&quality=95&ssl=1',
+            username: 'User123',
+            rating: 5,
+            date: 'November 23, 2023',
+            sku: 'Đen - XXl',
+            content: 'This product is amazing! Highly recommended.'
+        }
+          
+    ];
+
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // handle get id
@@ -144,7 +206,7 @@ const DetailProduct = () => {
     };
 
     return (
-        <div className="w-[85%] m-auto pt-28">
+        <div className="w-10/12 m-auto pt-28">
             <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2 bg-[#FFFF] p-5 m-auto rounded-md mb-4">
                 {/* Start list image product */}
                 <div className=" hidden col-span-1 lg:flex flex-col gap-2 overflow-y-auto scroll-smooth hide-scrollbar h-auto">
@@ -159,10 +221,11 @@ const DetailProduct = () => {
                     ))}
                 </div>
                 {/* End list image product */}
+
                 {/* Start image product */}
                 <div className="col-span-12 md:col-span-5 relative flex gap-1">
                     <div
-                        className="w-full h-128 bg-cover bg-no-repeat bg-center relative rounded-md border-2"
+                        className="w-full h-[520px] bg-cover bg-no-repeat bg-center relative rounded-md border-2"
                         style={{ backgroundImage: picColor ? `url(${picColor})` : `url(${images[currentImageIndex]})` }}
                     >
                         <div className="w-full flex justify-end ">
@@ -176,6 +239,7 @@ const DetailProduct = () => {
                     </div>
                 </div>
                 {/* End image product */}
+
                 {/* Start info prođuct */}
                 <div className="col-span-12 md:col-span-6 lg:col-span-6 md:ml-10 ">
                     <div className="text-xl not-italic font-medium pb-7">{product?.name}</div>
@@ -186,26 +250,8 @@ const DetailProduct = () => {
                         <span className='rating-value'>{product?.rating}</span>&nbsp;
                         <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.2rem' }}/>
                     </div>
-
-                    {/* start sỉze */}
-                     {/* <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-helper-label">Kích cỡ</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            input={<OutlinedInput label="Kích cỡ" />}
-                            fullWidth
-                            value={size}
-                            onChange={handleChangeSize}
-                        >
-                            {product?.options[1].values.map((item, index) => (
-                                <MenuItem key={index} value={item.valueName}>
-                                    {item.valueName}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl> */}
                     {/* end sỉze */}
+
                     {/* start list color */}
                     <div className='rounded mt-8 pl-2 pr-2 pt-1 pb-1 bg-[#fafafa]'>
                         <div className="mt-4 ml-2">
@@ -277,7 +323,7 @@ const DetailProduct = () => {
                         </Button> */}
                     </div>
                     <div className="pt-10">
-                        <Accordion>
+                        <Accordion defaultExpanded>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
@@ -297,16 +343,6 @@ const DetailProduct = () => {
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel3a-content"
-                                id="panel3a-header"
-                            >
-                                <Typography>Reviews (0)</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails></AccordionDetails>
-                        </Accordion>
                     </div>
                 </div>
                 {/* End info prođuct */}
@@ -319,11 +355,11 @@ const DetailProduct = () => {
                 </div>
                 <div className='p-5 m-auto rounded-md mt-5'>
                     <Typography>
-                        <p>   {product?.description}</p>
-                     
+                        <p>{product?.description}</p>
                     </Typography>
                 </div>
             </div>
+            {/* End product description */}
 
             {/* Start product reviews */}
             <div className="bg-[#FFFF] p-5 m-auto rounded-md mb-4">
@@ -335,156 +371,62 @@ const DetailProduct = () => {
                     <div className="grid grid-cols-8 sm:grid-cols-8 md:grid-cols-8 xl:grid-cols-6 gap-0 mb-8 ">
                     <div className='col-span-1'>
                         <div className='flex items-center justify-center mt-4'>
-                            <span className='text-red-500 text-2xl font-bold'>{product?.rating}&nbsp;</span> 
+                            <span className='text-red-500 text-3xl font-bold'>{product?.rating}&nbsp;</span> 
                             <span className='text-red-500 text-lg'>trên 5</span>
                         </div>
                         <div className='flex items-center justify-center h-10'>
-                        {/* <Rating defaultValue={product?.rating} precision={0.1} readOnly sx={{ fontSize: '1.8rem' }}/> */}
                             <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.8rem' }}/>
                         </div>
                     </div>
-              
-                        <div className='col-span-5 grid grid-cols-8 sm:grid-cols-8 mb-8 mt-2 h-[50%]'>
-                            <div className='h-full'>
-                                <BootstrapButton className='w-full'>
-                                    <Card
-                                        sx={{ justifyContent: 'space-between', width: '100%' }}
-                                    >
-                                        <Box sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            flex: '1 1 auto',
-                                            height: '32px', 
-                                            marginTop: '5px',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            maxWidth: 'fit-content', 
-                                        }}>
-                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
-                                                Tất cả
-                                            </CardContent>
-                                        </Box>
-                                    </Card>
-                                </BootstrapButton>
-                            </div>                    
-                            <div className="flex items-center justify-center">
-                                <BootstrapButton className='w-full'>
-                                    <Card
-                                        sx={{ justifyContent: 'space-between', width: '100%'}}
-                                    >
-                                        <Box sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            flex: '1 1 auto',
-                                            height: '32px', 
-                                            marginTop: '5px',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            maxWidth: 'fit-content', 
-                                        }}>
-                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
-                                                5 sao (55)
-                                            </CardContent>
-                                        </Box>
-                                    </Card>
-                                </BootstrapButton>
-                            </div>
-
-                            <div>
-                                <BootstrapButton className='w-full'>
-                                    <Card
-                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
-                                    >
-                                        <Box sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            flex: '1 1 auto',
-                                            height: '32px', 
-                                            marginTop: '5px',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            maxWidth: 'fit-content', 
-                                        }}>
-                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
-                                                4 sao (100)
-                                            </CardContent>
-                                        </Box>
-                                    </Card>
-                                </BootstrapButton>
-                            </div>
-                            <div>
-                                <BootstrapButton className='w-full'>
-                                    <Card
-                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
-                                    >
-                                        <Box sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            flex: '1 1 auto',
-                                            height: '32px', 
-                                            marginTop: '5px',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            maxWidth: 'fit-content', 
-                                        }}>
-                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
-                                                3 sao (22)
-                                            </CardContent>
-                                        </Box>
-                                    </Card>
-                                </BootstrapButton>
-                            </div>
-                            <div>
-                                <BootstrapButton className='w-full'>
-                                    <Card
-                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
-                                    >
-                                        <Box sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            flex: '1 1 auto',
-                                            height: '32px', 
-                                            marginTop: '5px',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            maxWidth: 'fit-content', 
-                                        }}>
-                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
-                                                2 sao (2)
-                                            </CardContent>
-                                        </Box>
-                                    </Card>
-                                </BootstrapButton>
-                            </div>
-                            <div>
-                                <BootstrapButton className='w-full'>
-                                    <Card
-                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
-                                    >
-                                        <Box sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            flex: '1 1 auto',
-                                            height: '32px', 
-                                            marginTop: '5px',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            maxWidth: 'fit-content', 
-                                        }}>
-                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
-                                                1 sao (0)
-                                            </CardContent>
-                                        </Box>
-                                    </Card>
-                                </BootstrapButton>
-                            </div>
+                        <div className='col-span-5 grid grid-cols-8 sm:grid-cols-8 mb-8 mt-2'>
+                            <RatingButton text="Tất cả" />
+                            <RatingButton text="5 sao (55)" />
+                            <RatingButton text="4 sao (100)" />
+                            <RatingButton text="3 sao (22)" />
+                            <RatingButton text="2 sao (2)" />
+                            <RatingButton text="1 sao (0)" />
+                            <div className='col-span-2 mb-8 w-[70%]'>
+                                <RatingButton text="Có bình luận (10)" />
+                            </div> 
                         </div>   
- 
                     </div>
                 </div>
                 <div className='p-5 m-auto rounded-md mt-5'>
+                    <div className="container mx-auto p-4 mb-5">               
+                        {reviews.map((review, index) => (
+                            <Fragment key={index}>
+                                <ReviewItem {...review} />
+                                {index !== reviews.length - 1 && <hr className="my-4 border-t border-gray-300" />}
+                            </Fragment>
+                        ))}
+                    </div>
                 </div>
             </div>
+             {/* End product reviews */}
+
+            {/* Start same products */}
+            <div className='flex items-center justify-between mt-8 text-gray-500 mb-3'>
+                <div>SẢN PHẨM LIÊN QUAN</div>
+                <a href="/ds-san-pham" className="text-blue-500">Xem tất cả ></a>
+            </div>
+            <div className='h-auto'>
+                    {/* end navigation  */}
+                    {/* start list item */}
+                    <div className="col-span-5 px-3 xl:col-span-4 ">
+                        {data.length !== 0 ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                                {data.map((item, index) => (
+                                    <CardComp key={index} itemProduct={item} />
+                                ))}
+                            </div>
+                        ) : null}
+                    </div>
+                    {/* end list item */}
+                </div>
+             {/* End same products */}
+             <div className="p-5 m-auto rounded-md mb-4 mt-4 w-1/5">
+                <a href='/ds-san-pham' className='bg-[#FFFF] flex justify-center items-center h-12 rounded shadow'>Xem thêm</a>
+             </div>
         </div>
     );
 };
