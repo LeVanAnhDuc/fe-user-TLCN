@@ -15,6 +15,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import { Fragment } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NavigateBefore from '@mui/icons-material/NavigateBefore';
 import NavigateNext from '@mui/icons-material/NavigateNext';
@@ -143,16 +144,16 @@ const DetailProduct = () => {
     };
 
     return (
-        <div className="w-[86%] m-auto pt-28">
-            <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2 white-bg p-5 m-auto rounded-md">
+        <div className="w-[85%] m-auto pt-28">
+            <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2 bg-[#FFFF] p-5 m-auto rounded-md mb-4">
                 {/* Start list image product */}
-                <div className=" hidden col-span-1 lg:flex flex-col gap-2 overflow-y-auto scroll-smooth hide-scrollbar h-144">
+                <div className=" hidden col-span-1 lg:flex flex-col gap-2 overflow-y-auto scroll-smooth hide-scrollbar h-auto">
                     {images.map((item, index) => (
                         <img
                             src={item}
                             key={index}
                             alt={item}
-                            className="w-full h-20 bg-contain rounded-md hover:opacity-40"
+                            className="w-full h-21 bg-contain rounded-md hover:opacity-40"
                             onMouseEnter={() => handleChangePic(index)}
                         />
                     ))}
@@ -177,8 +178,8 @@ const DetailProduct = () => {
                 {/* End image product */}
                 {/* Start info prođuct */}
                 <div className="col-span-12 md:col-span-6 lg:col-span-6 md:ml-10 ">
-                    <div className="text-xl not-italic font-medium pb-8">{product?.name}</div>
-                    <div className="text-base not-italic font-medium gray-bg price-aline">
+                    <div className="text-xl not-italic font-medium pb-7">{product?.name}</div>
+                    <div className="text-base not-italic font-medium bg-[#fafafa] price-aline">
                         <span className='detail-dong'>đ</span>
                         <span className='detail-price'>{product?.price}</span>
                         &nbsp; &nbsp; &nbsp; &nbsp;
@@ -206,7 +207,7 @@ const DetailProduct = () => {
                     </FormControl> */}
                     {/* end sỉze */}
                     {/* start list color */}
-                    <div className='gray-bg rounded mt-8 pl-2 pr-2 pt-1 pb-1'>
+                    <div className='rounded mt-8 pl-2 pr-2 pt-1 pb-1 bg-[#fafafa]'>
                         <div className="mt-4 ml-2">
                             <span>Kích cỡ</span>
                         </div>
@@ -299,18 +300,6 @@ const DetailProduct = () => {
                         <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel2a-content"
-                                id="panel2a-header"
-                            >
-                                <Typography>Product Information</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>{product?.description}</Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel3a-content"
                                 id="panel3a-header"
                             >
@@ -321,6 +310,180 @@ const DetailProduct = () => {
                     </div>
                 </div>
                 {/* End info prođuct */}
+            </div>
+
+            {/* Start product description */}
+            <div className="bg-[#FFFF] p-5 m-auto rounded-md mb-4">
+                <div className='bg-[#fafafa] h-10 price-aline ml-2'>
+                    <span>MÔ TẢ SẢN PHẨM</span>
+                </div>
+                <div className='p-5 m-auto rounded-md mt-5'>
+                    <Typography>
+                        <p>   {product?.description}</p>
+                     
+                    </Typography>
+                </div>
+            </div>
+
+            {/* Start product reviews */}
+            <div className="bg-[#FFFF] p-5 m-auto rounded-md mb-4">
+                <div className='h-10 ml-6'>
+                    <span>ĐÁNH GIÁ SẢN PHẨM</span>
+                </div>
+                
+                <div className='bg-[#fffbf8] h-24 ml-2 border border-[#f9ede6]'>
+                    <div className="grid grid-cols-8 sm:grid-cols-8 md:grid-cols-8 xl:grid-cols-6 gap-0 mb-8 ">
+                    <div className='col-span-1'>
+                        <div className='flex items-center justify-center mt-4'>
+                            <span className='text-red-500 text-2xl font-bold'>{product?.rating}&nbsp;</span> 
+                            <span className='text-red-500 text-lg'>trên 5</span>
+                        </div>
+                        <div className='flex items-center justify-center h-10'>
+                        {/* <Rating defaultValue={product?.rating} precision={0.1} readOnly sx={{ fontSize: '1.8rem' }}/> */}
+                            <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.8rem' }}/>
+                        </div>
+                    </div>
+              
+                        <div className='col-span-5 grid grid-cols-8 sm:grid-cols-8 mb-8 mt-2 h-[50%]'>
+                            <div className='h-full'>
+                                <BootstrapButton className='w-full'>
+                                    <Card
+                                        sx={{ justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '32px', 
+                                            marginTop: '5px',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
+                                                Tất cả
+                                            </CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            </div>                    
+                            <div className="flex items-center justify-center">
+                                <BootstrapButton className='w-full'>
+                                    <Card
+                                        sx={{ justifyContent: 'space-between', width: '100%'}}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '32px', 
+                                            marginTop: '5px',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
+                                                5 sao (55)
+                                            </CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            </div>
+
+                            <div>
+                                <BootstrapButton className='w-full'>
+                                    <Card
+                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '32px', 
+                                            marginTop: '5px',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
+                                                4 sao (100)
+                                            </CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            </div>
+                            <div>
+                                <BootstrapButton className='w-full'>
+                                    <Card
+                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '32px', 
+                                            marginTop: '5px',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
+                                                3 sao (22)
+                                            </CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            </div>
+                            <div>
+                                <BootstrapButton className='w-full'>
+                                    <Card
+                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '32px', 
+                                            marginTop: '5px',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
+                                                2 sao (2)
+                                            </CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            </div>
+                            <div>
+                                <BootstrapButton className='w-full'>
+                                    <Card
+                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '32px', 
+                                            marginTop: '5px',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent sx={{fontSize: '12px', justifyItems: 'center', alignItems: 'center'}}>
+                                                1 sao (0)
+                                            </CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            </div>
+                        </div>   
+ 
+                    </div>
+                </div>
+                <div className='p-5 m-auto rounded-md mt-5'>
+                </div>
             </div>
         </div>
     );

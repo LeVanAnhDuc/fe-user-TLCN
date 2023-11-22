@@ -89,11 +89,11 @@ const Cart = () => {
     }, [totalProductLocalStorage]);
 
     return (
-        <div className="w-10/12 m-auto pt-32">
+        <div className="w-[86%] m-auto pt-28">
             <div className="grid grid-cols-12 gap-2">
                 {/* start list product */}
                 <div className="col-span-12 lg:col-span-8 ">
-                    <div className="h-min bg-[#F5F5F5] px-6 py-3 mb-5 rounded">
+                    <div className="h-min bg-[#FFFF] px-6 py-3 mb-5 rounded">
                         <div className="font-semibold text-lg">Miễn phí vận chuyển</div>
                         <span className="text-sm text-gray-500">
                             Áp dụng cho đơn đặt hàng từ 5.000.000 VNĐ trở lên.
@@ -172,20 +172,31 @@ const Cart = () => {
                 </div>
                 {/* end list product */}
                 {/* start bill */}
-                <div className="col-span-12 mt-10 lg:mt-0 lg:col-span-4 lg:ml-10 space-y-5">
+                <div className="col-span-12 mt-10 lg:mt-0 lg:col-span-4 lg:ml-10 space-y-5 bg-[#FFFF] p-5 h-[50%] rounded">
                     <h1 className="text-2xl font-semibold text-center">Tổng chi phí</h1>
                     <div className="grid grid-cols-3">
                         <span className="text-left col-span-2">Tổng tiền Sản phẩm</span>
-                        <span className="text-right">{totalPrice.toLocaleString('vi-VN')} VNĐ</span>
+                        <span className="text-right">
+                            <span className='black-dong'>đ</span>
+                            {totalPrice.toLocaleString('vi-VN')}
+                        </span>
                     </div>
                     <div className="grid grid-cols-3">
-                        <span className="text-left col-span-2">Dự kiến Giao hàng và Xử lý</span>
-                        <span className="text-right">{0} VNĐ</span>
+                        <span className="text-left col-span-2">Phí</span>
+                        <span className="text-right">
+                            <span className='black-dong'>đ</span>
+                            {0}
+                        </span>
                     </div>
                     <div className="grid grid-cols-3 relative py-10">
                         <span className="absolute left-0 top-5 h-0.5 bg-gray-200 w-full"></span>
                         <span className="text-left col-span-2">Thành tiền</span>
-                        <span className="text-right">{(totalPrice + 0).toLocaleString('vi-VN')} VNĐ</span>
+                        <span className="text-right">
+                            <span className='detail-dong'>đ</span>
+                            <span  className='detail-price'>
+                                {(totalPrice + 0).toLocaleString('vi-VN')}
+                            </span>                   
+                        </span>
                         <span className="absolute left-0 bottom-5 h-0.5 bg-gray-200 w-full"></span>
                     </div>
                     {totalProduct === 0 ? (

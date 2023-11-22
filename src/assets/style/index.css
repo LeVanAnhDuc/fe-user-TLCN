@@ -84,7 +84,7 @@ html *::-webkit-scrollbar-track {
 .detail-dong {
     position: relative;
     font-size: 20px; 
-    top: -3px; 
+    top: -6px; 
     color: rgb(238,77,45);
 }
 
@@ -178,8 +178,8 @@ html *::-webkit-scrollbar-track {
 .price-aline {
     display: flex;
     align-items: center;
-    padding-left: 5px;
-    border-radius: 5px;
+    padding-left: 16px;
+    border-radius: 4px;
     height: 56px;
     /* justify-content: center; */
   }
