@@ -12,7 +12,7 @@ const Dashboard = () => {
                     <VolunteerActivismTwoTone sx={{ fontSize: 35, color: '#FF6636' }} />
                 </div>
                 <div className="col-span-2">
-                    <div className="font-medium text-2xl">1804</div>
+                    <div className="font-medium text-2xl">10</div>
                     <div className="text-sm text-gray-500">Sản phẩm quan tâm</div>
                 </div>
             </div>
@@ -24,7 +24,7 @@ const Dashboard = () => {
                 </div>
                 <div className="col-span-2">
                     <div className="font-medium text-2xl">18</div>
-                    <div className="text-sm text-gray-500">Chờ xác nhận</div>
+                    <div className="text-sm text-gray-500">Chờ thanh toán</div>
                 </div>
             </div>
             {/* end doi xac nhan don hang */}
@@ -45,8 +45,8 @@ const Dashboard = () => {
                     <ShoppingBagTwoTone sx={{ fontSize: 35, color: '#FD8E1F' }} />
                 </div>
                 <div className="col-span-2">
-                    <div className="font-medium text-2xl">2002</div>
-                    <div className="text-sm text-gray-500">Đã thanh toán</div>
+                    <div className="font-medium text-2xl">12</div>
+                    <div className="text-sm text-gray-500">Đã giao</div>
                 </div>
             </div>
             {/* end sp da thanh toan */}

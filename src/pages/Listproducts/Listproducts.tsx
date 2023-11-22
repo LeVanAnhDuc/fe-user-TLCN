@@ -38,7 +38,7 @@ function Listproducts() {
     const [page, setPage] = useState<number>(1); // Trang hiện tại
     const [totalPages, setTotalPages] = useState<number>(0); // Tổng số trang
     const [totalProducts, setTotalProducts] = useState<number>(0); // Tổng số san pham
-    const itemsPerPage = 25;
+    const itemsPerPage = 50;
 
     const getAllProducts = async (pageNo: number) => {
         try {
@@ -58,6 +58,7 @@ function Listproducts() {
     }, [page]);
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, newPage: number) => {
+        window.scrollTo(0, 0);
         setPage(newPage);
     };
     // handle menu

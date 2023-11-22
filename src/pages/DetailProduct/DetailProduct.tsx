@@ -143,8 +143,8 @@ const DetailProduct = () => {
     };
 
     return (
-        <div className="w-10/12 m-auto pt-32">
-            <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2">
+        <div className="w-[86%] m-auto pt-28">
+            <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2 white-bg p-5 m-auto rounded-md">
                 {/* Start list image product */}
                 <div className=" hidden col-span-1 lg:flex flex-col gap-2 overflow-y-auto scroll-smooth hide-scrollbar h-144">
                     {images.map((item, index) => (
@@ -159,9 +159,9 @@ const DetailProduct = () => {
                 </div>
                 {/* End list image product */}
                 {/* Start image product */}
-                <div className="col-span-12 md:col-span-6 relative flex gap-1">
+                <div className="col-span-12 md:col-span-5 relative flex gap-1">
                     <div
-                        className="w-full h-144 bg-cover bg-no-repeat bg-center relative rounded-md border-2"
+                        className="w-full h-128 bg-cover bg-no-repeat bg-center relative rounded-md border-2"
                         style={{ backgroundImage: picColor ? `url(${picColor})` : `url(${images[currentImageIndex]})` }}
                     >
                         <div className="w-full flex justify-end ">
@@ -176,11 +176,11 @@ const DetailProduct = () => {
                 </div>
                 {/* End image product */}
                 {/* Start info prođuct */}
-                <div className="col-span-12 md:col-span-6 lg:col-span-5 md:ml-10 ">
+                <div className="col-span-12 md:col-span-6 lg:col-span-6 md:ml-10 ">
                     <div className="text-xl not-italic font-medium pb-8">{product?.name}</div>
-                    <div className="text-base not-italic font-medium">
+                    <div className="text-base not-italic font-medium gray-bg price-aline">
                         <span className='detail-dong'>đ</span>
-                        <span className='price'>{product?.price}</span>
+                        <span className='detail-price'>{product?.price}</span>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <span className='rating-value'>{product?.rating}</span>&nbsp;
                         <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.2rem' }}/>
@@ -206,62 +206,75 @@ const DetailProduct = () => {
                     </FormControl> */}
                     {/* end sỉze */}
                     {/* start list color */}
-                    <div className="mt-8 mb-2">
-                        <span>Size</span>
-                    </div>
-                    <div className="grid grid-cols-auto sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-auto gap-2 mb-8">
-                        {product?.options[1].values.map((item, index) => (
-                            <BootstrapButton key={index} onClick={() => handleChangeSize(item)}
-                                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-                            >
-                                <Card key={index} 
-                                    sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}
+                    <div className='gray-bg rounded mt-8 pl-2 pr-2 pt-1 pb-1'>
+                        <div className="mt-4 ml-2">
+                            <span>Kích cỡ</span>
+                        </div>
+                        <div className="grid grid-cols-auto sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-auto gap-2 mb-8">
+                            {product?.options[1].values.map((item, index) => (
+                                <BootstrapButton key={index} onClick={() => handleChangeSize(item)}
+                                    sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                                 >
-                                    <Box sx={{
-                                            display: 'flex', flexDirection: 'column', fontSize: '16px', 
-                                            flex: '1 1 auto', height: '50px', maxWidth: 'fit-content'}}
+                                    <Card key={index} 
+                                        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}
                                     >
-                                        <CardContent>{item.valueName}</CardContent>
-                                    </Box>
-                                </Card>
-                            </BootstrapButton>
-                        ))}
-                    </div>
-                    <div className="mt-10 mb-2">
-                        <span>Màu</span>
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 xl:grid-cols-2 gap-2 mb-8">
-                        {product?.options[0].values.map((item, index) => (
-                            <BootstrapButton key={index} onClick={() => handleChangePicColor(item)}>
-                                <Card
-                                    key={index}
-                                    sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
-                                >
-                                     <Box sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        flex: '1 1 auto',
-                                        height: '50px', 
-                                        maxWidth: 'fit-content', 
-                                    }}>
-                                        <CardContent>{item.valueName}</CardContent>
-                                    </Box>
-                                    <Image className="h-14" src={item.imageUrl} alt={item.valueName} />
-                                </Card>
-                            </BootstrapButton>
-                        ))}
+                                        <Box sx={{
+                                                display: 'flex', flexDirection: 'column', fontSize: '16px', 
+                                                flex: '1 1 auto', height: '50px', maxWidth: 'fit-content'}}
+                                        >
+                                            <CardContent>{item.valueName}</CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            ))}
+                        </div>
+                        <div className="mt-4 mb-2 ml-2">
+                            <span>Màu sắc</span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 xl:grid-cols-2 gap-2 mb-8">
+                            {product?.options[0].values.map((item, index) => (
+                                <BootstrapButton key={index} onClick={() => handleChangePicColor(item)}>
+                                    <Card
+                                        key={index}
+                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Image className="p-[4px] h-[50px]" src={item.imageUrl} alt={item.valueName} />
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '50px', 
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent>{item.valueName}</CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            ))}
+                        </div>
                     </div>
                     {/* end list color */}
 
-                    <Button
-                        disabled={color && size ? false : true}
-                        fullWidth
-                        variant="contained"
-                        sx={{ height: 50, marginTop: 2 }}
-                        onClick={handleAddCart}
-                    >
-                        +<ShoppingCart />
-                    </Button>
+                    <div className='grid grid-cols-2 gap-6'>
+                        <Button
+                            disabled={color && size ? false : true}
+                            w-10
+                            variant="contained"
+                            sx={{ height: 50, marginTop: 2, marginLeft: '10px' }}
+                            onClick={handleAddCart}
+                        >
+                            +<ShoppingCart />&nbsp;Thêm vào giỏ hàng
+                        </Button>
+                        {/* <Button
+                            disabled={color && size ? false : true}
+                            fullWidth
+                            variant="contained"
+                            sx={{ height: 50, marginTop: 2, backgroundColor: '#FF0000', '&:hover': { backgroundColor: '#CC0000' } }} 
+                            onClick={handleAddCart}
+                        >
+                            Mua ngay
+                        </Button> */}
+                    </div>
                     <div className="pt-10">
                         <Accordion>
                             <AccordionSummary

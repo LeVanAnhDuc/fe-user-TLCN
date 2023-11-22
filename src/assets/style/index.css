@@ -19,6 +19,7 @@ body {
     /* line-height: 1.5; */
     /* Tối ưu tải phông chữ */
     text-rendering: optimizeSpeed;
+    background-color: rgb(245, 245, 245);
 }
 
 button,
@@ -106,6 +107,11 @@ html *::-webkit-scrollbar-track {
     font-size: 24px; 
 }
 
+.detail-price {
+    color: rgb(238,77,45);
+    font-size: 32px; 
+}
+
 .rating-value {
     color: rgb(238,77,45);
     font-size: 18px; 
@@ -161,8 +167,19 @@ html *::-webkit-scrollbar-track {
     justify-content: center;
 }
 
-.TableHead-fixed {
-  position: sticky;
-  background-color: white; /* Đảm bảo phần cố định không bị che bởi phần nền */
-  /* z-index: 100; Đảm bảo phần cố định hiển thị trên các phần tử khác */
+.white-bg {
+    background-color: #fff;
 }
+
+.gray-bg {
+    background-color: rgb(245, 245, 245); 
+}
+
+.price-aline {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    border-radius: 5px;
+    height: 56px;
+    /* justify-content: center; */
+  }

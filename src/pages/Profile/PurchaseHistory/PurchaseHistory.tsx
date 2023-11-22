@@ -28,7 +28,7 @@ import Image from '../../../components/Image';
 
 function Row(props: { item: IOrder }) {
     const { item } = props;
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const navigate = useNavigate();
     const handleNextDetailPage = (idProduct: number) => {
@@ -60,7 +60,7 @@ function Row(props: { item: IOrder }) {
                     </Button>
                 </TableCell>
             </TableRow>
-            <TableRow>
+            <TableRow className='mb-10'>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
@@ -120,11 +120,11 @@ function Row(props: { item: IOrder }) {
                                                     </span>
                                                 ))}
                                             </TableCell>
-                                            <TableCell align="left">{item2.quantity} </TableCell>
-                                            <TableCell align="right">
+                                            <TableCell align="left">x{item2.quantity} </TableCell>
+                                            <TableCell align="left">
                                                 <span className="dong">đ</span>
                                                 <span className='subtotal-price'>
-                                                    {item2.subTotal.toLocaleString('vi-VN')}
+                                                    {item2.price.toLocaleString('vi-VN')}
                                                 </span>
                                             </TableCell>
                                         </TableRow>
