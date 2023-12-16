@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://duckshop.onrender.com/api/v1',
-    timeout: 300000, // Thời gian timeout cho mỗi request
+    timeout: 3000000, // Thời gian timeout cho mỗi request
     headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
