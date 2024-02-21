@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 
-import logo from '../../../assets/img/BG 2.png';
-import Image from '../../../components/Image';
-import config from '../../../config';
+import logo from '../../assets/img/logoDuck.png';
+import Image from '../Image';
+import config from '../../config';
 const LINKS = [
     {
         title: 'Sản phẩm',
@@ -30,7 +30,7 @@ const currentYear = new Date().getFullYear();
 
 function Footer() {
     return (
-        <div className="bg-footer text-white pt-8 pb-2 mt-10">
+        <div className="bg-footer text-white pt-8 pb-2 mt-auto">
             <footer className="relative w-10/12 m-auto">
                 <div className="mx-auto w-full">
                     <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">

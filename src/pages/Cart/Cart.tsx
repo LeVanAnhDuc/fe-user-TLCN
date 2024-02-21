@@ -20,7 +20,7 @@ import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
 import QuantityProduct from './QuantityProduct';
 import DeleteProduct from './DeleteProduct';
 
-import { getCountOfItems } from '../../apis/cartApi';
+import { getCountItemOfCart } from '../../apis/cartApi';
 import { useDispatch } from 'react-redux';
 import { setToTalProductCart } from './totalProducCartSlice';
 import MouseOverPopover from '../../components/MouseOverPopover/MouseOverPopover';
@@ -66,7 +66,7 @@ const Cart = () => {
 
     // handle số lượng sản phẩm trong giỏ hàng
     const getTotalItemOfCart = async () => {
-        const totalProductInCart = await getCountOfItems();
+        const totalProductInCart = await getCountItemOfCart();
         if (totalProductInCart.status === 200) {
             dispatch(setToTalProductCart(+totalProductInCart.data));
         }

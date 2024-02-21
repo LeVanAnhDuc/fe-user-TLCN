@@ -11,16 +11,29 @@ module.exports = {
             xl: '1280px',
             '2xl': '1536px',
         },
-        fontFamily: {
-            sans: ['Graphik', 'sans-serif'],
-            serif: ['Merriweather', 'serif'],
-        },
         extend: {
             backgroundColor: {
                 header: 'white',
                 footer: '#787A91',
                 headerProfile: '#FFEEE8',
                 review: '#F3EEEA',
+            },
+            colors: {
+                primary: {
+                    50: '#e0f7fa',
+                    100: '#b2ebf2',
+                    200: '#80deea',
+                    300: '#4dd0e1',
+                    400: '#26c6da',
+                    500: '#00bcd4',
+                    600: '#00acc1',
+                    700: '#0097a7',
+                    800: '#00838f',
+                    900: '#006064',
+                },
+            },
+            backgroundImage: {
+                'login-banner': "url('./src/assets/img/login/banner-login.png')",
             },
             spacing: {
                 18: '4.5rem',

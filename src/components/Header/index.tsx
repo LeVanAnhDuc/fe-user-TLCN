@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Image from '../../../components/Image';
-import logo from '../../../assets/img/BG 2.png';
+import Image from '../Image';
+import logo from '../../assets/img/logoDuck.png';
 
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
@@ -12,15 +12,15 @@ import Popper from '@mui/material/Popper';
 import Store from '@mui/icons-material/Store';
 
 import { Link, useNavigate } from 'react-router-dom';
-import config from '../../../config';
+import config from '../../config';
 
-import { useAppDispatch, useAppSelector } from '../../../redux/hook';
-import { selectAvatarUrl, selectIsLogin, selectUserNameUser, setIsLogin } from '../../../pages/LogIn/loginSlice';
-import { selectToTalProductCart } from '../../../pages/Cart/totalProducCartSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hook';
+import { selectAvatarUrl, selectIsLogin, selectUserNameUser, setIsLogin } from '../../pages/LogIn/loginSlice';
+import { selectToTalProductCart } from '../../pages/Cart/totalProducCartSlice';
 import Favorite from '@mui/icons-material/Favorite';
-import MouseOverPopover from '../../../components/MouseOverPopover/MouseOverPopover';
-import Search from '../../../components/Search/Search';
-import { selectToTalWishList } from '../../../pages/Profile/Wishlist/wishListSlice';
+import MouseOverPopover from '../MouseOverPopover/MouseOverPopover';
+import Search from '../Search/Search';
+import { selectToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
 
 function Header() {
     const dispatch = useAppDispatch();
@@ -90,8 +90,8 @@ function Header() {
         <>
             <div
                 className={`${
-                    scroll ? 'bg-header shadow-xl fixed duration-200 ease-in' : 'bg-transparent absolute'
-                } h-18 flex flex-col justify-center items-center w-screen z-50`}
+                    scroll ? 'bg-header shadow-md fixed' : 'bg-transparent absolute'
+                } h-18 flex flex-col justify-center items-center w-full z-50`}
             >
                 <div className="sm:w-10/12 w-11/12 flex justify-between gap-3">
                     <div className="h-full w-24  md:w-40 ">

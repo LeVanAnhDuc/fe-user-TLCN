@@ -31,7 +31,7 @@ export const getCartByToken = async () => {
         throw error;
     }
 };
-export const getCountOfItems = async () => {
+export const getCountItemOfCart = async () => {
     try {
         const response = await axios.get(`/cart/items/count`);
         return response;

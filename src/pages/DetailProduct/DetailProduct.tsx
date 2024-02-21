@@ -23,7 +23,7 @@ import IProduct from '../../interface/product';
 
 import BootstrapButton from './Button/BootstrapButton';
 import config from '../../config';
-import { addToCart, getCountOfItems } from '../../apis/cartApi';
+import { addToCart, getCountItemOfCart } from '../../apis/cartApi';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Image from '../../components/Image';
 import { useDispatch } from 'react-redux';
@@ -31,7 +31,7 @@ import { setToTalProductCart } from '../Cart/totalProducCartSlice';
 import Rating from '@mui/material/Rating';
 import Favorite from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import { getWishListNumber, putFollowProduct } from '../../apis/followProductApi';
+import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
 import ReviewProductCurrent from './ReviewProductCurrent/ReviewProductCurrent';
 import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';
 import RelatedProduct from './RelatedProduct/RelatedProduct';
@@ -140,7 +140,7 @@ const DetailProduct = () => {
             setFavourite((prev) => !prev);
             try {
                 await putFollowProduct(+idProduct);
-                const response = await getWishListNumber();
+                const response = await getCountItemOfWishList();
                 dispatch(setToTalWishList(+response.data));
             } catch (error) {
                 toast.error(`${error}`);
@@ -156,7 +156,7 @@ const DetailProduct = () => {
 
     // handle số lượng sản phẩm trong giỏ hàng
     const getTotalItemOfCart = async () => {
-        const totalProductInCart = await getCountOfItems();
+        const totalProductInCart = await getCountItemOfCart();
         if (totalProductInCart.status === 200) {
             dispatch(setToTalProductCart(+totalProductInCart.data));
         }
@@ -348,7 +348,9 @@ const DetailProduct = () => {
             {/* Start product description */}
             <div className="mt-5">
                 <div className="bg-gray-200 p-3 rounded text-xl font-normal">MÔ TẢ SẢN PHẨM</div>
-                <div className="mt-5 text-lg bg-gray-100 p-5 rounded shadow-md whitespace-pre-line">{product?.description}</div>
+                <div className="mt-5 text-lg bg-gray-100 p-5 rounded shadow-md whitespace-pre-line">
+                    {product?.description}
+                </div>
             </div>
 
             {/* Start product reviews */}

@@ -17,7 +17,7 @@ import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import Favorite from '@mui/icons-material/Favorite';
 
 import Image from '../../../components/Image';
-import { getWishListNumber, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
+import { getCountItemOfWishList, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
 import IFollowProduct from '../../../interface/followProduct';
 import config from '../../../config';
 import MouseOverPopover from '../../../components/MouseOverPopover/MouseOverPopover';
@@ -71,7 +71,7 @@ const Wishlist = () => {
 
     const handleToggleFavourite = async (itemProduct: number) => {
         await putFollowProduct(itemProduct);
-        const response = await getWishListNumber();
+        const response = await getCountItemOfWishList();
         dispatch(setToTalWishList(+response.data));
         setLoading((prev) => !prev);
     };

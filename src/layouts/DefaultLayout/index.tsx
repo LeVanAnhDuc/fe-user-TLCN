@@ -1,6 +1,7 @@
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
 import { ReactNode } from 'react';
+
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -8,9 +9,9 @@ interface DefaultLayoutProps {
 
 function DefaultLayout({ children }: DefaultLayoutProps) {
     return (
-        <div>
+        <div className="min-h-screen flex flex-col">
             <Header />
-            <div className="text-base pt-18 min-h-screen">{children}</div>
+            <div className="pt-18 h-full w-full">{children}</div>
             <Footer />
         </div>
     );

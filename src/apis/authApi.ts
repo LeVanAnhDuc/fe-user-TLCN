@@ -30,7 +30,6 @@ export const loginApi = async (email: string, password: string) => {
             usernameOrEmail: email,
             password,
         });
-        // handle save token
         if (response.data.jwt) {
             localStorage.setItem('accessToken', response.data.jwt.accessToken);
             localStorage.setItem('tokenType', response.data.jwt.tokenType);

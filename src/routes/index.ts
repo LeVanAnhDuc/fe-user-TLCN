@@ -1,11 +1,9 @@
 import config from '../config/index';
-
 import Error404 from '../pages/Error404';
-
 import Home from '../pages/Home/Home';
 import Listproducts from '../pages/Listproducts/Listproducts';
 import DetailProduct from '../pages/DetailProduct/DetailProduct';
-import LogIn from '../pages/LogIn/LogIn';
+import LogIn from '../pages/LogIn';
 import Register from '../pages/Register/Register';
 import CheckOut from '../pages/CheckOut/CheckOut';
 import Cart from '../pages/Cart/Cart';
@@ -37,7 +35,6 @@ const publishRoute: Array<TRouters> = [
     { path: config.Routes.error, component: Error404, layout: null },
 ];
 
-// required sign in
 const privateRoute: Array<TRouters> = [
     { path: config.Routes.home, component: Home },
     { path: config.Routes.listProducts, component: Listproducts },

@@ -1,5 +1,5 @@
-import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
@@ -29,9 +29,7 @@ const InputText = (propsCh: IProps) => {
         ...props
     } = propsCh;
 
-    // show pass
     const [showPassword, setShowPassword] = useState(false);
-
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     return (

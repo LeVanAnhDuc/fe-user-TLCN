@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 
 import config from '../../config';
 import IProduct from '../../interface/product';
-import { getWishListNumber, putFollowProduct } from '../../apis/followProductApi';
+import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
 import { setToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
 
 const Card = (props: { itemProduct: IProduct }) => {
@@ -33,7 +33,7 @@ const Card = (props: { itemProduct: IProduct }) => {
                 const response = await putFollowProduct(+itemProduct.id);
 
                 if (response.status === 200) {
-                    const totalFavourite = await getWishListNumber();
+                    const totalFavourite = await getCountItemOfWishList();
                     if (favourite) {
                         setFavouriteCount((prev) => prev - 1);
                     } else {
