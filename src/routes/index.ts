@@ -10,7 +10,7 @@ import Cart from '../pages/Cart/Cart';
 import Profile from '../pages/Profile/Profile';
 import GetOTPRegister from '../pages/GetOTPRegister';
 import GetOTPLogin from '../pages/GetOTPLogin';
-import ForgotPassWord from '../pages/ForgotPassWord/ForgotPassWord';
+import ForgotPassWord from '../pages/ForgotPassWord';
 import Detail from '../pages/Profile/PurchaseHistory/Detail/Detail';
 
 type TRouters = {

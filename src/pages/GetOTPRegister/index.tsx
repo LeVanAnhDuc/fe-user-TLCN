@@ -18,7 +18,7 @@ import AnimationTran from '../../components/AnimationTran';
 import Button from '../../components/Button';
 import SnackBarLoading from '../../components/SnackBarLoading';
 
-type TGetOTPRegister = {
+type FormDataGetOTPRegister = {
     otp: string;
 };
 
@@ -48,11 +48,11 @@ const GetOTPRegister = () => {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm<TGetOTPRegister>({
+    } = useForm<FormDataGetOTPRegister>({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit: SubmitHandler<TGetOTPRegister> = async (data) => {
+    const onSubmit: SubmitHandler<FormDataGetOTPRegister> = async (data) => {
         if (dataRegister.email !== '') {
             try {
                 setIsLoadingDiaLog(true);

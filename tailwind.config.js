@@ -35,6 +35,7 @@ module.exports = {
             backgroundImage: {
                 'login-banner': "url('./src/assets/img/login/banner-login.png')",
                 'register-banner': "url('./src/assets/img/register/banner-register.png')",
+                'forgotPassword-banner': "url('./src/assets/img/forgotPassword/banner-forgotPassword.png')",
             },
             spacing: {
                 18: '4.5rem',

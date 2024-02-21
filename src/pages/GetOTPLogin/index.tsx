@@ -14,7 +14,7 @@ import logoDuck from '../../assets/img/logoDuck.png';
 import SnackBarLoading from '../../components/SnackBarLoading';
 import Button from '../../components/Button';
 
-type TGetOTPLogin = {
+type FormDataGetOTPLogin = {
     otp: string;
     email: string;
 };
@@ -44,11 +44,11 @@ const GetOTPRegister = () => {
         handleSubmit,
         getValues,
         formState: { errors },
-    } = useForm<TGetOTPLogin>({
+    } = useForm<FormDataGetOTPLogin>({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit: SubmitHandler<TGetOTPLogin> = async (data) => {
+    const onSubmit: SubmitHandler<FormDataGetOTPLogin> = async (data) => {
         setIsLoadingDiaLog(true);
         setTitleDialog('Đang kiếm tra OTP');
         const response = await verifyOTPRegister(data.email, data.otp);
