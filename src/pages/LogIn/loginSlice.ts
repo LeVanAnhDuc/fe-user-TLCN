@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../redux/store';
 
-// Define a type for the slice state
+import type { RootState } from '../../redux/store';
 interface IInitialStateLogin {
     isLogin: boolean;
     idUser: string;
@@ -11,7 +10,6 @@ interface IInitialStateLogin {
     avatarUrl: string | null;
 }
 
-// Define the initial state using that type
 const initialState: IInitialStateLogin = {
     isLogin: false,
     idUser: '',
@@ -19,12 +17,13 @@ const initialState: IInitialStateLogin = {
     nameUser: '',
     avatarUrl: '',
 };
-// Lấy giá trị khi có từ localStorage
+
 const savedIsLogin = localStorage.getItem('isLogin');
-const savedInfoUser = localStorage.getItem('infoUser');
 if (savedIsLogin) {
     initialState.isLogin = JSON.parse(savedIsLogin);
 }
+
+const savedInfoUser = localStorage.getItem('infoUser');
 if (savedInfoUser) {
     const dataInfo = JSON.parse(savedInfoUser);
     initialState.idUser = dataInfo.idUser;
@@ -39,7 +38,6 @@ export const loginSlice = createSlice({
     reducers: {
         setIsLogin: (state, action: PayloadAction<boolean>) => {
             state.isLogin = action.payload;
-            // Lưu giá trị mới vào localStorage khi có thay đổi
             localStorage.setItem('isLogin', JSON.stringify(action.payload));
         },
         setInfoUser: (
@@ -51,7 +49,6 @@ export const loginSlice = createSlice({
             state.avatarUrl = action.payload.avatarUrl;
             state.nameUser = action.payload.nameUser;
 
-            // Lưu giá trị mới vào localStorage khi có thay đổi
             if (action.payload.idUser && action.payload.userNameUser) {
                 localStorage.setItem(
                     'infoUser',
@@ -66,8 +63,6 @@ export const loginSlice = createSlice({
         },
         setAvatarUser: (state, action: PayloadAction<string | null>) => {
             state.avatarUrl = action.payload;
-
-            // Lưu giá trị mới vào localStorage khi có thay đổi
 
             localStorage.setItem(
                 'infoUser',
@@ -85,7 +80,6 @@ export const { setIsLogin } = loginSlice.actions;
 export const { setInfoUser } = loginSlice.actions;
 export const { setAvatarUser } = loginSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectIsLogin = (state: RootState) => state.login.isLogin;
 export const selectIDUser = (state: RootState) => state.login.idUser;
 export const selectUserNameUser = (state: RootState) => state.login.userNameUser;

@@ -22,10 +22,10 @@ import SnackBarLoading from '../../components/SnackBarLoading';
 import AnimationTran from '../../components/AnimationTran';
 import AnimationScale from '../../components/AnimationScale';
 import logoDuck from '../../assets/img/logoDuck.png';
-import { checkPassWord, checkUserName } from '../../utils/checkData';
+import { checkPassWord, checkUserNameAndEmail } from '../../utils/checkData';
 
 type FormDataLogin = {
-    email: string;
+    emailOrUserName: string;
     passWord: string;
 };
 
@@ -38,8 +38,8 @@ const LogIn = () => {
     const [isLoadingDialog, setIsLoadingDialog] = useState<boolean>(false);
 
     const schema = yup.object().shape({
-        email: yup.string().required('Tên tài khoản đang trống'),
-        passWord: yup.string().required('Mật khẩu đang trống'),
+        emailOrUserName: yup.string().required('Tên tài khoản đang trống'),
+        passWord: yup.string().required('Mật khẩu đang trống').min(8, 'Mật khẩu phải từ 8 kí tự trở lên'),
     });
 
     const {
@@ -51,17 +51,17 @@ const LogIn = () => {
     });
 
     const onSubmit: SubmitHandler<FormDataLogin> = async (data: FormDataLogin) => {
-        if (!checkUserName(data.email)) {
+        if (!checkUserNameAndEmail(data.emailOrUserName)) {
             toast.error('Tên đăng nhập chưa đúng định dạng');
             return;
         }
         if (!checkPassWord(data.passWord)) {
-            toast.error('Mật khẩu phải trên 8 kí tự và không chứa kí tự đặc biệt');
+            toast.error('Mật khẩu không chứa kí tự đặc biệt');
             return;
         }
         try {
             setIsLoadingDialog(true);
-            const response = await loginApi(data.email, data.passWord);
+            const response = await loginApi(data.emailOrUserName, data.passWord);
             setIsLoadingDialog(false);
 
             if (response?.data?.jwt) {
@@ -118,7 +118,7 @@ const LogIn = () => {
     return (
         <>
             <SnackBarLoading open={isLoadingDialog} content="Xác nhận đăng nhập" />
-            <div className=" bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
+            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
                     <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">
                         <AnimationTran tranX={100} className="text-2xl font-bold text-gray-900">
@@ -128,19 +128,19 @@ const LogIn = () => {
                             <AnimationTran tranX={100} delay={0.1}>
                                 <>
                                     <Controller
-                                        name="email"
+                                        name="emailOrUserName"
                                         control={control}
                                         render={({ field }) => (
                                             <TextField
                                                 {...field}
-                                                error={errors.email ? true : false}
+                                                error={errors.emailOrUserName ? true : false}
                                                 fullWidth
                                                 label={'Nhập email hoặc tên tài khoản'}
                                                 autoComplete="username"
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.email?.message}</p>
+                                    <p className="text-red-600 text-sm mt-1.5">{errors.emailOrUserName?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.2}>
