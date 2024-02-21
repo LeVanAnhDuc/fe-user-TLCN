@@ -83,10 +83,12 @@ const Register = () => {
                                 <img src={logoDuck} alt="Logo_Duck" className="h-20 m-auto" />
                             </Link>
                         </AnimationScale>
-                        <h5 className="leading-7 tracking-tight">
-                            Tạo hồ sơ Thành viên Duck của bạn và có quyền truy cập đầu tiên vào những sản phẩm, nguồn
-                            cảm hứng và cộng đồng tốt nhất của Duck.
-                        </h5>
+                        <AnimationTran tranY={-100}>
+                            <h5 className="leading-7 tracking-tight">
+                                Tạo hồ sơ Thành viên Duck của bạn và có quyền truy cập đầu tiên vào những sản phẩm,
+                                nguồn cảm hứng và cộng đồng tốt nhất của Duck.
+                            </h5>
+                        </AnimationTran>
                         <div className="bg-register-banner bg-contain bg-no-repeat bg-center w-full h-full"></div>
                     </section>
                     <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">

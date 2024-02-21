@@ -63,8 +63,9 @@ const LogIn = () => {
             setIsLoadingDialog(true);
             const response = await loginApi(data.emailOrUserName, data.passWord);
             setIsLoadingDialog(false);
+            console.log(response);
 
-            if (response?.data?.jwt) {
+            if (response.status === 200 && response.data.jwt) {
                 toast.success('Đăng nhập thành công');
                 dispatch(setIsLogin(true));
                 dispatch(
@@ -77,14 +78,11 @@ const LogIn = () => {
                 );
                 getTotalItemOfCartAndTotalWishList();
                 navigate('/');
-            }
-            if (response.data.message === MESS_XACTHUC) {
+            } else if (response.data.message === MESS_XACTHUC) {
                 toast.error(response.data.message);
                 navigate(config.Routes.getOTPLogIn);
             } else {
-                if (response && response.status) {
-                    toast.error(response.data.message || response.data);
-                }
+                toast.error(response.data.message || response.data);
             }
         } catch (error) {
             toast.error(`${error}`);

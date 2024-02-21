@@ -8,7 +8,7 @@ import Register from '../pages/Register';
 import CheckOut from '../pages/CheckOut/CheckOut';
 import Cart from '../pages/Cart/Cart';
 import Profile from '../pages/Profile/Profile';
-import GetOTPRegister from '../pages/GetOTPRegister/GetOTPRegister';
+import GetOTPRegister from '../pages/GetOTPRegister';
 import GetOTPLogin from '../pages/GetOTPLogin/GetOTPLogin';
 import ForgotPassWord from '../pages/ForgotPassWord/ForgotPassWord';
 import Detail from '../pages/Profile/PurchaseHistory/Detail/Detail';
