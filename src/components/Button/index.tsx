@@ -13,8 +13,8 @@ const Button = (props: Iprops) => {
     return (
         <motion.button
             className={`${
-                disabled ? 'bg-transparent text-gray-400' : 'text-white'
-            } border-2 px-5 py-2 rounded-lg text-lg font-medium h-12  ${className} `}
+                disabled ? 'bg-transparent text-gray-400' : ''
+            } border-2  px-5 py-2 rounded-lg text-lg font-medium h-12  ${className} `}
             whileHover={
                 !disabled
                     ? {
