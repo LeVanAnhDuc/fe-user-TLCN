@@ -208,7 +208,7 @@ function Header() {
                                 </Popper>
                             </>
                         ) : (
-                            <div className="text-gray-500 font-semibold flex gap-2">
+                            <div className="text-gray-500 text-sm font-semibold flex gap-2">
                                 <Link
                                     to={config.Routes.register}
                                     className="uppercase cursor-pointer hover:text-primary-900"

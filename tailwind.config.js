@@ -31,9 +31,10 @@ module.exports = {
                 },
             },
             backgroundImage: {
-                'login-banner': "url('./src/assets/img/login/banner-login.png')",
-                'register-banner': "url('./src/assets/img/register/banner-register.png')",
-                'forgotPassword-banner': "url('./src/assets/img/forgotPassword/banner-forgotPassword.png')",
+                'login-banner': "url('./src/assets/img/login/banner.png')",
+                'register-banner': "url('./src/assets/img/register/banner.png')",
+                'forgotPassword-banner': "url('./src/assets/img/forgotPassword/banner.png')",
+                'home-banner': "url('./src/assets/img/home/banner.png')",
             },
             spacing: {
                 18: '4.5rem',
