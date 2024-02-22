@@ -13,8 +13,6 @@ module.exports = {
         },
         extend: {
             backgroundColor: {
-                header: 'white',
-                footer: '#787A91',
                 headerProfile: '#FFEEE8',
                 review: '#F3EEEA',
             },
