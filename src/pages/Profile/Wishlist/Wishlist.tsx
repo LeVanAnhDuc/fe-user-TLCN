@@ -20,7 +20,7 @@ import Image from '../../../components/Image';
 import { getCountItemOfWishList, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
 import IFollowProduct from '../../../interface/followProduct';
 import config from '../../../config';
-import MouseOverPopover from '../../../components/MouseOverPopover/MouseOverPopover';
+import MouseOverPopover from '../../../components/MouseOverPopover';
 import { setToTalWishList } from './wishListSlice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

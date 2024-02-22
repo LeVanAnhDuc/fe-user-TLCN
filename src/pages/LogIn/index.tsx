@@ -63,10 +63,8 @@ const LogIn = () => {
             setIsLoadingDialog(true);
             const response = await loginApi(data.emailOrUserName, data.passWord);
             setIsLoadingDialog(false);
-            console.log(response);
 
             if (response.status === 200 && response.data.jwt) {
-                toast.success('Đăng nhập thành công');
                 dispatch(setIsLogin(true));
                 dispatch(
                     setInfoUser({

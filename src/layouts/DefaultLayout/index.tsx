@@ -11,7 +11,7 @@ function DefaultLayout({ children }: DefaultLayoutProps) {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
-            <div className="pt-18 h-full w-full">{children}</div>
+            <div className="h-full w-full">{children}</div>
             <Footer />
         </div>
     );

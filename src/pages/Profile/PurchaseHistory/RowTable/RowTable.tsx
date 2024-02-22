@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { updateOrderStatusByID } from '../../../../apis/orderApi';
 import Image from '../../../../components/Image';
-import MouseOverPopover from '../../../../components/MouseOverPopover/MouseOverPopover';
+import MouseOverPopover from '../../../../components/MouseOverPopover';
 import ModalReview from '../ModalReview/ModalReview';
 import IOrder from '../../../../interface/order';
 import config from '../../../../config';

@@ -23,7 +23,7 @@ import DeleteProduct from './DeleteProduct';
 import { getCountItemOfCart } from '../../apis/cartApi';
 import { useDispatch } from 'react-redux';
 import { setToTalProductCart } from './totalProducCartSlice';
-import MouseOverPopover from '../../components/MouseOverPopover/MouseOverPopover';
+import MouseOverPopover from '../../components/MouseOverPopover';
 
 const Cart = () => {
     const navigate = useNavigate();
