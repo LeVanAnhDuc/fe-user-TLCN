@@ -2,7 +2,9 @@ const Routes = {
     home: '/',
     logIn: '/dang-nhap',
     getOTPLogIn: '/xac-thuc-OTP-email',
+
     forgotPass: '/quen-mat-khau',
+
     register: '/dang-ki',
     getOTPRegister: '/xac-thuc-OTP',
     listProducts: '/ds-san-pham',

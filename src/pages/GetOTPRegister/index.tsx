@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -13,10 +13,10 @@ import { loginApi, sendOTPRegister, verifyOTPRegister } from '../../apis/authApi
 import { useAppDispatch } from '../../redux/hook';
 import { setInfoUser, setIsLogin } from '../LogIn/loginSlice';
 import config from '../../config';
-import logoDuck from '../../assets/img/logoDuck.png';
 import AnimationTran from '../../components/AnimationTran';
 import Button from '../../components/Button';
 import SnackBarLoading from '../../components/SnackBarLoading';
+import Logo from '../../components/Logo';
 
 type FormDataGetOTPRegister = {
     otp: string;
@@ -27,7 +27,9 @@ const GetOTPRegister = () => {
     const navigate = useNavigate();
     const dataRegister = useAppSelector(getDataRegister);
 
-    const [isLoadingDialog, setIsLoadingDiaLog] = useState(false);
+    const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+    const [isLoadingSendOTPAgain, setIsLoadingSendOTPAgain] = useState(false);
+    const [isLoadingLogin, setIsLoadingLogin] = useState(false);
     const [titleDialog, setTitleDialog] = useState<string>('');
     const [verifyOTP, setVerifyOTP] = useState<boolean>(false);
 
@@ -53,58 +55,67 @@ const GetOTPRegister = () => {
     });
 
     const onSubmit: SubmitHandler<FormDataGetOTPRegister> = async (data) => {
-        if (dataRegister.email !== '') {
-            try {
-                setIsLoadingDiaLog(true);
-                setTitleDialog('Đang kiếm tra OTP');
-                const response = await verifyOTPRegister(dataRegister.email, data.otp);
-                setIsLoadingDiaLog(false);
-
-                if (response.status === 200) {
-                    toast.success(response.data);
-                    setVerifyOTP(true);
-                } else {
-                    toast.error(response.data.message || response.data);
-                }
-            } catch (error) {
-                toast.error(`${error}`);
-            }
-        } else {
-            toast.error('OTP của email hết hạn. Vui lòng nhập lại Email');
+        if (dataRegister.email === '') {
+            toast.error('Vui lòng nhập lại Email');
             navigate(config.Routes.getOTPLogIn);
             setVerifyOTP(false);
+            return;
+        }
+
+        try {
+            setIsLoadingSubmit(true);
+            setTitleDialog('Đang kiếm tra OTP');
+            const response = await verifyOTPRegister(dataRegister.email, data.otp);
+            setIsLoadingSubmit(false);
+
+            if (response.status === 200) {
+                toast.success(response.data);
+                setVerifyOTP(true);
+            } else {
+                toast.error(response.data.message || response.data);
+                dispatch(clearRegister());
+            }
+        } catch (error) {
+            toast.error(`${error}`);
         }
     };
 
     const handleSendOTPAgain = async () => {
-        if (dataRegister.email !== '') {
-            try {
-                setIsLoadingDiaLog(true);
-                setTitleDialog('Tiến hành gửi OTP');
-                const response = await sendOTPRegister(dataRegister.email);
-                setIsLoadingDiaLog(false);
-
-                if (response.status === 200) {
-                    toast.success(response.data);
-                } else {
-                    toast.error(response.data.message || response.data);
-                }
-            } catch (error) {
-                toast.error(`${error}`);
-            }
-        } else {
+        if (dataRegister.email === '') {
             toast.error('OTP của email hết hạn. Vui lòng nhập lại Email');
             navigate(config.Routes.getOTPLogIn);
             setVerifyOTP(false);
+            return;
+        }
+
+        try {
+            setIsLoadingSendOTPAgain(true);
+            setTitleDialog('Tiến hành gửi OTP');
+            const response = await sendOTPRegister(dataRegister.email);
+            setIsLoadingSendOTPAgain(false);
+
+            if (response.status === 200) {
+                toast.success(response.data);
+            } else {
+                toast.error(response.data.message || response.data);
+                dispatch(clearRegister());
+            }
+        } catch (error) {
+            toast.error(`${error}`);
         }
     };
 
     const handleLogin = async () => {
+        if (dataRegister.email === '' && dataRegister.passWord === '') {
+            navigate(config.Routes.logIn);
+            return;
+        }
+
         try {
-            setIsLoadingDiaLog(true);
+            setIsLoadingLogin(true);
             setTitleDialog('Tiến hành đăng nhập');
             const response = await loginApi(dataRegister.email, dataRegister.passWord);
-            setIsLoadingDiaLog(false);
+            setIsLoadingLogin(false);
 
             if (response.status === 200 && response.data.jwt) {
                 toast.success('Đăng nhập thành công');
@@ -118,7 +129,7 @@ const GetOTPRegister = () => {
                     }),
                 );
                 dispatch(clearRegister());
-                navigate('/');
+                navigate(config.Routes.home);
             } else {
                 toast.error(response.data.message || response.data);
             }
@@ -128,13 +139,11 @@ const GetOTPRegister = () => {
     };
     return (
         <>
-            <SnackBarLoading open={isLoadingDialog} content={titleDialog} />
+            <SnackBarLoading open={isLoadingSendOTPAgain || isLoadingSubmit || isLoadingLogin} content={titleDialog} />
             <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
-                    <section className="min-h-[31rem] w-full flex-col lg:flex hidden">
-                        <Link to={config.Routes.home}>
-                            <img src={logoDuck} alt="Logo_Duck" className="h-20 m-auto" />
-                        </Link>
+                    <section className="min-h-[31rem] w-full flex-col items-center lg:flex hidden">
+                        <Logo />
                         <AnimationTran tranY={-100} className="m-auto">
                             <h5 className="leading-7 tracking-tight">Mã xác thực sẽ được gửi qua Email</h5>
                         </AnimationTran>
@@ -165,15 +174,17 @@ const GetOTPRegister = () => {
                             </AnimationTran>
                             <div className="grid grid-cols-2 gap-2">
                                 <AnimationTran tranX={-100} delay={0.3}>
-                                    <Button type="submit" className="bg-primary-500 w-full">
+                                    <Button type="submit" variant="fill" fullWidth loading={isLoadingSubmit}>
                                         Xác thực OTP
                                     </Button>
                                 </AnimationTran>
                                 <AnimationTran tranX={-100} delay={0.2}>
                                     <Button
                                         type="submit"
-                                        className="bg-primary-500 w-full"
+                                        variant="outline"
+                                        fullWidth
                                         disabled={verifyOTP ? false : true}
+                                        loading={isLoadingLogin}
                                         onClick={handleLogin}
                                     >
                                         Đăng nhập ngay
@@ -181,7 +192,12 @@ const GetOTPRegister = () => {
                                 </AnimationTran>
                             </div>
                             <AnimationTran tranX={-100} delay={0.4}>
-                                <Button className="bg-primary-500 w-full" onClick={handleSendOTPAgain}>
+                                <Button
+                                    variant="fill"
+                                    fullWidth
+                                    loading={isLoadingSendOTPAgain}
+                                    onClick={handleSendOTPAgain}
+                                >
                                     Gửi lại mã
                                 </Button>
                             </AnimationTran>

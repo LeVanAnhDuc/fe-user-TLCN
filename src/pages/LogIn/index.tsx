@@ -21,8 +21,8 @@ import Button from '../../components/Button';
 import SnackBarLoading from '../../components/SnackBarLoading';
 import AnimationTran from '../../components/AnimationTran';
 import AnimationScale from '../../components/AnimationScale';
-import logoDuck from '../../assets/img/logoDuck.png';
 import { checkPassWord, checkUserNameAndEmail } from '../../utils/checkData';
+import Logo from '../../components/Logo';
 
 type FormDataLogin = {
     emailOrUserName: string;
@@ -35,7 +35,7 @@ const LogIn = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const [isLoadingDialog, setIsLoadingDialog] = useState<boolean>(false);
+    const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(false);
 
     const schema = yup.object().shape({
         emailOrUserName: yup.string().required('Tên tài khoản đang trống'),
@@ -60,9 +60,9 @@ const LogIn = () => {
             return;
         }
         try {
-            setIsLoadingDialog(true);
+            setIsLoadingLogin(true);
             const response = await loginApi(data.emailOrUserName, data.passWord);
-            setIsLoadingDialog(false);
+            setIsLoadingLogin(false);
 
             if (response.status === 200 && response.data.jwt) {
                 dispatch(setIsLogin(true));
@@ -75,7 +75,7 @@ const LogIn = () => {
                     }),
                 );
                 getTotalItemOfCartAndTotalWishList();
-                navigate('/');
+                navigate(config.Routes.home);
             } else if (response.data.message === MESS_XACTHUC) {
                 toast.error(response.data.message);
                 navigate(config.Routes.getOTPLogIn);
@@ -107,13 +107,13 @@ const LogIn = () => {
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
-            navigate('/');
+            navigate(config.Routes.home);
         }
     }, []);
 
     return (
         <>
-            <SnackBarLoading open={isLoadingDialog} content="Xác nhận đăng nhập" />
+            <SnackBarLoading open={isLoadingLogin} content="Xác nhận đăng nhập" />
             <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
                     <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">
@@ -155,37 +155,39 @@ const LogIn = () => {
                                     <p className="text-red-600 text-sm mt-1.5">{errors.passWord?.message}</p>
                                 </>
                             </AnimationTran>
-                            <AnimationTran tranX={100} delay={0.3} className="w-full text-right ">
-                                <Link
-                                    to={config.Routes.forgotPass}
-                                    className="text-sm font-semibold text-gray-600 hover:text-black transition"
-                                >
-                                    Quên mật khẩu
-                                </Link>
+                            <AnimationTran tranX={100} delay={0.3} className="w-full flex justify-end">
+                                <Button variant="text" size="small">
+                                    <Link
+                                        to={config.Routes.forgotPass}
+                                        className="text-sm font-semibold text-gray-600 hover:text-black transition"
+                                    >
+                                        Quên mật khẩu
+                                    </Link>
+                                </Button>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.4}>
-                                <Button type="submit" className="bg-primary-500 w-full">
+                                <Button type="submit" variant="fill" fullWidth loading={isLoadingLogin}>
                                     Đăng nhập
                                 </Button>
                             </AnimationTran>
                         </form>
                         <AnimationTran tranY={100} delay={0.5} className="text-center text-sm text-gray-500">
-                            <>
+                            <div className="flex place-content-center place-items-center">
                                 Chưa có tài khoản?
-                                <Link
-                                    to={config.Routes.register}
-                                    className="pl-1 font-semibold text-base text-primary-600 hover:text-primary-900 underline transition"
-                                >
-                                    Đăng kí.
-                                </Link>
-                            </>
+                                <Button variant="text" size="small" className="!px-0">
+                                    <Link
+                                        to={config.Routes.register}
+                                        className="pl-1 font-semibold text-base text-primary-600 hover:text-primary-900 underline transition"
+                                    >
+                                        Đăng kí.
+                                    </Link>
+                                </Button>
+                            </div>
                         </AnimationTran>
                     </section>
                     <section className="w-full h-full flex-col lg:flex hidden">
-                        <AnimationScale>
-                            <Link to={config.Routes.home}>
-                                <img src={logoDuck} alt="Logo_Duck" className="h-20 m-auto" />
-                            </Link>
+                        <AnimationScale className="m-auto">
+                            <Logo />
                         </AnimationScale>
                         <div className="bg-login-banner bg-contain bg-no-repeat bg-center w-full h-full "></div>
                     </section>

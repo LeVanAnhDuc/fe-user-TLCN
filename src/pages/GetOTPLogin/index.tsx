@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,9 +10,9 @@ import * as yup from 'yup';
 import config from '../../config';
 import { sendOTPRegister, verifyOTPRegister } from '../../apis/authApi';
 import AnimationTran from '../../components/AnimationTran';
-import logoDuck from '../../assets/img/logoDuck.png';
 import SnackBarLoading from '../../components/SnackBarLoading';
 import Button from '../../components/Button';
+import Logo from '../../components/Logo';
 
 type FormDataGetOTPLogin = {
     otp: string;
@@ -22,7 +22,8 @@ type FormDataGetOTPLogin = {
 const GetOTPRegister = () => {
     const navigate = useNavigate();
 
-    const [isLoadingDialog, setIsLoadingDiaLog] = useState(false);
+    const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+    const [isLoadingSendOTPAgain, setIsLoadingSendOTPAgain] = useState(false);
     const [titleDialog, setTitleDialog] = useState<string>('');
 
     const schema = yup.object().shape({
@@ -49,10 +50,10 @@ const GetOTPRegister = () => {
     });
 
     const onSubmit: SubmitHandler<FormDataGetOTPLogin> = async (data) => {
-        setIsLoadingDiaLog(true);
+        setIsLoadingSubmit(true);
         setTitleDialog('Đang kiếm tra OTP');
         const response = await verifyOTPRegister(data.email, data.otp);
-        setIsLoadingDiaLog(false);
+        setIsLoadingSubmit(false);
 
         if (response.status === 200) {
             toast.success(response.data);
@@ -65,10 +66,10 @@ const GetOTPRegister = () => {
     const handleSendOTPAgain = async () => {
         if (getValues().email !== undefined) {
             try {
-                setIsLoadingDiaLog(true);
+                setIsLoadingSendOTPAgain(true);
                 setTitleDialog('Tiến hành gửi OTP');
                 const response = await sendOTPRegister(getValues().email);
-                setIsLoadingDiaLog(false);
+                setIsLoadingSendOTPAgain(false);
 
                 if (response.status === 200) {
                     toast.success(response.data);
@@ -84,13 +85,11 @@ const GetOTPRegister = () => {
     };
     return (
         <>
-            <SnackBarLoading open={isLoadingDialog} content={titleDialog} />
+            <SnackBarLoading open={isLoadingSendOTPAgain || isLoadingSubmit} content={titleDialog} />
             <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
-                    <section className="min-h-[31rem] w-full flex-col lg:flex hidden">
-                        <Link to={config.Routes.home}>
-                            <img src={logoDuck} alt="Logo_Duck" className="h-20 m-auto" />
-                        </Link>
+                    <section className="min-h-[31rem] w-full flex-col items-center lg:flex hidden">
+                        <Logo />
                         <AnimationTran tranY={-100} className="m-auto">
                             <h5 className="leading-7 tracking-tight">Mã xác thực sẽ được gửi qua Email</h5>
                         </AnimationTran>
@@ -138,13 +137,18 @@ const GetOTPRegister = () => {
                             </AnimationTran>
                             <div className="grid grid-cols-2 gap-2">
                                 <AnimationTran tranX={-100} delay={0.4}>
-                                    <Button type="submit" className="bg-primary-500 w-full">
+                                    <Button type="submit" variant="fill" fullWidth loading={isLoadingSubmit}>
                                         Xác thực
                                     </Button>
                                 </AnimationTran>
 
                                 <AnimationTran tranX={-100} delay={0.3}>
-                                    <Button className="border-primary-200 w-full" onClick={handleSendOTPAgain}>
+                                    <Button
+                                        variant="outline"
+                                        fullWidth
+                                        onClick={handleSendOTPAgain}
+                                        loading={isLoadingSendOTPAgain}
+                                    >
                                         Gửi lại mã
                                     </Button>
                                 </AnimationTran>

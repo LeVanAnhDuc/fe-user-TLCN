@@ -12,11 +12,11 @@ import { useAppDispatch } from '../../redux/hook';
 import { setRegister } from './registerSlice';
 import { registerApi } from '../../apis/authApi';
 import AnimationScale from '../../components/AnimationScale';
-import logoDuck from '../../assets/img/logoDuck.png';
 import AnimationTran from '../../components/AnimationTran';
 import Button from '../../components/Button';
 import { checkPassWord } from '../../utils/checkData';
 import SnackBarLoading from '../../components/SnackBarLoading';
+import Logo from '../../components/Logo';
 
 type FormDataResgister = {
     email: string;
@@ -28,7 +28,7 @@ const Register = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const [isLoadingDialog, setIsLoadingDiaLog] = useState(false);
+    const [isLoadingRegister, setIsLoadingRegister] = useState(false);
 
     const schema = yup.object().shape({
         email: yup.string().required('Email đang trống').email('Định dạng email không đúng'),
@@ -51,9 +51,9 @@ const Register = () => {
         }
 
         try {
-            setIsLoadingDiaLog(true);
+            setIsLoadingRegister(true);
             const response = await registerApi(data.userName, data.email, data.passWord);
-            setIsLoadingDiaLog(false);
+            setIsLoadingRegister(false);
 
             if (response.status === 201) {
                 dispatch(
@@ -74,14 +74,12 @@ const Register = () => {
 
     return (
         <>
-            <SnackBarLoading open={isLoadingDialog} content="Tiến hành đăng kí. Đợi giây lát" />
+            <SnackBarLoading open={isLoadingRegister} content="Tiến hành đăng kí. Đợi giây lát" />
             <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
                     <section className="w-full h-full flex-col lg:flex hidden">
-                        <AnimationScale>
-                            <Link to={config.Routes.home}>
-                                <img src={logoDuck} alt="Logo_Duck" className="h-20 m-auto" />
-                            </Link>
+                        <AnimationScale className="m-auto">
+                            <Logo />
                         </AnimationScale>
                         <AnimationTran tranY={-100}>
                             <h5 className="leading-7 tracking-tight">
@@ -152,22 +150,24 @@ const Register = () => {
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.4}>
-                                <Button type="submit" className="bg-primary-500 w-full">
+                                <Button type="submit" fullWidth variant="fill" loading={isLoadingRegister}>
                                     Đăng kí
                                 </Button>
                             </AnimationTran>
                         </form>
 
-                        <AnimationTran tranY={100} delay={0.5} className="text-center text-sm text-gray-400">
-                            <>
+                        <AnimationTran tranY={100} delay={0.5} className="text-center text-sm text-gray-500">
+                            <div className="flex place-content-center place-items-center">
                                 Bạn đã có tài khoản?
-                                <Link
-                                    to={config.Routes.logIn}
-                                    className="pl-1 font-semibold text-base text-primary-600 underline hover:text-primary-900 transition"
-                                >
-                                    Đăng nhập.
-                                </Link>
-                            </>
+                                <Button variant="text" size="small" className="!px-0">
+                                    <Link
+                                        to={config.Routes.logIn}
+                                        className="pl-1 font-semibold text-base text-primary-600 underline hover:text-primary-900 transition"
+                                    >
+                                        Đăng nhập.
+                                    </Link>
+                                </Button>
+                            </div>
                         </AnimationTran>
                     </section>
                 </div>

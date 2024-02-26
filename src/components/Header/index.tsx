@@ -86,7 +86,7 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700'
+                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
                                     } uppercase cursor-pointer transition`}
                                 >
                                     Trang chủ
@@ -97,7 +97,7 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700'
+                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
                                     } uppercase cursor-pointer transition`}
                                 >
                                     Cửa hàng
@@ -108,7 +108,7 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700'
+                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
                                     } uppercase cursor-pointer transition`}
                                 >
                                     Chính sách
@@ -119,7 +119,7 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700'
+                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
                                     } uppercase cursor-pointer transition`}
                                 >
                                     Bảng size

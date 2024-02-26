@@ -1,6 +1,6 @@
 import config from '../config/index';
 import Error404 from '../pages/Error404';
-import Home from '../pages/Home/Home';
+import Home from '../pages/Home';
 import Listproducts from '../pages/Listproducts/Listproducts';
 import DetailProduct from '../pages/DetailProduct/DetailProduct';
 import LogIn from '../pages/LogIn';

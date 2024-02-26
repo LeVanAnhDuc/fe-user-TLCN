@@ -59,7 +59,7 @@ function Home() {
                                 nghiệm vui vẻ, năng động và trẻ trung.
                             </div>
                             <Link to={config.Routes.listProducts}>
-                                <Button className="bg-primary-600 border-0">Mua ngay</Button>
+                                <Button variant="fill">Mua ngay</Button>
                             </Link>
                         </div>
                     </div>
@@ -88,7 +88,7 @@ function Home() {
                         </AnimationTran>
                         <AnimationTran className="flex justify-center md:justify-start" tranY={100}>
                             <Link to={config.Routes.listProducts}>
-                                <Button className="bg-primary-600 border-0">Tìm hiểm thêm</Button>
+                                <Button variant="fill">Tìm hiểm thêm</Button>
                             </Link>
                         </AnimationTran>
                     </div>
@@ -129,7 +129,7 @@ function Home() {
                                 className="absolute inset-x-0 bottom-10 flex justify-center"
                             >
                                 <Link to={config.Routes.listProducts + `#cate:Thời trang nam`} className="flex">
-                                    <Button className="bg-white/80 border-primary-400">Thời trang nam</Button>
+                                    <Button variant="outlineBlur">Thời trang nam</Button>
                                 </Link>
                             </AnimationScale>
                         </div>
@@ -147,7 +147,7 @@ function Home() {
                                 className="absolute inset-x-0 bottom-10 flex justify-center"
                             >
                                 <Link to={config.Routes.listProducts + `#cate:Thời trang nữ`} className="flex">
-                                    <Button className="bg-white/80 border-primary-700">Thời trang nữ</Button>
+                                    <Button variant="outlineBlur">Thời trang nữ</Button>
                                 </Link>
                             </AnimationScale>
                         </div>
@@ -165,7 +165,7 @@ function Home() {
                                 className="absolute inset-x-0 bottom-10 flex justify-center"
                             >
                                 <Link to={config.Routes.listProducts + `#cate:Thời trang trẻ em`} className="flex">
-                                    <Button className="bg-white/80 border-primary-400">Thời trang trẻ em</Button>
+                                    <Button variant="outlineBlur">Thời trang trẻ em</Button>
                                 </Link>
                             </AnimationScale>
                         </div>
@@ -188,7 +188,9 @@ function Home() {
                             </AnimationTran>
                             <AnimationTran tranY={100} delay={0.2}>
                                 <Link to={config.Routes.listProducts}>
-                                    <Button className="bg-white/80 border-primary-400">Xem cửa hàng</Button>
+                                    <Button variant="outlineBlur" className="m-auto">
+                                        Xem cửa hàng
+                                    </Button>
                                 </Link>
                             </AnimationTran>
                         </>
