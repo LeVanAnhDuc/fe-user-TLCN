@@ -7,7 +7,8 @@ const Routes = {
 
     register: '/dang-ki',
     getOTPRegister: '/xac-thuc-OTP',
-    listProducts: '/ds-san-pham',
+
+    shop: '/ds-san-pham',
     detailProduct: '/chi-tiet-san-pham',
     cart: '/gio-hang',
     checkOut: '/thanh-toan',

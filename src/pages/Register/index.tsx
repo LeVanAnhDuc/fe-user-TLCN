@@ -162,7 +162,7 @@ const Register = () => {
                                 <Button variant="text" size="small" className="!px-0">
                                     <Link
                                         to={config.Routes.logIn}
-                                        className="pl-1 font-semibold text-base text-primary-600 underline hover:text-primary-900 transition"
+                                        className="pl-1 font-semibold text-base underline transition"
                                     >
                                         Đăng nhập.
                                     </Link>

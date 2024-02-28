@@ -26,7 +26,7 @@ const Search = (props: Iprops) => {
     useEffect(() => {
         if (!search.trim()) {
             setSearch('');
-            locationRouter.pathname === config.Routes.listProducts && setDoneSearch && setDoneSearch(true);
+            locationRouter.pathname === config.Routes.shop && setDoneSearch && setDoneSearch(true);
             return;
         }
     }, [search]);

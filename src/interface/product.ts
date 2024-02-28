@@ -37,3 +37,11 @@ export interface IProductPriceBySKU {
     productId: number;
     valueNames: Array<string>;
 }
+
+export interface IProductFilter {
+    pageNo: number;
+    pageSize: number;
+    key: string;
+    cate: string;
+    sort: string;
+}

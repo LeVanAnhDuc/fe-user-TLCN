@@ -177,7 +177,7 @@ const LogIn = () => {
                                 <Button variant="text" size="small" className="!px-0">
                                     <Link
                                         to={config.Routes.register}
-                                        className="pl-1 font-semibold text-base text-primary-600 hover:text-primary-900 underline transition"
+                                        className="pl-1 font-semibold text-base underline transition"
                                     >
                                         Đăng kí.
                                     </Link>

@@ -62,10 +62,10 @@ const DetailProduct = () => {
                 }
                 if (response.status !== 200) {
                     toast.error(response.data.message);
-                    navigate(config.Routes.listProducts);
+                    navigate(config.Routes.shop);
                 }
             } else {
-                navigate(config.Routes.listProducts);
+                navigate(config.Routes.shop);
             }
         } catch {
             toast.error('Đang bảo trì');

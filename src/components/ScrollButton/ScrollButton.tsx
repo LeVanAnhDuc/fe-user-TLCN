@@ -24,7 +24,7 @@ function ScrollButton() {
     };
 
     return (
-        <div className="fixed bottom-10 right-10">
+        <div className="fixed bottom-10 right-10 z-50">
             {showButton && (
                 <button
                     className="rounded-full h-14 w-14 hover:bg-black bg-blue-500 animate-bounce transition-all duration-500"

@@ -1,0 +1,26 @@
+import IProduct from '../interface/product';
+
+export const initObjectProduct: IProduct = {
+    id: '',
+    name: '',
+    description: '',
+    price: 0,
+    quantity: 0,
+    quantityAvailable: 0,
+    categoryId: '',
+    slug: '',
+    promotionalPrice: '',
+    sold: 0,
+    rating: 0,
+    numberOfRatings: 0,
+    favoriteCount: 0,
+    isActive: false,
+    isSelling: false,
+    createdDate: '',
+    lastModifiedDate: '',
+    createdBy: '',
+    lastModifiedBy: '',
+    liked: false,
+    listImages: [],
+    options: [],
+};

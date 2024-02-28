@@ -1,40 +1,30 @@
 /* eslint-disable no-useless-catch */
+import { IProductFilter } from '../interface/product.js';
 import axios from './axiosConfig.js';
 
-export const getAllProductSearchWithinPagination = async (
-    pageNo: number,
-    pageSize: number,
-    key: string,
-    cate: string,
-    sort: string,
-) => {
+export const getAllProductSearchWithinPagination = async (productSearch: IProductFilter) => {
     try {
         const params: Record<string, string | number | boolean> = {
             sell: true,
-            pageNo: pageNo,
-            pageSize: pageSize,
+            pageNo: productSearch.pageNo,
+            pageSize: productSearch.pageSize,
         };
 
-        // Thêm key vào đối tượng nếu key không rỗng
-        if (key !== '') {
-            params['key'] = key;
+        if (productSearch.key !== '') {
+            params['key'] = productSearch.key;
         }
 
-        // Thêm sort vào đối tượng nếu sort không rỗng
-        if (sort !== '') {
-            params['sort'] = sort;
+        if (productSearch.sort !== '') {
+            params['sort'] = productSearch.sort;
         }
 
-        // Thêm cate vào đối tượng nếu cate không rỗng
-        if (cate !== '') {
-            params['cate'] = cate;
+        if (productSearch.cate !== '') {
+            params['cate'] = productSearch.cate;
         }
+
         const url = '/products/search?' + new URLSearchParams(params as Record<string, string>).toString();
 
         const response = await axios.get(url);
-        // const response = await axios.get(
-        //     `/products/search?key=${key}&cate=${cate}&sort=${sort}&pageSize=${pageSize}&pageNo=${pageNo}&sell=true`,
-        // );
 
         return response;
     } catch (error) {

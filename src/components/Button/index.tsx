@@ -11,7 +11,7 @@ interface Iprops {
     loading?: boolean;
     children: ReactElement | string;
     type?: 'button' | 'submit' | 'reset' | undefined;
-    onClick?: () => Promise<void>;
+    onClick?: () => Promise<void> | void;
 }
 const Button = (props: Iprops) => {
     const {
@@ -37,7 +37,7 @@ const Button = (props: Iprops) => {
         ${size === 'medium' ? 'h-12 text-base' : ''} 
         ${size === 'large' ? 'h-16 text-lg px-6' : ''} 
         ${variant === 'fill' ? 'bg-primary-400' : ''} 
-        ${variant === 'text' ? 'bg-transparent text-primary-700 ' : ''} 
+        ${variant === 'text' ? 'bg-transparent text-primary-500 hover:text-primary-800' : ''} 
         ${variant === 'outline' ? 'bg-transparent border-primary-700 border-2' : ''} 
         ${variant === 'outlineBlur' ? 'bg-white/80 border-primary-700 border-2' : ''} 
         ${className} `;

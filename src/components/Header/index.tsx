@@ -17,14 +17,13 @@ import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { selectAvatarUrl, selectIsLogin, selectUserNameUser, setIsLogin } from '../../pages/LogIn/loginSlice';
 import { selectToTalProductCart } from '../../pages/Cart/totalProducCartSlice';
 import { selectToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
-import MouseOverPopover from '../MouseOverPopover';
 import Search from '../Search';
 import Button from '../Button';
 import Logo from '../Logo';
 
 function Header() {
     const dispatch = useAppDispatch();
-    const navaigate = useNavigate();
+    const navigate = useNavigate();
 
     const userName = useAppSelector(selectUserNameUser);
     const avatarUrl = useAppSelector(selectAvatarUrl);
@@ -44,7 +43,7 @@ function Header() {
         localStorage.removeItem('totalProductInCart');
         localStorage.removeItem('totalWishList');
         dispatch(setIsLogin(false));
-        navaigate('/');
+        navigate('/');
         handlePopoverClose();
     };
 
@@ -69,7 +68,8 @@ function Header() {
 
     useEffect(() => {
         if (isDoneSearch === true) {
-            navaigate(config.Routes.listProducts + '#' + search);
+            // navigate(config.Routes.shop + '#' + search);
+            navigate(config.Routes.shop, { state: { searchItem: search } });
         }
         return () => setDoneSearch(false);
     });
@@ -93,7 +93,7 @@ function Header() {
                                 </div>
                             )}
                         </NavLink>
-                        <NavLink to={config.Routes.listProducts}>
+                        <NavLink to={config.Routes.shop}>
                             {({ isActive }) => (
                                 <div
                                     className={`${
@@ -136,36 +136,32 @@ function Header() {
                             <>
                                 <Link to={config.Routes.cart}>
                                     <IconButton>
-                                        <MouseOverPopover content="Giỏ hàng">
-                                            <Badge
-                                                badgeContent={totalProductCart}
-                                                color="secondary"
-                                                anchorOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'right',
-                                                }}
-                                                overlap="circular"
-                                            >
-                                                <ShoppingCartIcon />
-                                            </Badge>
-                                        </MouseOverPopover>
+                                        <Badge
+                                            badgeContent={totalProductCart}
+                                            color="secondary"
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            overlap="circular"
+                                        >
+                                            <ShoppingCartIcon />
+                                        </Badge>
                                     </IconButton>
                                 </Link>
                                 <Link to={config.Routes.profile + '#' + config.PageInProfile.favouriteProfile}>
                                     <IconButton>
-                                        <MouseOverPopover content="Danh sách yêu thích">
-                                            <Badge
-                                                badgeContent={totalWishList}
-                                                color="secondary"
-                                                anchorOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'right',
-                                                }}
-                                                overlap="circular"
-                                            >
-                                                <Favorite />
-                                            </Badge>
-                                        </MouseOverPopover>
+                                        <Badge
+                                            badgeContent={totalWishList}
+                                            color="secondary"
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            overlap="circular"
+                                        >
+                                            <Favorite />
+                                        </Badge>
                                     </IconButton>
                                 </Link>
                                 <div
@@ -244,22 +240,30 @@ function Header() {
                     <div className="flex flex-col gap-3">
                         <NavLink to={config.Routes.home}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''} w-full`}>Trang chủ</Button>
+                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                    Trang chủ
+                                </Button>
                             )}
                         </NavLink>
-                        <NavLink to={config.Routes.listProducts}>
+                        <NavLink to={config.Routes.shop}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''} w-full`}>Cửa hàng</Button>
+                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                    Cửa hàng
+                                </Button>
                             )}
                         </NavLink>
                         <NavLink to={'chinh sach'}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''} w-full`}>Chính sách</Button>
+                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                    Chính sách
+                                </Button>
                             )}
                         </NavLink>
                         <NavLink to={'Bảng size'}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''} w-full`}>Bảng size</Button>
+                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                    Bảng size
+                                </Button>
                             )}
                         </NavLink>
                     </div>

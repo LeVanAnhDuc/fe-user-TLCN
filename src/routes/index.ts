@@ -1,7 +1,7 @@
 import config from '../config/index';
 import Error404 from '../pages/Error404';
 import Home from '../pages/Home';
-import Listproducts from '../pages/Listproducts/Listproducts';
+import Shop from '../pages/Shop';
 import DetailProduct from '../pages/DetailProduct/DetailProduct';
 import LogIn from '../pages/LogIn';
 import Register from '../pages/Register';
@@ -21,7 +21,7 @@ type TRouters = {
 
 const publishRoute: Array<TRouters> = [
     { path: config.Routes.home, component: Home },
-    { path: config.Routes.listProducts, component: Listproducts },
+    { path: config.Routes.shop, component: Shop },
     { path: config.Routes.detailProduct, component: DetailProduct },
     { path: config.Routes.logIn, component: LogIn },
     { path: config.Routes.getOTPLogIn, component: GetOTPLogin },
@@ -37,7 +37,7 @@ const publishRoute: Array<TRouters> = [
 
 const privateRoute: Array<TRouters> = [
     { path: config.Routes.home, component: Home },
-    { path: config.Routes.listProducts, component: Listproducts },
+    { path: config.Routes.shop, component: Shop },
     { path: config.Routes.detailProduct, component: DetailProduct },
     { path: config.Routes.logIn, component: LogIn },
     { path: config.Routes.getOTPLogIn, component: GetOTPLogin },

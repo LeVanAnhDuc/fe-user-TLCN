@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import { Fragment } from 'react';
 import { publishRoute, privateRoute } from './routes';
 import { DefaultLayout } from './layouts';
-import ScrollAutoTop from './components/ScrollAutoTop/ScrollAutoTop.ts';
+import ScrollAutoTop from './components/ScrollAutoTop';
 import { useAppSelector } from './redux/hook';
 import { selectIsLogin } from './pages/LogIn/loginSlice';
 

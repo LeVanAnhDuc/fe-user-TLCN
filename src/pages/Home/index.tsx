@@ -13,7 +13,7 @@ import Carousel from '../../components/Carousel';
 
 function Home() {
     const dispatch = useDispatch();
-    const navaigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleCheckToken = async (token: string) => {
         const response = await checkExpiredToken(token);
@@ -24,7 +24,7 @@ function Home() {
             localStorage.removeItem('totalProductInCart');
             localStorage.removeItem('totalWishList');
             dispatch(setIsLogin(false));
-            navaigate('/');
+            navigate('/');
         }
     };
 
@@ -58,7 +58,7 @@ function Home() {
                                 cho ra đời nguồn năng lượng mang tên “Youth”. Chúng mình luôn muốn tạo nên những trải
                                 nghiệm vui vẻ, năng động và trẻ trung.
                             </div>
-                            <Link to={config.Routes.listProducts}>
+                            <Link to={config.Routes.shop}>
                                 <Button variant="fill">Mua ngay</Button>
                             </Link>
                         </div>
@@ -87,7 +87,7 @@ function Home() {
                             </div>
                         </AnimationTran>
                         <AnimationTran className="flex justify-center md:justify-start" tranY={100}>
-                            <Link to={config.Routes.listProducts}>
+                            <Link to={config.Routes.shop}>
                                 <Button variant="fill">Tìm hiểm thêm</Button>
                             </Link>
                         </AnimationTran>
@@ -128,7 +128,13 @@ function Home() {
                                 delay={0.3}
                                 className="absolute inset-x-0 bottom-10 flex justify-center"
                             >
-                                <Link to={config.Routes.listProducts + `#cate:Thời trang nam`} className="flex">
+                                <Link
+                                    to={config.Routes.shop}
+                                    state={{
+                                        category: 'Thời trang nam',
+                                    }}
+                                    className="flex"
+                                >
                                     <Button variant="outlineBlur">Thời trang nam</Button>
                                 </Link>
                             </AnimationScale>
@@ -146,7 +152,13 @@ function Home() {
                                 delay={0.3}
                                 className="absolute inset-x-0 bottom-10 flex justify-center"
                             >
-                                <Link to={config.Routes.listProducts + `#cate:Thời trang nữ`} className="flex">
+                                <Link
+                                    to={config.Routes.shop}
+                                    state={{
+                                        category: 'Thời trang nữ',
+                                    }}
+                                    className="flex"
+                                >
                                     <Button variant="outlineBlur">Thời trang nữ</Button>
                                 </Link>
                             </AnimationScale>
@@ -164,7 +176,13 @@ function Home() {
                                 delay={0.3}
                                 className="absolute inset-x-0 bottom-10 flex justify-center"
                             >
-                                <Link to={config.Routes.listProducts + `#cate:Thời trang trẻ em`} className="flex">
+                                <Link
+                                    to={config.Routes.shop}
+                                    state={{
+                                        category: 'Thời trang trẻ em',
+                                    }}
+                                    className="flex"
+                                >
                                     <Button variant="outlineBlur">Thời trang trẻ em</Button>
                                 </Link>
                             </AnimationScale>
@@ -187,7 +205,7 @@ function Home() {
                                 Xem các phụ kiện thời trang dành cho bạn
                             </AnimationTran>
                             <AnimationTran tranY={100} delay={0.2}>
-                                <Link to={config.Routes.listProducts}>
+                                <Link to={config.Routes.shop}>
                                     <Button variant="outlineBlur" className="m-auto">
                                         Xem cửa hàng
                                     </Button>

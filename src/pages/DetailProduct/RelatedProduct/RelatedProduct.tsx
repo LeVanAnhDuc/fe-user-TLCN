@@ -42,7 +42,7 @@ const RelatedProduct = (props: Iprops) => {
         <>
             <div className="flex flex-wrap justify-between items-center bg-gray-200 p-3 rounded text-xl font-normal">
                 <span>SẢN PHẨM LIÊN QUAN</span>
-                <Link to={config.Routes.listProducts + `#cate:${categoryName}`}>
+                <Link to={config.Routes.shop + `#cate:${categoryName}`}>
                     <Button>{`Xem tất cả >>`} </Button>
                 </Link>
             </div>

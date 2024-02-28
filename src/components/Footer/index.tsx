@@ -13,7 +13,7 @@ const LINKS = [
         title: 'Sản phẩm',
         items: [
             { content: 'Trang chủ', to: config.Routes.home },
-            { content: 'Danh sách sản phẩm', to: config.Routes.listProducts },
+            { content: 'Danh sách sản phẩm', to: config.Routes.shop },
             { content: 'Bảng Size', to: '' },
         ],
     },

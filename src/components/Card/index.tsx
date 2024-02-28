@@ -1,11 +1,6 @@
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
 import { toast } from 'react-toastify';
@@ -17,15 +12,24 @@ import config from '../../config';
 import IProduct from '../../interface/product';
 import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
 import { setToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
+import Button from '../Button';
+import Skeleton from '../Skeleton';
+import AnimationTran from '../AnimationTran';
 
-const Card = (props: { itemProduct: IProduct }) => {
-    const { itemProduct } = props;
+interface Iprops {
+    itemProduct: IProduct;
+    loading: boolean;
+    delay?: number;
+}
+
+const Card = (props: Iprops) => {
+    const { itemProduct, loading = false, delay = 0 } = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // yeu thich
     const [favourite, setFavourite] = useState(itemProduct.liked ? true : false);
     const [favoriteCount, setFavouriteCount] = useState(itemProduct.favoriteCount);
+
     const handleChangeFavorite = async () => {
         const token = localStorage.getItem('accessToken');
         if (token) {
@@ -46,68 +50,94 @@ const Card = (props: { itemProduct: IProduct }) => {
                 toast.error(`${error}`);
             }
         } else {
-            toast.info('Bạn cần đăng nhập trước khi yêu thích sản phẩm');
+            toast.warning('Yêu cầu đăng nhập');
             navigate(config.Routes.logIn);
         }
-
-        // fake
     };
-    // chi tiet san pham
+
     const handleNextDetailPage = () => {
         if (itemProduct.id) {
             navigate(`${config.Routes.detailProduct}#${itemProduct.id}`);
         } else {
-            toast.error('Đang bảo trì');
+            toast.error('Đợi giây lát');
         }
     };
+
     return (
-        <div className="shadow-lg p-2 rounded-lg">
-            <div onClick={handleNextDetailPage} className="cursor-pointer">
-                <Box
-                    sx={{
-                        height: 270, // Chiều cao cố định
-                        overflow: 'hidden',
-                        margin: 1,
-                        '&:hover .image': {
-                            transform: 'scale(1.2)',
-                        },
-                    }}
-                >
-                    <CardMedia
-                        className="image"
-                        sx={{
-                            width: '100%',
-                            height: '100%',
-                            transition: 'transform 0.2s',
-                        }}
-                        image={itemProduct.listImages[0]}
-                    />
-                </Box>
-            </div>
-            <CardContent>
-                <div className="font-medium text-base  grid gap-1">
-                    <div className="h-18 overflow-hidden ">{itemProduct.name}</div>
-                    <div className="flex justify-between mt-3">
-                        <div className="text-base not-italic font-medium text-red-500 flex ">
-                            <span className="text-sm pr-0.5">đ</span>
-                            {itemProduct.price.toLocaleString('vi-VN')}
+        <AnimationTran tranY={30} delay={delay}>
+            <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[0.98] hover:-translate-y-1 transition ">
+                <div onClick={handleNextDetailPage} className="cursor-pointer">
+                    <div className="h-48 overflow-hidden ">
+                        {loading ? (
+                            <Skeleton fillFull />
+                        ) : (
+                            <img
+                                src={itemProduct.listImages[0]}
+                                alt={itemProduct.name}
+                                className="object-cover object-center size-full"
+                            />
+                        )}
+                    </div>
+                    <div className="mx-4 my-3 font-medium space-y-3">
+                        {loading ? (
+                            <Skeleton fillFull className="h-9" />
+                        ) : (
+                            <div className="line-clamp-2 text-sm">{itemProduct.name}</div>
+                        )}
+                        <div className="flex justify-between gap-5">
+                            {loading ? (
+                                <Skeleton className="h-6" fullWidth />
+                            ) : (
+                                <div className="text-base text-red-500 flex gap-0.5">
+                                    <span className="text-sm">đ</span>
+                                    {itemProduct.price.toLocaleString('vi-VN')}
+                                </div>
+                            )}
+                            {loading ? (
+                                <Skeleton className="h-6" fullWidth />
+                            ) : (
+                                <Rating value={itemProduct.rating} precision={0.5} readOnly size="small" />
+                            )}
                         </div>
-                        <Rating value={itemProduct.rating} precision={0.5} readOnly />
+                        <div className="flex justify-between gap-5">
+                            {loading ? (
+                                <Skeleton className="h-6" fullWidth />
+                            ) : (
+                                <span className="text-sm text-gray-600">Độ ưu thích {favoriteCount}</span>
+                            )}
+                            {loading ? (
+                                <Skeleton className="h-6" fullWidth />
+                            ) : (
+                                <span className="text-sm text-gray-600">Đã bán {itemProduct.sold}</span>
+                            )}
+                        </div>
                     </div>
                 </div>
-            </CardContent>
-            <CardActions>
-                <Button fullWidth variant="outlined" onClick={handleNextDetailPage}>
-                    <ShoppingCart />
-                </Button>
-                <Button onClick={handleChangeFavorite}>
-                    {favourite ? <Favorite sx={{ color: 'red' }} /> : <FavoriteBorder sx={{ color: 'red' }} />}
-                </Button>
-                <div className="flex place-content-center w-full">
-                    <span className="text-sm text-gray-600 font-medium">Yêu thích {favoriteCount}</span>
+
+                <div className="m-4">
+                    {loading ? (
+                        <Skeleton className="h-12" fullWidth />
+                    ) : (
+                        <Button fullWidth variant="outline" onClick={handleNextDetailPage}>
+                            <ShoppingCart />
+                        </Button>
+                    )}
                 </div>
-            </CardActions>
-        </div>
+
+                {!loading && (
+                    <>
+                        <div className="bg-white blur-lg absolute -top-1 right-1.5 size-14 rounded-full"></div>
+                        <Button onClick={handleChangeFavorite} className="!absolute top-0 right-0 ">
+                            {favourite ? (
+                                <Favorite className="!text-primary-700  rounded-full " fontSize="large" />
+                            ) : (
+                                <FavoriteBorder className="!text-primary-700  rounded-full " fontSize="large" />
+                            )}
+                        </Button>
+                    </>
+                )}
+            </div>
+        </AnimationTran>
     );
 };
 
