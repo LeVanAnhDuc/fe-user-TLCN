@@ -6,7 +6,7 @@ import DetailProduct from '../pages/DetailProduct/DetailProduct';
 import LogIn from '../pages/LogIn';
 import Register from '../pages/Register';
 import CheckOut from '../pages/CheckOut/CheckOut';
-import Cart from '../pages/Cart/Cart';
+import Cart from '../pages/Cart';
 import Profile from '../pages/Profile/Profile';
 import GetOTPRegister from '../pages/GetOTPRegister';
 import GetOTPLogin from '../pages/GetOTPLogin';
@@ -22,7 +22,7 @@ type TRouters = {
 const publishRoute: Array<TRouters> = [
     { path: config.Routes.home, component: Home },
     { path: config.Routes.shop, component: Shop },
-    { path: config.Routes.detailProduct, component: DetailProduct },
+    { path: config.Routes.detailProductID, component: DetailProduct },
     { path: config.Routes.logIn, component: LogIn },
     { path: config.Routes.getOTPLogIn, component: GetOTPLogin },
     { path: config.Routes.forgotPass, component: ForgotPassWord },
@@ -38,7 +38,7 @@ const publishRoute: Array<TRouters> = [
 const privateRoute: Array<TRouters> = [
     { path: config.Routes.home, component: Home },
     { path: config.Routes.shop, component: Shop },
-    { path: config.Routes.detailProduct, component: DetailProduct },
+    { path: config.Routes.detailProductID, component: DetailProduct },
     { path: config.Routes.logIn, component: LogIn },
     { path: config.Routes.getOTPLogIn, component: GetOTPLogin },
     { path: config.Routes.forgotPass, component: ForgotPassWord },

@@ -1,27 +1,19 @@
 import React from 'react';
 import { forwardRef, useState } from 'react';
-import noImage from '../../assets/img/no-image.png';
 
-// fallback: customImage = images.noImage
-// fallback: customImage : đổi tên để kh trùng. Gắn mặc định là images.noImage nếu không truyền từ ngoài vào
+import images from '../../assets/img';
 
 interface ImageProps {
     src: string;
     alt: string;
     className?: string;
     fallback?: string;
-    [key: string]: unknown; // Sử dụng [key: string]: any để chấp nhận bất kỳ props nào
+    [key: string]: unknown;
 }
 
 const Image = forwardRef(
     (
-        {
-            src,
-            alt,
-            className,
-            fallback: customImage = noImage, // Đặt mặc định nếu không được truyền
-            ...props
-        }: ImageProps,
+        { src, alt, className, fallback: customImage = images.noImage, ...props }: ImageProps,
         ref: React.Ref<HTMLImageElement>,
     ) => {
         const [fallback, setFallBack] = useState('');

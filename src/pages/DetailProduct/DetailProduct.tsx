@@ -1,5 +1,5 @@
 import { SetStateAction, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import IconButton from '@mui/material/IconButton';
@@ -27,7 +27,7 @@ import { addToCart, getCountItemOfCart } from '../../apis/cartApi';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Image from '../../components/Image';
 import { useDispatch } from 'react-redux';
-import { setToTalProductCart } from '../Cart/totalProducCartSlice';
+import { setToTalProductCart } from '../Cart/totalProductInCartSlice';
 import Rating from '@mui/material/Rating';
 import Favorite from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
@@ -39,9 +39,8 @@ import RelatedProduct from './RelatedProduct/RelatedProduct';
 const DetailProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // handle get id
-    const location = useLocation();
-    const idProduct = location.hash.substring(1);
+    const { id } = useParams();
+
     // handle data
     const [favourite, setFavourite] = useState<boolean>(false);
     const [product, setProduct] = useState<IProduct>(); // Dữ liệu từ API
@@ -50,7 +49,7 @@ const DetailProduct = () => {
 
     const getProduct = async (id: number) => {
         try {
-            if (idProduct && !isNaN(+idProduct)) {
+            if (id && !isNaN(+id)) {
                 // tồn tai ma san pham và phải là số
                 const response = await getSingleProduct(id);
 
@@ -72,9 +71,9 @@ const DetailProduct = () => {
         }
     };
     useEffect(() => {
-        getProduct(+idProduct);
+        getProduct(+id);
         window.scroll(0, 0);
-    }, [idProduct]);
+    }, [id]);
 
     //  handle size, color
     const [color, setColor] = useState<string>('');
@@ -89,9 +88,9 @@ const DetailProduct = () => {
         const token = localStorage.getItem('accessToken');
         if (token) {
             // call api day vao gio hang  style
-            if (idProduct) {
+            if (id) {
                 const quantity: number = 1; // so luong san pham
-                const productId: number = +idProduct; //id san pham
+                const productId: number = +id; //id san pham
                 const valueNames: Array<string> = [color, size]; //style san pham
                 try {
                     const resonse = await addToCart(quantity, productId, valueNames);
@@ -120,7 +119,7 @@ const DetailProduct = () => {
     const handleGetPrice = async () => {
         if (color && size) {
             try {
-                const response = await getSKUPrice(+idProduct, color, size);
+                const response = await getSKUPrice(+id, color, size);
                 if (response.status === 200 && product) {
                     const updatedObject: IProduct = product;
                     updatedObject.price = response.data;
@@ -139,7 +138,7 @@ const DetailProduct = () => {
         if (token) {
             setFavourite((prev) => !prev);
             try {
-                await putFollowProduct(+idProduct);
+                await putFollowProduct(+id);
                 const response = await getCountItemOfWishList();
                 dispatch(setToTalWishList(+response.data));
             } catch (error) {
@@ -152,7 +151,7 @@ const DetailProduct = () => {
     };
     useEffect(() => {
         handleGetPrice();
-    }, [idProduct, color, size]);
+    }, [id, color, size]);
 
     // handle số lượng sản phẩm trong giỏ hàng
     const getTotalItemOfCart = async () => {
@@ -355,7 +354,7 @@ const DetailProduct = () => {
 
             {/* Start product reviews */}
             <div className="mt-5">
-                <ReviewProductCurrent idProduct={+idProduct} rating={ratingProduct} />
+                <ReviewProductCurrent id={+id} rating={ratingProduct} />
             </div>
 
             {/* Start related product */}

@@ -57,9 +57,7 @@ const Card = (props: Iprops) => {
 
     const handleNextDetailPage = () => {
         if (itemProduct.id) {
-            navigate(`${config.Routes.detailProduct}#${itemProduct.id}`);
-        } else {
-            toast.error('Đợi giây lát');
+            navigate(`${config.Routes.detailProduct}/${itemProduct.id}`);
         }
     };
 

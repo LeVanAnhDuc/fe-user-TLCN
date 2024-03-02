@@ -7,10 +7,12 @@ const Routes = {
 
     register: '/dang-ki',
     getOTPRegister: '/xac-thuc-OTP',
-
     shop: '/ds-san-pham',
-    detailProduct: '/chi-tiet-san-pham',
     cart: '/gio-hang',
+
+    detailProduct: '/chi-tiet-san-pham',
+    detailProductID: '/chi-tiet-san-pham/:id',
+
     checkOut: '/thanh-toan',
     profile: '/trang-cua-ban',
     detailOrder: '/trang-cua-ban/chi-tiet-don-hang',

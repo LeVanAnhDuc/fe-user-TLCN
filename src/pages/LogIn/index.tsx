@@ -10,9 +10,9 @@ import * as yup from 'yup';
 
 import { useAppDispatch } from '../../redux/hook';
 import { setInfoUser, setIsLogin } from './loginSlice';
-import { getCountItemOfCart } from '../../apis/cartApi';
+import { getCartByToken, getCountItemOfCart } from '../../apis/cartApi';
 import { getCountItemOfWishList } from '../../apis/followProductApi';
-import { setToTalProductCart } from '../Cart/totalProducCartSlice';
+import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/totalProductInCartSlice';
 import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';
 import config from '../../config';
 import { loginApi } from '../../apis/authApi';
@@ -89,12 +89,17 @@ const LogIn = () => {
 
     const getTotalItemOfCartAndTotalWishList = async () => {
         try {
-            const [totalProductInCart, totalProductInWishList] = await Promise.all([
+            const [totalProductInCart, totalProductInWishList, itemOfCart] = await Promise.all([
                 getCountItemOfCart(),
                 getCountItemOfWishList(),
+                getCartByToken(),
             ]);
             if (totalProductInCart.status === 200) {
                 dispatch(setToTalProductCart(+totalProductInCart.data));
+            }
+            if (itemOfCart.status === 200) {
+                dispatch(setItemsOfCart(itemOfCart?.data?.cartItems));
+                dispatch(setToTalPriceCart(itemOfCart?.data?.totalPrice));
             }
             if (totalProductInWishList.status === 200) {
                 dispatch(setToTalWishList(+totalProductInWishList.data));

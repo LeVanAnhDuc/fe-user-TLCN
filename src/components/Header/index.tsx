@@ -15,11 +15,12 @@ import { useState, useEffect, useCallback } from 'react';
 import config from '../../config';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { selectAvatarUrl, selectIsLogin, selectUserNameUser, setIsLogin } from '../../pages/LogIn/loginSlice';
-import { selectToTalProductCart } from '../../pages/Cart/totalProducCartSlice';
+import { selectToTalProductCart } from '../../pages/Cart/totalProductInCartSlice';
 import { selectToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
 import Search from '../Search';
 import Button from '../Button';
 import Logo from '../Logo';
+import CartModal from '../../pages/Cart/CartModal';
 
 function Header() {
     const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ function Header() {
     const [isDoneSearch, setDoneSearch] = useState<boolean>(false);
     const [anchorPopperAvatar, setAnchorPopperAvatar] = useState<HTMLElement | null>(null);
     const [menuResponsive, setMenuResponsive] = useState<boolean>(false);
+    const [openCartModal, setOpenCartModal] = useState<boolean>(false);
 
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
@@ -42,6 +44,8 @@ function Header() {
         localStorage.removeItem('infoUser');
         localStorage.removeItem('totalProductInCart');
         localStorage.removeItem('totalWishList');
+        localStorage.removeItem('productInCart');
+        localStorage.removeItem('totalPriceInCart');
         dispatch(setIsLogin(false));
         navigate('/');
         handlePopoverClose();
@@ -65,10 +69,12 @@ function Header() {
         }
         setMenuResponsive(open);
     };
+    const toggleDrawerCartModal = useCallback(() => {
+        setOpenCartModal((prev) => !prev);
+    }, []);
 
     useEffect(() => {
         if (isDoneSearch === true) {
-            // navigate(config.Routes.shop + '#' + search);
             navigate(config.Routes.shop, { state: { searchItem: search } });
         }
         return () => setDoneSearch(false);
@@ -134,21 +140,23 @@ function Header() {
                         </div>
                         {checkLogin ? (
                             <>
-                                <Link to={config.Routes.cart}>
-                                    <IconButton>
-                                        <Badge
-                                            badgeContent={totalProductCart}
-                                            color="secondary"
-                                            anchorOrigin={{
-                                                vertical: 'top',
-                                                horizontal: 'right',
-                                            }}
-                                            overlap="circular"
-                                        >
-                                            <ShoppingCartIcon />
-                                        </Badge>
-                                    </IconButton>
-                                </Link>
+                                <IconButton onClick={toggleDrawerCartModal}>
+                                    <Badge
+                                        badgeContent={totalProductCart}
+                                        color="secondary"
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        overlap="circular"
+                                    >
+                                        <ShoppingCartIcon />
+                                    </Badge>
+                                </IconButton>
+                                <CartModal
+                                    openCartModal={openCartModal}
+                                    toggleDrawerCartModal={toggleDrawerCartModal}
+                                />
                                 <Link to={config.Routes.profile + '#' + config.PageInProfile.favouriteProfile}>
                                     <IconButton>
                                         <Badge

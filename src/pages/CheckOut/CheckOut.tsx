@@ -10,7 +10,7 @@ import Avatar from '@mui/material/Avatar';
 
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
-import { setToTalProductCart } from '../Cart/totalProducCartSlice';
+import { setToTalProductCart } from '../Cart/totalProductInCartSlice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 

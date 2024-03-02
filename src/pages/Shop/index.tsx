@@ -201,40 +201,39 @@ function Listproducts() {
                     </div>
                     <div className="col-span-1 xl:col-span-9 min-h-[87vh] flex flex-col">
                         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 ">
-                            {isLoadingAPIProducts ? (
-                                Array(itemsPerPage)
-                                    .fill(constants.initObjectProduct)
-                                    .map((item, index) => {
-                                        const indexDive = (index % 3) / 5;
-                                        return (
-                                            <CardComp
-                                                key={index}
-                                                itemProduct={item}
-                                                loading={isLoadingAPIProducts}
-                                                delay={indexDive}
-                                            />
-                                        );
-                                    })
-                            ) : products.length !== 0 ? (
-                                products.map((item, index) => {
-                                    const indexDive = (index % 3) / 5;
+                            {isLoadingAPIProducts
+                                ? Array(itemsPerPage)
+                                      .fill(constants.initObjectProduct)
+                                      .map((item, index) => {
+                                          const indexDive = (index % 3) / 5;
+                                          return (
+                                              <CardComp
+                                                  key={index}
+                                                  itemProduct={item}
+                                                  loading={isLoadingAPIProducts}
+                                                  delay={indexDive}
+                                              />
+                                          );
+                                      })
+                                : products.map((item, index) => {
+                                      const indexDive = (index % 3) / 5;
 
-                                    return (
-                                        <CardComp
-                                            key={index}
-                                            itemProduct={item}
-                                            loading={isLoadingAPIProducts}
-                                            delay={indexDive}
-                                        />
-                                    );
-                                })
-                            ) : (
-                                <div className="h-full flex flex-col items-center justify-center  text-xl text-gray-400 gap-5">
-                                    <ContentPasteSearch sx={{ fontSize: '100px' }} />
-                                    Hix. Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và tìm lại nhé?
-                                </div>
-                            )}
+                                      return (
+                                          <CardComp
+                                              key={index}
+                                              itemProduct={item}
+                                              loading={isLoadingAPIProducts}
+                                              delay={indexDive}
+                                          />
+                                      );
+                                  })}
                         </div>
+                        {!isLoadingAPIProducts && products.length === 0 && (
+                            <div className="size-full flex flex-col items-center justify-center text-xl text-gray-400 gap-5 ">
+                                <ContentPasteSearch sx={{ fontSize: '100px' }} />
+                                Hix. Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và tìm lại nhé?
+                            </div>
+                        )}
                         <div className="w-full flex justify-between items-center py-5 mt-auto">
                             <article>
                                 Đang hiển thị <span className="font-bold">{totalProductsPage} </span>
