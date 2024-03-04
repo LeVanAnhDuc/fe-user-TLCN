@@ -38,7 +38,7 @@ export const totalProductInCartSlice = createSlice({
             state.totalItem = action.payload;
             localStorage.setItem('totalProductInCart', JSON.stringify(state.totalItem));
         },
-        deleteProductCart: (state, action: PayloadAction<number>) => {
+        deleteNumberProductCart: (state, action: PayloadAction<number>) => {
             state.totalItem -= action.payload;
             localStorage.setItem('totalProductInCart', JSON.stringify(state.totalItem));
         },
@@ -53,7 +53,7 @@ export const totalProductInCartSlice = createSlice({
     },
 });
 
-export const { setToTalProductCart, deleteProductCart, setItemsOfCart, setToTalPriceCart } =
+export const { setToTalProductCart, deleteNumberProductCart, setItemsOfCart, setToTalPriceCart } =
     totalProductInCartSlice.actions;
 
 export const selectToTalProductCart = (state: RootState) => state.totalProductInCart.totalItem;

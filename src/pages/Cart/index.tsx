@@ -14,7 +14,7 @@ import IProductCart from '../../interface/productCart';
 import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
 import ChangeQuantityProduct from './ChangeQuantityProduct';
 import {
-    deleteProductCart,
+    deleteNumberProductCart,
     selectProductsCart,
     selectToTalPriceCart,
     selectToTalProductCart,
@@ -68,7 +68,7 @@ const Cart = () => {
         try {
             const response = await deleteCartItemByID(idItemInCart);
             if (response.status === 200) {
-                dispatch(deleteProductCart(1));
+                dispatch(deleteNumberProductCart(1));
                 getListProduct();
             } else {
                 toast.error(response.data.message);

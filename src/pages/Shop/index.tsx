@@ -18,7 +18,7 @@ import { useLocation } from 'react-router-dom';
 
 import ICategory from '../../interface/category';
 import { getAllCategoryWithPagination } from '../../apis/categoryApii';
-import CardComp from '../../components/Card';
+import Card from '../../components/Card';
 import { getAllProductSearchWithinPagination } from '../../apis/productApi';
 import IProduct, { IProductFilter } from '../../interface/product';
 import config from '../../config';
@@ -204,29 +204,22 @@ function Listproducts() {
                             {isLoadingAPIProducts
                                 ? Array(itemsPerPage)
                                       .fill(constants.initObjectProduct)
-                                      .map((item, index) => {
-                                          const indexDive = (index % 3) / 5;
-                                          return (
-                                              <CardComp
-                                                  key={index}
-                                                  itemProduct={item}
-                                                  loading={isLoadingAPIProducts}
-                                                  delay={indexDive}
-                                              />
-                                          );
-                                      })
-                                : products.map((item, index) => {
-                                      const indexDive = (index % 3) / 5;
-
-                                      return (
-                                          <CardComp
+                                      .map((item, index) => (
+                                          <Card
                                               key={index}
                                               itemProduct={item}
                                               loading={isLoadingAPIProducts}
-                                              delay={indexDive}
+                                              delay={(index % 3) / 5}
                                           />
-                                      );
-                                  })}
+                                      ))
+                                : products.map((item, index) => (
+                                      <Card
+                                          key={index}
+                                          itemProduct={item}
+                                          loading={isLoadingAPIProducts}
+                                          delay={(index % 3) / 5}
+                                      />
+                                  ))}
                         </div>
                         {!isLoadingAPIProducts && products.length === 0 && (
                             <div className="size-full flex flex-col items-center justify-center text-xl text-gray-400 gap-5 ">

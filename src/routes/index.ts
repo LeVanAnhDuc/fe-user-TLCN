@@ -2,7 +2,7 @@ import config from '../config/index';
 import Error404 from '../pages/Error404';
 import Home from '../pages/Home';
 import Shop from '../pages/Shop';
-import DetailProduct from '../pages/DetailProduct/DetailProduct';
+import DetailProduct from '../pages/DetailProduct';
 import LogIn from '../pages/LogIn';
 import Register from '../pages/Register';
 import CheckOut from '../pages/CheckOut/CheckOut';

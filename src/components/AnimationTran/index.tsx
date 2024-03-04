@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 interface Iprops {
     className?: string;
-    children?: ReactElement | JSX.Element | string;
+    children?: ReactElement | JSX.Element | string | ReactNode;
     tranX?: number;
     tranY?: number;
     opacity?: number;

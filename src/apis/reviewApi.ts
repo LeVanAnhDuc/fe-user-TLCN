@@ -20,14 +20,13 @@ export const getAllReviewWithPagination = async (
     idProduct: number,
     pageNo: number,
     pageSize: number,
-    star?: number | undefined | null,
+    star?: number | null,
 ) => {
     try {
         const params: Record<string, string | number | undefined> = {
             pageNo: pageNo,
             pageSize: pageSize,
         };
-        // Thêm key vào đối tượng nếu key không rỗng
         if (star && (star !== undefined || star !== null)) {
             params['star'] = star;
         }
@@ -35,7 +34,6 @@ export const getAllReviewWithPagination = async (
         const url = `/reviews/${idProduct}?` + new URLSearchParams(params as Record<string, string>).toString();
         const response = await axios.get(url);
 
-        // const response = await axios.get(`/reviews/${idProduct}?pageNo=${pageNo}&pageSize=${pageSize}`);
         return response;
     } catch (error) {
         throw error;

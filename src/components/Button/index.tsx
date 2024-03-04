@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { TailSpinIcon } from '../../assets/icon';
 
 interface Iprops {
@@ -9,7 +9,7 @@ interface Iprops {
     fullWidth?: boolean;
     disabled?: boolean;
     loading?: boolean;
-    children: ReactElement | string;
+    children: ReactElement | string | ReactNode;
     type?: 'button' | 'submit' | 'reset' | undefined;
     onClick?: () => Promise<void> | void;
 }

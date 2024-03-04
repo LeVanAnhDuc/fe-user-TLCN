@@ -5,7 +5,7 @@ import Rating from '@mui/material/Rating';
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import config from '../../config';
@@ -18,7 +18,7 @@ import AnimationTran from '../AnimationTran';
 
 interface Iprops {
     itemProduct: IProduct;
-    loading: boolean;
+    loading?: boolean;
     delay?: number;
 }
 
@@ -60,6 +60,11 @@ const Card = (props: Iprops) => {
             navigate(`${config.Routes.detailProduct}/${itemProduct.id}`);
         }
     };
+
+    useEffect(() => {
+        setFavourite(itemProduct.liked ? true : false);
+        setFavouriteCount(itemProduct.favoriteCount);
+    }, [loading]);
 
     return (
         <AnimationTran tranY={30} delay={delay}>

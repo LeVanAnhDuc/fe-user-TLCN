@@ -17,7 +17,7 @@ import IProductCart from '../../interface/productCart';
 import { getCartByToken } from '../../apis/cartApi';
 import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
 import {
-    deleteProductCart,
+    deleteNumberProductCart,
     selectProductsCart,
     selectToTalPriceCart,
     selectToTalProductCart,
@@ -77,7 +77,7 @@ const CartModal = (props: Iprops) => {
         try {
             const response = await deleteCartItemByID(idItemInCart);
             if (response.status === 200) {
-                dispatch(deleteProductCart(1));
+                dispatch(deleteNumberProductCart(1));
                 getListProduct();
             } else {
                 toast.error(response.data.message);
