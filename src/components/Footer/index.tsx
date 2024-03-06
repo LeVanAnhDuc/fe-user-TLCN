@@ -32,7 +32,7 @@ const currentYear = new Date().getFullYear();
 function Footer() {
     return (
         <footer className="mt-auto bg-black text-gray-400 py-10">
-            <div className="relative w-10/12 m-auto">
+            <div className="relative sm:w-10/12 w-11/12 m-auto">
                 <div className="mx-auto w-full">
                     <div className="grid grid-cols-1 justify-between gap-x-4 gap-y-20 md:grid-cols-2">
                         <div className="flex flex-col gap-1">

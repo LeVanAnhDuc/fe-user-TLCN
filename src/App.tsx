@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Slide, ToastContainer } from 'react-toastify';
 import { Fragment } from 'react';
 import { publishRoute, privateRoute } from './routes';
 import { DefaultLayout } from './layouts';
@@ -63,9 +63,9 @@ function App() {
             )}
 
             <ToastContainer
-                position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
@@ -73,6 +73,7 @@ function App() {
                 draggable
                 pauseOnHover
                 theme="light"
+                transition={Slide}
             />
         </>
     );

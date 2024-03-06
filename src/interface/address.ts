@@ -1,5 +1,5 @@
 export default interface IAddress {
-    id: number;
+    id?: number;
     fullName: string;
     phoneNumber: string;
     city: string;

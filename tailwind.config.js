@@ -11,10 +11,6 @@ module.exports = {
             '2xl': '1536px',
         },
         extend: {
-            backgroundColor: {
-                headerProfile: '#FFEEE8',
-                review: '#F3EEEA',
-            },
             colors: {
                 primary: {
                     50: '#e0f7fa',

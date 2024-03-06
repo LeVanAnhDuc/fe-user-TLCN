@@ -1,9 +1,9 @@
 import IAddress from './address';
 import IProductCart from './productCart';
 export interface IOrderCheckOut {
-    total: number;
+    total?: number;
     paymentType: string; //(VNPay) OR (Cash on Delivery)
-    note: string;
+    note?: string;
     addressId: number;
 }
 

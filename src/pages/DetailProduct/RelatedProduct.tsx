@@ -47,16 +47,18 @@ const RelatedProduct = (props: Iprops) => {
     }, [categoryName]);
 
     return (
-        <section className="">
+        <>
             <div className="flex flex-wrap justify-between items-center bg-white p-5 rounded-t-lg ">
-                <div className="text-lg font-medium">ĐÁNH GIÁ SẢN PHẨM</div>
+                <div className="text-lg font-medium uppercase">SẢN PHẨM LIÊN QUAN</div>
                 <Link
                     to={config.Routes.shop}
                     state={{
                         category: categoryName,
                     }}
                 >
-                    <Button variant="text">{`Xem tất cả`} </Button>
+                    <Button variant="text" className="h-fit">
+                        {`Xem tất cả`}{' '}
+                    </Button>
                 </Link>
             </div>
 
@@ -79,7 +81,7 @@ const RelatedProduct = (props: Iprops) => {
                     Không có sản phẩm nào liên quan
                 </div>
             )}
-        </section>
+        </>
     );
 };
 

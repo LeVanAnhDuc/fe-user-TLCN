@@ -9,7 +9,7 @@ export const checkOutVNPay = (data: IOrderCheckOut, userName: string) => {
     }
 };
 
-export const makePaymentVNPay = (total: number, orderId: number, addressId: number, note: string) => {
+export const makePaymentVNPay = (total: number, orderId: number, addressId: number, note?: string) => {
     try {
         const response = `http://localhost:8080/api/v1/vnpay/pay?amount=${total}&orderId=${orderId}&addressId=${addressId}&note=${note}`;
 

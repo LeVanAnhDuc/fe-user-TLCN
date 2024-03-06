@@ -140,7 +140,7 @@ function Listproducts() {
 
     return (
         <section className="bg-gray-100">
-            <div className="w-10/12 py-6 mx-auto relative">
+            <div className="sm:w-10/12 w-11/12 py-6 mx-auto relative">
                 <ScrollButton />
 
                 <div className="grid xl:grid-cols-12 gap-10 relative">

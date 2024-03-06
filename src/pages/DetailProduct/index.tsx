@@ -224,7 +224,7 @@ const DetailProduct = () => {
                                 <span className="text-gray-400">|</span>
                                 <div className="flex items-center gap-1">
                                     <span className="font-semibold">{product?.rating}/5</span>
-                                    <Rating readOnly value={ratingProduct} precision={0.01} size="small" />
+                                    <Rating readOnly value={ratingProduct} precision={0.1} size="small" />
                                 </div>
                                 <span className="text-gray-400 px-3">|</span>
                                 <div className="flex items-center gap-1">

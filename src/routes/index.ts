@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import config from '../config/index';
 import Error404 from '../pages/Error404';
 import Home from '../pages/Home';
@@ -5,18 +7,20 @@ import Shop from '../pages/Shop';
 import DetailProduct from '../pages/DetailProduct';
 import LogIn from '../pages/LogIn';
 import Register from '../pages/Register';
-import CheckOut from '../pages/CheckOut/CheckOut';
+import CheckOut from '../pages/CheckOut';
 import Cart from '../pages/Cart';
-import Profile from '../pages/Profile/Profile';
 import GetOTPRegister from '../pages/GetOTPRegister';
 import GetOTPLogin from '../pages/GetOTPLogin';
 import ForgotPassWord from '../pages/ForgotPassWord';
+
 import Detail from '../pages/Profile/PurchaseHistory/Detail/Detail';
+import { AddressList, Dashboard, ManagerPass, PurchaseHistory, Settings, Wishlist } from '../pages/Profile';
+import ProfileUserLayout from '../layouts/ProfileUserLayout';
 
 type TRouters = {
     path: string;
     component: React.ComponentType;
-    layout?: React.ComponentType | null;
+    layout?: React.ComponentType<{ children: ReactNode }> | null;
 };
 
 const publishRoute: Array<TRouters> = [
@@ -30,7 +34,14 @@ const publishRoute: Array<TRouters> = [
     { path: config.Routes.getOTPRegister, component: GetOTPRegister },
     { path: config.Routes.cart, component: Cart },
     { path: config.Routes.checkOut, component: CheckOut },
-    { path: config.Routes.profile, component: Profile },
+
+    { path: config.Routes.profileHomeProfile, component: Dashboard, layout: ProfileUserLayout },
+    { path: config.Routes.profileAccountProfile, component: Settings, layout: ProfileUserLayout },
+    { path: config.Routes.profileAddressProfile, component: AddressList, layout: ProfileUserLayout },
+    { path: config.Routes.profileFavouriteProfile, component: Wishlist, layout: ProfileUserLayout },
+    { path: config.Routes.profileHistoryPaymentProfile, component: PurchaseHistory, layout: ProfileUserLayout },
+    { path: config.Routes.profilePassWordProfile, component: ManagerPass, layout: ProfileUserLayout },
+
     { path: config.Routes.detailOrder, component: Detail },
     { path: config.Routes.error, component: Error404, layout: null },
 ];

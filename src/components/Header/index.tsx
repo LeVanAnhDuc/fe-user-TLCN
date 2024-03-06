@@ -157,7 +157,7 @@ function Header() {
                                     openCartModal={openCartModal}
                                     toggleDrawerCartModal={toggleDrawerCartModal}
                                 />
-                                <Link to={config.Routes.profile + '#' + config.PageInProfile.favouriteProfile}>
+                                <Link to={config.Routes.profileFavouriteProfile}>
                                     <IconButton>
                                         <Badge
                                             badgeContent={totalWishList}
@@ -189,15 +189,13 @@ function Header() {
                                 >
                                     <div className="flex flex-col text-sm text-gray-500 font-medium tracking-wider bg-white rounded">
                                         <Link
-                                            to={config.Routes.profile + '#' + config.PageInProfile.homeProfile}
+                                            to={config.Routes.profileHomeProfile}
                                             className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
                                         >
                                             Tài khoản của tôi
                                         </Link>
                                         <Link
-                                            to={
-                                                config.Routes.profile + '#' + config.PageInProfile.historyPaymentProfile
-                                            }
+                                            to={config.Routes.profileHistoryPaymentProfile}
                                             className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
                                         >
                                             Đơn mua
