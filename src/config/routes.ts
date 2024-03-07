@@ -19,9 +19,11 @@ const Routes = {
     profileHistoryPaymentProfile: '/lich-su-mua-hang',
     profileAccountProfile: '/quan-li-ca-nhan',
     profilePassWordProfile: '/doi-mat-khau',
-
     detailOrder: '/chi-tiet-don-hang',
     detailOrderID: '/chi-tiet-don-hang/:id',
+
+    tableSize: '/bang-size',
+    policy: '/chinh-sach',
 
     error: '*',
 };

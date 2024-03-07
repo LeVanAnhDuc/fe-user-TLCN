@@ -14,15 +14,13 @@ const LINKS = [
         items: [
             { content: 'Trang chủ', to: config.Routes.home },
             { content: 'Danh sách sản phẩm', to: config.Routes.shop },
-            { content: 'Bảng Size', to: '' },
         ],
     },
     {
         title: 'Chính sách',
         items: [
-            { content: 'Chính sách mua hàng', to: '' },
-            { content: 'Chính sách bảo mật', to: '' },
-            { content: 'Phương thức thanh toán', to: '' },
+            { content: 'Bảng Size', to: config.Routes.tableSize },
+            { content: 'Chính sách', to: config.Routes.policy },
         ],
     },
 ];
@@ -36,33 +34,33 @@ function Footer() {
                 <div className="mx-auto w-full">
                     <div className="grid grid-cols-1 justify-between gap-x-4 gap-y-20 md:grid-cols-2">
                         <div className="flex flex-col gap-1">
-                            <Logo className="text-white text-7xl flex justify-center md:justify-start" />
-                            <div className="font-normal flex justify-center md:justify-start">
+                            <Logo className="text-white text-6xl flex justify-center md:justify-start" />
+                            <div className="font-normal text-sm flex justify-center md:justify-start">
                                 Duck &copy; {currentYear} . Đã đăng ký Bản quyền.
                             </div>
                             <div className="flex flex-col gap-3 items-center justify-start  md:items-start">
-                                <p className="">Theo dõi DUCK qua các nền tảng khác nhau</p>
+                                <p className="text-sm">Theo dõi DUCK qua các nền tảng khác nhau</p>
                                 <div className="flex gap-4">
                                     <Link
                                         to={'https://www.facebook.com/qb.levananhduc'}
                                         target="_blank"
                                         className="hover:text-primary-700"
                                     >
-                                        <FacebookIcon sx={{ fontSize: 33 }} />
+                                        <FacebookIcon fontSize="medium" />
                                     </Link>
                                     <Link
                                         to="https://www.instagram.com/hi.iam.lvad/"
                                         target="_blank"
                                         className="hover:text-primary-700"
                                     >
-                                        <InstagramIcon sx={{ fontSize: 33 }} />
+                                        <InstagramIcon fontSize="medium" />
                                     </Link>
                                     <Link
                                         to={'https://github.com/LeVanAnhDuc'}
                                         target="_blank"
                                         className="hover:text-primary-700"
                                     >
-                                        <GitHubIcon sx={{ fontSize: 33 }} />
+                                        <GitHubIcon fontSize="medium" />
                                     </Link>
                                     <Link
                                         to={
@@ -71,10 +69,10 @@ function Footer() {
                                         target="_blank"
                                         className="hover:text-primary-700"
                                     >
-                                        <MapIcon sx={{ fontSize: 33 }} />
+                                        <MapIcon fontSize="medium" />
                                     </Link>
                                     <a href={'mailto:levananhduc1804@gmail.com'} className="hover:text-primary-700">
-                                        <EmailIcon sx={{ fontSize: 33 }} />
+                                        <EmailIcon fontSize="medium" />
                                     </a>
                                 </div>
                             </div>

@@ -110,7 +110,7 @@ function Header() {
                                 </div>
                             )}
                         </NavLink>
-                        <NavLink to={'Chính sách'}>
+                        <NavLink to={config.Routes.policy}>
                             {({ isActive }) => (
                                 <div
                                     className={`${
@@ -121,7 +121,7 @@ function Header() {
                                 </div>
                             )}
                         </NavLink>
-                        <NavLink to={'Bảng size'}>
+                        <NavLink to={config.Routes.tableSize}>
                             {({ isActive }) => (
                                 <div
                                     className={`${
@@ -258,14 +258,14 @@ function Header() {
                                 </Button>
                             )}
                         </NavLink>
-                        <NavLink to={'chinh sach'}>
+                        <NavLink to={config.Routes.policy}>
                             {({ isActive }) => (
                                 <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
                                     Chính sách
                                 </Button>
                             )}
                         </NavLink>
-                        <NavLink to={'Bảng size'}>
+                        <NavLink to={config.Routes.tableSize}>
                             {({ isActive }) => (
                                 <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
                                     Bảng size

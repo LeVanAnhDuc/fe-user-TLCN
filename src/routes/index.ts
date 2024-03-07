@@ -16,6 +16,8 @@ import ForgotPassWord from '../pages/ForgotPassWord';
 import Detail from '../pages/Profile/PurchaseHistory/Detail';
 import { AddressList, Dashboard, ManagerPass, PurchaseHistory, Settings, Wishlist } from '../pages/Profile';
 import ProfileUserLayout from '../layouts/ProfileUserLayout';
+import TableSize from '../pages/TableSize';
+import Policy from '../pages/Policy';
 
 type TRouters = {
     path: string;
@@ -34,14 +36,14 @@ const publishRoute: Array<TRouters> = [
     { path: config.Routes.getOTPRegister, component: GetOTPRegister },
     { path: config.Routes.cart, component: Cart },
     { path: config.Routes.checkOut, component: CheckOut },
-
+    { path: config.Routes.tableSize, component: TableSize },
+    { path: config.Routes.policy, component: Policy },
     { path: config.Routes.profileHomeProfile, component: Dashboard, layout: ProfileUserLayout },
     { path: config.Routes.profileAccountProfile, component: Settings, layout: ProfileUserLayout },
     { path: config.Routes.profileAddressProfile, component: AddressList, layout: ProfileUserLayout },
     { path: config.Routes.profileFavouriteProfile, component: Wishlist, layout: ProfileUserLayout },
     { path: config.Routes.profileHistoryPaymentProfile, component: PurchaseHistory, layout: ProfileUserLayout },
     { path: config.Routes.profilePassWordProfile, component: ManagerPass, layout: ProfileUserLayout },
-
     { path: config.Routes.detailOrderID, component: Detail },
     { path: config.Routes.error, component: Error404, layout: null },
 ];
@@ -55,6 +57,8 @@ const privateRoute: Array<TRouters> = [
     { path: config.Routes.forgotPass, component: ForgotPassWord },
     { path: config.Routes.register, component: Register },
     { path: config.Routes.getOTPRegister, component: GetOTPRegister },
+    { path: config.Routes.tableSize, component: TableSize },
+    { path: config.Routes.policy, component: Policy },
     { path: config.Routes.error, component: Error404, layout: null },
 ];
 
