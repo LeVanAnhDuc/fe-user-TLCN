@@ -235,18 +235,18 @@ const PurchaseHistory = () => {
 
                                 <div className="h-0.5 bg-gray-200 mt-3"></div>
 
-                                <div className="flex justify-between items-center p-5 bg-primary-50/40">
-                                    <div className="flex justify-end items-center gap-2">
+                                <div className="flex flex-wrap gap-3 justify-between items-center p-5 bg-primary-50/40">
+                                    <div className="flex items-center gap-2 text-center">
                                         <span className="font-medium text">Thành tiền:</span>
                                         <div className="not-italic text-xl font-medium text-red-500  flex gap-1">
                                             {convertNumberToVND(item.total)}
                                             <span className="text-lg">đ</span>
                                         </div>
                                     </div>
-                                    <div className="flex justify-end gap-2">
+                                    <div className="flex  gap-2">
                                         {item.status === config.StatusOrders.WAITFORPAY && (
                                             <Button
-                                                className="!h-10"
+                                                className="!min-h-10 min-w-32"
                                                 variant="fill"
                                                 onClick={() => handlePaymentOrder(item.id)}
                                             >
@@ -254,7 +254,7 @@ const PurchaseHistory = () => {
                                             </Button>
                                         )}
                                         <Button
-                                            className="!h-10"
+                                            className="!min-h-10 min-w-24"
                                             variant="outline"
                                             onClick={() => handleRedirectDetailOrder(item.id)}
                                         >
@@ -263,7 +263,7 @@ const PurchaseHistory = () => {
                                         {(item.status === config.StatusOrders.ORDERED ||
                                             item.status === config.StatusOrders.WAITFORPAY) && (
                                             <Button
-                                                className="!h-10 text-red-500 hover:text-red-800"
+                                                className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
                                                 variant="text"
                                                 onClick={() => handleCancelOrder(item.id)}
                                             >

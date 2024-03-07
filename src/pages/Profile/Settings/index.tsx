@@ -134,8 +134,8 @@ const Settings = () => {
                 <Loading />
             ) : (
                 <section className="bg-white p-7 rounded-lg">
-                    <div className="space-y-10">
-                        <div className="font-semibold text-xl">Thông tin cá nhân</div>
+                    <div className="space-y-5 lg:w-9/12 xl:w-7/12 m-auto">
+                        <div className="font-bold text-xl text-center">Thông tin cá nhân</div>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <Controller

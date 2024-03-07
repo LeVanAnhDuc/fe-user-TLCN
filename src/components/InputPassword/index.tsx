@@ -28,7 +28,7 @@ const InputPassword = (propsCh: Iprops) => {
     return (
         <>
             <FormControl fullWidth variant="outlined">
-                <InputLabel>{label}</InputLabel>
+                <InputLabel color={error ? 'error' : 'primary'}>{label}</InputLabel>
                 <OutlinedInput
                     {...field}
                     error={error}

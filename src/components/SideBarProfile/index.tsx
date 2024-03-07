@@ -1,5 +1,12 @@
 import Avatar from '@mui/material/Avatar';
 
+import Home from '@mui/icons-material/Home';
+import Favorite from '@mui/icons-material/Favorite';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import LockReset from '@mui/icons-material/LockReset';
+import ManageAccounts from '@mui/icons-material/ManageAccounts';
+import Place from '@mui/icons-material/Place';
+
 import { NavLink } from 'react-router-dom';
 import { ChangeEvent, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -48,7 +55,7 @@ const SideBarProfile = () => {
         <>
             <SnackBarLoading open={isLoadingAPI} content={'Đang cập nhật ảnh'} />
 
-            <section className="h-fit w-full sticky top-20 space-y-7 bg-white p-5 rounded-lg">
+            <section className="hidden lg:block h-fit w-full sticky top-20 space-y-7 bg-white p-5 rounded-lg">
                 <div className="flex place-items-center gap-2">
                     <div className="size-fit rounded-full relative overflow-hidden flex justify-center items-center group">
                         <input
@@ -147,6 +154,99 @@ const SideBarProfile = () => {
                     </NavLink>
                 </nav>
             </section>
+
+            <div className="block lg:hidden sticky top-20 space-y-5">
+                <div className="size-fit rounded-full relative overflow-hidden flex justify-center items-center group">
+                    <input
+                        ref={inputRef}
+                        className="absolute bottom-0 left-0 opacity-0 size-full"
+                        type="file"
+                        onChange={handleImageChange}
+                    />
+                    <Avatar
+                        src={avatarUrl || undefined}
+                        className="!size-14 cursor-pointer object-cover object-center"
+                    />
+                    <div
+                        className="absolute bottom-0 size-full backdrop-blur-sm bg-white/10 transition  cursor-pointer hidden group-hover:block"
+                        onClick={() => inputRef.current && inputRef.current.click()}
+                    ></div>
+                    <div
+                        className="absolute bottom-0 transition duration-500 cursor-pointer translate-y-10 group-hover:-translate-y-1/2 "
+                        onClick={() => inputRef.current && inputRef.current.click()}
+                    >
+                        <span className="text-primary-500 text-3xl font-bold select-none">+</span>
+                    </div>
+                </div>
+                <nav className="h-full flex flex-col gap-6 bg-white  py-5 rounded-lg text-gray-500 font-semibold ">
+                    <NavLink to={config.Routes.profileHomeProfile}>
+                        {({ isActive }) => (
+                            <div
+                                className={`${
+                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                } size-full cursor-pointer transition text-center rounded-lg p-2`}
+                            >
+                                <Home />
+                            </div>
+                        )}
+                    </NavLink>
+                    <NavLink to={config.Routes.profileFavouriteProfile}>
+                        {({ isActive }) => (
+                            <div
+                                className={`${
+                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                            >
+                                <Favorite />
+                            </div>
+                        )}
+                    </NavLink>
+                    <NavLink to={config.Routes.profileAddressProfile}>
+                        {({ isActive }) => (
+                            <div
+                                className={`${
+                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                            >
+                                <Place />
+                            </div>
+                        )}
+                    </NavLink>
+                    <NavLink to={config.Routes.profileHistoryPaymentProfile}>
+                        {({ isActive }) => (
+                            <div
+                                className={`${
+                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                            >
+                                <ShoppingCart />
+                            </div>
+                        )}
+                    </NavLink>
+                    <NavLink to={config.Routes.profileAccountProfile}>
+                        {({ isActive }) => (
+                            <div
+                                className={`${
+                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                            >
+                                <ManageAccounts />
+                            </div>
+                        )}
+                    </NavLink>
+                    <NavLink to={config.Routes.profilePassWordProfile}>
+                        {({ isActive }) => (
+                            <div
+                                className={`${
+                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                            >
+                                <LockReset />
+                            </div>
+                        )}
+                    </NavLink>
+                </nav>
+            </div>
         </>
     );
 };

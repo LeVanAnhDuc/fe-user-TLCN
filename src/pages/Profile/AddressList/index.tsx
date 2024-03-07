@@ -124,7 +124,7 @@ const AddressList = () => {
                                     </div>
                                     <div className="space-y-2">
                                         <Button
-                                            className="!p-2 !h-10 text-sm"
+                                            className="min-w-40 !min-h-10 text-sm"
                                             variant="fill"
                                             disabled={item.isDefault ? true : false}
                                             onClick={() => handleSetDefault(item.id ? item.id : 0)}
@@ -141,7 +141,7 @@ const AddressList = () => {
                                             </Button>
                                             {!item.isDefault && (
                                                 <Button
-                                                    className="!p-2 !h-10 text-sm text-red-500"
+                                                    className="!p-2 !h-10 text-sm text-red-500 hover:text-red-900"
                                                     onClick={() => deleteAddress(item.id ? item.id : 0)}
                                                 >
                                                     Xóa

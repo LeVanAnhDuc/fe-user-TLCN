@@ -11,10 +11,10 @@ interface ProfileUserLayoutProps {
 
 function ProfileUserLayout({ children }: ProfileUserLayoutProps) {
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="min-h-screen flex flex-col bg-gray-100 relative">
             <Header />
-            <div className="h-full flex gap-5 w-11/12 sm:w-10/12 m-auto py-10 relative">
-                <div className="min-w-56">
+            <div className="h-full flex gap-3 lg:gap-5 w-11/12 sm:w-10/12 m-auto py-10 relative">
+                <div>
                     <SideBarProfile />
                 </div>
                 <div className="w-full">

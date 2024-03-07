@@ -17,6 +17,7 @@ import Button from '../../components/Button';
 import { checkPassWord } from '../../utils/checkData';
 import SnackBarLoading from '../../components/SnackBarLoading';
 import Logo from '../../components/Logo';
+import InputPassword from '../../components/InputPassword';
 
 type FormDataResgister = {
     email: string;
@@ -137,12 +138,10 @@ const Register = () => {
                                         name="passWord"
                                         control={control}
                                         render={({ field }) => (
-                                            <TextField
-                                                {...field}
+                                            <InputPassword
+                                                field={{ ...field }}
                                                 error={errors.passWord ? true : false}
-                                                fullWidth
                                                 label={'Nhập mật khẩu'}
-                                                autoComplete="password"
                                             />
                                         )}
                                     />

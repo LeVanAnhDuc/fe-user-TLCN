@@ -43,8 +43,8 @@ const ForgotPassWord = () => {
                 const numericRegex = /^[a-zA-Z0-9]+$/;
                 return numericRegex.test(value);
             }),
-        passWord: yup.string().required('Mật khẩu đang trống'),
-        comfirmPassWord: yup.string().required('Mật khẩu đang trống'),
+        passWord: yup.string().required('Mật khẩu đang trống').min(8, 'Mật khẩu phải từ 8 kí tự trở lên'),
+        comfirmPassWord: yup.string().required('Mật khẩu đang trống').min(8, 'Mật khẩu phải từ 8 kí tự trở lên'),
     });
 
     const {

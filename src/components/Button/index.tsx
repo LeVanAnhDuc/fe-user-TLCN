@@ -16,7 +16,7 @@ interface Iprops {
 const Button = (props: Iprops) => {
     const {
         className,
-        variant,
+        variant = 'text',
         size,
         fullWidth,
         disabled = false,
@@ -36,10 +36,10 @@ const Button = (props: Iprops) => {
         ${size === 'small' ? 'h-8 text-sm px-2' : ''} 
         ${size === 'medium' ? 'h-12 text-base' : ''} 
         ${size === 'large' ? 'h-16 text-lg px-6' : ''} 
-        ${variant === 'fill' ? 'bg-primary-400' : ''} 
-        ${variant === 'text' ? 'bg-transparent text-primary-500 hover:text-primary-800' : ''} 
-        ${variant === 'outline' ? 'bg-transparent border-primary-700 border-2' : ''} 
-        ${variant === 'outlineBlur' ? 'bg-white/80 border-primary-700 border-2' : ''} 
+        ${variant === 'fill' ? 'bg-primary-400 text-white' : ''} 
+        ${variant === 'text' ? 'bg-transparent hover:text-primary-800' : ''} 
+        ${variant === 'outline' ? 'bg-transparent text-primary-700 border-primary-700 border-2' : ''} 
+        ${variant === 'outlineBlur' ? 'bg-white/80 text-primary-700 border-primary-700 border-2' : ''} 
         ${className} `;
 
     return (
