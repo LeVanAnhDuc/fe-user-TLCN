@@ -13,7 +13,7 @@ import GetOTPRegister from '../pages/GetOTPRegister';
 import GetOTPLogin from '../pages/GetOTPLogin';
 import ForgotPassWord from '../pages/ForgotPassWord';
 
-import Detail from '../pages/Profile/PurchaseHistory/Detail/Detail';
+import Detail from '../pages/Profile/PurchaseHistory/Detail';
 import { AddressList, Dashboard, ManagerPass, PurchaseHistory, Settings, Wishlist } from '../pages/Profile';
 import ProfileUserLayout from '../layouts/ProfileUserLayout';
 
@@ -42,7 +42,7 @@ const publishRoute: Array<TRouters> = [
     { path: config.Routes.profileHistoryPaymentProfile, component: PurchaseHistory, layout: ProfileUserLayout },
     { path: config.Routes.profilePassWordProfile, component: ManagerPass, layout: ProfileUserLayout },
 
-    { path: config.Routes.detailOrder, component: Detail },
+    { path: config.Routes.detailOrderID, component: Detail },
     { path: config.Routes.error, component: Error404, layout: null },
 ];
 

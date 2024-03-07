@@ -20,7 +20,9 @@ const Routes = {
     profileAccountProfile: '/quan-li-ca-nhan',
     profilePassWordProfile: '/doi-mat-khau',
 
-    detailOrder: '/trang-cua-ban/chi-tiet-don-hang',
+    detailOrder: '/chi-tiet-don-hang',
+    detailOrderID: '/chi-tiet-don-hang/:id',
+
     error: '*',
 };
 

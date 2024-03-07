@@ -63,6 +63,12 @@ const PurchaseHistory = () => {
         }
     };
 
+    const handleRedirectDetailOrder = (idOrder: number) => {
+        if (idOrder) {
+            navigate(`${config.Routes.detailOrder}/${idOrder}`);
+        }
+    };
+
     const handlePaymentOrder = async (idOder: number) => {
         if (idOder) {
             navigate(config.Routes.checkOut, { state: { idOder: idOder } });
@@ -250,9 +256,7 @@ const PurchaseHistory = () => {
                                         <Button
                                             className="!h-10"
                                             variant="outline"
-                                            // onClick={() =>
-                                            //     navigate(config.Routes.detailOrder, { state: { idPurchaseHistory: item.id } })
-                                            // }
+                                            onClick={() => handleRedirectDetailOrder(item.id)}
                                         >
                                             Chi tiết
                                         </Button>
