@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SideBarProfile from '../../components/SideBarProfile';
+import ScrollButton from '../../components/ScrollButton/ScrollButton';
 
 interface ProfileUserLayoutProps {
     children: ReactNode;
@@ -16,7 +17,10 @@ function ProfileUserLayout({ children }: ProfileUserLayoutProps) {
                 <div className="min-w-56">
                     <SideBarProfile />
                 </div>
-                <div className="w-full ">{children}</div>
+                <div className="w-full">
+                    <ScrollButton />
+                    {children}
+                </div>
             </div>
             <Footer />
         </div>

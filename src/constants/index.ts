@@ -1,4 +1,5 @@
 import IProduct from '../interface/product';
+import IProductCart, { IProductChildrenCart, ISku } from '../interface/productCart';
 
 export const initObjectProduct: IProduct = {
     id: '',
@@ -23,4 +24,16 @@ export const initObjectProduct: IProduct = {
     liked: false,
     listImages: [],
     options: [],
+};
+
+export const initObjecProductCart: IProductCart = {
+    hasReview: false,
+    id: 0,
+    orderId: 0,
+    imageUrl: '',
+    price: 0,
+    product: {} as IProductChildrenCart,
+    quantity: 0,
+    sku: {} as ISku,
+    subTotal: 0,
 };

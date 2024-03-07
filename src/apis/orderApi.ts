@@ -3,8 +3,22 @@ import { IOrderCheckOut } from '../interface/order.js';
 import axios from './axiosConfig.js';
 
 export const searchOrderForUser = async (status: string) => {
+    // try {
+    //     const response = await axios.get(`/orders/search?status=${status}`);
+    //     return response;
+    // } catch (error) {
+    //     throw error;
+    // }
     try {
-        const response = await axios.get(`/orders/search?status=${status}`);
+        const params: Record<string, string | number | boolean> = {};
+
+        if (status) {
+            params['status'] = status;
+        }
+
+        const url = '/orders/search?' + new URLSearchParams(params as Record<string, string>).toString();
+
+        const response = await axios.get(url);
         return response;
     } catch (error) {
         throw error;

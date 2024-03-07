@@ -1,6 +1,6 @@
 import Dashboard from './Dashboard';
 import Wishlist from './Wishlist';
-import PurchaseHistory from './PurchaseHistory/PurchaseHistory';
+import PurchaseHistory from './PurchaseHistory';
 import Settings from './Settings/Settings';
 import AddressList from './AddressList';
 import ManagerPass from './ManagerPass/ManagerPass';

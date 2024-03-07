@@ -34,7 +34,7 @@ const Pay = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const idOrder = location.hash.substring(1);
+    const idOrder = location.state.idOder;
 
     const [isChecked, setIsChecked] = useState(false);
     const [addresses, setAddresses] = useState<Array<IAddress>>([]);
@@ -260,7 +260,7 @@ const Pay = () => {
                                     <p className="text-red-600 text-sm mt-1.5">{errors.addressId?.message}</p>
                                 </AnimationTran>
                             ) : (
-                                <Link to={config.Routes.profile + '#' + config.PageInProfile.addressProfile}>
+                                <Link to={config.Routes.profileAddressProfile}>
                                     <Button fullWidth variant="outline">
                                         Hiện chưa có địa chỉ. Nhấn để thêm
                                     </Button>
