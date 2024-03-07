@@ -70,20 +70,32 @@ export const loginSlice = createSlice({
                     userNameUser: state.userNameUser,
                     idUser: state.idUser,
                     avatarUrl: action.payload,
+                    nameUser: state.nameUser,
+                }),
+            );
+        },
+        setNameUser: (state, action: PayloadAction<string>) => {
+            state.nameUser = action.payload;
+
+            localStorage.setItem(
+                'infoUser',
+                JSON.stringify({
+                    userNameUser: state.userNameUser,
+                    idUser: state.idUser,
+                    avatarUrl: state.avatarUrl,
+                    nameUser: action.payload,
                 }),
             );
         },
     },
 });
 
-export const { setIsLogin } = loginSlice.actions;
-export const { setInfoUser } = loginSlice.actions;
-export const { setAvatarUser } = loginSlice.actions;
+export const { setIsLogin, setNameUser, setInfoUser, setAvatarUser } = loginSlice.actions;
 
 export const selectIsLogin = (state: RootState) => state.login.isLogin;
 export const selectIDUser = (state: RootState) => state.login.idUser;
 export const selectUserNameUser = (state: RootState) => state.login.userNameUser;
-export const selectnameUser = (state: RootState) => state.login.nameUser;
+export const selectNameUser = (state: RootState) => state.login.nameUser;
 export const selectAvatarUrl = (state: RootState) => state.login.avatarUrl;
 
 export default loginSlice.reducer;

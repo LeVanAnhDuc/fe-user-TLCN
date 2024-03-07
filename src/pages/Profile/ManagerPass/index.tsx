@@ -49,12 +49,10 @@ const ManagerPass = () => {
     };
 
     return (
-        <>
-            {/* start section 2 */}
-            <div className="py-10 h-full w-full sm:w-7/12 m-auto text-center ">
-                <div className="mb-5 font-semibold text-xl">Đổi mật khẩu</div>
-                <form className="space-y-6 mb-10" onSubmit={handleSubmit(onSubmit)}>
-                    {/* start input password */}
+        <section className="bg-white p-7 rounded-lg">
+            <div className="h-full w-7/12 text-center m-auto space-y-5">
+                <div className="font-bold text-xl">Đổi mật khẩu</div>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <InputText
                         labelInput="Mật khẩu hiện tại"
                         errorInput={errors.currentPassWord ? true : false}
@@ -67,8 +65,6 @@ const ManagerPass = () => {
                             }),
                         }}
                     />
-                    {/* end input password */}
-                    {/* start new password */}
                     <InputText
                         labelInput="Mật khẩu mới"
                         errorInput={errors.newPassWord ? true : false}
@@ -81,8 +77,6 @@ const ManagerPass = () => {
                             }),
                         }}
                     />
-                    {/* end new password */}
-                    {/* start comfirm password */}
                     <InputText
                         labelInput="Xác nhận lại mật khẩu"
                         errorInput={errors.confirmPassWord ? true : false}
@@ -95,22 +89,12 @@ const ManagerPass = () => {
                             }),
                         }}
                     />
-                    {/* end comfirm password */}
-                    <Button
-                        style={{ float: 'right' }}
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        fullWidth
-                    >
+                    <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
                         Lưu mật khẩu mới
                     </Button>
                 </form>
             </div>
-
-            {/* end section 2 */}
-        </>
+        </section>
     );
 };
 

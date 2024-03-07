@@ -97,9 +97,9 @@ const Wishlist = () => {
             {isLoadingAPI ? (
                 <Loading />
             ) : (
-                <div className="size-full m-auto">
+                <div className="size-full relative">
                     {wishList.length === 0 ? (
-                        <div className="size-full flex flex-col items-center gap-5">
+                        <div className="size-full flex  flex-col items-center justify-center gap-5">
                             <ContentPasteSearch sx={{ fontSize: '100px' }} className="text-gray-400" />
                             <span className="text-xl text-gray-400">
                                 Hix. Không có sản phẩm nào. Bạn ghé cửa hàng để đặt đồ nhé?
@@ -110,7 +110,7 @@ const Wishlist = () => {
                         </div>
                     ) : (
                         <>
-                            <div className="space-y-4">
+                            <div className="space-y-4 pb-16">
                                 {wishList.map((item, index) => (
                                     <AnimationTran
                                         tranY={100}
@@ -155,7 +155,7 @@ const Wishlist = () => {
                                     </AnimationTran>
                                 ))}
                             </div>
-                            <div className="w-full flex justify-center my-5 ">
+                            <div className="size-fit flex absolute bottom-0 right-0">
                                 <Pagination
                                     count={totalPages}
                                     page={page}

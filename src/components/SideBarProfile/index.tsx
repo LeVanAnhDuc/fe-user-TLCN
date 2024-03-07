@@ -1,21 +1,78 @@
 import Avatar from '@mui/material/Avatar';
 
 import { NavLink } from 'react-router-dom';
+import { ChangeEvent, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { useAppSelector } from '../../redux/hook';
-import { selectAvatarUrl, selectUserNameUser, selectnameUser } from '../../pages/LogIn/loginSlice';
+import { selectAvatarUrl, selectUserNameUser, selectNameUser, setAvatarUser } from '../../pages/LogIn/loginSlice';
 import config from '../../config';
+import { uploadAvatar } from '../../apis/uploadImageApi';
+import SnackBarLoading from '../SnackBarLoading';
 
 const SideBarProfile = () => {
     const userName = useAppSelector(selectUserNameUser);
-    const name = useAppSelector(selectnameUser);
+    const name = useAppSelector(selectNameUser);
     const avatarUrl = useAppSelector(selectAvatarUrl);
+    const dispatch = useDispatch();
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
+
+    const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setLoadingAPI(true);
+
+            const formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            try {
+                const response = await uploadAvatar(formData);
+
+                if (response.status === 200) {
+                    dispatch(setAvatarUser(response.data));
+                } else {
+                    toast.error(response.data.message || response.data);
+                }
+            } catch (error) {
+                toast.error(`${error}`);
+            } finally {
+                setLoadingAPI(false);
+            }
+        }
+    };
+
     return (
         <>
-            <section className="h-fit w-full sticky top-20 space-y-7 bg-white p-7 rounded-lg">
-                <div className="flex place-items-center place-content-between gap-2">
-                    <Avatar src={avatarUrl || undefined} className="!size-14" />
-                    <div className="max-w-32">
+            <SnackBarLoading open={isLoadingAPI} content={'Đang cập nhật ảnh'} />
+
+            <section className="h-fit w-full sticky top-20 space-y-7 bg-white p-5 rounded-lg">
+                <div className="flex place-items-center gap-2">
+                    <div className="size-fit rounded-full relative overflow-hidden flex justify-center items-center group">
+                        <input
+                            ref={inputRef}
+                            className="absolute bottom-0 left-0 opacity-0 size-full"
+                            type="file"
+                            onChange={handleImageChange}
+                        />
+                        <Avatar
+                            src={avatarUrl || undefined}
+                            className="!size-14 cursor-pointer object-cover object-center"
+                        />
+                        <div
+                            className="absolute bottom-0 size-full backdrop-blur-sm bg-white/10 transition  cursor-pointer hidden group-hover:block"
+                            onClick={() => inputRef.current && inputRef.current.click()}
+                        ></div>
+                        <div
+                            className="absolute bottom-0 transition duration-500 cursor-pointer translate-y-10 group-hover:-translate-y-1/2 "
+                            onClick={() => inputRef.current && inputRef.current.click()}
+                        >
+                            <span className="text-primary-500 text-3xl font-bold select-none">+</span>
+                        </div>
+                    </div>
+                    <div className="w-28">
                         <div className="font-bold text-lg truncate">{userName}</div>
                         <div className="text-sm truncate">{name}</div>
                     </div>
