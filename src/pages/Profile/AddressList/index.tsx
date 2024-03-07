@@ -124,7 +124,7 @@ const AddressList = () => {
                                     </div>
                                     <div className="space-y-2">
                                         <Button
-                                            className="min-w-40 !min-h-10 text-sm"
+                                            className="min-w-36 !min-h-10 text-sm !p-2"
                                             variant="fill"
                                             disabled={item.isDefault ? true : false}
                                             onClick={() => handleSetDefault(item.id ? item.id : 0)}

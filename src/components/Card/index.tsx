@@ -85,7 +85,7 @@ const Card = (props: Iprops) => {
                         {loading ? (
                             <Skeleton fillFull className="h-9" />
                         ) : (
-                            <div className="line-clamp-2 text-sm">{itemProduct.name}</div>
+                            <div className="line-clamp-2 text-sm min-h-10">{itemProduct.name}</div>
                         )}
                         <div className="flex justify-between gap-5">
                             {loading ? (

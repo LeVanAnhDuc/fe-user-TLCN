@@ -178,13 +178,13 @@ const SideBarProfile = () => {
                         <span className="text-primary-500 text-3xl font-bold select-none">+</span>
                     </div>
                 </div>
-                <nav className="h-full flex flex-col gap-6 bg-white  py-5 rounded-lg text-gray-500 font-semibold ">
+                <nav className="h-full flex flex-col gap-3 bg-white rounded-lg text-gray-500 font-semibold ">
                     <NavLink to={config.Routes.profileHomeProfile}>
                         {({ isActive }) => (
                             <div
                                 className={`${
                                     isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                } size-full cursor-pointer transition text-center rounded-lg p-2`}
+                                } size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <Home />
                             </div>
@@ -195,7 +195,7 @@ const SideBarProfile = () => {
                             <div
                                 className={`${
                                     isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                                }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <Favorite />
                             </div>
@@ -206,7 +206,7 @@ const SideBarProfile = () => {
                             <div
                                 className={`${
                                     isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                                }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <Place />
                             </div>
@@ -217,7 +217,7 @@ const SideBarProfile = () => {
                             <div
                                 className={`${
                                     isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                                }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <ShoppingCart />
                             </div>
@@ -228,7 +228,7 @@ const SideBarProfile = () => {
                             <div
                                 className={`${
                                     isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                                }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <ManageAccounts />
                             </div>
@@ -239,7 +239,7 @@ const SideBarProfile = () => {
                             <div
                                 className={`${
                                     isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                }  size-full cursor-pointer transition text-center rounded-lg p-2`}
+                                }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <LockReset />
                             </div>
