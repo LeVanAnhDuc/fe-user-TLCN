@@ -133,7 +133,7 @@ const Settings = () => {
             {isLoadingAPIGet ? (
                 <Loading />
             ) : (
-                <section className="bg-white p-7 rounded-lg">
+                <section className="bg-white p-7 rounded-lg dark:bg-dark-600">
                     <div className="space-y-5 lg:w-9/12 xl:w-7/12 m-auto">
                         <div className="font-bold text-xl text-center">Thông tin cá nhân</div>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>

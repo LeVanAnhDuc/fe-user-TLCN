@@ -55,7 +55,7 @@ const SideBarProfile = () => {
         <>
             <SnackBarLoading open={isLoadingAPI} content={'Đang cập nhật ảnh'} />
 
-            <section className="hidden lg:block h-fit w-full sticky top-20 space-y-7 bg-white p-5 rounded-lg">
+            <section className="hidden lg:block h-fit w-full sticky top-20 space-y-7 bg-white p-5 rounded-lg dark:bg-dark-600">
                 <div className="flex place-items-center gap-2">
                     <div className="size-fit rounded-full relative overflow-hidden flex justify-center items-center group">
                         <input
@@ -90,7 +90,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'text-primary-500 dark:text-primary-400'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
                                 Trang của tôi
@@ -101,7 +103,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'text-primary-500 dark:text-primary-400'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
                                 Danh sách ưu thích
@@ -112,7 +116,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'text-primary-500 dark:text-primary-400'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
                                 Danh sách địa chỉ
@@ -123,7 +129,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'text-primary-500 dark:text-primary-400'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
                                 Lịch sử mua hàng
@@ -134,7 +142,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'text-primary-500 dark:text-primary-400'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
                                 Tài khoản của tôi
@@ -145,7 +155,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'text-primary-500 dark:text-primary-400'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
                                 Đổi mật khẩu
@@ -178,12 +190,14 @@ const SideBarProfile = () => {
                         <span className="text-primary-500 text-3xl font-bold select-none">+</span>
                     </div>
                 </div>
-                <nav className="h-full flex flex-col gap-3 bg-white rounded-lg text-gray-500 font-semibold ">
+                <nav className="h-full flex flex-col gap-3 bg-white rounded-lg text-gray-500 font-semibold dark:bg-dark-600">
                     <NavLink to={config.Routes.profileHomeProfile}>
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'bg-primary-500 text-white'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:hover:text-primary-400'
                                 } size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <Home />
@@ -194,7 +208,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'bg-primary-500 text-white'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:hover:text-primary-400'
                                 }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <Favorite />
@@ -205,7 +221,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'bg-primary-500 text-white'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:hover:text-primary-400'
                                 }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <Place />
@@ -216,7 +234,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'bg-primary-500 text-white'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:hover:text-primary-400'
                                 }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <ShoppingCart />
@@ -227,7 +247,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'bg-primary-500 text-white'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:hover:text-primary-400'
                                 }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <ManageAccounts />
@@ -238,7 +260,9 @@ const SideBarProfile = () => {
                         {({ isActive }) => (
                             <div
                                 className={`${
-                                    isActive ? 'bg-primary-500 text-white' : 'hover:text-primary-700 hover:scale-[1.03]'
+                                    isActive
+                                        ? 'bg-primary-500 text-white'
+                                        : 'hover:text-primary-700 hover:scale-[1.03] dark:hover:text-primary-400'
                                 }  size-full cursor-pointer transition text-center rounded-lg p-3`}
                             >
                                 <LockReset />

@@ -101,7 +101,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 lg:w-8/12 bg-white rounded-lg p-8 space-y-10">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 lg:w-8/12 bg-white rounded-lg p-8 space-y-10 dark:bg-dark-500">
                     <div className="size-full grid grid-cols-12 gap-1 overflow-hidden">
                         <Image
                             src={orderItem?.imageUrl || ''}

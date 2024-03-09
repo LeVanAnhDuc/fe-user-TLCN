@@ -100,8 +100,11 @@ const Wishlist = () => {
                 <div className="size-full relative">
                     {wishList.length === 0 ? (
                         <div className="size-full flex  flex-col items-center justify-center gap-5">
-                            <ContentPasteSearch sx={{ fontSize: '100px' }} className="text-gray-400" />
-                            <span className="text-xl text-gray-400">
+                            <ContentPasteSearch
+                                sx={{ fontSize: '100px' }}
+                                className="text-gray-400 dark:text-gray-200"
+                            />
+                            <span className="text-xl text-gray-400 dark:text-gray-200">
                                 Hix. Không có sản phẩm nào. Bạn ghé cửa hàng để đặt đồ nhé?
                             </span>
                             <Link to={config.Routes.shop}>
@@ -115,7 +118,7 @@ const Wishlist = () => {
                                     <AnimationTran
                                         tranY={100}
                                         key={index}
-                                        className="h-fit w-full grid grid-cols-12 bg-white rounded-lg overflow-hidden"
+                                        className="h-fit w-full grid grid-cols-12 bg-white rounded-lg overflow-hidden dark:bg-dark-600"
                                         delay={(index % 4) / 20}
                                     >
                                         <Image

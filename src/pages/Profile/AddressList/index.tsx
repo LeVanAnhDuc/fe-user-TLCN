@@ -111,7 +111,7 @@ const AddressList = () => {
                             {addresses.map((item, index) => (
                                 <AnimationTran
                                     tranY={100}
-                                    className="flex justify-between py-5 px-6 bg-white rounded-lg shadow"
+                                    className="flex justify-between py-5 px-6 bg-white rounded-lg shadow dark:bg-dark-600"
                                     key={index}
                                     delay={(index % 4) / 20}
                                 >

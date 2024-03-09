@@ -56,7 +56,7 @@ const ManagerPass = () => {
     };
 
     return (
-        <section className="bg-white p-7 rounded-lg">
+        <section className="bg-white p-7 rounded-lg dark:bg-dark-600">
             <div className="h-full lg:w-9/12 xl:w-7/12 m-auto space-y-5">
                 <div className="font-bold text-xl text-center">Đổi mật khẩu</div>
                 <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>

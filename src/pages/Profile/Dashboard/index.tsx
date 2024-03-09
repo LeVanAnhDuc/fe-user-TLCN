@@ -42,36 +42,36 @@ const Dashboard = () => {
     return (
         <>
             <div className="flex flex-col gap-5">
-                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <div className="size-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                     <CardStatictis
                         icon={VolunteerActivismOutlined}
                         data={statictis?.favoriteCount}
-                        content="Sản phẩm quan tâm"
-                        color="bg-orange-200"
+                        content="Quan tâm"
+                        className="bg-orange-200 dark:bg-orange-300"
                     />
                     <CardStatictis
                         icon={InventoryOutlined}
                         data={statictis?.ordered}
                         content="Đã đặt"
-                        color="bg-red-200"
+                        className="bg-red-200 dark:bg-red-300"
                         delay={0.1}
                     />
                     <CardStatictis
                         icon={AirportShuttleOutlined}
                         data={statictis?.shipping}
                         content="Đang giao"
-                        color="bg-green-200"
+                        className="bg-green-200 dark:bg-green-300"
                         delay={0.2}
                     />
                     <CardStatictis
                         icon={ShoppingBagOutlined}
                         data={statictis?.delivered}
                         content="Đã giao"
-                        color="bg-blue-200"
+                        className="bg-blue-200 dark:bg-blue-300"
                         delay={0.3}
                     />
                 </div>
-                <AnimationTran tranY={50} className="bg-white size-full rounded-lg">
+                <AnimationTran tranY={50} className="bg-white size-full rounded-lg dark:bg-dark-600">
                     <BarChart
                         xAxis={[{ scaleType: 'band', data: ['Sản phẩm quan tâm', 'Đã đặt', 'Đang giao', 'Đã giao'] }]}
                         series={[

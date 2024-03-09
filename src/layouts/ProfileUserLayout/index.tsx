@@ -12,7 +12,7 @@ interface ProfileUserLayoutProps {
 
 function ProfileUserLayout({ children }: ProfileUserLayoutProps) {
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100 relative">
+        <div className="min-h-screen flex flex-col bg-gray-100 relative dark:bg-dark-400">
             <Header />
             <div className="h-full flex gap-3 lg:gap-5 w-11/12 sm:w-10/12 m-auto py-10 relative">
                 <div>

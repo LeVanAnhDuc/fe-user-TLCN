@@ -69,15 +69,18 @@ const Detail = () => {
                     <Loading />
                 </div>
             ) : (
-                <section className="bg-gray-100 py-10">
+                <section className="bg-gray-100 py-10 dark:bg-dark-400">
                     <ScrollButton />
                     <div className="w-10/12 m-auto space-y-10">
                         <Breadcrumbs className="!font-medium">
-                            <Link className="text-primary-700 hover:underline" to={config.Routes.home}>
+                            <Link
+                                className="text-primary-700 hover:underline dark:text-primary-500"
+                                to={config.Routes.home}
+                            >
                                 DUCK
                             </Link>
                             <Link
-                                className="text-primary-700 hover:underline"
+                                className="text-primary-700 hover:underline dark:text-primary-500"
                                 to={config.Routes.profileHistoryPaymentProfile}
                             >
                                 Lịch sử mua
@@ -88,12 +91,12 @@ const Detail = () => {
                         <table className="w-full border-collapse border border-gray-300">
                             <thead>
                                 <tr>
-                                    <th className="border bg-primary-100 p-4 text-lg" colSpan={2}>
+                                    <th className="border bg-primary-100 p-4 text-lg dark:bg-dark-600" colSpan={2}>
                                         Chi tiết đơn hàng
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white">
+                            <tbody className="bg-white dark:bg-dark-500">
                                 <tr>
                                     <td className="border border-gray-300 p-3 min-w-40">Ngày xuất đơn</td>
                                     <td className="border border-gray-300 p-3 font-bold">
@@ -163,7 +166,7 @@ const Detail = () => {
                                 <Fragment key={indexProduct}>
                                     <AnimationTran
                                         tranY={100}
-                                        className="size-full grid grid-cols-12 gap-1 overflow-hidden bg-white rounded-lg shadow"
+                                        className="size-full grid grid-cols-12 gap-1 overflow-hidden bg-white rounded-lg shadow dark:bg-dark-600"
                                     >
                                         <>
                                             <Image

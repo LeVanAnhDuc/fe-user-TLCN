@@ -144,7 +144,11 @@ const PurchaseHistory = () => {
                     </div>
                     <div className="space-y-5">
                         {listHistory.map((item, index) => (
-                            <AnimationTran tranY={100} className=" bg-white rounded-lg shadow" key={index}>
+                            <AnimationTran
+                                tranY={100}
+                                className=" bg-white rounded-lg shadow dark:bg-dark-600"
+                                key={index}
+                            >
                                 <div className="flex items-center justify-between p-5">
                                     <div className="text-sm font-bold">{item.createdDate}</div>
                                     <div
@@ -235,7 +239,7 @@ const PurchaseHistory = () => {
 
                                 <div className="h-0.5 bg-gray-200 mt-3"></div>
 
-                                <div className="flex flex-wrap gap-3 justify-between items-center p-5 bg-primary-50/40">
+                                <div className="flex flex-wrap gap-3 justify-between items-center p-5 bg-primary-50/40 rounded-b-lg dark:bg-dark-500">
                                     <div className="flex items-center gap-2 text-center">
                                         <span className="font-medium text">Thành tiền:</span>
                                         <div className="not-italic text-xl font-medium text-red-500  flex gap-1">
