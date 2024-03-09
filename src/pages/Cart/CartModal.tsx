@@ -95,10 +95,10 @@ const CartModal = (props: Iprops) => {
 
     return (
         <Drawer anchor={'right'} open={openCartModal} onClose={toggleDrawerCartModal}>
-            <div className="w-screen sm:w-[34rem] min-h-screen  bg-gray-100 ">
+            <div className="w-screen sm:w-[34rem] min-h-screen  bg-gray-100 dark:bg-dark-400">
                 <div className="relative h-full flex flex-col justify-between">
                     <div className="sticky top-0 z-10">
-                        <div className="bg-primary-200 w-full h-14 rounded-b-xl dark:bg-primary-600">
+                        <div className="bg-primary-200 w-full h-14 rounded-b-xl dark:bg-primary-900">
                             <div className="flex justify-between items-center mb-10 h-full px-5">
                                 <span className="text-xl font-bold tracking-wide">Giỏ hàng</span>
                                 <Fab color="error" size="small" className="!shadow-none">
@@ -111,8 +111,11 @@ const CartModal = (props: Iprops) => {
                     <div className="py-5 h-full hide-scrollbar overflow-y-scroll">
                         {products.length === 0 ? (
                             <div className="h-full flex flex-col items-center justify-center gap-5 px-20">
-                                <ContentPasteSearch sx={{ fontSize: '100px' }} className="text-gray-400" />
-                                <span className="text-xl text-center text-gray-400">
+                                <ContentPasteSearch
+                                    sx={{ fontSize: '100px' }}
+                                    className="text-gray-400 dark:text-gray-200"
+                                />
+                                <span className="text-xl text-center text-gray-400 dark:text-gray-200">
                                     Hix. Không có sản phẩm nào. Bạn ghé cửa hàng để đặt đồ nhé?
                                 </span>
                                 <Link to={config.Routes.shop}>
@@ -127,7 +130,7 @@ const CartModal = (props: Iprops) => {
                                     <AnimationTran
                                         tranY={100}
                                         key={index}
-                                        className="size-full grid grid-cols-12 gap-2 bg-white rounded-lg overflow-hidden shadow p-2"
+                                        className="size-full grid grid-cols-12 gap-2 bg-white rounded-lg overflow-hidden shadow p-2 dark:bg-dark-600"
                                         delay={(index % 4) / 20}
                                     >
                                         <>
@@ -195,7 +198,7 @@ const CartModal = (props: Iprops) => {
                         )}
                     </div>
 
-                    <div className="bg-gray-100 border-t-2 border-black">
+                    <div className="bg-gray-200 border-t-2 border-black dark:bg-dark-700">
                         <div className="flex flex-col w-full h-fit px-5 py-2 gap-5">
                             <div className="flex justify-between items-center w-full font-bold">
                                 <span className="text-lg">Tổng</span>

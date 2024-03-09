@@ -142,7 +142,9 @@ const ForgotPassWord = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.email?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.email?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
 
@@ -162,7 +164,9 @@ const ForgotPassWord = () => {
                                                 />
                                             )}
                                         />
-                                        <p className="text-red-600 text-sm py-1 h-6">{errors.otp?.message}</p>
+                                        <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                            {errors.otp?.message}
+                                        </p>
                                     </>
                                 </AnimationTran>
                             )}
@@ -182,7 +186,9 @@ const ForgotPassWord = () => {
                                                     />
                                                 )}
                                             />
-                                            <p className="text-red-600 text-sm py-1 h-6">{errors.passWord?.message}</p>
+                                            <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                                {errors.passWord?.message}
+                                            </p>
                                         </>
                                     </AnimationTran>
                                     <AnimationTran tranY={-100} delay={0.1}>
@@ -198,7 +204,7 @@ const ForgotPassWord = () => {
                                                     />
                                                 )}
                                             />
-                                            <p className="text-red-600 text-sm py-1 h-6">
+                                            <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
                                                 {errors.comfirmPassWord?.message}
                                             </p>
                                         </>

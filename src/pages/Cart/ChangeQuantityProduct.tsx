@@ -58,7 +58,7 @@ const ChangeQuantityProduct = (props: IProps) => {
                 <HorizontalRule fontSize="small" />
             </Button>
             <input
-                className="rounded border-2 px-1 py-1 w-[50px] text-center"
+                className="rounded border-2 px-1 py-1 w-[50px] text-center dark:bg-dark-300"
                 value={quantity}
                 onChange={handleChange}
             />

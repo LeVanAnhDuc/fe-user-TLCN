@@ -34,7 +34,10 @@ const Pay = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const idOrder = location.state.idOder;
+    let idOrder: number = 0;
+    if (location.state) {
+        idOrder = location.state.idOder;
+    }
 
     const [isChecked, setIsChecked] = useState(false);
     const [addresses, setAddresses] = useState<Array<IAddress>>([]);
@@ -183,10 +186,10 @@ const Pay = () => {
     }, []);
 
     return (
-        <section className="bg-gray-100 py-5 sm:py-10 ">
+        <section className="bg-gray-100 py-5 sm:py-10 dark:bg-dark-400">
             <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
                 <div className="grid lg:grid-cols-5 gap-10">
-                    <div className="space-y-3 lg:col-span-3 bg-white p-5 sm:p-10 rounded-lg">
+                    <div className="space-y-3 lg:col-span-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
                         <div className="font-semibold text-xl">Thông tin liên lạc của bạn ?</div>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranY={100}>
@@ -224,7 +227,9 @@ const Pay = () => {
                                         </FormControl>
                                     )}
                                 />
-                                <p className="text-red-600 text-sm mt-1.5">{errors.paymentType?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.paymentType?.message}
+                                </p>
                             </AnimationTran>
 
                             {addresses.length > 0 ? (
@@ -257,7 +262,9 @@ const Pay = () => {
                                             </FormControl>
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.addressId?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.addressId?.message}
+                                    </p>
                                 </AnimationTran>
                             ) : (
                                 <Link to={config.Routes.profileAddressProfile}>
@@ -282,7 +289,9 @@ const Pay = () => {
                                         />
                                     )}
                                 />
-                                <p className="text-red-600 text-sm mt-1.5">{errors.note?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.note?.message}
+                                </p>
                             </AnimationTran>
 
                             <AnimationScale scale={0.4}>
@@ -295,7 +304,7 @@ const Pay = () => {
                                 <span>
                                     <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
                                 </span>
-                                <span className="col-span-9 text-gray-400">
+                                <span className="col-span-9 text-gray-400 dark:text-gray-300">
                                     Tôi đã đọc và đồng ý cho Duck xử lý thông tin của tôi theo
                                     <span className="underline ml-0.5">Quy định về Quyền riêng tư</span> và
                                     <span className="underline ml-0.5"> Chính sách Cookie </span>. Duck là đối tác tin
@@ -305,7 +314,7 @@ const Pay = () => {
                         </form>
                     </div>
 
-                    <div className="space-y-5 lg:col-span-2 bg-white h-fit p-5 sm:p-10 rounded-lg sticky top-20">
+                    <div className="space-y-5 lg:col-span-2 bg-white h-fit p-5 sm:p-10 rounded-lg sticky top-20 dark:bg-dark-600">
                         <h1 className="text-xl font-bold text-center">Tổng chi phí</h1>
                         <div className="flex justify-between">
                             <span className="font-medium">Tổng tiền</span>
@@ -333,7 +342,7 @@ const Pay = () => {
 
                         <div className="h-0.5 bg-gray-200 w-full"></div>
 
-                        <div className="text-center text-gray-600">
+                        <div className="text-center text-gray-600 dark:text-gray-300">
                             (Tổng cộng giá của đơn hàng của bạn, bao gồm tất cả các chi phí và thuế)
                         </div>
                     </div>

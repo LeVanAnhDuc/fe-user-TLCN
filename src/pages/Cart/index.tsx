@@ -85,7 +85,7 @@ const Cart = () => {
     };
 
     return (
-        <div className="bg-gray-100 py-16">
+        <div className="bg-gray-100 py-16 dark:bg-dark-400">
             <div className="grid lg:grid-cols-11 xl:grid-cols-12 gap-5 w-11/12 sm:w-10/12 m-auto">
                 <div className="lg:col-span-8 xl:col-span-9">
                     <div className="space-y-4">
@@ -93,7 +93,7 @@ const Cart = () => {
                             <AnimationTran
                                 tranY={100}
                                 key={index}
-                                className="size-full grid grid-cols-12 gap-1 bg-white rounded-lg overflow-hidden"
+                                className="size-full grid grid-cols-12 gap-1 bg-white rounded-lg overflow-hidden dark:bg-dark-600"
                                 delay={(index % 4) / 20}
                             >
                                 <>
@@ -164,7 +164,7 @@ const Cart = () => {
                     )}
                 </div>
 
-                <div className="lg:col-span-3 sticky top-20 bg-white h-fit w-full p-5 rounded-lg space-y-5">
+                <div className="lg:col-span-3 sticky top-20 bg-white h-fit w-full p-5 rounded-lg space-y-5 dark:bg-dark-600">
                     <h1 className="text-2xl font-bold text-center">Tổng chi phí</h1>
                     <div className="flex flex-wrap justify-between gap-1">
                         <span className="font-semibold">Tổng tiền</span>

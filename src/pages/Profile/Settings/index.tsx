@@ -156,7 +156,9 @@ const Settings = () => {
                                         />
                                     )}
                                 />
-                                <p className="text-red-600 text-sm py-1 h-6">{errors.username?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.username?.message}
+                                </p>
                             </div>
                             <div>
                                 <Controller
@@ -173,7 +175,9 @@ const Settings = () => {
                                         />
                                     )}
                                 />
-                                <p className="text-red-600 text-sm py-1 h-6">{errors.name?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.name?.message}
+                                </p>
                             </div>
                             <div>
                                 <Controller
@@ -190,7 +194,9 @@ const Settings = () => {
                                         />
                                     )}
                                 />
-                                <p className="text-red-600 text-sm py-1 h-6">{errors.email?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.email?.message}
+                                </p>
                             </div>
                             <div>
                                 <Controller
@@ -213,7 +219,9 @@ const Settings = () => {
                                         </FormControl>
                                     )}
                                 />
-                                <p className="text-red-600 text-sm py-1 h-6">{errors.gender?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.gender?.message}
+                                </p>
                             </div>
                             <div>
                                 <Controller
@@ -230,7 +238,9 @@ const Settings = () => {
                                         />
                                     )}
                                 />
-                                <p className="text-red-600 text-sm py-1 h-6">{errors.phoneNumber?.message}</p>
+                                <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                    {errors.phoneNumber?.message}
+                                </p>
                             </div>
 
                             <Button type="submit" variant="fill" fullWidth loading={isLoadingAPIUpdate}>

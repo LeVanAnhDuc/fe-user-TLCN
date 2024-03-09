@@ -115,7 +115,9 @@ const GetOTPRegister = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.email?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.email?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.2}>
@@ -132,7 +134,9 @@ const GetOTPRegister = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.otp?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.otp?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <div className="grid grid-cols-2 gap-2">

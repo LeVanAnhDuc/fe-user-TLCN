@@ -5,12 +5,13 @@ const Routes = {
     getOTPRegister: '/xac-thuc-OTP',
     getOTPLogIn: '/xac-thuc-OTP-email',
     forgotPass: '/quen-mat-khau',
-
     shop: '/ds-san-pham',
     cart: '/gio-hang',
+
+    checkOut: '/thanh-toan',
+
     detailProduct: '/chi-tiet-san-pham',
     detailProductID: '/chi-tiet-san-pham/:id',
-    checkOut: '/thanh-toan',
 
     profileHomeProfile: '/trang-cua-ban',
     profileFavouriteProfile: '/danh-sach-uu-thich',

@@ -73,7 +73,9 @@ const ManagerPass = () => {
                                 />
                             )}
                         />
-                        <p className="text-red-600 text-sm py-1 h-6">{errors.currentPassWord?.message}</p>
+                        <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                            {errors.currentPassWord?.message}
+                        </p>
                     </div>
                     <div>
                         <Controller
@@ -88,7 +90,7 @@ const ManagerPass = () => {
                                 />
                             )}
                         />
-                        <p className="text-red-600 text-sm py-1 h-6">{errors.newPassWord?.message}</p>
+                        <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">{errors.newPassWord?.message}</p>
                     </div>
                     <div>
                         <Controller
@@ -103,7 +105,9 @@ const ManagerPass = () => {
                                 />
                             )}
                         />
-                        <p className="text-red-600 text-sm py-1 h-6">{errors.confirmPassWord?.message}</p>
+                        <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                            {errors.confirmPassWord?.message}
+                        </p>
                     </div>
                     <Button type="submit" variant="fill" fullWidth loading={isLoadingAPI}>
                         Lưu mật khẩu mới
