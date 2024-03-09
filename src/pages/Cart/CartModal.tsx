@@ -23,7 +23,7 @@ import {
     selectToTalProductCart,
     setItemsOfCart,
     setToTalPriceCart,
-} from './totalProductInCartSlice';
+} from './cartSlice';
 import AnimationTran from '../../components/AnimationTran';
 import { convertNumberToVND } from '../../utils/convertData';
 import ChangeQuantityProduct from './ChangeQuantityProduct';

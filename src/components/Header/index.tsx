@@ -15,7 +15,7 @@ import { useState, useEffect, useCallback } from 'react';
 import config from '../../config';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { selectAvatarUrl, selectIsLogin, selectUserNameUser, setIsLogin } from '../../pages/LogIn/loginSlice';
-import { selectToTalProductCart } from '../../pages/Cart/totalProductInCartSlice';
+import { selectToTalProductCart } from '../../pages/Cart/cartSlice';
 import { selectToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
 import Search from '../Search';
 import Button from '../Button';
@@ -81,7 +81,7 @@ function Header() {
     });
     return (
         <>
-            <header className="sticky top-0 flex flex-col justify-center items-center w-full bg-white shadow z-50 ">
+            <header className="sticky top-0 flex flex-col justify-center items-center w-full bg-white shadow z-50 dark:bg-dark-600">
                 <div className="sm:w-10/12 w-11/12 flex justify-between items-center gap-3 py-3">
                     <div className="xl:hidden hover:cursor-pointer " onClick={toggleMenuResponsive(true)}>
                         <FilterListIcon fontSize="large" />
@@ -92,8 +92,10 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                    } uppercase cursor-pointer transition`}
+                                        isActive
+                                            ? 'text-primary-500 dark:text-primary-400'
+                                            : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
+                                    } uppercase cursor-pointer transition `}
                                 >
                                     Trang chủ
                                 </div>
@@ -103,8 +105,10 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                    } uppercase cursor-pointer transition`}
+                                        isActive
+                                            ? 'text-primary-500 dark:text-primary-400'
+                                            : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
+                                    } uppercase cursor-pointer transition `}
                                 >
                                     Cửa hàng
                                 </div>
@@ -114,8 +118,10 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                    } uppercase cursor-pointer transition`}
+                                        isActive
+                                            ? 'text-primary-500 dark:text-primary-400'
+                                            : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
+                                    } uppercase cursor-pointer transition `}
                                 >
                                     Chính sách
                                 </div>
@@ -125,8 +131,10 @@ function Header() {
                             {({ isActive }) => (
                                 <div
                                     className={`${
-                                        isActive ? 'text-primary-500' : 'hover:text-primary-700 hover:scale-[1.03]'
-                                    } uppercase cursor-pointer transition`}
+                                        isActive
+                                            ? 'text-primary-500 dark:text-primary-400'
+                                            : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
+                                    } uppercase cursor-pointer transition `}
                                 >
                                     Bảng size
                                 </div>
@@ -173,11 +181,11 @@ function Header() {
                                     </IconButton>
                                 </Link>
                                 <div
-                                    className="flex items-center px-2 py-2 rounded-lg cursor-pointer hover:bg-gray-100"
+                                    className="flex items-center px-2 py-2 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-400"
                                     onClick={handlePopoverToggle}
                                 >
                                     <Avatar src={avatarUrl || undefined} alt="Avatar" sx={{ width: 32, height: 32 }} />
-                                    <span className="text-base ml-1 font-medium normal-case text-black">
+                                    <span className="text-base ml-1 font-medium normal-case text-black dark:text-white">
                                         {userName}
                                     </span>
                                 </div>
@@ -187,7 +195,7 @@ function Header() {
                                     onMouseLeave={handlePopoverClose}
                                     sx={{ zIndex: 60 }}
                                 >
-                                    <div className="flex flex-col text-sm text-gray-500 font-medium tracking-wider bg-white rounded">
+                                    <div className="flex flex-col text-sm text-gray-500 font-medium tracking-wider bg-white rounded dark:bg-dark-500 dark:text-white">
                                         <Link
                                             to={config.Routes.profileHomeProfile}
                                             className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
@@ -210,17 +218,17 @@ function Header() {
                                 </Popper>
                             </>
                         ) : (
-                            <div className="text-gray-500 text-sm font-semibold flex gap-2">
+                            <div className="text-gray-500 text-sm font-semibold flex gap-2 dark:text-dark-50">
                                 <Link
                                     to={config.Routes.register}
-                                    className="uppercase cursor-pointer hover:text-primary-900"
+                                    className="uppercase cursor-pointer hover:text-primary-900 dark:hover:text-primary-300"
                                 >
                                     Đăng Kí
                                 </Link>
                                 <div>|</div>
                                 <Link
                                     to={config.Routes.logIn}
-                                    className="uppercase cursor-pointer hover:text-primary-900"
+                                    className="uppercase cursor-pointer hover:text-primary-900 dark:hover:text-primary-300"
                                 >
                                     Đăng Nhập
                                 </Link>
@@ -246,28 +254,28 @@ function Header() {
                     <div className="flex flex-col gap-3">
                         <NavLink to={config.Routes.home}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                <Button variant={isActive ? 'fill' : 'text'} fullWidth>
                                     Trang chủ
                                 </Button>
                             )}
                         </NavLink>
                         <NavLink to={config.Routes.shop}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                <Button variant={isActive ? 'fill' : 'text'} fullWidth>
                                     Cửa hàng
                                 </Button>
                             )}
                         </NavLink>
                         <NavLink to={config.Routes.policy}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                <Button variant={isActive ? 'fill' : 'text'} fullWidth>
                                     Chính sách
                                 </Button>
                             )}
                         </NavLink>
                         <NavLink to={config.Routes.tableSize}>
                             {({ isActive }) => (
-                                <Button className={`${isActive ? 'bg-primary-500' : ''}`} fullWidth>
+                                <Button variant={isActive ? 'fill' : 'text'} fullWidth>
                                     Bảng size
                                 </Button>
                             )}

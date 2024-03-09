@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SideBarProfile from '../../components/SideBarProfile';
 import ScrollButton from '../../components/ScrollButton/ScrollButton';
+import SpeedDialSettingUI from '../../components/SpeedDialSettingUI';
 
 interface ProfileUserLayoutProps {
     children: ReactNode;
@@ -23,6 +24,7 @@ function ProfileUserLayout({ children }: ProfileUserLayoutProps) {
                 </div>
             </div>
             <Footer />
+            <SpeedDialSettingUI />
         </div>
     );
 }

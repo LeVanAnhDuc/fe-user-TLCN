@@ -12,7 +12,7 @@ import { useAppDispatch } from '../../redux/hook';
 import { setInfoUser, setIsLogin } from './loginSlice';
 import { getCartByToken } from '../../apis/cartApi';
 import { getCountItemOfWishList } from '../../apis/followProductApi';
-import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/totalProductInCartSlice';
+import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/cartSlice';
 import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';
 import config from '../../config';
 import { loginApi } from '../../apis/authApi';
@@ -123,7 +123,7 @@ const LogIn = () => {
                         <AnimationTran tranX={100} className="text-2xl font-bold text-gray-900">
                             Đăng nhập
                         </AnimationTran>
-                        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={100} delay={0.1}>
                                 <>
                                     <Controller
@@ -139,7 +139,7 @@ const LogIn = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.emailOrUserName?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.emailOrUserName?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.2}>
@@ -155,7 +155,7 @@ const LogIn = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.passWord?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.passWord?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.3} className="w-full flex justify-end">

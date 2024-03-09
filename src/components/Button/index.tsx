@@ -37,7 +37,7 @@ const Button = (props: Iprops) => {
         ${size === 'medium' ? 'h-12 text-base' : ''} 
         ${size === 'large' ? 'h-16 text-lg px-6' : ''} 
         ${variant === 'fill' ? 'bg-primary-400 text-white' : ''} 
-        ${variant === 'text' ? 'bg-transparent hover:text-primary-800' : ''} 
+        ${variant === 'text' ? 'bg-transparent hover:text-primary-800 dark:hover:text-primary-300' : ''} 
         ${variant === 'outline' ? 'bg-transparent text-primary-700 border-primary-700 border-2' : ''} 
         ${variant === 'outlineBlur' ? 'bg-white/80 text-primary-700 border-primary-700 border-2' : ''} 
         ${className} `;

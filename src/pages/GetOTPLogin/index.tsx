@@ -100,7 +100,7 @@ const GetOTPRegister = () => {
                         <AnimationTran tranX={-100} className="text-2xl font-bold text-gray-900">
                             Nhập mã xác thực
                         </AnimationTran>
-                        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={-100} delay={0.1}>
                                 <>
                                     <Controller
@@ -115,7 +115,7 @@ const GetOTPRegister = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.email?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.email?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.2}>
@@ -132,7 +132,7 @@ const GetOTPRegister = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.otp?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.otp?.message}</p>
                                 </>
                             </AnimationTran>
                             <div className="grid grid-cols-2 gap-2">

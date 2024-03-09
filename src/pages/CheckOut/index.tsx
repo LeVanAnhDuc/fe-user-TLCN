@@ -14,7 +14,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { setItemsOfCart, setToTalProductCart } from '../Cart/totalProductInCartSlice';
+import { setItemsOfCart, setToTalProductCart } from '../Cart/cartSlice';
 import config from '../../config';
 import { IOrderCheckOut } from '../../interface/order';
 import IAddress from '../../interface/address';

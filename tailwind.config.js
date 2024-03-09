@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} \*/
 // eslint-disable-next-line no-undef
 module.exports = {
+    darkMode: 'class',
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     theme: {
         screens: {
@@ -24,6 +25,16 @@ module.exports = {
                     800: '#00838f',
                     900: '#006064',
                 },
+                dark: {
+                    50: '#E5E7EB',
+                    100: '#D1D5DB',
+                    200: '#9CA3AF',
+                    300: '#6B7280',
+                    400: '#4B5563',
+                    500: '#374151',
+                    600: '#1F2A37',
+                    700: '#111928',
+                },
             },
             backgroundImage: {
                 'login-banner': "url('./src/assets/img/login/banner.png')",
@@ -31,7 +42,6 @@ module.exports = {
                 'forgotPassword-banner': "url('./src/assets/img/forgotPassword/banner.png')",
                 'home-banner': "url('./src/assets/img/home/banner.png')",
             },
-            darkSelector: '.dark-mode',
         },
     },
     plugins: [],

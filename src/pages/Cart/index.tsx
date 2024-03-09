@@ -20,7 +20,7 @@ import {
     selectToTalProductCart,
     setItemsOfCart,
     setToTalPriceCart,
-} from './totalProductInCartSlice';
+} from './cartSlice';
 import MouseOverPopover from '../../components/MouseOverPopover';
 import { convertNumberToVND } from '../../utils/convertData';
 import Button from '../../components/Button';

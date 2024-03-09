@@ -31,7 +31,7 @@ if (savePrice) {
 }
 
 export const totalProductInCartSlice = createSlice({
-    name: 'totalProductInCart',
+    name: 'cart',
     initialState,
     reducers: {
         setToTalProductCart: (state, action: PayloadAction<number>) => {
@@ -56,8 +56,8 @@ export const totalProductInCartSlice = createSlice({
 export const { setToTalProductCart, deleteNumberProductCart, setItemsOfCart, setToTalPriceCart } =
     totalProductInCartSlice.actions;
 
-export const selectToTalProductCart = (state: RootState) => state.totalProductInCart.totalItem;
-export const selectToTalPriceCart = (state: RootState) => state.totalProductInCart.totalPrice;
-export const selectProductsCart = (state: RootState) => state.totalProductInCart.listItemInCart;
+export const selectToTalProductCart = (state: RootState) => state.cart.totalItem;
+export const selectToTalPriceCart = (state: RootState) => state.cart.totalPrice;
+export const selectProductsCart = (state: RootState) => state.cart.listItemInCart;
 
 export default totalProductInCartSlice.reducer;

@@ -9,7 +9,7 @@ const Logo = (props: Iprops) => {
     return (
         <Link
             to={config.Routes.home}
-            className={`text-black tracking-[0.5rem] text-5xl font-bold font-mono`}
+            className={`text-black tracking-[0.5rem] text-5xl font-bold font-mono dark:text-white`}
             {...passProps}
         >
             <span className={`${className}`}>DUCK</span>

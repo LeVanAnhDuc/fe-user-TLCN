@@ -13,7 +13,7 @@ import { getSKUPrice, getSingleProduct } from '../../apis/productApi';
 import IProduct from '../../interface/product';
 import config from '../../config';
 import { addToCart, getCartByToken } from '../../apis/cartApi';
-import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/totalProductInCartSlice';
+import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/cartSlice';
 import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
 import ReviewProductCurrent from './ReviewProduct';
 import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';

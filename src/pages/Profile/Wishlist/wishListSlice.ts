@@ -16,7 +16,7 @@ if (saved) {
 }
 
 export const wishListSlice = createSlice({
-    name: 'totalWishList',
+    name: 'wishList',
     initialState,
     reducers: {
         setToTalWishList: (state, action: PayloadAction<number>) => {
@@ -28,6 +28,6 @@ export const wishListSlice = createSlice({
 
 export const { setToTalWishList } = wishListSlice.actions;
 
-export const selectToTalWishList = (state: RootState) => state.wishListSlice.total;
+export const selectToTalWishList = (state: RootState) => state.wishList.total;
 
 export default wishListSlice.reducer;

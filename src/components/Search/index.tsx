@@ -35,7 +35,7 @@ const Search = (props: Iprops) => {
         <div className="relative h-fit w-full text-gray-600 flex items-center">
             <input
                 type="search"
-                className="border-y-2 border-l-2 border-gray-300 bg-white h-10 w-full px-3 py-2 rounded-l-xl text-sm focus:border-primary-900 "
+                className="border-y-2 border-l-2 border-gray-300 bg-white h-10 w-full px-3 py-2 rounded-l-xl text-sm focus:border-primary-900 dark:focus:border-primary-300"
                 placeholder="Tìm kiếm sản phẩm..."
                 required
                 value={search}
@@ -43,10 +43,10 @@ const Search = (props: Iprops) => {
             />
             <button
                 type="submit"
-                className="h-10 w-14 bg-primary-600 flex justify-center items-center rounded-r-xl"
+                className="h-10 w-14 bg-primary-600 flex justify-center items-center rounded-r-xl dark:bg-primary-300"
                 onClick={handleSubmitSearch}
             >
-                <IconSearch />
+                <IconSearch className="text-white dark:text-dark-600" />
             </button>
         </div>
     );

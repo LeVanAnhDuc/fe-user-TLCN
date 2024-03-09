@@ -95,7 +95,7 @@ const Register = () => {
                             Đăng kí
                         </AnimationTran>
 
-                        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={-100} delay={0.1}>
                                 <>
                                     <Controller
@@ -111,7 +111,7 @@ const Register = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.email?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.email?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.2}>
@@ -129,7 +129,7 @@ const Register = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.userName?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.userName?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.3}>
@@ -145,7 +145,7 @@ const Register = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm mt-1.5">{errors.passWord?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6">{errors.passWord?.message}</p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.4}>

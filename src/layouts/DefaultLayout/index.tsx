@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import SpeedDialSettingUI from '../../components/SpeedDialSettingUI';
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -13,6 +14,7 @@ function DefaultLayout({ children }: DefaultLayoutProps) {
             <Header />
             <div className="size-full">{children}</div>
             <Footer />
+            <SpeedDialSettingUI />
         </div>
     );
 }
