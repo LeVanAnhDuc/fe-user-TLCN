@@ -76,8 +76,8 @@ const Register = () => {
     return (
         <>
             <SnackBarLoading open={isLoadingRegister} content="Tiến hành đăng kí. Đợi giây lát" />
-            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
-                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
+            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center dark:from-primary-700 dark:via-primary-900 dark:to-primary-800">
+                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow dark:bg-dark-600">
                     <section className="w-full h-full flex-col lg:flex hidden">
                         <AnimationScale className="m-auto">
                             <Logo />
@@ -90,8 +90,8 @@ const Register = () => {
                         </AnimationTran>
                         <div className="bg-register-banner bg-contain bg-no-repeat bg-center w-full h-full"></div>
                     </section>
-                    <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">
-                        <AnimationTran tranX={-100} className="text-2xl font-bold text-gray-900">
+                    <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
+                        <AnimationTran tranX={-100} className="text-2xl font-bold ">
                             Đăng kí
                         </AnimationTran>
 
@@ -111,7 +111,9 @@ const Register = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.email?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.email?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.2}>
@@ -129,7 +131,9 @@ const Register = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.userName?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.userName?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.3}>
@@ -145,7 +149,9 @@ const Register = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.passWord?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.passWord?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={-100} delay={0.4}>
@@ -155,7 +161,7 @@ const Register = () => {
                             </AnimationTran>
                         </form>
 
-                        <AnimationTran tranY={100} delay={0.5} className="text-center text-sm text-gray-500">
+                        <AnimationTran tranY={100} delay={0.5} className="text-center text-sm ">
                             <div className="flex place-content-center place-items-center">
                                 Bạn đã có tài khoản?
                                 <Button variant="text" size="small" className="!px-0">

@@ -140,8 +140,8 @@ const GetOTPRegister = () => {
     return (
         <>
             <SnackBarLoading open={isLoadingSendOTPAgain || isLoadingSubmit || isLoadingLogin} content={titleDialog} />
-            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
-                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
+            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center dark:from-primary-700 dark:via-primary-900 dark:to-primary-800">
+                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow dark:bg-dark-600">
                     <section className="min-h-[31rem] w-full flex-col items-center lg:flex hidden">
                         <Logo />
                         <AnimationTran tranY={-100} className="m-auto">
@@ -150,8 +150,8 @@ const GetOTPRegister = () => {
                         <div className="bg-register-banner bg-contain bg-no-repeat bg-center w-full h-full"></div>
                     </section>
 
-                    <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">
-                        <AnimationTran tranX={-100} className="text-2xl font-bold text-gray-900">
+                    <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
+                        <AnimationTran tranX={-100} className="text-2xl font-bold ">
                             Nhập mã xác thực
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>

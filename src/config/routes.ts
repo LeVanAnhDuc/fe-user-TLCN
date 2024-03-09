@@ -1,12 +1,11 @@
 const Routes = {
     home: '/',
     logIn: '/dang-nhap',
+    register: '/dang-ki',
+    getOTPRegister: '/xac-thuc-OTP',
     getOTPLogIn: '/xac-thuc-OTP-email',
 
     forgotPass: '/quen-mat-khau',
-
-    register: '/dang-ki',
-    getOTPRegister: '/xac-thuc-OTP',
     shop: '/ds-san-pham',
     cart: '/gio-hang',
     detailProduct: '/chi-tiet-san-pham',

@@ -117,10 +117,10 @@ const LogIn = () => {
     return (
         <>
             <SnackBarLoading open={isLoadingLogin} content="Xác nhận đăng nhập" />
-            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
-                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
-                    <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">
-                        <AnimationTran tranX={100} className="text-2xl font-bold text-gray-900">
+            <div className="bg-gradient-to-r from-primary-400 via-primary-600 to-primary-500 flex place-content-center dark:from-primary-700 dark:via-primary-900 dark:to-primary-800">
+                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow dark:bg-dark-600">
+                    <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
+                        <AnimationTran tranX={100} className="text-2xl font-bold">
                             Đăng nhập
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
@@ -139,7 +139,9 @@ const LogIn = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.emailOrUserName?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.emailOrUserName?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.2}>
@@ -155,15 +157,14 @@ const LogIn = () => {
                                             />
                                         )}
                                     />
-                                    <p className="text-red-600 text-sm py-1 h-6">{errors.passWord?.message}</p>
+                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                        {errors.passWord?.message}
+                                    </p>
                                 </>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.3} className="w-full flex justify-end">
                                 <Button variant="text" size="small">
-                                    <Link
-                                        to={config.Routes.forgotPass}
-                                        className="text-sm font-semibold text-gray-600 hover:text-black transition"
-                                    >
+                                    <Link to={config.Routes.forgotPass} className="text-sm font-semibold">
                                         Quên mật khẩu
                                     </Link>
                                 </Button>
@@ -174,7 +175,7 @@ const LogIn = () => {
                                 </Button>
                             </AnimationTran>
                         </form>
-                        <AnimationTran tranY={100} delay={0.5} className="text-center text-sm text-gray-500">
+                        <AnimationTran tranY={100} delay={0.5} className="text-center text-sm ">
                             <div className="flex place-content-center place-items-center">
                                 Chưa có tài khoản?
                                 <Button variant="text" size="small" className="!px-0">

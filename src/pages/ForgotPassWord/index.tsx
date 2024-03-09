@@ -82,16 +82,20 @@ const ForgotPassWord = () => {
     };
 
     const handleSendOTPAgain = async () => {
-        setIsLoadingGetOTP(true);
-        setTitleDialog('Tiến hành gửi OTP');
-        const response = await sendOTPRegister(getValues().email);
-        setIsLoadingGetOTP(false);
+        if (getValues().email) {
+            setIsLoadingGetOTP(true);
+            setTitleDialog('Tiến hành gửi OTP');
+            const response = await sendOTPRegister(getValues().email);
+            setIsLoadingGetOTP(false);
 
-        if (response.status === 200) {
-            setInputOTP(true);
-            toast.success('Đã gửi OTP');
+            if (response.status === 200) {
+                setInputOTP(true);
+                toast.success('Đã gửi OTP');
+            } else {
+                toast.error(response.data.message || response.data);
+            }
         } else {
-            toast.error(response.data.message || response.data);
+            toast.error('Email đang rỗng');
         }
     };
 
@@ -115,10 +119,10 @@ const ForgotPassWord = () => {
     return (
         <>
             <SnackBarLoading open={isLoadingSubmit || isLoadingGetOTP} content={titleDialog} />
-            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center">
-                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow">
-                    <section className="w-full flex flex-col justify-start gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg">
-                        <AnimationTran tranX={100} className="text-2xl font-bold text-gray-900">
+            <div className="bg-gradient-to-r from-primary-200 via-primary-700 to-primary-500 flex place-content-center dark:from-primary-700 dark:via-primary-900 dark:to-primary-800">
+                <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow dark:bg-dark-600">
+                    <section className="w-full flex flex-col justify-start gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
+                        <AnimationTran tranX={100} className="text-2xl font-bold">
                             Quên mật khẩu
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>

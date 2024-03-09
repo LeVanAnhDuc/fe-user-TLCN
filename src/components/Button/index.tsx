@@ -36,10 +36,18 @@ const Button = (props: Iprops) => {
         ${size === 'small' ? 'h-8 text-sm px-2' : ''} 
         ${size === 'medium' ? 'h-12 text-base' : ''} 
         ${size === 'large' ? 'h-16 text-lg px-6' : ''} 
-        ${variant === 'fill' ? 'bg-primary-400 text-white' : ''} 
-        ${variant === 'text' ? 'bg-transparent hover:text-primary-800 dark:hover:text-primary-300' : ''} 
-        ${variant === 'outline' ? 'bg-transparent text-primary-700 border-primary-700 border-2' : ''} 
-        ${variant === 'outlineBlur' ? 'bg-white/80 text-primary-700 border-primary-700 border-2' : ''} 
+        ${variant === 'fill' ? 'bg-primary-400 text-white dark:bg-primary-700' : ''} 
+        ${variant === 'text' ? 'bg-transparent hover:text-primary-800 dark:hover:text-primary-400' : ''} 
+        ${
+            variant === 'outline'
+                ? 'bg-transparent text-primary-400 border-primary-400 border-2 dark:text-primary-400 dark:border-primary-400'
+                : ''
+        } 
+        ${
+            variant === 'outlineBlur'
+                ? 'bg-white/80 text-primary-400 border-primary-400 border-2 dark:text-primary-400 dark:border-primary-400'
+                : ''
+        } 
         ${className} `;
 
     return (
