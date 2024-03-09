@@ -67,9 +67,9 @@ const ReviewProduct = (props: Iprops) => {
     }, [idProduct, page, starActive]);
 
     return (
-        <div ref={targetComponentRef} className="rounded-lg bg-white ">
+        <div ref={targetComponentRef} className="rounded-lg bg-white dark:bg-dark-600">
             <div className="text-lg font-medium p-5 ">ĐÁNH GIÁ SẢN PHẨM</div>
-            <div className="bg-primary-100 py-5 grid grid-cols-8">
+            <div className="bg-primary-50 py-5 grid grid-cols-8 dark:bg-primary-900">
                 <div className="col-span-3 lg:col-span-2 text-center space-y-1">
                     <div className="text-red-500">
                         <span className="text-xl font-bold">{rating}&nbsp;</span>
@@ -80,42 +80,42 @@ const ReviewProduct = (props: Iprops) => {
 
                 <div className="col-span-5 lg:col-span-6 flex flex-wrap items-center gap-3">
                     <Button
-                        className="w-28"
+                        className="w-32"
                         variant={starActive === null ? 'fill' : 'outline'}
                         onClick={() => handleChangeStar(null)}
                     >
                         Tất cả ({numberListStar?.all})
                     </Button>
                     <Button
-                        className="w-28"
+                        className="w-32"
                         variant={starActive === 5 ? 'fill' : 'outline'}
                         onClick={() => handleChangeStar(5)}
                     >
                         5 sao ({numberListStar?.fiveStar})
                     </Button>
                     <Button
-                        className="w-28"
+                        className="w-32"
                         variant={starActive === 4 ? 'fill' : 'outline'}
                         onClick={() => handleChangeStar(4)}
                     >
                         4 sao ({numberListStar?.fourStar})
                     </Button>
                     <Button
-                        className="w-28"
+                        className="w-32"
                         variant={starActive === 3 ? 'fill' : 'outline'}
                         onClick={() => handleChangeStar(3)}
                     >
                         3 sao ({numberListStar?.threeStar})
                     </Button>
                     <Button
-                        className="w-28"
+                        className="w-32"
                         variant={starActive === 2 ? 'fill' : 'outline'}
                         onClick={() => handleChangeStar(2)}
                     >
                         2 sao ({numberListStar?.twoStar})
                     </Button>
                     <Button
-                        className="w-28"
+                        className="w-32"
                         variant={starActive === 1 ? 'fill' : 'outline'}
                         onClick={() => handleChangeStar(1)}
                     >

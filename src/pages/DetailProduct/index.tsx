@@ -170,7 +170,7 @@ const DetailProduct = () => {
     }, [id]);
 
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 dark:bg-dark-400">
             <div className="w-11/12 sm:w-10/12 m-auto py-10 space-y-10">
                 <div className="grid lg:grid-cols-12 gap-3">
                     <div className="hidden col-span-1 lg:block h-[30rem] space-y-2.5 overflow-y-auto hide-scrollbar ">
@@ -198,7 +198,7 @@ const DetailProduct = () => {
                                     onClick={handlePreviousClick}
                                 >
                                     <>
-                                        <div className="absolute bg-white size-full rounded-full blur-xl p-7"></div>
+                                        <div className="absolute bg-white size-full rounded-full blur-xl p-7 dark:bg-dark-300"></div>
                                         <NavigateBefore className="z-10" />
                                     </>
                                 </Button>
@@ -208,7 +208,7 @@ const DetailProduct = () => {
                                     onClick={handleNextClick}
                                 >
                                     <>
-                                        <div className="absolute bg-white size-full rounded-full blur-xl p-7"></div>
+                                        <div className="absolute bg-white size-full rounded-full blur-xl p-7 dark:bg-dark-300"></div>
                                         <NavigateNext className="z-10" />
                                     </>
                                 </Button>
@@ -292,7 +292,9 @@ const DetailProduct = () => {
                                     <ChangeQuantityProduct quantity={quantity} setQuantity={setQuantity} />
                                     <div className="whitespace-nowrap space-x-2">
                                         <span className="font-medium">{product?.quantityAvailable}</span>
-                                        <span className="text-gray-500 ">sản phẩm có sẵn</span>
+                                        <span className="text-gray-500 dark:text-gray-300 text-sm">
+                                            sản phẩm có sẵn
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -312,28 +314,20 @@ const DetailProduct = () => {
                                     className="!rounded-full !p-3 border-2"
                                     onClick={handleToggleFavorite}
                                 >
-                                    {favourite ? (
-                                        <Favorite className="text-primary-800" />
-                                    ) : (
-                                        <FavoriteBorder className="text-primary-800 " />
-                                    )}
+                                    {favourite ? <Favorite /> : <FavoriteBorder />}
                                 </Button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="bg-white rounded-lg p-5 space-y-5">
+                <div className="bg-white rounded-lg p-5 space-y-5 shadow dark:bg-dark-600">
                     <div className="text-lg font-medium">MÔ TẢ SẢN PHẨM</div>
                     <div>{product?.description}</div>
                 </div>
 
-                <div className="mt-5">
-                    <ReviewProductCurrent idProduct={id ? +id : 0} rating={ratingProduct} />
-                </div>
+                <ReviewProductCurrent idProduct={id ? +id : 0} rating={ratingProduct} />
 
-                <div className="mt-5">
-                    <RelatedProduct categoryName={categoryName} />
-                </div>
+                <RelatedProduct categoryName={categoryName} />
             </div>
         </div>
     );

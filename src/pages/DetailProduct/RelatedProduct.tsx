@@ -28,7 +28,7 @@ const RelatedProduct = (props: Iprops) => {
                         pageSize: itemsPerPage,
                         key: '',
                         cate: categoryName,
-                        sort: 'string',
+                        sort: '',
                     };
                     setIsLoading(true);
                     const response = await getAllProductSearchWithinPagination(searchFilter);
@@ -47,8 +47,8 @@ const RelatedProduct = (props: Iprops) => {
     }, [categoryName]);
 
     return (
-        <>
-            <div className="flex flex-wrap justify-between items-center bg-white p-5 rounded-t-lg ">
+        <section className="space-y-3">
+            <div className="flex flex-wrap justify-between items-center bg-white p-5 rounded-t-lg dark:bg-dark-600">
                 <div className="text-lg font-medium uppercase">SẢN PHẨM LIÊN QUAN</div>
                 <Link
                     to={config.Routes.shop}
@@ -57,7 +57,7 @@ const RelatedProduct = (props: Iprops) => {
                     }}
                 >
                     <Button variant="text" className="h-fit">
-                        {`Xem tất cả`}{' '}
+                        {`Xem tất cả`}
                     </Button>
                 </Link>
             </div>
@@ -81,7 +81,7 @@ const RelatedProduct = (props: Iprops) => {
                     Không có sản phẩm nào liên quan
                 </div>
             )}
-        </>
+        </section>
     );
 };
 

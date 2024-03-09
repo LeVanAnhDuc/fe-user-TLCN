@@ -7,13 +7,12 @@ const Routes = {
     forgotPass: '/quen-mat-khau',
     shop: '/ds-san-pham',
     cart: '/gio-hang',
-
     checkOut: '/thanh-toan',
-
     detailProduct: '/chi-tiet-san-pham',
     detailProductID: '/chi-tiet-san-pham/:id',
 
     profileHomeProfile: '/trang-cua-ban',
+
     profileFavouriteProfile: '/danh-sach-uu-thich',
     profileAddressProfile: '/danh-sach-dia-chi',
     profileHistoryPaymentProfile: '/lich-su-mua-hang',
