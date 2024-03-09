@@ -53,7 +53,11 @@ const SpeedDialSettingUI = () => {
     return (
         <>
             <div className="fixed bottom-5 right-5 animate-spin-slow z-40">
-                <Fab color="primary" onClick={toggleDrawer}>
+                <Fab
+                    color="primary"
+                    onClick={toggleDrawer}
+                    className="hover:!bg-primary-700 !bg-primary-500 animate-spin-slow"
+                >
                     <Settings />
                 </Fab>
             </div>

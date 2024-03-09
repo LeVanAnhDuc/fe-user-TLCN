@@ -4,8 +4,8 @@ const Routes = {
     register: '/dang-ki',
     getOTPRegister: '/xac-thuc-OTP',
     getOTPLogIn: '/xac-thuc-OTP-email',
-
     forgotPass: '/quen-mat-khau',
+
     shop: '/ds-san-pham',
     cart: '/gio-hang',
     detailProduct: '/chi-tiet-san-pham',

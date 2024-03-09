@@ -45,7 +45,7 @@ const Button = (props: Iprops) => {
         } 
         ${
             variant === 'outlineBlur'
-                ? 'bg-white/80 text-primary-400 border-primary-400 border-2 dark:text-primary-400 dark:border-primary-400'
+                ? 'bg-white/80 text-primary-400 border-primary-400 border-2 dark:bg-dark-400/80 dark:text-primary-400 dark:border-primary-400'
                 : ''
         } 
         ${className} `;

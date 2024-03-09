@@ -13,7 +13,6 @@ import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import Close from '@mui/icons-material/Close';
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 
 import ICategory from '../../interface/category';
@@ -26,6 +25,7 @@ import ScrollButton from '../../components/ScrollButton/ScrollButton';
 import Button from '../../components/Button';
 import * as constants from '../../constants';
 import Skeleton from '../../components/Skeleton';
+import Error404 from '../Error404';
 
 function Listproducts() {
     const location = useLocation();
@@ -36,6 +36,7 @@ function Listproducts() {
     const [products, setProducts] = useState<Array<IProduct>>([]);
     const [isLoadingAPIProducts, setIsLoadingAPIProduct] = useState<boolean>(false);
     const [isLoadingAPICategories, setIsLoadingAPICategories] = useState<boolean>(false);
+    const [errorAPI, setErrorAPI] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [totalProducts, setTotalProducts] = useState<number>(0);
@@ -75,10 +76,10 @@ function Listproducts() {
                 setTotalPages(totalPages);
                 setTotalProducts(totalElements);
             } else {
-                toast.error('Không phản hồi');
+                setErrorAPI(true);
             }
         } catch (error) {
-            toast.error('Không phản hồi');
+            setErrorAPI(true);
         }
     };
 
@@ -124,10 +125,10 @@ function Listproducts() {
                 if (response.status === 200 && Array.isArray(response.data.content)) {
                     setCategories(response.data.content);
                 } else {
-                    toast.error('Không phản hồi');
+                    setErrorAPI(true);
                 }
             } catch (error) {
-                toast.error('Không phản hồi');
+                setErrorAPI(true);
             }
         };
 
@@ -138,17 +139,21 @@ function Listproducts() {
         getAllProducts(page, filterSortBy, cateFilter);
     }, [page, searchItem, filterSortBy, cateFilter]);
 
+    if (errorAPI) {
+        return <Error404 />;
+    }
+
     return (
-        <section className="bg-gray-100">
+        <section className="bg-gray-100 dark:bg-dark-400">
             <div className="sm:w-10/12 w-11/12 py-6 mx-auto relative">
                 <ScrollButton />
 
                 <div className="grid xl:grid-cols-12 gap-10 relative">
                     <div className="col-span-3 w-full h-[87vh] hidden xl:block sticky top-20 rounded z-40">
-                        <div className=" w-full h-full pr-0.5 overflow-y-auto">
-                            <FormControl fullWidth variant="standard">
-                                <InputLabel className="!font-bold !text-lg">Sắp xếp theo</InputLabel>
-                                <Select value={filterSortBy} onChange={handleGetFilterSortBy}>
+                        <div className=" w-full h-full pr-0.5 overflow-y-auto space-y-3">
+                            <FormControl className="!rounded-lg" fullWidth variant="filled">
+                                <InputLabel className="!font-bold !text-lg !rounded-lg">Sắp xếp theo</InputLabel>
+                                <Select className="!rounded-lg" value={filterSortBy} onChange={handleGetFilterSortBy}>
                                     <MenuItem value={config.SearchFilter.random}>Không sắp xếp</MenuItem>
                                     <MenuItem value={config.SearchFilter.favoriteAsc}>
                                         Lượt thích: Thấp đến Cao
@@ -169,11 +174,14 @@ function Listproducts() {
                                 </Select>
                             </FormControl>
 
-                            <Accordion defaultExpanded>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Accordion defaultExpanded className="!bg-transparent">
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    className="!bg-white dark:!bg-dark-300 !rounded-t-lg"
+                                >
                                     <div className="font-bold ">Danh mục</div>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails className="!bg-white dark:!bg-dark-300 !rounded-b-lg">
                                     <div className="flex flex-col gap-2">
                                         {isLoadingAPICategories
                                             ? Array(10)

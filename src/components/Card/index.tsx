@@ -68,7 +68,7 @@ const Card = (props: Iprops) => {
 
     return (
         <AnimationTran tranY={30} delay={delay}>
-            <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[0.98] hover:-translate-y-1 transition ">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[0.98] hover:-translate-y-1 transition dark:bg-dark-600">
                 <div onClick={handleNextDetailPage} className="cursor-pointer">
                     <div className="h-48 overflow-hidden ">
                         {loading ? (
@@ -106,12 +106,16 @@ const Card = (props: Iprops) => {
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                <span className="text-sm text-gray-600">Độ ưu thích {favoriteCount}</span>
+                                <span className="text-sm text-gray-600 dark:text-gray-300">
+                                    Độ ưu thích {favoriteCount}
+                                </span>
                             )}
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                <span className="text-sm text-gray-600">Đã bán {itemProduct.sold}</span>
+                                <span className="text-sm text-gray-600 dark:text-gray-300">
+                                    Đã bán {itemProduct.sold}
+                                </span>
                             )}
                         </div>
                     </div>

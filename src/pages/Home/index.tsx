@@ -48,9 +48,9 @@ function Home() {
                     className="absolute top-12 right-2 sm:top-16 sm:right-24 md:top-16 md:right-44"
                     tranX={100}
                 >
-                    <div className="w-[30rem] h-[28rem] bg-primary-200 dark:bg-primary-600 rounded-tl-[10rem] rounded-br-[10rem]">
+                    <div className="w-[30rem] h-[28rem] bg-primary-200 dark:bg-primary-900 rounded-tl-[10rem] rounded-br-[10rem]">
                         <div className="px-14 py-24 flex flex-col gap-8 justify-center ">
-                            <div className="text-4xl font-bold text-primary-900 dark:text-primary-300 leading-tight">
+                            <div className="text-4xl font-bold text-primary-900 dark:text-primary-100 leading-tight">
                                 Nghệ thuật ăn mặc
                             </div>
                             <div className="font-medium">
@@ -67,17 +67,17 @@ function Home() {
             </div>
 
             <div className="w-full flex flex-col justify-center items-center gap-1 my-5">
-                <AnimationTran tranY={100} className="bg-black h-1 w-3/12"></AnimationTran>
+                <AnimationTran tranY={100} className="bg-black h-1 w-3/12 dark:bg-white"></AnimationTran>
                 <AnimationTran tranY={100} delay={0.2} className="uppercase text-xl font-semibold not-italic">
                     NHỮNG ĐIỂM NỔI BẬT TRONG TUẦN NÀY
                 </AnimationTran>
             </div>
-            <div className="w-full py-16 bg-primary-200/80 dark:bg-primary-600">
+            <div className="w-full py-16 bg-primary-200/80 dark:bg-primary-900">
                 <div className="sm:w-10/12 w-11/12 relative grid grid-cols-1 md:grid-cols-2 gap-10 m-auto">
                     <div className="flex flex-col justify-center gap-10">
                         <AnimationTran tranX={-100}>
                             <div className="flex flex-col gap-4 text-center md:text-left md:mt-0">
-                                <div className="text-5xl font-bold text-primary-800 dark:text-primary-300">
+                                <div className="text-5xl font-bold text-primary-800 dark:text-primary-100">
                                     50+ Thời trang có cảm hứng
                                 </div>
                                 <div className="font-medium ">
@@ -112,7 +112,7 @@ function Home() {
 
             <div className="w-10/12 flex flex-col justify-center m-auto my-8 gap-8">
                 <div className="w-full grid justify-items-center gap-1">
-                    <div className="bg-black h-1 w-3/12"></div>
+                    <div className="bg-black h-1 w-3/12 dark:bg-white"></div>
                     <div className="uppercase text-xl font-semibold not-italic">Những Điều Cần Thiết</div>
                 </div>
                 <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -12,7 +12,7 @@ const index = (props: Iprops) => {
     ${fillFull ? 'size-full' : ''} 
     ${className} `;
 
-    return <div className={`${allClass} min-h-2 min-w-2 animate-pulse bg-gray-200 rounded-md`}></div>;
+    return <div className={`${allClass} min-h-2 min-w-2 animate-pulse bg-gray-200 rounded-md dark:bg-dark-500`}></div>;
 };
 
 export default index;

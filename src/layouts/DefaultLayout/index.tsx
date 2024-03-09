@@ -12,7 +12,7 @@ function DefaultLayout({ children }: DefaultLayoutProps) {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
-            <div className="size-full">{children}</div>
+            <div className="size-full dark:bg-dark-600">{children}</div>
             <Footer />
             <SpeedDialSettingUI />
         </div>

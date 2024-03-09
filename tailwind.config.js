@@ -42,6 +42,9 @@ module.exports = {
                 'forgotPassword-banner': "url('./src/assets/img/forgotPassword/banner.png')",
                 'home-banner': "url('./src/assets/img/home/banner.png')",
             },
+            animation: {
+                'spin-slow': 'spin 8s linear infinite',
+            },
         },
     },
     plugins: [],
