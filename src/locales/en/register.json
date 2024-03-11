@@ -1,0 +1,19 @@
+{
+    "emailIsRequired": "Email is required",
+    "emailIsValidate": "Email has not format",
+    "usernameIsRequired": "Username is required",
+    "UsernameLeast4": "Username must be at least 4 digits",
+    "passwordIsRequired": "Password is required",
+    "passwordIsNotFormat": "Password has not format",
+    "passwordLeast8": "Password must be at most 8 digits",
+    "registerSuccessful": "Register successful",
+    "registerFailed": "Register failed",
+    "proceedWithRegistration": "Proceed with registration",
+    "titleRegister": "Create your Duck member profile and gain initial access to Duck's best products, inspiration sources, and community.",
+    "register": "Sign up",
+    "enterEmail": "Enter email",
+    "enterUsername": "Enter username",
+    "enterPassword": "Enter password",
+    "alreadyAccount": "Already have an account",
+    "login": "Login"
+}
