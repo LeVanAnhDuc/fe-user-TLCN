@@ -1,6 +1,6 @@
 import SPEEDDIALSETTINGUI_EN from './speedDialSettingUI.json';
 // import HOME_EN from './home.json';
-// import LOGIN_EN from './login.json';
+import LOGIN_EN from './login.json';
 // import REGISTER_EN from './register.json';
 // import HEADER_EN from './header.json';
 // import FOOTER_EN from './footer.json';
@@ -16,7 +16,7 @@ import SPEEDDIALSETTINGUI_EN from './speedDialSettingUI.json';
 export {
     SPEEDDIALSETTINGUI_EN,
     // HOME_EN,
-    // LOGIN_EN,
+    LOGIN_EN,
     // REGISTER_EN,
     // HEADER_EN,
     // FOOTER_EN,

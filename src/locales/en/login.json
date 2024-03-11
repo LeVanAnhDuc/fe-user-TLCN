@@ -1,0 +1,16 @@
+{
+    "emailOrUserNameRequired": "Username is required",
+    "emailOrUserNameNotFormat": "Username has not format",
+    "passwordIsRequired": "Password is required",
+    "passwordIsNotFormat": "Password has not format",
+    "passwordLeast8": "Password must be at least 8 digits",
+    "accountNotAuthenticated": "Account not authenticated",
+    "login": "Login",
+    "confirmAccount": "Confirm Account",
+    "enterEmailOrUserName": "Enter email or username",
+    "enterPassword": "Enter password",
+    "forgotPassword": "Forgot password",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "loginFailed": "Login failed"
+}

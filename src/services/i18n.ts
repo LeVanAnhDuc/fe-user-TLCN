@@ -8,7 +8,7 @@ export const resources = {
     en: {
         speedDialSettingUI: en.SPEEDDIALSETTINGUI_EN,
         // home: en.HOME_EN,
-        // login: en.LOGIN_EN,
+        login: en.LOGIN_EN,
         // register: en.REGISTER_EN,
         // header: en.HEADER_EN,
         // footer: en.FOOTER_EN,
@@ -24,7 +24,7 @@ export const resources = {
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
         // home: vi.HOME_VI,
-        // login: vi.LOGIN_VI,
+        login: vi.LOGIN_VI,
         // register: vi.REGISTER_VI,
         // header: vi.HEADER_VI,
         // footer: vi.FOOTER_VI,
@@ -47,7 +47,7 @@ i18n.use(initReactI18next).init({
     ns: [
         'speedDialSettingUI',
         // 'home',
-        // 'login',
+        'login',
         // 'register',
         // 'header',
         // 'footer',

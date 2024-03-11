@@ -1,0 +1,16 @@
+{
+    "emailOrUserNameRequired": "Tên tài khoản đang trống",
+    "emailOrUserNameNotFormat": "Tên đăng nhập chưa đúng định dạng",
+    "passwordIsRequired": "Mật khẩu đang trống",
+    "passwordIsNotFormat": "Mật khẩu chưa đúng định dạng",
+    "passwordLeast8": "Mật khẩu lớn hơn 8 kí tư",
+    "accountNotAuthenticated": "Tài khoản chưa được xác thực",
+    "login": "Đăng nhập",
+    "confirmAccount": "Xác nhận đăng nhập",
+    "enterEmailOrUserName": "Nhập email hoặc tên tài khoản",
+    "enterPassword": "Nhập mật khẩu",
+    "forgotPassword": "Quên mật khẩu",
+    "noAccount": "Chưa có tài khoản?",
+    "signUp": "Đăng kí",
+    "loginFailed": "Đăng nhập thất bại"
+}

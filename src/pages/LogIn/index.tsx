@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../redux/hook';
 import { setInfoUser, setIsLogin } from './loginSlice';
@@ -21,7 +22,6 @@ import Button from '../../components/Button';
 import SnackBarLoading from '../../components/SnackBarLoading';
 import AnimationTran from '../../components/AnimationTran';
 import AnimationScale from '../../components/AnimationScale';
-import { checkPassWord, checkUserNameAndEmail } from '../../utils/checkData';
 import Logo from '../../components/Logo';
 
 type FormDataLogin = {
@@ -34,12 +34,32 @@ const MESS_XACTHUC = 'Tài khoản chưa được xác thực';
 const LogIn = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const { t } = useTranslation('login');
 
     const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(false);
 
     const schema = yup.object().shape({
-        emailOrUserName: yup.string().required('Tên tài khoản đang trống'),
-        passWord: yup.string().required('Mật khẩu đang trống').min(8, 'Mật khẩu phải từ 8 kí tự trở lên'),
+        emailOrUserName: yup
+            .string()
+            .required(t('emailOrUserNameRequired'))
+            .test('is-emailOrUserName', t('emailOrUserNameNotFormat'), function (value) {
+                if (!value) return true;
+
+                const regexUserName = /^(?:(?:\w{4,})|(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}))$/;
+
+                return regexUserName.test(value);
+            }),
+        passWord: yup
+            .string()
+            .required(t('passwordIsRequired'))
+            .test('is-passWord', t('passwordIsNotFormat'), function (value) {
+                if (!value) return true;
+
+                const regexUserName = /^[a-zA-Z0-9]+$/;
+
+                return regexUserName.test(value);
+            })
+            .min(8, t('passwordLeast8')),
     });
 
     const {
@@ -51,14 +71,6 @@ const LogIn = () => {
     });
 
     const onSubmit: SubmitHandler<FormDataLogin> = async (data: FormDataLogin) => {
-        if (!checkUserNameAndEmail(data.emailOrUserName)) {
-            toast.error('Tên đăng nhập chưa đúng định dạng');
-            return;
-        }
-        if (!checkPassWord(data.passWord)) {
-            toast.error('Mật khẩu không chứa kí tự đặc biệt');
-            return;
-        }
         try {
             setIsLoadingLogin(true);
             const response = await loginApi(data.emailOrUserName, data.passWord);
@@ -77,13 +89,13 @@ const LogIn = () => {
                 getTotalItemOfCartAndTotalWishList();
                 navigate(config.Routes.home);
             } else if (response.data.message === MESS_XACTHUC) {
-                toast.error(response.data.message);
+                toast.error(t('accountNotAuthenticated'));
                 navigate(config.Routes.getOTPLogIn);
             } else {
                 toast.error(response.data.message || response.data);
             }
         } catch (error) {
-            toast.error(`${error}`);
+            toast.error(t('loginFailed'));
         }
     };
 
@@ -103,7 +115,7 @@ const LogIn = () => {
                 dispatch(setToTalWishList(+totalProductInWishList.data));
             }
         } catch (error) {
-            toast.error(`${error}`);
+            console.log(`${error}`);
         }
     };
 
@@ -116,12 +128,12 @@ const LogIn = () => {
 
     return (
         <>
-            <SnackBarLoading open={isLoadingLogin} content="Xác nhận đăng nhập" />
+            <SnackBarLoading open={isLoadingLogin} content={t('confirmAccount')} />
             <div className="bg-gradient-to-r from-primary-400 via-primary-600 to-primary-500 flex place-content-center dark:from-primary-700 dark:via-primary-900 dark:to-primary-800">
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow dark:bg-dark-600">
                     <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
                         <AnimationTran tranX={100} className="text-2xl font-bold">
-                            Đăng nhập
+                            {t('login')}
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={100} delay={0.1}>
@@ -134,7 +146,7 @@ const LogIn = () => {
                                                 {...field}
                                                 error={errors.emailOrUserName ? true : false}
                                                 fullWidth
-                                                label={'Nhập email hoặc tên tài khoản'}
+                                                label={t('enterEmailOrUserName')}
                                                 autoComplete="username"
                                             />
                                         )}
@@ -153,7 +165,7 @@ const LogIn = () => {
                                             <InputPassword
                                                 field={{ ...field }}
                                                 error={errors.passWord ? true : false}
-                                                label={'Nhập mật khẩu'}
+                                                label={t('enterPassword')}
                                             />
                                         )}
                                     />
@@ -165,25 +177,25 @@ const LogIn = () => {
                             <AnimationTran tranX={100} delay={0.3} className="w-full flex justify-end">
                                 <Button variant="text" size="small">
                                     <Link to={config.Routes.forgotPass} className="text-sm font-semibold">
-                                        Quên mật khẩu
+                                        {t('forgotPassword')}
                                     </Link>
                                 </Button>
                             </AnimationTran>
                             <AnimationTran tranX={100} delay={0.4}>
                                 <Button type="submit" variant="fill" fullWidth loading={isLoadingLogin}>
-                                    Đăng nhập
+                                    {t('login')}
                                 </Button>
                             </AnimationTran>
                         </form>
                         <AnimationTran tranY={100} delay={0.5} className="text-center text-sm ">
                             <div className="flex place-content-center place-items-center">
-                                Chưa có tài khoản?
+                                {t('noAccount')}
                                 <Button variant="text" size="small" className="!px-0">
                                     <Link
                                         to={config.Routes.register}
                                         className="pl-1 font-semibold text-base underline transition"
                                     >
-                                        Đăng kí.
+                                        {t('signUp')}.
                                     </Link>
                                 </Button>
                             </div>
