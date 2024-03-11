@@ -8,12 +8,11 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { publishRoute, privateRoute } from './routes';
 import { DefaultLayout } from './layouts';
 import ScrollAutoTop from './components/ScrollAutoTop';
-import { useAppSelector } from './redux/hook';
 import { selectIsLogin } from './pages/LogIn/loginSlice';
 import { selectIsTheme } from './components/SpeedDialSettingUI/themeSlice';
 
 function App() {
-    const isLogin = useAppSelector(selectIsLogin);
+    const isLogin = useSelector(selectIsLogin);
 
     const storedTheme = useSelector(selectIsTheme);
     const [theme, setTheme] = useState(

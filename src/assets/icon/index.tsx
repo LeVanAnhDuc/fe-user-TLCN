@@ -45,81 +45,43 @@ export const TailSpinIcon = (props: IIcon) => {
     );
 };
 
-export const BallTriangleIcon = (props: IIcon) => {
-    const { width = '57', height = '57', className, color = '*fff' } = props;
+export const FlatEngLand = (props: IIcon) => {
+    const { width = '32', height = '32', className } = props;
     return (
-        <svg
-            width={width}
-            height={height}
-            viewBox="0 0 57 57"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke={color}
-            className={className}
-        >
-            <g fill={color} fillRule="evenodd">
-                <g transform="translate(1 1)" strokeWidth="2">
-                    <circle cx="5" cy="50" r="5">
-                        <animate
-                            attributeName="cy"
-                            begin="0s"
-                            dur="2.2s"
-                            values="50;5;50;50"
-                            calcMode="linear"
-                            repeatCount="indefinite"
-                        />
-                        <animate
-                            attributeName="cx"
-                            begin="0s"
-                            dur="2.2s"
-                            values="5;27;49;5"
-                            calcMode="linear"
-                            repeatCount="indefinite"
-                        />
-                    </circle>
-                    <circle cx="27" cy="5" r="5">
-                        <animate
-                            attributeName="cy"
-                            begin="0s"
-                            dur="2.2s"
-                            from="5"
-                            to="5"
-                            values="5;50;50;5"
-                            calcMode="linear"
-                            repeatCount="indefinite"
-                        />
-                        <animate
-                            attributeName="cx"
-                            begin="0s"
-                            dur="2.2s"
-                            from="27"
-                            to="27"
-                            values="27;49;5;27"
-                            calcMode="linear"
-                            repeatCount="indefinite"
-                        />
-                    </circle>
-                    <circle cx="49" cy="50" r="5">
-                        <animate
-                            attributeName="cy"
-                            begin="0s"
-                            dur="2.2s"
-                            values="50;50;5;50"
-                            calcMode="linear"
-                            repeatCount="indefinite"
-                        />
-                        <animate
-                            attributeName="cx"
-                            from="49"
-                            to="49"
-                            begin="0s"
-                            dur="2.2s"
-                            values="49;5;27;49"
-                            calcMode="linear"
-                            repeatCount="indefinite"
-                        />
-                    </circle>
-                </g>
-            </g>
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 32 32" className={className}>
+            <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"></rect>
+            <path fill="#be2a2a" d="M31 14L18 14 18 4 14 4 14 14 1 14 1 18 14 18 14 28 18 28 18 18 31 18 31 14z"></path>
+            <path
+                d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                opacity=".15"
+            ></path>
+            <path
+                d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                fill="#fff"
+                opacity=".2"
+            ></path>
+        </svg>
+    );
+};
+
+export const FlatVietNam = (props: IIcon) => {
+    const { width = '32', height = '32', className } = props;
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 32 32" className={className}>
+            <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#c93728"></rect>
+            <path
+                d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                opacity=".15"
+            ></path>
+            <path
+                d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                fill="#fff"
+                opacity=".2"
+            ></path>
+            <path
+                fill="#ff5"
+                d="M18.008 16.366L21.257 14.006 17.241 14.006 16 10.186 14.759 14.006 10.743 14.006 13.992 16.366 12.751 20.186 16 17.825 19.249 20.186 18.008 16.366z"
+            ></path>
         </svg>
     );
 };

@@ -12,6 +12,8 @@ interface Iprops {
     children: ReactElement | string | ReactNode;
     type?: 'button' | 'submit' | 'reset' | undefined;
     onClick?: () => Promise<void> | void;
+    startIcon?: ReactNode;
+    endIcon?: ReactNode;
 }
 const Button = (props: Iprops) => {
     const {
@@ -24,6 +26,8 @@ const Button = (props: Iprops) => {
         children,
         type = 'button',
         onClick,
+        startIcon,
+        endIcon,
         ...passProps
     } = props;
 
@@ -53,7 +57,7 @@ const Button = (props: Iprops) => {
     return (
         <motion.button
             className={`
-            rounded-lg text-lg font-medium h-12 px-4 flex place-content-center place-items-center relative ${allClass}`}
+            rounded-lg text-lg font-medium h-12 px-4 flex place-content-center place-items-center relative gap-2 ${allClass}`}
             whileHover={
                 checkActiveAnimation
                     ? {
@@ -68,8 +72,10 @@ const Button = (props: Iprops) => {
             onClick={onClick}
             {...passProps}
         >
+            {startIcon}
             {loading && <TailSpinIcon className="absolute inset-y-0 inset-x-0 m-auto h-5/6 w-full " color="#00bcd4" />}
             {children}
+            {endIcon}
         </motion.button>
     );
 };

@@ -1,40 +1,39 @@
 import Settings from '@mui/icons-material/Settings';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import Drawer from '@mui/material/Drawer';
 import Fab from '@mui/material/Fab';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Close from '@mui/icons-material/Close';
 import LightMode from '@mui/icons-material/LightMode';
 import DarkMode from '@mui/icons-material/DarkMode';
 
 import { useEffect, useState } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import config from '../../config';
 import { selectIsTheme, setIsTheme } from './themeSlice';
+import { FlatEngLand, FlatVietNam } from '../../assets/icon';
+import Button from '../Button';
 
 const SpeedDialSettingUI = () => {
     const dispatch = useDispatch();
+    const { i18n } = useTranslation();
+    const { t } = useTranslation('speedDialSettingUI');
     const theme = useSelector(selectIsTheme);
 
     const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-    // const [language, setLanguage] = useState<string>(config.Language.english);
+    const [language, setLanguage] = useState<string>(config.Language.vietNam);
     const [mode, setMode] = useState<string>(theme);
 
     const toggleDrawer = () => {
         setOpenDrawer((prev) => !prev);
     };
 
-    // const handleGetLanguage = (event: SelectChangeEvent) => {
-    //     setLanguage(event.target.value as string);
-    //     i18n.changeLanguage(event.target.value as string);
-    // };
+    const handleGetLanguage = (event: SelectChangeEvent) => {
+        setLanguage(event.target.value as string);
+        i18n.changeLanguage(event.target.value as string);
+    };
 
     const handleChangeMode = (value: string) => {
         setMode(value);
@@ -62,46 +61,71 @@ const SpeedDialSettingUI = () => {
                 </Fab>
             </div>
             <Drawer anchor={'right'} open={openDrawer} onClose={toggleDrawer}>
-                <div className="flex justify-between items-center px-5 py-5">
-                    <div className="text-2xl font-bold tracking-wide">Cấu hình</div>
-                    <Fab color="error" size="small">
-                        <Close onClick={toggleDrawer} />
-                    </Fab>
-                </div>
-                <div className="flex flex-col gap-3 pt-5 px-3 w-screen sm:w-96 ">
-                    <div className="text-base font-normal text-gray-600 dark:text-gray-300">Ngôn ngữ</div>
-                    {/* <FormControl fullWidth>
-                        <InputLabel>{t('language')}</InputLabel>
-                        <Select
-                            input={<OutlinedInput label={t('language')} />}
-                            value={language}
-                            onChange={handleGetLanguage}
-                        >
-                            <MenuItem value={config.Language.vietNam}>{t('vietNam')}</MenuItem>
-                            <MenuItem value={config.Language.english}>{t('english')}</MenuItem>
-                        </Select>
-                    </FormControl> */}
-                </div>
-                <div className="flex flex-col gap-3 pt-5 px-3">
-                    <div className="text-base font-normal text-gray-600 dark:text-gray-300">Chế độ</div>
-                    <ButtonGroup variant="outlined" size="large">
+                <div className="!space-y-3">
+                    <div className="flex justify-between items-center px-4 pt-3">
+                        <div className="text-lg font-bold tracking-wide">{t('settings')}</div>
                         <Button
-                            variant={mode === 'dark' ? 'contained' : 'outlined'}
-                            fullWidth
-                            startIcon={<DarkMode />}
-                            onClick={() => handleChangeMode('dark')}
+                            onClick={toggleDrawer}
+                            className="!size-fit !rounded-full hover:bg-gray-100 dark:hover:bg-gray-100/20 transition !p-1"
                         >
-                            Tối
+                            <Close />
                         </Button>
-                        <Button
-                            variant={mode === 'light' ? 'contained' : 'outlined'}
-                            fullWidth
-                            startIcon={<LightMode />}
-                            onClick={() => handleChangeMode('light')}
-                        >
-                            Sáng
-                        </Button>
-                    </ButtonGroup>
+                    </div>
+                    <div className="h-[0.1rem] bg-gray-300 w-full dark:bg-gray-500"></div>
+
+                    <div className="space-y-7 pt-3 px-4">
+                        <div className="flex flex-col gap-2 w-screen sm:w-80">
+                            <div className="text-xs font-normal text-gray-600 dark:text-gray-300 uppercase">
+                                {t('language')}
+                            </div>
+
+                            {/* <FormControl fullWidth>
+                            <InputLabel>{t('language')}</InputLabel> */}
+                            <Select
+                                // input={<OutlinedInput label={t('language')} />}
+                                value={language}
+                                onChange={handleGetLanguage}
+                                variant="standard"
+                            >
+                                <MenuItem value={config.Language.vietNam}>
+                                    <div className="flex items-center gap-5">
+                                        <FlatVietNam />
+                                        {t('vietNam')}
+                                    </div>
+                                </MenuItem>
+                                <MenuItem value={config.Language.english}>
+                                    <div className="flex items-center gap-5">
+                                        <FlatEngLand />
+                                        {t('english')}
+                                    </div>
+                                </MenuItem>
+                            </Select>
+                            {/* </FormControl> */}
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <div className="text-xs font-normal text-gray-600 dark:text-gray-300 uppercase">
+                                {t('mode')}
+                            </div>
+                            <div className="flex gap-2">
+                                <Button
+                                    variant={mode === 'dark' ? 'fill' : 'outline'}
+                                    fullWidth
+                                    startIcon={<DarkMode />}
+                                    onClick={() => handleChangeMode('dark')}
+                                >
+                                    {t('dark')}
+                                </Button>
+                                <Button
+                                    variant={mode === 'light' ? 'fill' : 'outline'}
+                                    fullWidth
+                                    startIcon={<LightMode />}
+                                    onClick={() => handleChangeMode('light')}
+                                >
+                                    {t('light')}
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Drawer>
         </>
