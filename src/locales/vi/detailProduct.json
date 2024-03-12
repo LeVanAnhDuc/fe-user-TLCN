@@ -1,0 +1,17 @@
+{
+    "requireLogin": "Bạn cần đăng nhập trước",
+    "review": "Đánh giá",
+    "size": "Kích thước",
+    "color": "Màu sắc",
+    "quantity": "Số lượng",
+    "productsAvailable": "sản phẩm có sẵn",
+    "addToCart": "Thêm vào giỏ",
+    "description": "Mô tả",
+    "productReviews": "ĐÁNH GIÁ SẢN PHẨM",
+    "outOf": "trên",
+    "all": "Tất cả",
+    "star": "sao",
+    "relatedProducts": "SẢN PHẨM LIÊN QUAN",
+    "seeAll": "Xem tất cả",
+    "noProductRelated": "Hix. Không có sản phẩm nào liên quan !!"
+}

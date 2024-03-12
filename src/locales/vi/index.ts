@@ -9,7 +9,7 @@ import HEADER_VI from './header.json';
 import FOOTER_VI from './footer.json';
 import SHOP_VI from './shop.json';
 import CARD_VI from './card.json';
-// import DETAILPRODUCT_VI from './detailProduct.json';
+import DETAILPRODUCT_VI from './detailProduct.json';
 // import CART_VI from './cart.json';
 // import CHECKOUT_VI from './checkOut.json';
 // import WISHLIST_VI from './wishList.json';
@@ -28,7 +28,7 @@ export {
     FOOTER_VI,
     SHOP_VI,
     CARD_VI,
-    // DETAILPRODUCT_VI,
+    DETAILPRODUCT_VI,
     // CART_VI,
     // CHECKOUT_VI,
     // WISHLIST_VI,

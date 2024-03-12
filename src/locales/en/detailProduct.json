@@ -1,0 +1,17 @@
+{
+    "requireLogin": "You need to log in",
+    "review": "Review",
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "productsAvailable": "products available",
+    "addToCart": "Add to cart",
+    "description": "Description",
+    "productReviews": "PRODUCT REVIEWS",
+    "outOf": "out of",
+    "all": "All",
+    "star": "star",
+    "relatedProducts": "RELATED PRODUCTS",
+    "seeAll": "See all",
+    "noProductRelated": "Hix. There are no related products!!"
+}

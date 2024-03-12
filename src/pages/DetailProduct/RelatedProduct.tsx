@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import Card from '../../components/Card';
 import { getAllProductSearchWithinPagination } from '../../apis/productApi';
@@ -15,6 +16,7 @@ interface Iprops {
 const RelatedProduct = (props: Iprops) => {
     const { categoryName } = props;
     const itemsPerPage = 8;
+    const { t } = useTranslation('detailProduct');
 
     const [products, setProducts] = useState<Array<IProduct>>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -49,7 +51,7 @@ const RelatedProduct = (props: Iprops) => {
     return (
         <section className="space-y-3">
             <div className="flex flex-wrap justify-between items-center bg-white p-5 rounded-t-lg dark:bg-dark-600">
-                <div className="text-lg font-medium uppercase">SẢN PHẨM LIÊN QUAN</div>
+                <div className="text-lg font-medium uppercase">{t('relatedProducts')}</div>
                 <Link
                     to={config.Routes.shop}
                     state={{
@@ -57,7 +59,7 @@ const RelatedProduct = (props: Iprops) => {
                     }}
                 >
                     <Button variant="text" className="h-fit">
-                        {`Xem tất cả`}
+                        {t('seeAll')}
                     </Button>
                 </Link>
             </div>
@@ -78,7 +80,7 @@ const RelatedProduct = (props: Iprops) => {
             </div>
             {!isLoading && products.length === 0 && (
                 <div className="size-full flex m-auto justify-center text-xl font-medium bg-white py-20 rounded-b-lg">
-                    Không có sản phẩm nào liên quan
+                    {t('noProductRelated')}
                 </div>
             )}
         </section>

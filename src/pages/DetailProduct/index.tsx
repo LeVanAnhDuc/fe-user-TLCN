@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { getSKUPrice, getSingleProduct } from '../../apis/productApi';
 import IProduct from '../../interface/product';
@@ -26,6 +27,7 @@ const DetailProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
+    const { t } = useTranslation('detailProduct');
 
     const [favourite, setFavourite] = useState<boolean>(false);
     const [product, setProduct] = useState<IProduct>();
@@ -56,8 +58,8 @@ const DetailProduct = () => {
             } else {
                 navigate(config.Routes.shop);
             }
-        } catch {
-            console.log('Đang bảo trì');
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -85,12 +87,12 @@ const DetailProduct = () => {
                     } else {
                         toast.info(addToCartAPI.data.message);
                     }
-                } catch {
-                    toast.error('Lỗi không thêm được sản phẩm');
+                } catch (error) {
+                    console.log(error);
                 }
             }
         } else {
-            toast.info('Bạn cần đăng nhập trước khi đặt hàng');
+            toast.info(t('requireLogin'));
             navigate(config.Routes.logIn);
         }
     };
@@ -124,7 +126,7 @@ const DetailProduct = () => {
                 console.log(`${error}`);
             }
         } else {
-            toast.info('Bạn cần đăng nhập để lưu sản phẩm yêu thích ');
+            toast.info(t('requireLogin'));
             navigate(config.Routes.logIn);
         }
     };
@@ -165,7 +167,7 @@ const DetailProduct = () => {
         id && getProduct(+id);
         window.scrollTo({
             top: 0,
-            behavior: 'instant',
+            behavior: 'smooth',
         });
     }, [id]);
 
@@ -229,13 +231,15 @@ const DetailProduct = () => {
                                 <span className="text-gray-400 px-3">|</span>
                                 <div className="flex items-center gap-1">
                                     <span className="font-semibold">{product?.numberOfRatings}</span>
-                                    <span>Đánh giá</span>
+                                    <span>{t('review')}</span>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-7">
                                 <div className="space-y-2">
-                                    <span className="font-medium">Kích thước : {size}</span>
+                                    <span className="font-medium">
+                                        {t('size')} : {size}
+                                    </span>
                                     <div className="flex flex-wrap gap-2">
                                         {product?.options
                                             .filter(
@@ -259,7 +263,9 @@ const DetailProduct = () => {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <span className="font-medium">Màu sắc : {color}</span>
+                                    <span className="font-medium">
+                                        {t('color')} : {color}
+                                    </span>
                                     <div className="flex flex-wrap gap-2">
                                         {product?.options
                                             .filter(
@@ -287,13 +293,13 @@ const DetailProduct = () => {
                             </div>
 
                             <div className="space-y-2">
-                                <span className="font-medium">Số lượng</span>
+                                <span className="font-medium">{t('quantity')}</span>
                                 <div className="flex items-center gap-10">
                                     <ChangeQuantityProduct quantity={quantity} setQuantity={setQuantity} />
                                     <div className="whitespace-nowrap space-x-2">
                                         <span className="font-medium">{product?.quantityAvailable}</span>
                                         <span className="text-gray-500 dark:text-gray-300 text-sm">
-                                            sản phẩm có sẵn
+                                            {t('productsAvailable')}
                                         </span>
                                     </div>
                                 </div>
@@ -307,7 +313,7 @@ const DetailProduct = () => {
                                     onClick={handleAddCart}
                                     className="uppercase"
                                 >
-                                    Thêm vào giỏ
+                                    {t('addToCart')}
                                 </Button>
                                 <Button
                                     variant={favourite ? 'fill' : 'outline'}
@@ -321,7 +327,7 @@ const DetailProduct = () => {
                     </div>
                 </div>
                 <div className="bg-white rounded-lg p-5 space-y-5 shadow dark:bg-dark-600">
-                    <div className="text-lg font-medium">MÔ TẢ SẢN PHẨM</div>
+                    <div className="text-lg font-medium uppercase">{t('description')}</div>
                     <div>{product?.description}</div>
                 </div>
 
