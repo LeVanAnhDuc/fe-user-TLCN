@@ -11,7 +11,7 @@ import SHOP_EN from './shop.json';
 import CARD_EN from './card.json';
 import DETAILPRODUCT_EN from './detailProduct.json';
 import CART_EN from './cart.json';
-// import CHECKOUT_EN from './checkOut.json';
+import CHECKOUT_EN from './checkOut.json';
 // import WISHLIST_EN from './wishList.json';
 // import PURCHASEHISTORY_EN from './purchaseHistory.json';
 // import ERROR404_EN from './error404.json';
@@ -30,7 +30,7 @@ export {
     CARD_EN,
     DETAILPRODUCT_EN,
     CART_EN,
-    // CHECKOUT_EN,
+    CHECKOUT_EN,
     // WISHLIST_EN,
     // PURCHASEHISTORY_EN,
     // ERROR404_EN,

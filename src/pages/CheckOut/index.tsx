@@ -6,6 +6,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
+import TextField from '@mui/material/TextField';
 
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -13,6 +14,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import { setItemsOfCart, setToTalProductCart } from '../Cart/cartSlice';
 import config from '../../config';
@@ -23,7 +25,6 @@ import { getTotalPriceForYourCart } from '../../apis/cartApi';
 import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
 import imgVNPAY from '../../assets/img/VnPay.png';
 import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
-import TextField from '@mui/material/TextField';
 import Button from '../../components/Button';
 import { convertNumberToVND } from '../../utils/convertData';
 import AnimationScale from '../../components/AnimationScale';
@@ -33,6 +34,7 @@ const Pay = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation('checkOut');
 
     let idOrder: number = 0;
     if (location.state) {
@@ -44,8 +46,8 @@ const Pay = () => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
     const schema = yup.object().shape({
-        paymentType: yup.string().required('Hình thức thanh toán đang trống'),
-        addressId: yup.number().required('Địa chỉ đang trống'),
+        paymentType: yup.string().required(t('paymentsIsRequired')),
+        addressId: yup.number().required(t('addressHomeIsRequired')),
         note: yup.string(),
     });
 
@@ -86,23 +88,26 @@ const Pay = () => {
     };
 
     const getAddressesAndOrderForWaiting = async () => {
-        const [addressesAPI, OrderByIDAPI] = await Promise.all([
-            getListAddressOffCurrentUser(),
-            getOrderByID(+idOrder),
-        ]);
+        try {
+            const [addressesAPI, OrderByIDAPI] = await Promise.all([
+                getListAddressOffCurrentUser(),
+                getOrderByID(+idOrder),
+            ]);
 
-        if (addressesAPI.status === 200) {
-            if (addressesAPI?.data) {
-                setAddresses(addressesAPI.data);
+            if (addressesAPI.status === 200) {
+                if (addressesAPI?.data) {
+                    setAddresses(addressesAPI.data);
+                }
             }
+            if (OrderByIDAPI.status === 200) {
+                setTotalPrice(OrderByIDAPI.data.total);
+                setValue('addressId', OrderByIDAPI.data.address.id);
+                setValue('note', OrderByIDAPI.data.note);
+                setValue('paymentType', OrderByIDAPI.data.paymentType);
+            }
+        } catch (error) {
+            console.log(`${error}`);
         }
-        if (OrderByIDAPI.status === 200) {
-            setTotalPrice(OrderByIDAPI.data.total);
-            setValue('addressId', OrderByIDAPI.data.address.id);
-            setValue('note', OrderByIDAPI.data.note);
-            setValue('paymentType', OrderByIDAPI.data.paymentType);
-        }
-        console.log(OrderByIDAPI);
     };
 
     const onSubmit: SubmitHandler<IOrderCheckOut> = async (data) => {
@@ -120,8 +125,8 @@ const Pay = () => {
                     });
 
                     if (response?.status === 200) {
-                        toast.success('Đặt hàng thành công');
-                        navigate(config.Routes.detailOrder + '#' + response.data.id);
+                        toast.success(t('orderIsSuccess'));
+                        navigate(`${config.Routes.detailOrder}/${response.data.id}`);
                     } else {
                         toast.error(response?.data.message || response?.data);
                     }
@@ -136,8 +141,8 @@ const Pay = () => {
                     if (response?.status === 201) {
                         dispatch(setToTalProductCart(0));
                         dispatch(setItemsOfCart([]));
-                        toast.success('Đặt hàng thành công');
-                        navigate(config.Routes.detailOrder + '#' + response.data.id);
+                        toast.success(t('orderIsSuccess'));
+                        navigate(`${config.Routes.detailOrder}/${response.data.id}`);
                     } else {
                         toast.error(response?.data.message || response?.data);
                     }
@@ -190,23 +195,24 @@ const Pay = () => {
             <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
                 <div className="grid lg:grid-cols-5 gap-10">
                     <div className="space-y-3 lg:col-span-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
-                        <div className="font-semibold text-xl">Thông tin liên lạc của bạn ?</div>
+                        <div className="font-semibold text-xl">{t('yourContact')} ?</div>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranY={100}>
                                 <Controller
                                     name="paymentType"
                                     control={control}
+                                    defaultValue=""
                                     render={({ field }) => (
                                         <FormControl fullWidth>
-                                            <InputLabel>Hình thức thanh toán</InputLabel>
+                                            <InputLabel>{t('payments')}</InputLabel>
                                             <Select
                                                 {...field}
-                                                input={<OutlinedInput label="Hình thức thanh toán" />}
+                                                input={<OutlinedInput label={t('payments')} />}
                                                 error={errors.paymentType ? true : false}
                                             >
                                                 <MenuItem value={config.PaymentType.VNPay} sx={{ height: '50px' }}>
                                                     <div className="w-full flex justify-between items-center">
-                                                        {config.PaymentType.VNPay}
+                                                        {t('vnPay')}
                                                         <Avatar
                                                             src={imgVNPAY}
                                                             sx={{
@@ -221,7 +227,7 @@ const Pay = () => {
                                                     value={config.PaymentType.CashOnDelivery}
                                                     sx={{ height: '50px' }}
                                                 >
-                                                    {config.PaymentType.CashOnDelivery}
+                                                    {t('cashOnDelivery')}
                                                 </MenuItem>
                                             </Select>
                                         </FormControl>
@@ -239,10 +245,10 @@ const Pay = () => {
                                         control={control}
                                         render={({ field }) => (
                                             <FormControl fullWidth>
-                                                <InputLabel>Địa chỉ</InputLabel>
+                                                <InputLabel>{t('addressHome')}</InputLabel>
                                                 <Select
                                                     {...field}
-                                                    input={<OutlinedInput label="Địa chỉ" />}
+                                                    input={<OutlinedInput label={t('addressHome')} />}
                                                     fullWidth
                                                     error={errors.addressId ? true : false}
                                                 >
@@ -269,7 +275,7 @@ const Pay = () => {
                             ) : (
                                 <Link to={config.Routes.profileAddressProfile}>
                                     <Button fullWidth variant="outline">
-                                        Hiện chưa có địa chỉ. Nhấn để thêm
+                                        {t('noAddressHome')}
                                     </Button>
                                 </Link>
                             )}
@@ -278,6 +284,7 @@ const Pay = () => {
                                 <Controller
                                     name="note"
                                     control={control}
+                                    defaultValue=""
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
@@ -285,7 +292,7 @@ const Pay = () => {
                                             fullWidth
                                             multiline
                                             rows={9}
-                                            placeholder={'Nhập ghi chú'}
+                                            label={t('enterNote')}
                                         />
                                     )}
                                 />
@@ -294,37 +301,35 @@ const Pay = () => {
                                 </p>
                             </AnimationTran>
 
-                            <AnimationScale scale={0.4}>
-                                <Button type="submit" variant="fill" fullWidth disabled={!isChecked}>
-                                    Đặt hàng
-                                </Button>
-                            </AnimationScale>
-
-                            <div className="grid grid-cols-10">
+                            <div className="grid grid-cols-10 pb-5">
                                 <span>
                                     <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
                                 </span>
                                 <span className="col-span-9 text-gray-400 dark:text-gray-300">
-                                    Tôi đã đọc và đồng ý cho Duck xử lý thông tin của tôi theo
-                                    <span className="underline ml-0.5">Quy định về Quyền riêng tư</span> và
-                                    <span className="underline ml-0.5"> Chính sách Cookie </span>. Duck là đối tác tin
-                                    cậy của Duck.
+                                    {t('iHaveRead')}
+                                    <span className="underline ml-0.5">{t('privacyPolicy')}</span> {t('and')}
+                                    <span className="underline ml-0.5">{t('cookiePolicy')}</span>.
                                 </span>
                             </div>
+                            <AnimationScale scale={0.4}>
+                                <Button type="submit" variant="fill" fullWidth disabled={!isChecked}>
+                                    {t('placeAnOrder')}
+                                </Button>
+                            </AnimationScale>
                         </form>
                     </div>
 
                     <div className="space-y-5 lg:col-span-2 bg-white h-fit p-5 sm:p-10 rounded-lg sticky top-20 dark:bg-dark-600">
-                        <h1 className="text-xl font-bold text-center">Tổng chi phí</h1>
+                        <h1 className="text-xl font-bold text-center">{t('totalCost')}</h1>
                         <div className="flex justify-between">
-                            <span className="font-medium">Tổng tiền</span>
+                            <span className="font-medium">{t('totalAmount')}</span>
                             <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                                 {convertNumberToVND(totalPrice)}
                                 <span className="text-sm">đ</span>
                             </AnimationScale>
                         </div>
                         <div className="flex justify-between">
-                            <span className="font-medium">Phí vận chuyển</span>
+                            <span className="font-medium">{t('totalDelivery')}</span>
                             <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                                 {convertNumberToVND(0)}
                                 <span className="text-sm">đ</span>
@@ -333,7 +338,7 @@ const Pay = () => {
                         <div className="h-0.5 bg-gray-200 w-full"></div>
 
                         <div className="flex justify-between relative">
-                            <span className="font-medium">Thành tiền</span>
+                            <span className="font-medium">{t('subtotal')}</span>
                             <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                                 {convertNumberToVND(totalPrice)}
                                 <span className="text-sm">đ</span>
@@ -343,7 +348,7 @@ const Pay = () => {
                         <div className="h-0.5 bg-gray-200 w-full"></div>
 
                         <div className="text-center text-gray-600 dark:text-gray-300">
-                            (Tổng cộng giá của đơn hàng của bạn, bao gồm tất cả các chi phí và thuế)
+                            ({t('TotalPriceOfYourOrder')})
                         </div>
                     </div>
                 </div>

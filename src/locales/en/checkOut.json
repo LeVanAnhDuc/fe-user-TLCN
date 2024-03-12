@@ -1,0 +1,22 @@
+{
+    "paymentsIsRequired": "Payments Is Required",
+    "addressHomeIsRequired": "Address Home Is Required",
+    "orderIsSuccess": "Order Is Success",
+    "yourContact": "Your contact information",
+    "payments": "Payments",
+    "vnPay": "Online payment with VNPay",
+    "cashOnDelivery": "Cash on delivery",
+    "addressHome": "Address Home",
+    "noAddressHome": "There is currently no address. Click to add",
+    "enterNote": "Enter Note",
+    "iHaveRead": "I have read and agree to let DUCK process my information according to",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and",
+    "cookiePolicy": "Cookie Policy",
+    "placeAnOrder": "Place an order",
+    "totalCost": "Total cost",
+    "totalAmount": "Total amount",
+    "totalDelivery": "Total delivery",
+    "subtotal": "Subtotal",
+    "TotalPriceOfYourOrder": "Total price of your order, including all fees and taxes"
+}

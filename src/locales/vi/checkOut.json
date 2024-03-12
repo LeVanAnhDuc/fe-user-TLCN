@@ -1,0 +1,22 @@
+{
+    "paymentsIsRequired": "Hình thức thanh toán đang trống",
+    "addressHomeIsRequired": "Địa chỉ nhà đang trống",
+    "orderIsSuccess": "Đặt hàng thành công",
+    "yourContact": "Thông tin liên lạc của bạn",
+    "payments": "Hình thức thanh toán",
+    "vnPay": "Thanh toán trực tuyến với VNPay",
+    "cashOnDelivery": "Thanh toán khi nhận hàng",
+    "addressHome": "Địa chỉ nhà",
+    "noAddressHome": "Hiện chưa có địa chỉ. Nhấn để thêm",
+    "enterNote": "Nhập ghi chú",
+    "iHaveRead": "Tôi đã đọc và đồng ý cho DUCK xử lý thông tin của tôi theo",
+    "privacyPolicy": "Quy định về Quyền riêng tư",
+    "and": "và",
+    "cookiePolicy": "Chính sách Cookie",
+    "placeAnOrder": "Đặt hàng",
+    "totalCost": "Tổng chi phí",
+    "totalAmount": "Tổng tiền",
+    "totalDelivery": "Phí vận chuyển",
+    "subtotal": "Thành tiền",
+    "TotalPriceOfYourOrder": "Tổng cộng giá của đơn hàng của bạn, bao gồm tất cả các chi phí và thuế"
+}
