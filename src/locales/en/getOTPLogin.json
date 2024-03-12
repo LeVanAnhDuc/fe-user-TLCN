@@ -1,0 +1,20 @@
+{
+    "emailIsRequired": "Email is required",
+    "emailIsValidate": "Email has not format",
+    "otpIsRequired": "OTP is required",
+    "otpLeast4": "OTP must be at least 4 digits",
+    "otpIsValidate": "OTP has not format",
+    "proceedWithCheckOTP": "Proceed check with OTP",
+    "proceedWithSendOTP": "Proceed send with OTP",
+    "pleaseEnterEmail": "Please enter email",
+    "titleGetOTPRegister": "Verification code will be sent via Email.",
+    "enterAuthCode": "Enter Auth Code",
+    "enterEmail": "Enter email",
+    "enterOTP": "Enter OTP",
+    "otpAuthentication": "OTP Authentication",
+    "sendOTPAgain": "Send OTP again",
+
+    "proceedWithLogin": "Proceed login",
+    "loginSuccessful": "Login successful",
+    "loginNow": "Login now"
+}

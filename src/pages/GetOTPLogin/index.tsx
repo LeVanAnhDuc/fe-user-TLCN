@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
 import { sendOTPRegister, verifyOTPRegister } from '../../apis/authApi';
@@ -21,18 +22,19 @@ type FormDataGetOTPLogin = {
 
 const GetOTPRegister = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation('getOTPLogin');
 
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
     const [isLoadingSendOTPAgain, setIsLoadingSendOTPAgain] = useState(false);
     const [titleDialog, setTitleDialog] = useState<string>('');
 
     const schema = yup.object().shape({
-        email: yup.string().required('Email đang trống').email('Định dạng email không đúng'),
+        email: yup.string().required(t('emailIsRequired')).email(t('emailIsValidate')),
         otp: yup
             .string()
-            .required('OTP đang trống')
-            .min(4, 'OTP phải từ 4 kí tự trở lên')
-            .test('is-OTP', 'OTP không được chứa kí tự lạ', function (value) {
+            .required(t('otpIsRequired'))
+            .min(4, t('otpLeast4'))
+            .test('is-OTP', t('otpIsValidate'), function (value) {
                 if (!value) return true;
 
                 const numericRegex = /^[a-zA-Z0-9]+$/;
@@ -50,16 +52,20 @@ const GetOTPRegister = () => {
     });
 
     const onSubmit: SubmitHandler<FormDataGetOTPLogin> = async (data) => {
-        setIsLoadingSubmit(true);
-        setTitleDialog('Đang kiếm tra OTP');
-        const response = await verifyOTPRegister(data.email, data.otp);
-        setIsLoadingSubmit(false);
+        try {
+            setIsLoadingSubmit(true);
+            setTitleDialog(t('proceedWithCheckOTP'));
+            const response = await verifyOTPRegister(data.email, data.otp);
+            setIsLoadingSubmit(false);
 
-        if (response.status === 200) {
-            toast.success(response.data);
-            navigate(config.Routes.logIn);
-        } else {
-            toast.error(response.data.message);
+            if (response.status === 200) {
+                toast.success(response.data);
+                navigate(config.Routes.logIn);
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -67,7 +73,7 @@ const GetOTPRegister = () => {
         if (getValues().email !== undefined) {
             try {
                 setIsLoadingSendOTPAgain(true);
-                setTitleDialog('Tiến hành gửi OTP');
+                setTitleDialog(t('proceedWithSendOTP'));
                 const response = await sendOTPRegister(getValues().email);
                 setIsLoadingSendOTPAgain(false);
 
@@ -80,7 +86,7 @@ const GetOTPRegister = () => {
                 toast.error(`${error}`);
             }
         } else {
-            toast.error('Vui lòng nhập email');
+            toast.error(t('pleaseEnterEmail'));
         }
     };
     return (
@@ -91,14 +97,14 @@ const GetOTPRegister = () => {
                     <section className="min-h-[31rem] w-full flex-col items-center lg:flex hidden">
                         <Logo />
                         <AnimationTran tranY={-100} className="m-auto">
-                            <h5 className="leading-7 tracking-tight">Mã xác thực sẽ được gửi qua Email</h5>
+                            <h5 className="leading-7 tracking-tight">{t('titleGetOTPRegister')}</h5>
                         </AnimationTran>
                         <div className="bg-register-banner bg-contain bg-no-repeat bg-center w-full h-full"></div>
                     </section>
 
                     <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
                         <AnimationTran tranX={-100} className="text-2xl font-bold">
-                            Nhập mã xác thực
+                            {t('enterAuthCode')}
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={-100} delay={0.1}>
@@ -111,7 +117,7 @@ const GetOTPRegister = () => {
                                                 {...field}
                                                 error={errors.email ? true : false}
                                                 fullWidth
-                                                label={'Nhập email'}
+                                                label={t('enterEmail')}
                                             />
                                         )}
                                     />
@@ -130,7 +136,7 @@ const GetOTPRegister = () => {
                                                 {...field}
                                                 error={errors.otp ? true : false}
                                                 fullWidth
-                                                label={'Nhập OTP'}
+                                                label={t('enterOTP')}
                                             />
                                         )}
                                     />
@@ -142,7 +148,7 @@ const GetOTPRegister = () => {
                             <div className="grid grid-cols-2 gap-2">
                                 <AnimationTran tranX={-100} delay={0.4}>
                                     <Button type="submit" variant="fill" fullWidth loading={isLoadingSubmit}>
-                                        Xác thực
+                                        {t('otpAuthentication')}
                                     </Button>
                                 </AnimationTran>
 
@@ -153,7 +159,7 @@ const GetOTPRegister = () => {
                                         onClick={handleSendOTPAgain}
                                         loading={isLoadingSendOTPAgain}
                                     >
-                                        Gửi lại mã
+                                        {t('sendOTPAgain')}
                                     </Button>
                                 </AnimationTran>
                             </div>

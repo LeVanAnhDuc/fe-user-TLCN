@@ -1,0 +1,20 @@
+{
+    "emailIsRequired": "Email đang trống",
+    "emailIsValidate": "Email không đúng định dạng",
+    "otpIsRequired": "OTP đang trống",
+    "otpLeast4": "OTP lớn hơn 4 kí tư",
+    "otpIsValidate": "OTP không đúng định dạng",
+    "proceedWithCheckOTP": "Tiến hành kiếm tra OTP",
+    "proceedWithSendOTP": "Tiến hành gửi OTP",
+    "pleaseEnterEmail": "Vui lòng nhập email",
+    "titleGetOTPRegister": "Mã xác thực sẽ được gửi qua Email.",
+    "enterAuthCode": "Nhập mã xác thực",
+    "enterEmail": "Nhập email",
+    "enterOTP": "Nhập OTP",
+    "otpAuthentication": "Xác thực OTP",
+    "sendOTPAgain": "Gửi lại mã",
+
+    "proceedWithLogin": "Tiến hành đăng nhập",
+    "loginSuccessful": "Đăng nhập thành công",
+    "loginNow": "Đăng nhập ngay"
+}

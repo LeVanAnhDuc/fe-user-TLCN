@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '../../redux/hook';
 import { clearRegister, getDataRegister } from '../Register/registerSlice';
@@ -26,6 +27,7 @@ const GetOTPRegister = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const dataRegister = useAppSelector(getDataRegister);
+    const { t } = useTranslation('getOTPRegister');
 
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
     const [isLoadingSendOTPAgain, setIsLoadingSendOTPAgain] = useState(false);
@@ -36,9 +38,9 @@ const GetOTPRegister = () => {
     const schema = yup.object().shape({
         otp: yup
             .string()
-            .required('OTP đang trống')
-            .min(4, 'OTP phải từ 4 kí tự trở lên')
-            .test('is-OTP', 'OTP không được chứa kí tự lạ', function (value) {
+            .required(t('otpIsRequired'))
+            .min(4, t('otpLeast4'))
+            .test('is-OTP', t('otpIsValidate'), function (value) {
                 if (!value) return true;
 
                 const numericRegex = /^[a-zA-Z0-9]+$/;
@@ -55,8 +57,8 @@ const GetOTPRegister = () => {
     });
 
     const onSubmit: SubmitHandler<FormDataGetOTPRegister> = async (data) => {
-        if (dataRegister.email === '') {
-            toast.error('Vui lòng nhập lại Email');
+        if (!dataRegister.email) {
+            toast.error(t('enterEmail'));
             navigate(config.Routes.getOTPLogIn);
             setVerifyOTP(false);
             return;
@@ -64,7 +66,7 @@ const GetOTPRegister = () => {
 
         try {
             setIsLoadingSubmit(true);
-            setTitleDialog('Đang kiếm tra OTP');
+            setTitleDialog(t('proceedWithCheckOTP'));
             const response = await verifyOTPRegister(dataRegister.email, data.otp);
             setIsLoadingSubmit(false);
 
@@ -81,8 +83,8 @@ const GetOTPRegister = () => {
     };
 
     const handleSendOTPAgain = async () => {
-        if (dataRegister.email === '') {
-            toast.error('OTP của email hết hạn. Vui lòng nhập lại Email');
+        if (!dataRegister.email) {
+            toast.error(t('enterEmail'));
             navigate(config.Routes.getOTPLogIn);
             setVerifyOTP(false);
             return;
@@ -90,7 +92,7 @@ const GetOTPRegister = () => {
 
         try {
             setIsLoadingSendOTPAgain(true);
-            setTitleDialog('Tiến hành gửi OTP');
+            setTitleDialog(t('proceedWithSendOTP'));
             const response = await sendOTPRegister(dataRegister.email);
             setIsLoadingSendOTPAgain(false);
 
@@ -106,19 +108,18 @@ const GetOTPRegister = () => {
     };
 
     const handleLogin = async () => {
-        if (dataRegister.email === '' && dataRegister.passWord === '') {
+        if (!dataRegister.email && !dataRegister.passWord) {
             navigate(config.Routes.logIn);
             return;
         }
 
         try {
             setIsLoadingLogin(true);
-            setTitleDialog('Tiến hành đăng nhập');
+            setTitleDialog(t('proceedWithLogin'));
             const response = await loginApi(dataRegister.email, dataRegister.passWord);
             setIsLoadingLogin(false);
 
             if (response.status === 200 && response.data.jwt) {
-                toast.success('Đăng nhập thành công');
                 dispatch(setIsLogin(true));
                 dispatch(
                     setInfoUser({
@@ -145,14 +146,14 @@ const GetOTPRegister = () => {
                     <section className="min-h-[31rem] w-full flex-col items-center lg:flex hidden">
                         <Logo />
                         <AnimationTran tranY={-100} className="m-auto">
-                            <h5 className="leading-7 tracking-tight">Mã xác thực sẽ được gửi qua Email</h5>
+                            <h5 className="leading-7 tracking-tight">{t('titleGetOTPRegister')}</h5>
                         </AnimationTran>
                         <div className="bg-register-banner bg-contain bg-no-repeat bg-center w-full h-full"></div>
                     </section>
 
                     <section className="w-full flex flex-col justify-center gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
                         <AnimationTran tranX={-100} className="text-2xl font-bold ">
-                            Nhập mã xác thực
+                            {t('enterAuthCode')}
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={-100} delay={0.1}>
@@ -165,7 +166,7 @@ const GetOTPRegister = () => {
                                                 {...field}
                                                 error={errors.otp ? true : false}
                                                 fullWidth
-                                                label={'Nhập OTP'}
+                                                label={t('enterOTP')}
                                             />
                                         )}
                                     />
@@ -177,7 +178,7 @@ const GetOTPRegister = () => {
                             <div className="grid grid-cols-2 gap-2">
                                 <AnimationTran tranX={-100} delay={0.3}>
                                     <Button type="submit" variant="fill" fullWidth loading={isLoadingSubmit}>
-                                        Xác thực OTP
+                                        {t('otpAuthentication')}
                                     </Button>
                                 </AnimationTran>
                                 <AnimationTran tranX={-100} delay={0.2}>
@@ -189,7 +190,7 @@ const GetOTPRegister = () => {
                                         loading={isLoadingLogin}
                                         onClick={handleLogin}
                                     >
-                                        Đăng nhập ngay
+                                        {t('loginNow')}
                                     </Button>
                                 </AnimationTran>
                             </div>
@@ -200,7 +201,7 @@ const GetOTPRegister = () => {
                                     loading={isLoadingSendOTPAgain}
                                     onClick={handleSendOTPAgain}
                                 >
-                                    Gửi lại mã
+                                    {t('sendOTPAgain')}
                                 </Button>
                             </AnimationTran>
                         </form>

@@ -2,6 +2,8 @@ import SPEEDDIALSETTINGUI_EN from './speedDialSettingUI.json';
 // import HOME_EN from './home.json';
 import LOGIN_EN from './login.json';
 import REGISTER_EN from './register.json';
+import GETOTPREGISTER_EN from './getOTPRegister.json';
+import GETOTPLOGIN_EN from './getOTPLogin.json';
 // import HEADER_EN from './header.json';
 // import FOOTER_EN from './footer.json';
 // import LISTPRODUCT_EN from './listProduct.json';
@@ -18,6 +20,8 @@ export {
     // HOME_EN,
     LOGIN_EN,
     REGISTER_EN,
+    GETOTPREGISTER_EN,
+    GETOTPLOGIN_EN,
     // HEADER_EN,
     // FOOTER_EN,
     // LISTPRODUCT_EN,
