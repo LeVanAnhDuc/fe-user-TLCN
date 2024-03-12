@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
 import Image from '../../components/Image';
@@ -42,6 +43,7 @@ const CartModal = (props: Iprops) => {
     const totalProduct = useSelector(selectToTalProductCart);
     const totalPrice = useSelector(selectToTalPriceCart);
     const products = useSelector(selectProductsCart);
+    const { t } = useTranslation('cart');
 
     const getListProduct = async () => {
         try {
@@ -100,7 +102,7 @@ const CartModal = (props: Iprops) => {
                     <div className="sticky top-0 z-10">
                         <div className="bg-primary-200 w-full h-14 rounded-b-xl dark:bg-primary-900">
                             <div className="flex justify-between items-center mb-10 h-full px-5">
-                                <span className="text-xl font-bold tracking-wide">Giỏ hàng</span>
+                                <span className="text-xl font-bold tracking-wide">{t('cart')}</span>
                                 <Fab color="error" size="small" className="!shadow-none">
                                     <Close onClick={toggleDrawerCartModal} />
                                 </Fab>
@@ -116,11 +118,11 @@ const CartModal = (props: Iprops) => {
                                     className="text-gray-400 dark:text-gray-200"
                                 />
                                 <span className="text-xl text-center text-gray-400 dark:text-gray-200">
-                                    Hix. Không có sản phẩm nào. Bạn ghé cửa hàng để đặt đồ nhé?
+                                    {t('noProductInCart')}
                                 </span>
                                 <Link to={config.Routes.shop}>
                                     <Button variant="fill" onClick={toggleDrawerCartModal}>
-                                        Cửa hàng
+                                        {t('shop')}
                                     </Button>
                                 </Link>
                             </div>
@@ -150,7 +152,9 @@ const CartModal = (props: Iprops) => {
                                                 <div className="flex justify-between items-center flex-wrap gap-1">
                                                     <aside>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">Phân loại:</span>
+                                                            <span className="font-bold w-18">
+                                                                {t('classification')}:
+                                                            </span>
                                                             <span className="font-medium">
                                                                 {item.sku?.optionValues?.map((option, index) => (
                                                                     <React.Fragment key={index}>
@@ -163,14 +167,14 @@ const CartModal = (props: Iprops) => {
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">Đơn giá: </span>
+                                                            <span className="font-bold w-18">{t('unitPrice')}: </span>
                                                             <span className="not-italic font-medium text-red-500 flex gap-1">
                                                                 {convertNumberToVND(item.price)}
                                                                 <span className="text-xs"> đ</span>
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">Tổng giá:</span>
+                                                            <span className="font-bold w-18">{t('totalPrice')}:</span>
                                                             <div className="not-italic font-medium text-red-500 flex gap-1">
                                                                 {convertNumberToVND(item.subTotal)}
                                                                 <span className="text-xs">đ</span>
@@ -183,7 +187,7 @@ const CartModal = (props: Iprops) => {
                                                             idItem={item.id}
                                                             handleChangeItemQuantity={handleChangeItemQuantity}
                                                         />
-                                                        <MouseOverPopover content="Bỏ khỏi giỏ hàng">
+                                                        <MouseOverPopover content={t('deleteProduct')}>
                                                             <IconButton onClick={() => handleDeleteProduct(item.id)}>
                                                                 <DeleteTwoTone className="!text-red-500" />
                                                             </IconButton>
@@ -201,7 +205,7 @@ const CartModal = (props: Iprops) => {
                     <div className="bg-gray-200 border-t-2 border-black dark:bg-dark-700">
                         <div className="flex flex-col w-full h-fit px-5 py-2 gap-5">
                             <div className="flex justify-between items-center w-full font-bold">
-                                <span className="text-lg">Tổng</span>
+                                <span className="text-lg">{t('totalAmount')}</span>
                                 <AnimationScale scale={0.5} className="text-red-500 flex justify-end">
                                     <>
                                         {convertNumberToVND(totalPrice)}
@@ -219,7 +223,7 @@ const CartModal = (props: Iprops) => {
                                         toggleDrawerCartModal();
                                     }}
                                 >
-                                    Giỏ hàng
+                                    {t('cart')}
                                 </Button>
                                 <Button
                                     className="rounded-lg"
@@ -231,7 +235,7 @@ const CartModal = (props: Iprops) => {
                                         toggleDrawerCartModal();
                                     }}
                                 >
-                                    Thanh toán
+                                    {t('checkOut')}
                                 </Button>
                             </div>
                         </div>

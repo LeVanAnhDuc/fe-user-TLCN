@@ -1,0 +1,14 @@
+{
+    "classification": "Classification",
+    "unitPrice": "Unit price",
+    "totalPrice": "Total price",
+    "deleteProduct": "Remove product from the cart",
+    "noProductInCart": "There are currently no products",
+    "shop": "Shop",
+    "totalCost": "Total cost",
+    "totalAmount": "Total amount",
+    "totalDelivery": "Total delivery",
+    "subtotal": "Subtotal",
+    "checkOut": "Check out",
+    "cart": "Cart"
+}

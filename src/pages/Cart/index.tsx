@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Image from '../../components/Image';
 import config from '../../config';
@@ -33,11 +34,11 @@ const Cart = () => {
     const totalProduct = useSelector(selectToTalProductCart);
     const totalPrice = useSelector(selectToTalPriceCart);
     const products = useSelector(selectProductsCart);
+    const { t } = useTranslation('cart');
 
     const getListProduct = async () => {
         try {
             const response = await getCartByToken();
-            console.log('check');
 
             if (response.status === 200) {
                 dispatch(setItemsOfCart(response?.data?.cartItems));
@@ -108,7 +109,7 @@ const Cart = () => {
                                         <div className="flex justify-between items-center flex-wrap gap-1">
                                             <aside>
                                                 <div className="flex gap-1">
-                                                    <span className="font-bold w-18">Phân loại:</span>
+                                                    <span className="font-bold w-18">{t('classification')}:</span>
                                                     <span className="font-medium">
                                                         {item.sku?.optionValues?.map((option, index) => (
                                                             <React.Fragment key={index}>
@@ -119,14 +120,14 @@ const Cart = () => {
                                                     </span>
                                                 </div>
                                                 <div className="flex gap-1">
-                                                    <span className="font-bold w-18">Đơn giá: </span>
+                                                    <span className="font-bold w-18">{t('unitPrice')}: </span>
                                                     <span className="not-italic font-medium text-red-500 flex gap-1">
                                                         {convertNumberToVND(item.price)}
                                                         <span className="text-xs"> đ</span>
                                                     </span>
                                                 </div>
                                                 <div className="flex gap-1">
-                                                    <span className="font-bold w-18">Tổng giá:</span>
+                                                    <span className="font-bold w-18">{t('totalPrice')}:</span>
                                                     <div className="not-italic font-medium text-red-500 flex gap-1">
                                                         {convertNumberToVND(item.subTotal)}
                                                         <span className="text-xs">đ</span>
@@ -139,7 +140,7 @@ const Cart = () => {
                                                     idItem={item.id}
                                                     handleChangeItemQuantity={handleChangeItemQuantity}
                                                 />
-                                                <MouseOverPopover content="Bỏ khỏi giỏ hàng">
+                                                <MouseOverPopover content={t('deleteProduct')}>
                                                     <IconButton onClick={() => handleDeleteProduct(item.id)}>
                                                         <DeleteTwoTone className="!text-red-500" />
                                                     </IconButton>
@@ -154,20 +155,18 @@ const Cart = () => {
                     {products.length === 0 && (
                         <div className="h-full flex flex-col items-center justify-center gap-5">
                             <ContentPasteSearch sx={{ fontSize: '100px' }} className="text-gray-400" />
-                            <span className="text-xl text-gray-400">
-                                Hix. Không có sản phẩm nào. Bạn ghé cửa hàng để đặt đồ nhé?
-                            </span>
+                            <span className="text-xl text-gray-400">{t('noProductInCart')}</span>
                             <Link to={config.Routes.shop}>
-                                <Button variant="fill">Cửa hàng</Button>
+                                <Button variant="fill">{t('shop')}</Button>
                             </Link>
                         </div>
                     )}
                 </div>
 
                 <div className="lg:col-span-3 sticky top-20 bg-white h-fit w-full p-5 rounded-lg space-y-5 dark:bg-dark-600">
-                    <h1 className="text-2xl font-bold text-center">Tổng chi phí</h1>
+                    <h1 className="text-2xl font-bold text-center">{t('totalCost')}</h1>
                     <div className="flex flex-wrap justify-between gap-1">
-                        <span className="font-semibold">Tổng tiền</span>
+                        <span className="font-semibold">{t('totalAmount')}</span>
                         <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                             <>
                                 {convertNumberToVND(totalPrice)}
@@ -176,7 +175,7 @@ const Cart = () => {
                         </AnimationScale>
                     </div>
                     <div className="flex flex-wrap justify-between gap-1">
-                        <span className="font-semibold">Phí vận chuyển</span>
+                        <span className="font-semibold">{t('totalDelivery')}</span>
                         <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                             <>
                                 {0}
@@ -186,7 +185,7 @@ const Cart = () => {
                     </div>
                     <div className="h-0.5 bg-gray-200 w-full"></div>
                     <div className="flex flex-wrap justify-between gap-1">
-                        <span className="font-semibold">Thành tiền</span>
+                        <span className="font-semibold">{t('subtotal')}</span>
                         <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                             <>
                                 {convertNumberToVND(totalPrice + 0)}
@@ -204,7 +203,7 @@ const Cart = () => {
                             navigate(config.Routes.checkOut);
                         }}
                     >
-                        Thanh toán
+                        {t('checkOut')}
                     </Button>
                 </div>
             </div>

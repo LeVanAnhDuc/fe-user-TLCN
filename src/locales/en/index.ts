@@ -10,7 +10,7 @@ import FOOTER_EN from './footer.json';
 import SHOP_EN from './shop.json';
 import CARD_EN from './card.json';
 import DETAILPRODUCT_EN from './detailProduct.json';
-// import CART_EN from './cart.json';
+import CART_EN from './cart.json';
 // import CHECKOUT_EN from './checkOut.json';
 // import WISHLIST_EN from './wishList.json';
 // import PURCHASEHISTORY_EN from './purchaseHistory.json';
@@ -29,7 +29,7 @@ export {
     SHOP_EN,
     CARD_EN,
     DETAILPRODUCT_EN,
-    // CART_EN,
+    CART_EN,
     // CHECKOUT_EN,
     // WISHLIST_EN,
     // PURCHASEHISTORY_EN,

@@ -1,0 +1,14 @@
+{
+    "classification": "Phân loại",
+    "unitPrice": "Đơn giá",
+    "totalPrice": "Tổng giá",
+    "deleteProduct": "Xóa sản phẩm khỏi giỏ hàng",
+    "noProductInCart": "Hiện không có sản phẩm",
+    "shop": "Cửa hàng",
+    "totalCost": "Tổng chi phí",
+    "totalAmount": "Tổng tiền",
+    "totalDelivery": "Phí vận chuyển",
+    "subtotal": "Thành tiền",
+    "checkOut": "Thanh toán",
+    "cart": "Giỏ hàng"
+}
