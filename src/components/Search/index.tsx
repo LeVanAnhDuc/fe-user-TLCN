@@ -9,10 +9,11 @@ interface Iprops {
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<string>>;
     setDoneSearch?: React.Dispatch<React.SetStateAction<boolean>>;
+    placeholderSearch?: string;
 }
 
 const Search = (props: Iprops) => {
-    const { search, setSearch, setDoneSearch } = props;
+    const { search, setSearch, setDoneSearch, placeholderSearch = 'Tìm kiếm sản phẩm...' } = props;
     const locationRouter = useLocation();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +37,7 @@ const Search = (props: Iprops) => {
             <input
                 type="search"
                 className="border-y-2 border-l-2 border-gray-300 bg-white h-10 w-full px-3 py-2 rounded-l-xl text-sm focus:border-primary-900 dark:focus:border-primary-300"
-                placeholder="Tìm kiếm sản phẩm..."
+                placeholder={placeholderSearch}
                 required
                 value={search}
                 onChange={handleChange}

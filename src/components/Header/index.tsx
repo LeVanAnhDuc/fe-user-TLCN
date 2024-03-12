@@ -11,6 +11,7 @@ import Fab from '@mui/material/Fab';
 
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
@@ -25,6 +26,7 @@ import CartModal from '../../pages/Cart/CartModal';
 function Header() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation('header');
 
     const userName = useAppSelector(selectUserNameUser);
     const avatarUrl = useAppSelector(selectAvatarUrl);
@@ -97,7 +99,7 @@ function Header() {
                                             : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                     } uppercase cursor-pointer transition `}
                                 >
-                                    Trang chủ
+                                    {t('home')}
                                 </div>
                             )}
                         </NavLink>
@@ -110,7 +112,7 @@ function Header() {
                                             : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                     } uppercase cursor-pointer transition `}
                                 >
-                                    Cửa hàng
+                                    {t('shop')}
                                 </div>
                             )}
                         </NavLink>
@@ -123,7 +125,7 @@ function Header() {
                                             : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                     } uppercase cursor-pointer transition `}
                                 >
-                                    Chính sách
+                                    {t('policy')}
                                 </div>
                             )}
                         </NavLink>
@@ -136,7 +138,7 @@ function Header() {
                                             : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                     } uppercase cursor-pointer transition `}
                                 >
-                                    Bảng size
+                                    {t('tableSize')}
                                 </div>
                             )}
                         </NavLink>
@@ -144,7 +146,12 @@ function Header() {
 
                     <div className=" flex items-center justify-end gap-2">
                         <div className="w-56 h-full hidden xl:flex">
-                            <Search search={search} setSearch={setSearch} setDoneSearch={setDoneSearch} />
+                            <Search
+                                search={search}
+                                setSearch={setSearch}
+                                setDoneSearch={setDoneSearch}
+                                placeholderSearch={t('placeholder')}
+                            />
                         </div>
                         {checkLogin ? (
                             <>
@@ -200,19 +207,19 @@ function Header() {
                                             to={config.Routes.profileHomeProfile}
                                             className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
                                         >
-                                            Tài khoản của tôi
+                                            {t('myAccount')}
                                         </Link>
                                         <Link
                                             to={config.Routes.profileHistoryPaymentProfile}
                                             className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
                                         >
-                                            Đơn mua
+                                            {t('purchaseOrder')}
                                         </Link>
                                         <div
                                             className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
                                             onClick={handleLogout}
                                         >
-                                            Đăng xuất
+                                            {t('logOut')}
                                         </div>
                                     </div>
                                 </Popper>
@@ -223,14 +230,14 @@ function Header() {
                                     to={config.Routes.register}
                                     className="uppercase cursor-pointer hover:text-primary-900 dark:hover:text-primary-300"
                                 >
-                                    Đăng Kí
+                                    {t('register')}
                                 </Link>
                                 <div>|</div>
                                 <Link
                                     to={config.Routes.logIn}
                                     className="uppercase cursor-pointer hover:text-primary-900 dark:hover:text-primary-300"
                                 >
-                                    Đăng Nhập
+                                    {t('login')}
                                 </Link>
                             </div>
                         )}
@@ -245,38 +252,43 @@ function Header() {
             >
                 <div className="h-screen w-96 py-5 px-7 flex flex-col  gap-5">
                     <div className="flex justify-between items-center">
-                        <span className="text-2xl font-bold tracking-wide">Danh mục</span>
+                        <span className="text-2xl font-bold tracking-wide">{t('navigation')}</span>
                         <Fab color="error" size="small">
                             <CloseIcon onClick={toggleMenuResponsive(false)} />
                         </Fab>
                     </div>
-                    <Search search={search} setSearch={setSearch} setDoneSearch={setDoneSearch} />
+                    <Search
+                        search={search}
+                        setSearch={setSearch}
+                        setDoneSearch={setDoneSearch}
+                        placeholderSearch={t('placeholder')}
+                    />
                     <div className="flex flex-col gap-3">
                         <NavLink to={config.Routes.home}>
                             {({ isActive }) => (
                                 <Button variant={isActive ? 'fill' : 'text'} fullWidth>
-                                    Trang chủ
+                                    {t('home')}
                                 </Button>
                             )}
                         </NavLink>
                         <NavLink to={config.Routes.shop}>
                             {({ isActive }) => (
                                 <Button variant={isActive ? 'fill' : 'text'} fullWidth>
-                                    Cửa hàng
+                                    {t('shop')}
                                 </Button>
                             )}
                         </NavLink>
                         <NavLink to={config.Routes.policy}>
                             {({ isActive }) => (
                                 <Button variant={isActive ? 'fill' : 'text'} fullWidth>
-                                    Chính sách
+                                    {t('policy')}
                                 </Button>
                             )}
                         </NavLink>
                         <NavLink to={config.Routes.tableSize}>
                             {({ isActive }) => (
                                 <Button variant={isActive ? 'fill' : 'text'} fullWidth>
-                                    Bảng size
+                                    {t('tableSize')}
                                 </Button>
                             )}
                         </NavLink>

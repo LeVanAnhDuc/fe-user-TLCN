@@ -1,0 +1,17 @@
+{
+    "home": "Home",
+    "shop": "Shop",
+    "policy": "Policy",
+    "tableSize": "Table Size",
+    "placeholder": "Search product...",
+    "myAccount": "My Account",
+    "purchaseOrder": "Purchase Order",
+    "logOut": "Log Out",
+    "register": "Sign Up",
+    "login": "Login",
+    "navigation": "Navigation",
+
+    "cart": "Cart",
+    "wishList": "Wish List",
+    "titleButton": "Search"
+}
