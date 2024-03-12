@@ -5,6 +5,7 @@ import ShoppingBagOutlined from '@mui/icons-material/ShoppingBagOutlined';
 import { BarChart } from '@mui/x-charts/BarChart';
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { getDataStatisticUser } from '../../../apis/statisticApi';
 import CardStatictis from './CardStatictis';
@@ -18,6 +19,7 @@ interface IDashboard {
     delivered: number;
 }
 const Dashboard = () => {
+    const { t } = useTranslation('myPage');
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
     const [statictis, setStatictis] = useState<IDashboard>();
     const getDataStatistic = async () => {
@@ -46,34 +48,36 @@ const Dashboard = () => {
                     <CardStatictis
                         icon={VolunteerActivismOutlined}
                         data={statictis?.favoriteCount}
-                        content="Quan tâm"
+                        content={t('care')}
                         className="bg-orange-200 dark:bg-orange-300"
                     />
                     <CardStatictis
                         icon={InventoryOutlined}
                         data={statictis?.ordered}
-                        content="Đã đặt"
+                        content={t('ordered')}
                         className="bg-red-200 dark:bg-red-300"
                         delay={0.1}
                     />
                     <CardStatictis
                         icon={AirportShuttleOutlined}
                         data={statictis?.shipping}
-                        content="Đang giao"
+                        content={t('beingDelivered')}
                         className="bg-green-200 dark:bg-green-300"
                         delay={0.2}
                     />
                     <CardStatictis
                         icon={ShoppingBagOutlined}
                         data={statictis?.delivered}
-                        content="Đã giao"
+                        content={t('delivered')}
                         className="bg-blue-200 dark:bg-blue-300"
                         delay={0.3}
                     />
                 </div>
                 <AnimationTran tranY={50} className="bg-white size-full rounded-lg dark:bg-dark-600">
                     <BarChart
-                        xAxis={[{ scaleType: 'band', data: ['Sản phẩm quan tâm', 'Đã đặt', 'Đang giao', 'Đã giao'] }]}
+                        xAxis={[
+                            { scaleType: 'band', data: [t('care'), t('ordered'), t('beingDelivered'), t('delivered')] },
+                        ]}
                         series={[
                             {
                                 data: [

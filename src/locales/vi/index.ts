@@ -12,6 +12,7 @@ import CARD_VI from './card.json';
 import DETAILPRODUCT_VI from './detailProduct.json';
 import CART_VI from './cart.json';
 import CHECKOUT_VI from './checkOut.json';
+import MYPAGE_VI from './myPage.json';
 // import WISHLIST_VI from './wishList.json';
 // import PURCHASEHISTORY_VI from './purchaseHistory.json';
 // import ERROR404_VI from './error404.json';
@@ -31,6 +32,7 @@ export {
     DETAILPRODUCT_VI,
     CART_VI,
     CHECKOUT_VI,
+    MYPAGE_VI,
     // WISHLIST_VI,
     // PURCHASEHISTORY_VI,
     // ERROR404_VI,
