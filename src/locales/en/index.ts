@@ -8,7 +8,7 @@ import FORGOTPASSWORD_EN from './forgotPassWord.json';
 import HEADER_EN from './header.json';
 import FOOTER_EN from './footer.json';
 import SHOP_EN from './shop.json';
-// import CARD_EN from './card.json';
+import CARD_EN from './card.json';
 // import DETAILPRODUCT_EN from './detailProduct.json';
 // import CART_EN from './cart.json';
 // import CHECKOUT_EN from './checkOut.json';
@@ -27,7 +27,7 @@ export {
     HEADER_EN,
     FOOTER_EN,
     SHOP_EN,
-    // CARD_EN,
+    CARD_EN,
     // DETAILPRODUCT_EN,
     // CART_EN,
     // CHECKOUT_EN,

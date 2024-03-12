@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
 import IProduct from '../../interface/product';
@@ -26,6 +27,7 @@ const Card = (props: Iprops) => {
     const { itemProduct, loading = false, delay = 0 } = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation('card');
 
     const [favourite, setFavourite] = useState(itemProduct.liked ? true : false);
     const [favoriteCount, setFavouriteCount] = useState(itemProduct.favoriteCount);
@@ -50,7 +52,7 @@ const Card = (props: Iprops) => {
                 toast.error(`${error}`);
             }
         } else {
-            toast.warning('Yêu cầu đăng nhập');
+            toast.warning(t('requireLogin'));
             navigate(config.Routes.logIn);
         }
     };
@@ -107,14 +109,14 @@ const Card = (props: Iprops) => {
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
                                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                                    Độ ưu thích {favoriteCount}
+                                    {t('preference')} {favoriteCount}
                                 </span>
                             )}
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
                                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                                    Đã bán {itemProduct.sold}
+                                    {t('sold')} {itemProduct.sold}
                                 </span>
                             )}
                         </div>
