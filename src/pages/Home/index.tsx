@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import * as homeImg from '../../assets/img/home/index';
 import config from '../../config';
@@ -14,6 +15,7 @@ import Carousel from '../../components/Carousel';
 function Home() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation('home');
 
     const handleCheckToken = async (token: string) => {
         const response = await checkExpiredToken(token);
@@ -51,15 +53,11 @@ function Home() {
                     <div className="w-[30rem] h-[28rem] bg-primary-200 dark:bg-primary-900 rounded-tl-[10rem] rounded-br-[10rem]">
                         <div className="px-14 py-24 flex flex-col gap-8 justify-center ">
                             <div className="text-4xl font-bold text-primary-900 dark:text-primary-100 leading-tight">
-                                Nghệ thuật ăn mặc
+                                {t('bannerTitle')}
                             </div>
-                            <div className="font-medium">
-                                Không chỉ là thời trang, DUCK còn là “phòng thí nghiệm” của tuổi trẻ - nơi nghiên cứu và
-                                cho ra đời nguồn năng lượng mang tên “Youth”. Chúng mình luôn muốn tạo nên những trải
-                                nghiệm vui vẻ, năng động và trẻ trung.
-                            </div>
+                            <div className="font-medium">{t('bannerDescription')}</div>
                             <Link to={config.Routes.shop}>
-                                <Button variant="fill">Mua ngay</Button>
+                                <Button variant="fill">{t('buyNow')}</Button>
                             </Link>
                         </div>
                     </div>
@@ -69,7 +67,7 @@ function Home() {
             <div className="w-full flex flex-col justify-center items-center gap-1 my-5">
                 <AnimationTran tranY={100} className="bg-black h-1 w-3/12 dark:bg-white"></AnimationTran>
                 <AnimationTran tranY={100} delay={0.2} className="uppercase text-xl font-semibold not-italic">
-                    NHỮNG ĐIỂM NỔI BẬT TRONG TUẦN NÀY
+                    {t('popularThisWeek')}
                 </AnimationTran>
             </div>
             <div className="w-full py-16 bg-primary-200/80 dark:bg-primary-900">
@@ -78,17 +76,14 @@ function Home() {
                         <AnimationTran tranX={-100}>
                             <div className="flex flex-col gap-4 text-center md:text-left md:mt-0">
                                 <div className="text-5xl font-bold text-primary-800 dark:text-primary-100">
-                                    50+ Thời trang có cảm hứng
+                                    {t('carouselTitle')}
                                 </div>
-                                <div className="font-medium ">
-                                    Nhà thiết kế của chúng tôi đã tạo ra rất nhiều nguyên mẫu sản phẩm đẹp đẽ truyền cảm
-                                    hứng cho bạn
-                                </div>
+                                <div className="font-medium ">{t('carouselDescription')}</div>
                             </div>
                         </AnimationTran>
                         <AnimationTran className="flex justify-center md:justify-start" tranY={100}>
                             <Link to={config.Routes.shop}>
-                                <Button variant="fill">Tìm hiểm thêm</Button>
+                                <Button variant="fill">{t('exploreMore')}</Button>
                             </Link>
                         </AnimationTran>
                     </div>
@@ -113,7 +108,7 @@ function Home() {
             <div className="w-10/12 flex flex-col justify-center m-auto my-8 gap-8">
                 <div className="w-full grid justify-items-center gap-1">
                     <div className="bg-black h-1 w-3/12 dark:bg-white"></div>
-                    <div className="uppercase text-xl font-semibold not-italic">Những Điều Cần Thiết</div>
+                    <div className="uppercase text-xl font-semibold not-italic">{t('diverseStyles')}</div>
                 </div>
                 <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-4">
                     <AnimationTran tranX={-100}>
@@ -135,7 +130,7 @@ function Home() {
                                     }}
                                     className="flex"
                                 >
-                                    <Button variant="outlineBlur">Thời trang nam</Button>
+                                    <Button variant="outlineBlur">{t('menFashion')}</Button>
                                 </Link>
                             </AnimationScale>
                         </div>
@@ -159,7 +154,7 @@ function Home() {
                                     }}
                                     className="flex"
                                 >
-                                    <Button variant="outlineBlur">Thời trang nữ</Button>
+                                    <Button variant="outlineBlur">{t('womenFashion')}</Button>
                                 </Link>
                             </AnimationScale>
                         </div>
@@ -183,7 +178,7 @@ function Home() {
                                     }}
                                     className="flex"
                                 >
-                                    <Button variant="outlineBlur">Thời trang trẻ em</Button>
+                                    <Button variant="outlineBlur">{t('childFashion')}</Button>
                                 </Link>
                             </AnimationScale>
                         </div>
@@ -202,12 +197,12 @@ function Home() {
                                 tranY={100}
                                 className="w-full h-auto mb-4 lg:text-4xl md:text-2xl text-xl font-medium not-italic tracking-widest text-white uppercase"
                             >
-                                Xem các phụ kiện thời trang dành cho bạn
+                                {t('videoTitle')}
                             </AnimationTran>
                             <AnimationTran tranY={100} delay={0.2}>
                                 <Link to={config.Routes.shop}>
                                     <Button variant="outlineBlur" className="m-auto">
-                                        Xem cửa hàng
+                                        {t('seeStory')}
                                     </Button>
                                 </Link>
                             </AnimationTran>

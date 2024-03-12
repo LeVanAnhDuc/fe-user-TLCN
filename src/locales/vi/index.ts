@@ -1,5 +1,5 @@
 import SPEEDDIALSETTINGUI_VI from './speedDialSettingUI.json';
-// import HOME_VI from './home.json';
+import HOME_VI from './home.json';
 import LOGIN_VI from './login.json';
 import REGISTER_VI from './register.json';
 import GETOTPREGISTER_VI from './getOTPRegister.json';
@@ -18,7 +18,7 @@ import FOOTER_VI from './footer.json';
 
 export {
     SPEEDDIALSETTINGUI_VI,
-    // HOME_VI,
+    HOME_VI,
     LOGIN_VI,
     REGISTER_VI,
     GETOTPREGISTER_VI,

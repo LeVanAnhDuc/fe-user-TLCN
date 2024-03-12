@@ -7,7 +7,7 @@ import * as vi from '../locales/vi';
 export const resources = {
     en: {
         speedDialSettingUI: en.SPEEDDIALSETTINGUI_EN,
-        // home: en.HOME_EN,
+        home: en.HOME_EN,
         login: en.LOGIN_EN,
         register: en.REGISTER_EN,
         getOTPRegister: en.GETOTPREGISTER_EN,
@@ -26,7 +26,7 @@ export const resources = {
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
-        // home: vi.HOME_VI,
+        home: vi.HOME_VI,
         login: vi.LOGIN_VI,
         register: vi.REGISTER_VI,
         getOTPRegister: vi.GETOTPREGISTER_VI,
@@ -45,14 +45,14 @@ export const resources = {
     },
 } as const;
 
-export const defaultNS = '';
+export const defaultNS = 'home';
 
 i18n.use(initReactI18next).init({
     resources,
     lng: 'vi',
     ns: [
         'speedDialSettingUI',
-        // 'home',
+        'home',
         'login',
         'register',
         'getOTPRegister',
