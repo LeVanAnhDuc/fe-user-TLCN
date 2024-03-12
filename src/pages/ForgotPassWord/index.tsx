@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
 import { sendOTPRegister, verifyOTPRegister } from '../../apis/authApi';
@@ -25,6 +26,7 @@ type FormDataForgotPassword = {
 
 const ForgotPassWord = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation('forgotPassWord');
 
     const [inputPass, setInputPass] = useState<boolean>(false);
     const [inputOTP, setInputOTP] = useState<boolean>(false);
@@ -33,23 +35,40 @@ const ForgotPassWord = () => {
     const [titleDialog, setTitleDialog] = useState<string>('');
 
     const schema = yup.object().shape({
-        email: yup.string().required('Email đang trống').email('Định dạng email không đúng'),
+        email: yup.string().required(t('emailIsRequired')).email(t('emailIsValidate')),
         otp: yup
             .string()
-            .required('OTP đang trống')
-            .min(4, 'OTP phải từ 4 kí tự trở lên')
-            .test('is-OTP', 'OTP không được chứa kí tự lạ', function (value) {
+            .required(t('otpIsRequired'))
+            .min(4, t('otpLeast4'))
+            .test('is-OTP', t('otpIsValidate'), function (value) {
                 if (!value) return true;
 
                 const numericRegex = /^[a-zA-Z0-9]+$/;
                 return numericRegex.test(value);
             }),
-        passWord: yup.string().required('Mật khẩu đang trống').min(8, 'Mật khẩu phải từ 8 kí tự trở lên'),
+        passWord: yup
+            .string()
+            .required(t('passwordIsRequired'))
+            .test('is-passWord', t('passwordIsNotFormat'), function (value) {
+                if (!value) return true;
+
+                const regexUserName = /^[a-zA-Z0-9]+$/;
+
+                return regexUserName.test(value);
+            })
+            .min(8, t('passwordLeast8')),
         comfirmPassWord: yup
             .string()
-            .required('Mật khẩu đang trống')
-            .min(8, 'Mật khẩu phải từ 8 kí tự trở lên')
-            .oneOf([yup.ref('passWord')], 'Mật khẩu xác nhận phải giống với mật khẩu mới'),
+            .required(t('passwordIsRequired'))
+            .test('is-passWord', t('passwordIsNotFormat'), function (value) {
+                if (!value) return true;
+
+                const regexUserName = /^[a-zA-Z0-9]+$/;
+
+                return regexUserName.test(value);
+            })
+            .min(8, t('passwordLeast8'))
+            .oneOf([yup.ref('passWord')], t('passwordConfirm')),
     });
 
     const {
@@ -64,7 +83,7 @@ const ForgotPassWord = () => {
     const onSubmit: SubmitHandler<FormDataForgotPassword> = async (data) => {
         try {
             setIsLoadingSubmit(true);
-            setTitleDialog('Kiểm tra mật khẩu');
+            setTitleDialog(t('proceedChangePass'));
             const response = await forgotPassWord(data.email, data.passWord);
             setIsLoadingSubmit(false);
 
@@ -84,25 +103,25 @@ const ForgotPassWord = () => {
     const handleSendOTPAgain = async () => {
         if (getValues().email) {
             setIsLoadingGetOTP(true);
-            setTitleDialog('Tiến hành gửi OTP');
+            setTitleDialog(t('proceedWithSendOTP'));
             const response = await sendOTPRegister(getValues().email);
             setIsLoadingGetOTP(false);
 
             if (response.status === 200) {
                 setInputOTP(true);
-                toast.success('Đã gửi OTP');
+                toast.success(t('sendOTPSuccessful'));
             } else {
                 toast.error(response.data.message || response.data);
             }
         } else {
-            toast.error('Email đang rỗng');
+            toast.error(t('emailIsEmpty'));
         }
     };
 
     const handleCheckOTP = async () => {
         try {
             setIsLoadingSubmit(true);
-            setTitleDialog('Đang kiếm tra OTP');
+            setTitleDialog(t('proceedWithCheckOTP'));
             const response = await verifyOTPRegister(getValues('email'), getValues('otp'));
             setIsLoadingSubmit(false);
 
@@ -123,7 +142,7 @@ const ForgotPassWord = () => {
                 <div className="w-10/12 xl:w-8/12 flex gap-3 bg-gray-100 my-20 py-8 px-6 rounded-xl shadow dark:bg-dark-600">
                     <section className="w-full flex flex-col justify-start gap-6 shadow py-7 px-5 bg-gray-50 rounded-lg dark:bg-dark-400">
                         <AnimationTran tranX={100} className="text-2xl font-bold">
-                            Quên mật khẩu
+                            {t('forgotPassword')}
                         </AnimationTran>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <AnimationTran tranX={100} delay={0.1}>
@@ -136,7 +155,7 @@ const ForgotPassWord = () => {
                                                 {...field}
                                                 error={errors.email ? true : false}
                                                 fullWidth
-                                                label={'Nhập email'}
+                                                label={t('enterEmail')}
                                                 autoComplete="email"
                                                 disabled={inputOTP ? true : false}
                                             />
@@ -159,7 +178,7 @@ const ForgotPassWord = () => {
                                                     {...field}
                                                     error={errors.otp ? true : false}
                                                     fullWidth
-                                                    label={'Nhập OTP'}
+                                                    label={t('enterOTP')}
                                                     disabled={inputPass ? true : false}
                                                 />
                                             )}
@@ -182,7 +201,7 @@ const ForgotPassWord = () => {
                                                     <InputPassword
                                                         field={{ ...field }}
                                                         error={errors.passWord ? true : false}
-                                                        label={'Nhập mật khẩu mới'}
+                                                        label={t('enterNewPassword')}
                                                     />
                                                 )}
                                             />
@@ -200,7 +219,7 @@ const ForgotPassWord = () => {
                                                     <InputPassword
                                                         field={{ ...field }}
                                                         error={errors.comfirmPassWord ? true : false}
-                                                        label={'Nhập lại mật khẩu mới'}
+                                                        label={t('enterConfirmNewPassword')}
                                                     />
                                                 )}
                                             />
@@ -216,7 +235,7 @@ const ForgotPassWord = () => {
                                 (inputPass ? (
                                     <AnimationTran tranY={-100} delay={0.1}>
                                         <Button type="submit" variant="fill" fullWidth loading={isLoadingSubmit}>
-                                            Xác nhận mật khẩu mới
+                                            {t('confirmNewPassword')}
                                         </Button>
                                     </AnimationTran>
                                 ) : (
@@ -227,7 +246,7 @@ const ForgotPassWord = () => {
                                             loading={isLoadingSubmit}
                                             onClick={handleCheckOTP}
                                         >
-                                            Xác thực OTP
+                                            {t('otpAuthentication')}
                                         </Button>
                                     </AnimationTran>
                                 ))}
@@ -240,7 +259,7 @@ const ForgotPassWord = () => {
                                         onClick={handleSendOTPAgain}
                                         loading={isLoadingGetOTP}
                                     >
-                                        {!inputOTP ? 'Gửi mã OTP' : 'Gửi lại mã OTP'}
+                                        {!inputOTP ? t('sendOTP') : t('sendOTPAgain')}
                                     </Button>
                                 </AnimationTran>
                             )}
@@ -250,10 +269,7 @@ const ForgotPassWord = () => {
                     <section className="min-h-[31rem] w-full flex-col items-center lg:flex hidden">
                         <Logo />
                         <AnimationTran tranY={-100} className="m-auto">
-                            <h5 className="leading-7 tracking-tight">
-                                Đừng lo lắng khi quên mật khẩu. Chỉ cần thực hiện các bước sau để có thể đổi mật khẩu
-                                của bạn.
-                            </h5>
+                            <h5 className="leading-7 tracking-tight">{t('titleForgotPass')}</h5>
                         </AnimationTran>
                         <div className="bg-forgotPassword-banner bg-contain bg-no-repeat bg-center w-full h-full"></div>
                     </section>

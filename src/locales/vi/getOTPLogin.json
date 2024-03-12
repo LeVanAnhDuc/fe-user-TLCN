@@ -12,9 +12,5 @@
     "enterEmail": "Nhập email",
     "enterOTP": "Nhập OTP",
     "otpAuthentication": "Xác thực OTP",
-    "sendOTPAgain": "Gửi lại mã",
-
-    "proceedWithLogin": "Tiến hành đăng nhập",
-    "loginSuccessful": "Đăng nhập thành công",
-    "loginNow": "Đăng nhập ngay"
+    "sendOTPAgain": "Gửi lại mã"
 }

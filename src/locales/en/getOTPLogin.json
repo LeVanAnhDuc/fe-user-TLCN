@@ -12,9 +12,5 @@
     "enterEmail": "Enter email",
     "enterOTP": "Enter OTP",
     "otpAuthentication": "OTP Authentication",
-    "sendOTPAgain": "Send OTP again",
-
-    "proceedWithLogin": "Proceed login",
-    "loginSuccessful": "Login successful",
-    "loginNow": "Login now"
+    "sendOTPAgain": "Send OTP again"
 }

@@ -4,6 +4,7 @@ import LOGIN_VI from './login.json';
 import REGISTER_VI from './register.json';
 import GETOTPREGISTER_VI from './getOTPRegister.json';
 import GETOTPLOGIN_VI from './getOTPLogin.json';
+import FORGOTPASSWORD_VI from './forgotPassWord.json';
 
 // import HEADER_VI from './header.json';
 // import FOOTER_VI from './footer.json';
@@ -23,6 +24,7 @@ export {
     REGISTER_VI,
     GETOTPREGISTER_VI,
     GETOTPLOGIN_VI,
+    FORGOTPASSWORD_VI,
     // HEADER_VI,
     // FOOTER_VI,
     // LISTPRODUCT_VI,

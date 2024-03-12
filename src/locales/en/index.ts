@@ -4,6 +4,7 @@ import LOGIN_EN from './login.json';
 import REGISTER_EN from './register.json';
 import GETOTPREGISTER_EN from './getOTPRegister.json';
 import GETOTPLOGIN_EN from './getOTPLogin.json';
+import FORGOTPASSWORD_EN from './forgotPassWord.json';
 // import HEADER_EN from './header.json';
 // import FOOTER_EN from './footer.json';
 // import LISTPRODUCT_EN from './listProduct.json';
@@ -22,6 +23,7 @@ export {
     REGISTER_EN,
     GETOTPREGISTER_EN,
     GETOTPLOGIN_EN,
+    FORGOTPASSWORD_EN,
     // HEADER_EN,
     // FOOTER_EN,
     // LISTPRODUCT_EN,
