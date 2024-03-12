@@ -6,7 +6,7 @@ import GETOTPREGISTER_VI from './getOTPRegister.json';
 import GETOTPLOGIN_VI from './getOTPLogin.json';
 import FORGOTPASSWORD_VI from './forgotPassWord.json';
 import HEADER_VI from './header.json';
-// import FOOTER_VI from './footer.json';
+import FOOTER_VI from './footer.json';
 // import LISTPRODUCT_VI from './listProduct.json';
 // import CARD_VI from './card.json';
 // import DETAILPRODUCT_VI from './detailProduct.json';
@@ -25,7 +25,7 @@ export {
     GETOTPLOGIN_VI,
     FORGOTPASSWORD_VI,
     HEADER_VI,
-    // FOOTER_VI,
+    FOOTER_VI,
     // LISTPRODUCT_VI,
     // CARD_VI,
     // DETAILPRODUCT_VI,
