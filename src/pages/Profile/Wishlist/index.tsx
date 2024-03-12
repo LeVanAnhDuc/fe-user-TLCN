@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import React from 'react';
-import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import Image from '../../../components/Image';
 import { getCountItemOfWishList, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
@@ -22,6 +22,7 @@ const Wishlist = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const itemsPerPage = 20;
+    const { t } = useTranslation('wishList');
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
@@ -66,7 +67,7 @@ const Wishlist = () => {
                 getAllFollowProduct(page);
             }
         } catch (error) {
-            toast.info('Không thể hủy');
+            console.log(error);
         }
     };
 
@@ -104,11 +105,9 @@ const Wishlist = () => {
                                 sx={{ fontSize: '100px' }}
                                 className="text-gray-400 dark:text-gray-200"
                             />
-                            <span className="text-xl text-gray-400 dark:text-gray-200">
-                                Hix. Không có sản phẩm nào. Bạn ghé cửa hàng để đặt đồ nhé?
-                            </span>
+                            <span className="text-xl text-gray-400 dark:text-gray-200">{t('noWishList')}</span>
                             <Link to={config.Routes.shop}>
-                                <Button variant="fill">Cửa hàng</Button>
+                                <Button variant="fill">{t('shop')}</Button>
                             </Link>
                         </div>
                     ) : (
@@ -131,7 +130,7 @@ const Wishlist = () => {
                                             <div className="line-clamp-2 font-semibold mb-3">{item.product.name}</div>
                                             <div className="flex justify-between items-center flex-wrap gap-1">
                                                 <div className="flex gap-2 items-center">
-                                                    <span className="font-bold ">Đơn giá: </span>
+                                                    <span className="font-bold ">{t('price')}: </span>
                                                     <span className="not-italic font-medium text-red-500 flex gap-1">
                                                         {convertNumberToVND(item.product.price)}
                                                         <span className="text-xs"> đ</span>
@@ -143,14 +142,14 @@ const Wishlist = () => {
                                                         className="text-sm !p-2 !h-11"
                                                         variant="outline"
                                                     >
-                                                        Hủy thích
+                                                        {t('unFavourite')}
                                                     </Button>
                                                     <Button
                                                         onClick={() => handleRedirectDetailItem(item.product.productId)}
                                                         className="text-sm !p-2 !h-11"
                                                         variant="fill"
                                                     >
-                                                        Mua ngay
+                                                        {t('buyNow')}
                                                     </Button>
                                                 </div>
                                             </div>

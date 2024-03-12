@@ -13,7 +13,7 @@ import DETAILPRODUCT_EN from './detailProduct.json';
 import CART_EN from './cart.json';
 import CHECKOUT_EN from './checkOut.json';
 import MYPAGE_EN from './myPage.json';
-// import WISHLIST_EN from './wishList.json';
+import WISHLIST_EN from './wishList.json';
 // import PURCHASEHISTORY_EN from './purchaseHistory.json';
 // import ERROR404_EN from './error404.json';
 
@@ -33,7 +33,7 @@ export {
     CART_EN,
     CHECKOUT_EN,
     MYPAGE_EN,
-    // WISHLIST_EN,
+    WISHLIST_EN,
     // PURCHASEHISTORY_EN,
     // ERROR404_EN,
 };
