@@ -14,6 +14,7 @@ import Close from '@mui/icons-material/Close';
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import ICategory from '../../interface/category';
 import { getAllCategoryWithPagination } from '../../apis/categoryApii';
@@ -29,6 +30,7 @@ import Error404 from '../Error404';
 
 function Listproducts() {
     const location = useLocation();
+    const { t } = useTranslation('shop');
 
     const itemsPerPage = 24;
     const searchItem = location.state?.searchItem ? location.state.searchItem : '';
@@ -107,7 +109,7 @@ function Listproducts() {
         setPage(newPage);
         window.scrollTo({
             top: 0,
-            behavior: 'instant',
+            behavior: 'smooth',
         });
     };
 
@@ -152,25 +154,17 @@ function Listproducts() {
                     <div className="col-span-3 w-full h-[87vh] hidden xl:block sticky top-20 rounded z-40">
                         <div className=" w-full h-full pr-0.5 overflow-y-auto space-y-3">
                             <FormControl className="!rounded-lg" fullWidth variant="filled">
-                                <InputLabel className="!font-bold !text-lg !rounded-lg">Sắp xếp theo</InputLabel>
+                                <InputLabel className="!font-bold !text-lg !rounded-lg">{t('sortBy')}</InputLabel>
                                 <Select className="!rounded-lg" value={filterSortBy} onChange={handleGetFilterSortBy}>
-                                    <MenuItem value={config.SearchFilter.random}>Không sắp xếp</MenuItem>
-                                    <MenuItem value={config.SearchFilter.favoriteAsc}>
-                                        Lượt thích: Thấp đến Cao
-                                    </MenuItem>
-                                    <MenuItem value={config.SearchFilter.favoriteDesc}>
-                                        Lượt thích: Cao đến Thấp
-                                    </MenuItem>
-                                    <MenuItem value={config.SearchFilter.priceAsc}>Giá: Thấp đến Cao</MenuItem>
-                                    <MenuItem value={config.SearchFilter.priceDesc}>Giá: Cao đến Thấp</MenuItem>
-                                    <MenuItem value={config.SearchFilter.ratingAsc}>Số sao: Thấp đến Cao</MenuItem>
-                                    <MenuItem value={config.SearchFilter.ratingDesc}>Số sao: Cao đến Thấp</MenuItem>
-                                    <MenuItem value={config.SearchFilter.reviewAsc}>
-                                        Lượt đánh giá: Thấp đến Cao
-                                    </MenuItem>
-                                    <MenuItem value={config.SearchFilter.reviewDesc}>
-                                        Lượt đánh giá: Cao đến Thấp
-                                    </MenuItem>
+                                    <MenuItem value={config.SearchFilter.random}>{t('notFilter')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.favoriteAsc}>{t('likesLowToHigh')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.favoriteDesc}>{t('likesHighToLow')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.priceAsc}>{t('priceLowToHigh')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.priceDesc}>{t('priceHighToLow')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.ratingAsc}>{t('ratingLowToHigh')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.ratingDesc}>{t('ratingHighToLow')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.reviewAsc}>{t('reviewLowToHigh')}</MenuItem>
+                                    <MenuItem value={config.SearchFilter.reviewDesc}>{t('reviewHighToLow')}</MenuItem>
                                 </Select>
                             </FormControl>
 
@@ -179,7 +173,7 @@ function Listproducts() {
                                     expandIcon={<ExpandMoreIcon />}
                                     className="!bg-white dark:!bg-dark-300 !rounded-t-lg"
                                 >
-                                    <div className="font-bold ">Danh mục</div>
+                                    <div className="font-bold">{t('category')}</div>
                                 </AccordionSummary>
                                 <AccordionDetails className="!bg-white dark:!bg-dark-300 !rounded-b-lg">
                                     <div className="flex flex-col gap-2">
@@ -232,13 +226,13 @@ function Listproducts() {
                         {!isLoadingAPIProducts && products.length === 0 && (
                             <div className="size-full flex flex-col items-center justify-center text-xl text-gray-400 gap-5 ">
                                 <ContentPasteSearch sx={{ fontSize: '100px' }} />
-                                Hix. Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và tìm lại nhé?
+                                {t('noProducts')}
                             </div>
                         )}
                         <div className="w-full flex justify-between items-center py-5 mt-auto">
                             <article>
-                                Đang hiển thị <span className="font-bold">{totalProductsPage} </span>
-                                trong <span className="font-bold">{totalProducts}</span> sản phẩm
+                                {t('showing')} <span className="font-bold">{totalProductsPage} </span>
+                                {t('of')} <span className="font-bold">{totalProducts}</span> {t('results')}
                             </article>
                             <Pagination
                                 count={totalPages}
@@ -254,39 +248,42 @@ function Listproducts() {
 
                 <div className="block xl:hidden fixed top-20 right-0 z-50 ">
                     <Button variant="fill" onClick={toggleMenu}>
-                        <div className="text-lg normal-case">Lọc sản phẩm</div>
+                        <div className="text-lg normal-case">{t('filterProduct')}</div>
                     </Button>
                 </div>
 
                 <Drawer anchor="top" open={openMenuFilterResponsive} onClose={toggleMenu}>
                     <div className="h-screen px-5 space-y-3">
                         <div className="flex justify-between items-center my-5">
-                            <span className="text-2xl font-bold tracking-wide">Lọc sản phẩm</span>
+                            <span className="text-2xl font-bold tracking-wide">{t('filterProduct')}</span>
                             <Fab color="error" size="small">
                                 <Close onClick={toggleMenu} />
                             </Fab>
                         </div>
                         <FormControl fullWidth variant="filled">
-                            <InputLabel>Sắp xếp theo</InputLabel>
-                            <Select value={filterSortBy} onChange={handleGetFilterSortBy}>
-                                <MenuItem value={config.SearchFilter.random}>Không chọn</MenuItem>
-                                <MenuItem value={config.SearchFilter.favoriteAsc}>Lượt thích: Thấp đến Cao</MenuItem>
-                                <MenuItem value={config.SearchFilter.favoriteDesc}>Lượt thích: Cao đến Thấp</MenuItem>
-                                <MenuItem value={config.SearchFilter.priceAsc}>Giá: Thấp đến Cao</MenuItem>
-                                <MenuItem value={config.SearchFilter.priceDesc}>Giá: Cao đến Thấp</MenuItem>
-                                <MenuItem value={config.SearchFilter.ratingAsc}>Số sao: Thấp đến Cao</MenuItem>
-                                <MenuItem value={config.SearchFilter.ratingDesc}>Số sao: Cao đến Thấp</MenuItem>
-                                <MenuItem value={config.SearchFilter.reviewAsc}>Lượt đánh giá: Thấp đến Cao</MenuItem>
-                                <MenuItem value={config.SearchFilter.reviewDesc}>Lượt đánh giá: Cao đến Thấp</MenuItem>
+                            <InputLabel className="!font-bold !text-lg !rounded-lg">{t('sortBy')}</InputLabel>
+                            <Select className="!rounded-lg" value={filterSortBy} onChange={handleGetFilterSortBy}>
+                                <MenuItem value={config.SearchFilter.random}>{t('notFilter')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.favoriteAsc}>{t('likesLowToHigh')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.favoriteDesc}>{t('likesHighToLow')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.priceAsc}>{t('priceLowToHigh')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.priceDesc}>{t('priceHighToLow')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.ratingAsc}>{t('ratingLowToHigh')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.ratingDesc}>{t('ratingHighToLow')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.reviewAsc}>{t('reviewLowToHigh')}</MenuItem>
+                                <MenuItem value={config.SearchFilter.reviewDesc}>{t('reviewHighToLow')}</MenuItem>
                             </Select>
                         </FormControl>
 
-                        <Accordion defaultExpanded>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <div className="font-bold">Danh mục sản phẩm</div>
+                        <Accordion defaultExpanded className="!bg-transparent">
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                className="!bg-white dark:!bg-dark-400 !rounded-t-lg"
+                            >
+                                <div className="font-bold">{t('category')}</div>
                             </AccordionSummary>
-                            <AccordionDetails>
-                                <div className="flex flex-col gap-3">
+                            <AccordionDetails className="!bg-white dark:!bg-dark-400 !rounded-b-lg">
+                                <div className="flex flex-col gap-2">
                                     {isLoadingAPICategories
                                         ? Array(10)
                                               .fill(null)

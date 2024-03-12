@@ -1,0 +1,18 @@
+{
+    "sortBy": "Sort by",
+    "notFilter": "None",
+    "likesLowToHigh": "Likes: Low to High",
+    "likesHighToLow": "Likes: High to Low",
+    "priceLowToHigh": "Price: Low to High",
+    "priceHighToLow": "Price: High to Low",
+    "ratingLowToHigh": "Stars: Low to High",
+    "ratingHighToLow": "Stars: High to Low",
+    "reviewLowToHigh": "Rating: Low to High",
+    "reviewHighToLow": "Rating: High to Low",
+    "category": "Category",
+    "noProducts": "Hix. No products. Can you try turning off the condition filter and searching again?",
+    "showing": "Showing",
+    "of": "of",
+    "results": "results",
+    "filterProduct": "Filter Product"
+}

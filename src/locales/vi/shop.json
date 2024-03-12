@@ -1,0 +1,18 @@
+{
+    "sortBy": "Sắp xếp theo",
+    "notFilter": "Không lọc",
+    "likesLowToHigh": "Lượt thích: Thấp đến Cao",
+    "likesHighToLow": "Lượt thích: Cao đến Thấp",
+    "priceLowToHigh": "Giá: Thấp đến Cao",
+    "priceHighToLow": "Giá: Cao đến Thấp",
+    "ratingLowToHigh": "Sao: Thấp đến Cao",
+    "ratingHighToLow": "Sao: Cao đến Thấp",
+    "reviewLowToHigh": "Đánh giá: Thấp đến Cao",
+    "reviewHighToLow": "Đánh giá: Cao đến Thấp",
+    "category": "Danh mục",
+    "noProducts": "Hix. Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và tìm lại nhé?",
+    "showing": "Hiển thị",
+    "of": "trong",
+    "results": "kết quả",
+    "filterProduct": "Lọc sản phẩm"
+}
