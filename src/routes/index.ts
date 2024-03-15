@@ -45,7 +45,7 @@ const publishRoute: Array<TRouters> = [
     { path: config.Routes.profileHistoryPaymentProfile, component: PurchaseHistory, layout: ProfileUserLayout },
     { path: config.Routes.profilePassWordProfile, component: ManagerPass, layout: ProfileUserLayout },
     { path: config.Routes.detailOrderID, component: Detail },
-    { path: config.Routes.error, component: Error404, layout: null },
+    { path: config.Routes.error, component: Error404 },
 ];
 
 const privateRoute: Array<TRouters> = [
@@ -59,7 +59,7 @@ const privateRoute: Array<TRouters> = [
     { path: config.Routes.getOTPRegister, component: GetOTPRegister },
     { path: config.Routes.tableSize, component: TableSize },
     { path: config.Routes.policy, component: Policy },
-    { path: config.Routes.error, component: Error404, layout: null },
+    { path: config.Routes.error, component: Error404 },
 ];
 
 export { publishRoute, privateRoute };

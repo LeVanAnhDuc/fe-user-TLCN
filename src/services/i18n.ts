@@ -23,7 +23,7 @@ export const resources = {
         myPage: en.MYPAGE_EN,
         wishList: en.WISHLIST_EN,
         // purchaseHistory: en.PURCHASEHISTORY_EN,
-        // error404: en.ERROR404_EN,
+        error404: en.ERROR404_EN,
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
@@ -43,7 +43,7 @@ export const resources = {
         myPage: vi.MYPAGE_VI,
         wishList: vi.WISHLIST_VI,
         // purchaseHistory: vi.PURCHASEHISTORY_VI,
-        // error404: vi.ERROR404_VI,
+        error404: vi.ERROR404_VI,
     },
 } as const;
 
@@ -70,7 +70,7 @@ i18n.use(initReactI18next).init({
         'myPage',
         'wishList',
         // 'purchaseHistory',
-        // 'error404',
+        'error404',
     ],
     defaultNS,
     fallbackLng: 'en',

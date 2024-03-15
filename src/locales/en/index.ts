@@ -15,7 +15,7 @@ import CHECKOUT_EN from './checkOut.json';
 import MYPAGE_EN from './myPage.json';
 import WISHLIST_EN from './wishList.json';
 // import PURCHASEHISTORY_EN from './purchaseHistory.json';
-// import ERROR404_EN from './error404.json';
+import ERROR404_EN from './error404.json';
 
 export {
     SPEEDDIALSETTINGUI_EN,
@@ -35,5 +35,5 @@ export {
     MYPAGE_EN,
     WISHLIST_EN,
     // PURCHASEHISTORY_EN,
-    // ERROR404_EN,
+    ERROR404_EN,
 };
