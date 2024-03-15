@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -25,6 +26,7 @@ interface FormData extends Pick<IInfoProfileUser, 'username' | 'name' | 'email' 
 const Settings = () => {
     const dispatch = useDispatch();
     const savedInfoUser = localStorage.getItem('infoUser');
+    const { t } = useTranslation('accountProfile');
 
     const [firstLoadingAPIGet, setFirstLoadingAPIGet] = useState<boolean>(true);
     const [isLoadingAPIGet, setLoadingAPIGet] = useState<boolean>(false);
@@ -33,19 +35,19 @@ const Settings = () => {
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
 
     const schema = yup.object().shape({
-        username: yup.string().required('Tên tài khoản đang trống'),
-        name: yup.string().required('Tên đang trống'),
-        email: yup.string().required('Email đang trống').email('Định dạng email không đúng'),
+        username: yup.string().required(t('usernameIsRequired')).min(4, t('UsernameLeast4')),
+        name: yup.string().required(t('nameIsRequired')),
+        email: yup.string().required(t('emailIsRequired')).email(t('emailIsValidate')),
         phoneNumber: yup
             .string()
-            .required('Số điện thoại đang trống')
-            .test('checkNumber', 'Số điện thoại không hợp lệ', (value) => {
+            .required(t('phoneIsRequired'))
+            .test('checkNumber', t('phoneIsNotFormat'), (value) => {
                 const regex = /^[0-9]+$/;
                 return regex.test(value);
             })
-            .min(10, 'Mật khẩu phải từ 10 kí tự trở lên')
-            .max(11, 'Mật khẩu phải từ 11 kí tự trở xuống'),
-        gender: yup.string().required('Giới tính đang trống'),
+            .min(10, t('phoneLeast10'))
+            .max(11, t('phoneLess11')),
+        gender: yup.string().required(t('genderIsRequired')),
     });
 
     const {
@@ -108,6 +110,7 @@ const Settings = () => {
             avatarUrl: '',
         };
         if (info && objectsAreEqual(info, dataProfile)) {
+            toast.warning(t('noneUpdate'));
             return;
         }
 
@@ -118,7 +121,7 @@ const Settings = () => {
         if (response.status === 200) {
             setInfo(dataProfile);
             dispatch(setNameUser(data.name));
-            toast.success('Cập nhật thông tin thành công');
+            toast.success(t('updateSuccessful'));
         } else {
             toast.error(response.data.message || response.data.phoneNumber);
         }
@@ -135,7 +138,7 @@ const Settings = () => {
             ) : (
                 <section className="bg-white p-7 rounded-lg dark:bg-dark-600">
                     <div className="space-y-5 lg:w-9/12 xl:w-7/12 m-auto">
-                        <div className="font-bold text-xl text-center">Thông tin cá nhân</div>
+                        <div className="font-bold text-xl text-center">{t('personalInformation')}</div>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <Controller
@@ -148,7 +151,7 @@ const Settings = () => {
                                             variant="filled"
                                             error={errors.username ? true : false}
                                             fullWidth
-                                            label={'Tên tài khoản'}
+                                            label={t('username')}
                                             autoComplete="username"
                                             InputProps={{
                                                 readOnly: true,
@@ -170,7 +173,7 @@ const Settings = () => {
                                             {...field}
                                             error={errors.name ? true : false}
                                             fullWidth
-                                            label={'Nhập tên của bạn'}
+                                            label={t('enterName')}
                                             autoComplete="name"
                                         />
                                     )}
@@ -189,7 +192,7 @@ const Settings = () => {
                                             {...field}
                                             error={errors.email ? true : false}
                                             fullWidth
-                                            label={'Nhập email'}
+                                            label={t('enterEmail')}
                                             autoComplete="email"
                                         />
                                     )}
@@ -205,16 +208,16 @@ const Settings = () => {
                                     defaultValue=""
                                     render={({ field }) => (
                                         <FormControl fullWidth>
-                                            <InputLabel>Giới tính</InputLabel>
+                                            <InputLabel>{t('selectGender')}</InputLabel>
                                             <Select
                                                 {...field}
                                                 fullWidth
                                                 error={errors.gender ? true : false}
-                                                label="Giới tính"
+                                                label={t('selectGender')}
                                             >
-                                                <MenuItem value={config.Gender.NAM}>{config.Gender.NAM}</MenuItem>
-                                                <MenuItem value={config.Gender.NU}>{config.Gender.NU}</MenuItem>
-                                                <MenuItem value={config.Gender.ORTHER}>{config.Gender.ORTHER}</MenuItem>
+                                                <MenuItem value={config.Gender.NAM}>{t('men')}</MenuItem>
+                                                <MenuItem value={config.Gender.NU}>{t('women')}</MenuItem>
+                                                <MenuItem value={config.Gender.OTHER}>{t('other')}</MenuItem>
                                             </Select>
                                         </FormControl>
                                     )}
@@ -233,7 +236,7 @@ const Settings = () => {
                                             {...field}
                                             error={errors.phoneNumber ? true : false}
                                             fullWidth
-                                            label={'Nhập số điện thoại'}
+                                            label={t('enterPhone')}
                                             autoComplete="phone"
                                         />
                                     )}
@@ -244,7 +247,7 @@ const Settings = () => {
                             </div>
 
                             <Button type="submit" variant="fill" fullWidth loading={isLoadingAPIUpdate}>
-                                Cập nhật
+                                {t('update')}
                             </Button>
                         </form>
                     </div>

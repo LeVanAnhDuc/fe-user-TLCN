@@ -1,7 +1,7 @@
 const Gender = {
     NAM: 'Nam',
     NU: 'Nữ',
-    ORTHER: 'Khác',
+    OTHER: 'Khác',
 };
 
 export default Gender;

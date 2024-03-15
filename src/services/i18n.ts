@@ -24,6 +24,7 @@ export const resources = {
         wishList: en.WISHLIST_EN,
         // purchaseHistory: en.PURCHASEHISTORY_EN,
         error404: en.ERROR404_EN,
+        accountProfile: en.ACCOUNTPROFILE_EN,
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
@@ -44,6 +45,7 @@ export const resources = {
         wishList: vi.WISHLIST_VI,
         // purchaseHistory: vi.PURCHASEHISTORY_VI,
         error404: vi.ERROR404_VI,
+        accountProfile: vi.ACCOUNTPROFILE_VI,
     },
 } as const;
 
@@ -71,6 +73,7 @@ i18n.use(initReactI18next).init({
         'wishList',
         // 'purchaseHistory',
         'error404',
+        'accountProfile',
     ],
     defaultNS,
     fallbackLng: 'en',
