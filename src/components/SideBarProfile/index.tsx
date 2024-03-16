@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { ChangeEvent, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '../../redux/hook';
 import { selectAvatarUrl, selectUserNameUser, selectNameUser, setAvatarUser } from '../../pages/LogIn/loginSlice';
@@ -23,6 +24,7 @@ const SideBarProfile = () => {
     const name = useAppSelector(selectNameUser);
     const avatarUrl = useAppSelector(selectAvatarUrl);
     const dispatch = useDispatch();
+    const { t } = useTranslation('sideBarProfile');
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -95,7 +97,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Trang của tôi
+                                {t('myPage')}
                             </div>
                         )}
                     </NavLink>
@@ -108,7 +110,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Danh sách ưu thích
+                                {t('favoritesList')}
                             </div>
                         )}
                     </NavLink>
@@ -121,7 +123,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Địa chỉ nhận hàng
+                                {t('deliveryAddress')}
                             </div>
                         )}
                     </NavLink>
@@ -134,7 +136,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Lịch sử mua hàng
+                                {t('purchaseHistory')}
                             </div>
                         )}
                     </NavLink>
@@ -147,7 +149,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Thông tin cá nhân
+                                {t('personalInformation')}
                             </div>
                         )}
                     </NavLink>
@@ -160,7 +162,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Đổi mật khẩu
+                                {t('changePassword')}
                             </div>
                         )}
                     </NavLink>
