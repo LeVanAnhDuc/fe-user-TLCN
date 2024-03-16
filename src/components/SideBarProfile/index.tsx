@@ -121,7 +121,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Danh sách địa chỉ
+                                Địa chỉ nhận hàng
                             </div>
                         )}
                     </NavLink>
@@ -147,7 +147,7 @@ const SideBarProfile = () => {
                                         : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                 }  cursor-pointer transition`}
                             >
-                                Tài khoản của tôi
+                                Thông tin cá nhân
                             </div>
                         )}
                     </NavLink>
