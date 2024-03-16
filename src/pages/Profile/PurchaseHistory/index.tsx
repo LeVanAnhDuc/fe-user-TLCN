@@ -2,7 +2,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
@@ -20,13 +20,16 @@ import { initObjecProductCart } from '../../../constants';
 
 const PurchaseHistory = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const status = location.state?.status ? location.state.status : '';
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [listHistory, setListHistory] = useState<Array<IOrder>>([]);
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
     const [callAPIAgain, setCallAPIAgain] = useState<boolean>(false);
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
-    const [statusOrder, setStatusOrder] = useState<string>('');
+    const [statusOrder, setStatusOrder] = useState<string>(status);
     const [openReview, setOpenReview] = useState(false);
     const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
 

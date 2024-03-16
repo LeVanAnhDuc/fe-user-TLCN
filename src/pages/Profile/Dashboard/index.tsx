@@ -11,6 +11,7 @@ import { getDataStatisticUser } from '../../../apis/statisticApi';
 import CardStatictis from './CardStatictis';
 import Error404 from '../../Error404';
 import AnimationTran from '../../../components/AnimationTran';
+import config from '../../../config';
 
 interface IDashboard {
     favoriteCount: number;
@@ -49,12 +50,15 @@ const Dashboard = () => {
                         icon={VolunteerActivismOutlined}
                         data={statictis?.favoriteCount}
                         content={t('care')}
+                        link={config.Routes.profileFavouriteProfile}
                         className="bg-orange-200 dark:bg-orange-300"
                     />
                     <CardStatictis
                         icon={InventoryOutlined}
                         data={statictis?.ordered}
                         content={t('ordered')}
+                        link={config.Routes.profileHistoryPaymentProfile}
+                        status={config.StatusOrders.ORDERED}
                         className="bg-red-200 dark:bg-red-300"
                         delay={0.1}
                     />
@@ -62,6 +66,8 @@ const Dashboard = () => {
                         icon={AirportShuttleOutlined}
                         data={statictis?.shipping}
                         content={t('beingDelivered')}
+                        link={config.Routes.profileHistoryPaymentProfile}
+                        status={config.StatusOrders.SHIPPED}
                         className="bg-green-200 dark:bg-green-300"
                         delay={0.2}
                     />
@@ -69,11 +75,13 @@ const Dashboard = () => {
                         icon={ShoppingBagOutlined}
                         data={statictis?.delivered}
                         content={t('delivered')}
+                        link={config.Routes.profileHistoryPaymentProfile}
+                        status={config.StatusOrders.DELIVERED}
                         className="bg-blue-200 dark:bg-blue-300"
                         delay={0.3}
                     />
                 </div>
-                <AnimationTran tranY={50} className="bg-white size-full rounded-lg dark:bg-dark-600">
+                <AnimationTran tranY={50} delay={0.1} className="bg-white size-full rounded-lg dark:bg-dark-600">
                     <BarChart
                         xAxis={[
                             { scaleType: 'band', data: [t('care'), t('ordered'), t('beingDelivered'), t('delivered')] },
@@ -88,6 +96,7 @@ const Dashboard = () => {
                                 ],
                             },
                         ]}
+                        height={335}
                     />
                 </AnimationTran>
             </div>
