@@ -25,6 +25,7 @@ export const resources = {
         // purchaseHistory: en.PURCHASEHISTORY_EN,
         error404: en.ERROR404_EN,
         accountProfile: en.ACCOUNTPROFILE_EN,
+        passWordProfile: en.PASSWORDPROFILE_EN,
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
@@ -46,6 +47,7 @@ export const resources = {
         // purchaseHistory: vi.PURCHASEHISTORY_VI,
         error404: vi.ERROR404_VI,
         accountProfile: vi.ACCOUNTPROFILE_VI,
+        passWordProfile: vi.PASSWORDPROFILE_VI,
     },
 } as const;
 
@@ -74,6 +76,7 @@ i18n.use(initReactI18next).init({
         // 'purchaseHistory',
         'error404',
         'accountProfile',
+        'passWordProfile',
     ],
     defaultNS,
     fallbackLng: 'en',

@@ -16,6 +16,7 @@ import MYPAGE_VI from './myPage.json';
 import WISHLIST_VI from './wishList.json';
 import ERROR404_VI from './error404.json';
 import ACCOUNTPROFILE_VI from './accountProfile.json';
+import PASSWORDPROFILE_VI from './passWordProfile.json';
 // import PURCHASEHISTORY_VI from './purchaseHistory.json';
 
 export {
@@ -37,5 +38,6 @@ export {
     WISHLIST_VI,
     ERROR404_VI,
     ACCOUNTPROFILE_VI,
+    PASSWORDPROFILE_VI,
     // PURCHASEHISTORY_VI,
 };
