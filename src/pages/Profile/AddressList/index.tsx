@@ -1,6 +1,8 @@
+import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
+
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
+import { useTranslation } from 'react-i18next';
 
 import ModalAddress from './ModalAddress';
 import IAddress from '../../../interface/address';
@@ -11,6 +13,8 @@ import Loading from '../../../components/Loading';
 import AnimationTran from '../../../components/AnimationTran';
 
 const AddressList = () => {
+    const { t } = useTranslation('addressesProfle');
+
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
@@ -67,7 +71,7 @@ const AddressList = () => {
     };
 
     const deleteAddress = async (idAddress: number) => {
-        const text = 'Đồng ý để xóa';
+        const text = t('confirmDelete');
         if (confirm(text) == true) {
             try {
                 const response = await deleteAddressByAddressID(idAddress);
@@ -98,13 +102,13 @@ const AddressList = () => {
                 <div className="size-full space-y-3">
                     <div className="flex justify-end relative ">
                         <Button onClick={handleCreateNew} variant="fill" className="text-sm">
-                            Thêm địa chỉ
+                            {t('addNewAddress')}
                         </Button>
                     </div>
                     {addresses.length === 0 ? (
                         <div className="size-full flex flex-col items-center gap-5 ">
                             <ContentPasteSearch sx={{ fontSize: '100px' }} className="text-gray-400" />
-                            <span className="text-xl text-gray-400">Hix. Không có địa chỉ nào. Bạn tạo mới nhé?</span>
+                            <span className="text-xl text-gray-400">{t('noAddress')}</span>
                         </div>
                     ) : (
                         <div className="space-y-3">
@@ -129,7 +133,7 @@ const AddressList = () => {
                                             disabled={item.isDefault ? true : false}
                                             onClick={() => handleSetDefault(item.id ? item.id : 0)}
                                         >
-                                            Thiết lập mặc định
+                                            {t('defaultSettings')}
                                         </Button>
                                         <div className="flex gap-3">
                                             <Button
@@ -137,14 +141,14 @@ const AddressList = () => {
                                                 variant="text"
                                                 onClick={() => handleUpdate(item.id ? item.id : 0)}
                                             >
-                                                Chỉnh sửa
+                                                {t('update')}
                                             </Button>
                                             {!item.isDefault && (
                                                 <Button
                                                     className="!p-2 !h-10 text-sm text-red-500 hover:text-red-900"
                                                     onClick={() => deleteAddress(item.id ? item.id : 0)}
                                                 >
-                                                    Xóa
+                                                    {t('deleteAddress')}
                                                 </Button>
                                             )}
                                         </div>

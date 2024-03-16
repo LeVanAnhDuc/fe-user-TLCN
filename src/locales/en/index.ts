@@ -17,6 +17,7 @@ import WISHLIST_EN from './wishList.json';
 import ERROR404_EN from './error404.json';
 import ACCOUNTPROFILE_EN from './accountProfile.json';
 import PASSWORDPROFILE_EN from './passWordProfile.json';
+import ADDRESSESPROFLE_EN from './addressesProfle.json';
 // import PURCHASEHISTORY_EN from './purchaseHistory.json';
 
 export {
@@ -39,5 +40,6 @@ export {
     ERROR404_EN,
     ACCOUNTPROFILE_EN,
     PASSWORDPROFILE_EN,
+    ADDRESSESPROFLE_EN,
     // PURCHASEHISTORY_EN,
 };

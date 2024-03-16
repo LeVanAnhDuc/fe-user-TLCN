@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import IAddress from '../../../interface/address';
 import {
@@ -15,19 +16,6 @@ import {
 } from '../../../apis/addressApi';
 import TextField from '@mui/material/TextField';
 import Button from '../../../components/Button';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '70%',
-    bgcolor: 'white',
-    border: '1px solid #000',
-    borderRadius: '10px',
-    boxShadow: 24,
-    p: 4,
-};
 
 interface IPropsAddress {
     open: boolean;
@@ -39,23 +27,25 @@ interface IPropsAddress {
 const ModalAddress = (propsCh: IPropsAddress) => {
     const { open, handleClose, idAddressUpdate, setRequestNewAddresses } = propsCh;
 
+    const { t } = useTranslation('addressesProfle');
+
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
 
     const schema = yup.object().shape({
-        fullName: yup.string().required('Tên người nhận đang trống'),
+        fullName: yup.string().required(t('nameIsRequired')),
         phoneNumber: yup
             .string()
-            .required('Số điện thoại đang trống')
-            .test('checkNumber', 'Số điện thoại không hợp lệ', (value) => {
+            .required(t('phoneIsRequired'))
+            .test('checkNumber', t('phoneIsNotFormat'), (value) => {
                 const regex = /^[0-9]+$/;
                 return regex.test(value);
             })
-            .min(10, 'Mật khẩu phải từ 10 kí tự trở lên')
-            .max(11, 'Mật khẩu phải từ 11 kí tự trở xuống'),
-        city: yup.string().required('Thành phố/Tỉnh đang trống'),
-        district: yup.string().required('Tên Quận/Huyện đang trống'),
-        ward: yup.string().required('Tên Phường/Xã đang trống'),
-        orderDetails: yup.string().required('Địa chỉ cụ thể đang trống'),
+            .min(10, t('phoneLeast10'))
+            .max(11, t('phoneLess11')),
+        city: yup.string().required(t('cityIsRequired')),
+        district: yup.string().required(t('districtIsRequired')),
+        ward: yup.string().required(t('wardIsRequired')),
+        orderDetails: yup.string().required(t('orderDetailsIsRequired')),
     });
 
     const {
@@ -87,7 +77,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
 
             if (response) {
                 if (response.status === 200) {
-                    toast.success('Cập nhật thành công');
+                    toast.success(t('updateSuccessful'));
                     setRequestNewAddresses((prev) => !prev);
                 } else {
                     toast.error(response.data.message || response.data);
@@ -100,7 +90,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
 
             if (response) {
                 if (response.status === 200) {
-                    toast.success('Thêm thành công');
+                    toast.success(t('addSuccessful'));
                     setRequestNewAddresses((prev) => !prev);
                 } else {
                     toast.error(response.data.message || response.data);
@@ -119,20 +109,21 @@ const ModalAddress = (propsCh: IPropsAddress) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Box sx={style}>
-                    <div className="text-lg mb-4 font-bold uppercase">Thông tin địa chỉ</div>
+                <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:w-[40rem] bg-white border border-black rounded-lg p-6 dark:bg-dark-600">
+                    <div className="mb-4 font-bold uppercase">{t('infoAddress')}</div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                         <div className="grid grid-cols-2 gap-5">
                             <div>
                                 <Controller
                                     name="fullName"
                                     control={control}
+                                    defaultValue=""
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
                                             error={errors.fullName ? true : false}
                                             fullWidth
-                                            placeholder="Họ và tên"
+                                            label={t('enterName')}
                                             autoComplete="name"
                                         />
                                     )}
@@ -144,12 +135,13 @@ const ModalAddress = (propsCh: IPropsAddress) => {
                                 <Controller
                                     name="phoneNumber"
                                     control={control}
+                                    defaultValue=""
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
                                             error={errors.phoneNumber ? true : false}
                                             fullWidth
-                                            placeholder="Số điện thoại"
+                                            label={t('enterPhone')}
                                             autoComplete="phone"
                                         />
                                     )}
@@ -158,67 +150,68 @@ const ModalAddress = (propsCh: IPropsAddress) => {
                             </div>
                         </div>
 
-                        <div>
-                            <Controller
-                                name="city"
-                                control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        error={errors.city ? true : false}
-                                        fullWidth
-                                        placeholder="Thành phố/Tỉnh"
-                                        autoComplete="address-level2"
-                                    />
-                                )}
-                            />
-                            <p className="text-red-600 text-sm mt-1.5 h-4">{errors.city?.message}</p>
-                        </div>
-
-                        <div>
-                            <Controller
-                                name="district"
-                                control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        error={errors.district ? true : false}
-                                        fullWidth
-                                        placeholder="Quận/Huyện"
-                                        autoComplete="address-level3"
-                                    />
-                                )}
-                            />
-                            <p className="text-red-600 text-sm mt-1.5 h-4">{errors.district?.message}</p>
-                        </div>
-
-                        <div>
-                            <Controller
-                                name="ward"
-                                control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        error={errors.ward ? true : false}
-                                        fullWidth
-                                        placeholder="Phường/Xã"
-                                        autoComplete="address-level4"
-                                    />
-                                )}
-                            />
-                            <p className="text-red-600 text-sm mt-1.5 h-4">{errors.ward?.message}</p>
+                        <div className="flex gap-5">
+                            <div className="size-full">
+                                <Controller
+                                    name="city"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <TextField
+                                            {...field}
+                                            error={errors.city ? true : false}
+                                            label={t('enterCity')}
+                                            autoComplete="address-level2"
+                                        />
+                                    )}
+                                />
+                                <p className="text-red-600 text-sm mt-1.5 h-4">{errors.city?.message}</p>
+                            </div>
+                            <div className="size-full">
+                                <Controller
+                                    name="district"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <TextField
+                                            {...field}
+                                            error={errors.district ? true : false}
+                                            label={t('enterDistrict')}
+                                            autoComplete="address-level3"
+                                        />
+                                    )}
+                                />
+                                <p className="text-red-600 text-sm mt-1.5 h-4">{errors.district?.message}</p>
+                            </div>
+                            <div className="size-full">
+                                <Controller
+                                    name="ward"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <TextField
+                                            {...field}
+                                            error={errors.ward ? true : false}
+                                            label={t('enterWard')}
+                                            autoComplete="address-level4"
+                                        />
+                                    )}
+                                />
+                                <p className="text-red-600 text-sm mt-1.5 h-4">{errors.ward?.message}</p>
+                            </div>
                         </div>
 
                         <div>
                             <Controller
                                 name="orderDetails"
                                 control={control}
+                                defaultValue=""
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
                                         error={errors.orderDetails ? true : false}
                                         fullWidth
-                                        placeholder="Địa chỉ cụ thể"
+                                        label={t('enterOrderDetails')}
                                         autoComplete="street-address"
                                     />
                                 )}
@@ -226,12 +219,12 @@ const ModalAddress = (propsCh: IPropsAddress) => {
                             <p className="text-red-600 text-sm mt-1.5 h-4">{errors.orderDetails?.message}</p>
                         </div>
 
-                        <div className="flex justify-end gap-10">
-                            <Button variant="text" onClick={handleClose}>
-                                Trở lại
+                        <div className="flex justify-end gap-5">
+                            <Button className="text-sm" variant="text" onClick={handleClose}>
+                                {t('return')}
                             </Button>
-                            <Button variant="fill" type="submit" loading={isLoadingAPI}>
-                                Hoàn thành
+                            <Button className="text-sm" variant="fill" type="submit" loading={isLoadingAPI}>
+                                {t('submit')}
                             </Button>
                         </div>
                     </form>

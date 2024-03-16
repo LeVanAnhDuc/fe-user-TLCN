@@ -26,6 +26,7 @@ export const resources = {
         error404: en.ERROR404_EN,
         accountProfile: en.ACCOUNTPROFILE_EN,
         passWordProfile: en.PASSWORDPROFILE_EN,
+        addressesProfle: en.ADDRESSESPROFLE_EN,
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
@@ -48,6 +49,7 @@ export const resources = {
         error404: vi.ERROR404_VI,
         accountProfile: vi.ACCOUNTPROFILE_VI,
         passWordProfile: vi.PASSWORDPROFILE_VI,
+        addressesProfle: vi.ADDRESSESPROFLE_VI,
     },
 } as const;
 
@@ -77,6 +79,7 @@ i18n.use(initReactI18next).init({
         'error404',
         'accountProfile',
         'passWordProfile',
+        'addressesProfle',
     ],
     defaultNS,
     fallbackLng: 'en',

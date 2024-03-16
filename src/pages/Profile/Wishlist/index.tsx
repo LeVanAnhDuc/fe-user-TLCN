@@ -140,7 +140,7 @@ const Wishlist = () => {
                                                     <Button
                                                         onClick={() => handleToggleFavourite(item.product.productId)}
                                                         className="text-sm !p-2 !h-11"
-                                                        variant="outline"
+                                                        variant="text"
                                                     >
                                                         {t('unFavourite')}
                                                     </Button>
