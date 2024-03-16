@@ -1,7 +1,5 @@
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -32,9 +30,10 @@ const PurchaseHistory = () => {
     const [openReview, setOpenReview] = useState(false);
     const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
 
-    const handleChangeStatus = (event: SelectChangeEvent) => {
-        setStatusOrder(event.target.value as string);
+    const handleChangeStatus = (_: React.MouseEvent<HTMLElement>, status: string) => {
+        setStatusOrder(status);
     };
+
     const handleGetListHistory = async (statusParam: string) => {
         try {
             firstLoadingAPI && setLoadingAPI(true);
@@ -120,28 +119,37 @@ const PurchaseHistory = () => {
             {isLoadingAPI ? (
                 <Loading />
             ) : (
-                <>
-                    <div className="flex items-center font-medium text-lg pb-5 gap-3 ">
-                        <span>Lọc đơn hàng:</span>
-                        <FormControl sx={{ width: 200 }} size="small">
-                            <InputLabel>Trạng thái</InputLabel>
-                            <Select value={statusOrder} label="Trạng thái" onChange={handleChangeStatus}>
-                                <MenuItem value={''}>Tất cả</MenuItem>
-                                <MenuItem value={config.StatusOrders.ORDERED}>{config.StatusOrders.ORDERED}</MenuItem>
-                                <MenuItem value={config.StatusOrders.PROCESSING}>
-                                    {config.StatusOrders.PROCESSING}
-                                </MenuItem>
-                                <MenuItem value={config.StatusOrders.SHIPPED}>{config.StatusOrders.SHIPPED}</MenuItem>
-                                <MenuItem value={config.StatusOrders.DELIVERED}>
-                                    {config.StatusOrders.DELIVERED}
-                                </MenuItem>
-                                <MenuItem value={config.StatusOrders.CANCELED}>{config.StatusOrders.CANCELED}</MenuItem>
-                                <MenuItem value={config.StatusOrders.WAITFORPAY}>
-                                    {config.StatusOrders.WAITFORPAY}
-                                </MenuItem>
-                            </Select>
-                        </FormControl>
-                    </div>
+                <section className="space-y-4">
+                    <ToggleButtonGroup
+                        value={statusOrder}
+                        exclusive
+                        onChange={handleChangeStatus}
+                        fullWidth
+                        className="!bg-white dark:!bg-dark-600 min-h-12"
+                        color="info"
+                    >
+                        <ToggleButton className="!text-xs" value={''}>
+                            Tất cả
+                        </ToggleButton>
+                        <ToggleButton className="!text-xs" value={config.StatusOrders.ORDERED}>
+                            {config.StatusOrders.ORDERED}
+                        </ToggleButton>
+                        <ToggleButton className="!text-xs" value={config.StatusOrders.PROCESSING}>
+                            {config.StatusOrders.PROCESSING}
+                        </ToggleButton>
+                        <ToggleButton className="!text-xs" value={config.StatusOrders.SHIPPED}>
+                            {config.StatusOrders.SHIPPED}
+                        </ToggleButton>
+                        <ToggleButton className="!text-xs" value={config.StatusOrders.DELIVERED}>
+                            {config.StatusOrders.DELIVERED}
+                        </ToggleButton>
+                        <ToggleButton className="!text-xs" value={config.StatusOrders.CANCELED}>
+                            {config.StatusOrders.CANCELED}
+                        </ToggleButton>
+                        <ToggleButton className="!text-xs" value={config.StatusOrders.WAITFORPAY}>
+                            {config.StatusOrders.WAITFORPAY}
+                        </ToggleButton>
+                    </ToggleButtonGroup>
                     <div className="space-y-5">
                         {listHistory.map((item, index) => (
                             <AnimationTran
@@ -279,7 +287,7 @@ const PurchaseHistory = () => {
                             </AnimationTran>
                         ))}
                     </div>
-                </>
+                </section>
             )}
         </>
     );
