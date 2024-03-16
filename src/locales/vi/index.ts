@@ -19,7 +19,7 @@ import ACCOUNTPROFILE_VI from './accountProfile.json';
 import PASSWORDPROFILE_VI from './passWordProfile.json';
 import ADDRESSESPROFLE_VI from './addressesProfle.json';
 import SIDEBARPROFILE_VI from './sideBarProfile.json';
-// import PURCHASEHISTORY_VI from './purchaseHistory.json';
+import PURCHASEHISTORY_VI from './purchaseHistory.json';
 
 export {
     SPEEDDIALSETTINGUI_VI,
@@ -43,5 +43,5 @@ export {
     PASSWORDPROFILE_VI,
     ADDRESSESPROFLE_VI,
     SIDEBARPROFILE_VI,
-    // PURCHASEHISTORY_VI,
+    PURCHASEHISTORY_VI,
 };

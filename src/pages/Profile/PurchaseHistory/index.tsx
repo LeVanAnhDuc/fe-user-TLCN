@@ -4,6 +4,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
 import IOrder from '../../../interface/order';
@@ -21,6 +22,7 @@ import { initObjecProductCart } from '../../../constants';
 const PurchaseHistory = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useTranslation('purchaseHistory');
 
     const status = location.state?.status ? location.state.status : '';
 
@@ -78,14 +80,13 @@ const PurchaseHistory = () => {
     };
 
     const handleCancelOrder = async (idProduct: number) => {
-        const userConfirmed = window.confirm('Bạn có chắc chắn muốn hủy không?');
+        const userConfirmed = window.confirm(t('userConfirmed'));
         if (userConfirmed) {
             try {
                 const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
 
                 if (response.status === 200) {
                     handleGetListHistory(statusOrder);
-                    toast.success('Đã hủy đơn hàng');
                 } else {
                     toast.error(response.data.message || response.data);
                 }
@@ -93,7 +94,7 @@ const PurchaseHistory = () => {
                 setErrorAPI(true);
             }
         } else {
-            toast.info('Hủy xóa');
+            toast.info(t('cancelDeletion'));
         }
     };
 
@@ -132,25 +133,25 @@ const PurchaseHistory = () => {
                         color="info"
                     >
                         <ToggleButton className="!text-xs" value={''}>
-                            Tất cả
+                            {t('all')}
                         </ToggleButton>
                         <ToggleButton className="!text-xs" value={config.StatusOrders.ORDERED}>
-                            {config.StatusOrders.ORDERED}
+                            {t('ordered')}
                         </ToggleButton>
                         <ToggleButton className="!text-xs" value={config.StatusOrders.PROCESSING}>
-                            {config.StatusOrders.PROCESSING}
+                            {t('processing')}
                         </ToggleButton>
                         <ToggleButton className="!text-xs" value={config.StatusOrders.SHIPPED}>
-                            {config.StatusOrders.SHIPPED}
+                            {t('shipped')}
                         </ToggleButton>
                         <ToggleButton className="!text-xs" value={config.StatusOrders.DELIVERED}>
-                            {config.StatusOrders.DELIVERED}
+                            {t('delivered')}
                         </ToggleButton>
                         <ToggleButton className="!text-xs" value={config.StatusOrders.CANCELED}>
-                            {config.StatusOrders.CANCELED}
+                            {t('canceled')}
                         </ToggleButton>
                         <ToggleButton className="!text-xs" value={config.StatusOrders.WAITFORPAY}>
-                            {config.StatusOrders.WAITFORPAY}
+                            {t('waitForPay')}
                         </ToggleButton>
                     </ToggleButtonGroup>
                     <div className="space-y-5">
@@ -191,7 +192,7 @@ const PurchaseHistory = () => {
                                                         <div className="flex justify-between items-center flex-wrap gap-1">
                                                             <div>
                                                                 <div className="flex gap-2">
-                                                                    <span className="w-18">Phân loại:</span>
+                                                                    <span className="w-18">{t('classification')}:</span>
                                                                     <span className="font-medium">
                                                                         {itemProduct.sku?.optionValues?.map(
                                                                             (option, index) => (
@@ -209,20 +210,20 @@ const PurchaseHistory = () => {
                                                                     </span>
                                                                 </div>
                                                                 <div className="flex gap-2">
-                                                                    <span className="w-18">Số lượng:</span>
+                                                                    <span className="w-18">{t('quantity')}:</span>
                                                                     <span className="font-medium">
                                                                         {itemProduct.quantity}
                                                                     </span>
                                                                 </div>
                                                                 <div className="flex gap-2">
-                                                                    <span className="w-18">Đơn giá: </span>
+                                                                    <span className="w-18">{t('unitPrice')}: </span>
                                                                     <span className="not-italic font-bold text-red-500 flex gap-1">
                                                                         {convertNumberToVND(itemProduct.price)}
                                                                         <span className="text-xs"> đ</span>
                                                                     </span>
                                                                 </div>
                                                                 <div className="flex gap-2">
-                                                                    <span className="w-18">Tổng giá:</span>
+                                                                    <span className="w-18">{t('totalPrice')}:</span>
                                                                     <div className="not-italic font-bold text-red-500 flex gap-1">
                                                                         {convertNumberToVND(itemProduct.subTotal)}
                                                                         <span className="text-xs">đ</span>
@@ -236,7 +237,7 @@ const PurchaseHistory = () => {
                                                                         className=" !h-10"
                                                                         onClick={() => handleOpenReview(itemProduct)}
                                                                     >
-                                                                        Đánh giá
+                                                                        {t('writeAReview')}
                                                                     </Button>
                                                                 )}
                                                             </div>
@@ -252,7 +253,7 @@ const PurchaseHistory = () => {
 
                                 <div className="flex flex-wrap gap-3 justify-between items-center p-5 bg-primary-50/40 rounded-b-lg dark:bg-dark-500">
                                     <div className="flex items-center gap-2 text-center">
-                                        <span className="font-medium text">Thành tiền:</span>
+                                        <span className="font-medium text">{t('totalAmount')}:</span>
                                         <div className="not-italic text-xl font-medium text-red-500  flex gap-1">
                                             {convertNumberToVND(item.total)}
                                             <span className="text-lg">đ</span>
@@ -265,7 +266,7 @@ const PurchaseHistory = () => {
                                                 variant="fill"
                                                 onClick={() => handlePaymentOrder(item.id)}
                                             >
-                                                Thanh toán
+                                                {t('payment')}
                                             </Button>
                                         )}
                                         <Button
@@ -273,7 +274,7 @@ const PurchaseHistory = () => {
                                             variant="outline"
                                             onClick={() => handleRedirectDetailOrder(item.id)}
                                         >
-                                            Chi tiết
+                                            {t('detail')}
                                         </Button>
                                         {(item.status === config.StatusOrders.ORDERED ||
                                             item.status === config.StatusOrders.WAITFORPAY) && (
@@ -282,7 +283,7 @@ const PurchaseHistory = () => {
                                                 variant="text"
                                                 onClick={() => handleCancelOrder(item.id)}
                                             >
-                                                Hủy đơn
+                                                {t('cancelOrder')}
                                             </Button>
                                         )}
                                     </div>

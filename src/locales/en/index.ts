@@ -19,8 +19,7 @@ import ACCOUNTPROFILE_EN from './accountProfile.json';
 import PASSWORDPROFILE_EN from './passWordProfile.json';
 import ADDRESSESPROFLE_EN from './addressesProfle.json';
 import SIDEBARPROFILE_EN from './sideBarProfile.json';
-
-// import PURCHASEHISTORY_EN from './purchaseHistory.json';
+import PURCHASEHISTORY_EN from './purchaseHistory.json';
 
 export {
     SPEEDDIALSETTINGUI_EN,
@@ -44,5 +43,5 @@ export {
     PASSWORDPROFILE_EN,
     ADDRESSESPROFLE_EN,
     SIDEBARPROFILE_EN,
-    // PURCHASEHISTORY_EN,
+    PURCHASEHISTORY_EN,
 };

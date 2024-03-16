@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import { IreviewOrder } from '../../../interface/review';
 import IProductCart from '../../../interface/productCart';
@@ -29,22 +30,21 @@ interface FormData {
     content?: string;
 }
 
-const labels: { [index: string]: string } = {
-    1: 'Tệ',
-    2: 'Kém',
-    3: 'Được',
-    4: 'Tốt',
-    5: 'Xuất sắc',
-};
-
-function getLabelText(value: number) {
-    return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
-}
-
 const ModalReview = (propsCh: IPropsAddress) => {
     const { open, handleClose, orderItem, setCallAPIAgain } = propsCh;
-
     const navigate = useNavigate();
+    const { t } = useTranslation('purchaseHistory');
+
+    const labels: { [index: string]: string } = {
+        1: t('poor'),
+        2: t('bad'),
+        3: t('okay'),
+        4: t('good'),
+        5: t('excellent'),
+    };
+    function getLabelText(value: number) {
+        return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+    }
 
     const schema = yup.object().shape({
         content: yup.string(),
@@ -77,7 +77,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                 setLoadingAPI(false);
 
                 if (response.status === 201) {
-                    toast.success('Đánh giá thành công');
+                    toast.success(t('reviewSuccessful'));
                     setValue('content', '');
                     setValueRating(5);
                     setCallAPIAgain((prev) => !prev);
@@ -114,7 +114,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                             <div className="flex justify-between items-center flex-wrap gap-1">
                                 <div>
                                     <div className="flex gap-2">
-                                        <span className="w-18">Phân loại:</span>
+                                        <span className="w-18">{t('classification')}:</span>
                                         <span className="font-medium">
                                             {orderItem?.sku?.optionValues?.map((option, index) => (
                                                 <React.Fragment key={index}>
@@ -125,18 +125,18 @@ const ModalReview = (propsCh: IPropsAddress) => {
                                         </span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <span className="w-18">Số lượng:</span>
+                                        <span className="w-18">{t('quantity')}:</span>
                                         <span className="font-medium">{orderItem?.quantity}</span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <span className="w-18">Đơn giá: </span>
+                                        <span className="w-18">{t('unitPrice')}:</span>
                                         <span className="not-italic font-bold text-red-500 flex gap-1">
                                             {convertNumberToVND(orderItem?.price)}
                                             <span className="text-xs"> đ</span>
                                         </span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <span className="w-18">Tổng giá:</span>
+                                        <span className="w-18">{t('totalPrice')}:</span>
                                         <div className="not-italic font-bold text-red-500 flex gap-1">
                                             {convertNumberToVND(orderItem?.subTotal)}
                                             <span className="text-xs">đ</span>
@@ -148,7 +148,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className=" space-y-5">
                         <div className="flex items-center gap-5">
-                            <span>Đánh sao:</span>
+                            <span>{t('rate')}:</span>
                             <Rating
                                 value={valueRating}
                                 precision={1}
@@ -180,7 +180,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                                         multiline
                                         minRows={9}
                                         fullWidth
-                                        placeholder="Ghi đánh giá"
+                                        label={t('productReview')}
                                     />
                                 )}
                             />
@@ -189,10 +189,10 @@ const ModalReview = (propsCh: IPropsAddress) => {
 
                         <div className="flex justify-end">
                             <Button className="w-40" variant="text" onClick={handleClose}>
-                                Huỷ đánh giá
+                                {t('cancelRating')}
                             </Button>
                             <Button className="w-40" variant="fill" type="submit" loading={isLoadingAPI}>
-                                Gửi đánh giá
+                                {t('sendRating')}
                             </Button>
                         </div>
                     </form>

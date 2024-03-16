@@ -11,10 +11,12 @@ import AnimationTran from '../../../../components/AnimationTran';
 import ScrollButton from '../../../../components/ScrollButton/ScrollButton';
 import Error404 from '../../../Error404';
 import Loading from '../../../../components/Loading';
+import { useTranslation } from 'react-i18next';
 
 const Detail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const { t } = useTranslation('purchaseHistory');
     const idProduct = id;
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
@@ -77,35 +79,35 @@ const Detail = () => {
                                 className="text-primary-700 hover:underline dark:text-primary-500"
                                 to={config.Routes.home}
                             >
-                                DUCK
+                                {t('home')}
                             </Link>
                             <Link
                                 className="text-primary-700 hover:underline dark:text-primary-500"
                                 to={config.Routes.profileHistoryPaymentProfile}
                             >
-                                Lịch sử mua
+                                {t('listPurchase')}
                             </Link>
-                            <AnimationTran tranY={-50}>Chi tiết đơn hàng</AnimationTran>
+                            <AnimationTran tranY={-50}>{t('orderDetails')}</AnimationTran>
                             <AnimationTran tranY={50}>{idProduct}</AnimationTran>
                         </Breadcrumbs>
                         <table className="w-full border-collapse border border-gray-300">
                             <thead>
                                 <tr>
                                     <th className="border bg-primary-100 p-4 text-lg dark:bg-dark-600" colSpan={2}>
-                                        Chi tiết đơn hàng
+                                        {t('detailedOrderInformation')}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white dark:bg-dark-500">
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Ngày xuất đơn</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('orderDate')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50}>{order?.createdDate}</AnimationTran>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Trạng thái</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('status')}</td>
                                     <td className="border border-gray-300 p-3 font-bold text-red-500">
                                         <AnimationTran tranY={-50} delay={0.02}>
                                             {order?.status}
@@ -113,7 +115,7 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Địa chỉ nhận hàng</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('shippingAddress')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.04}>
                                             {order?.address.orderDetails}, {order?.address.ward},{' '}
@@ -122,7 +124,7 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Hình thức thanh toán</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('payments')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.06}>
                                             {order?.paymentType}
@@ -130,7 +132,7 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Ghi chú</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('note')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.08}>
                                             {order?.note}
@@ -138,7 +140,7 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Tổng sản phẩm</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('totalItem')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.1}>
                                             {order?.totalItems}
@@ -146,7 +148,7 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">Thành tiền</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('subtotal')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran
                                             tranY={-50}
@@ -182,7 +184,7 @@ const Detail = () => {
                                                 <div className="flex justify-between items-center flex-wrap gap-1">
                                                     <div>
                                                         <div className="flex gap-2">
-                                                            <span className="w-18">Phân loại:</span>
+                                                            <span className="w-18">{t('classification')}:</span>
                                                             <span className="font-medium">
                                                                 {itemProduct.sku?.optionValues?.map((option, index) => (
                                                                     <Fragment key={index}>
@@ -195,18 +197,18 @@ const Detail = () => {
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-2">
-                                                            <span className="w-18">Số lượng:</span>
+                                                            <span className="w-18">{t('quantity')}:</span>
                                                             <span className="font-medium">{itemProduct.quantity}</span>
                                                         </div>
                                                         <div className="flex gap-2">
-                                                            <span className="w-18">Đơn giá: </span>
+                                                            <span className="w-18">{t('unitPrice')}: </span>
                                                             <span className="not-italic font-bold text-red-500 flex gap-1">
                                                                 {convertNumberToVND(itemProduct.price)}
                                                                 <span className="text-xs"> đ</span>
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-2">
-                                                            <span className="w-18">Tổng giá:</span>
+                                                            <span className="w-18">{t('totalPrice')}:</span>
                                                             <div className="not-italic font-bold text-red-500 flex gap-1">
                                                                 {convertNumberToVND(itemProduct.subTotal)}
                                                                 <span className="text-xs">đ</span>
