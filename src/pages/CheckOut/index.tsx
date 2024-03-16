@@ -1,13 +1,14 @@
 import Checkbox from '@mui/material/Checkbox';
-import { useCallback, useEffect, useState } from 'react';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -23,7 +24,6 @@ import IAddress from '../../interface/address';
 import { getListAddressOffCurrentUser } from '../../apis/addressApi';
 import { getTotalPriceForYourCart } from '../../apis/cartApi';
 import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
-import imgVNPAY from '../../assets/img/VnPay.png';
 import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
 import Button from '../../components/Button';
 import { convertNumberToVND } from '../../utils/convertData';
@@ -74,10 +74,8 @@ const Pay = () => {
                 getTotalPriceForYourCart(),
             ]);
 
-            if (addressesAPI.status === 200) {
-                if (addressesAPI?.data) {
-                    setAddresses(addressesAPI.data);
-                }
+            if (addressesAPI.status === 200 && addressesAPI?.data) {
+                setAddresses(addressesAPI.data);
             }
             if (totalPriceAPI.status === 200) {
                 setTotalPrice(totalPriceAPI?.data);
@@ -94,10 +92,8 @@ const Pay = () => {
                 getOrderByID(+idOrder),
             ]);
 
-            if (addressesAPI.status === 200) {
-                if (addressesAPI?.data) {
-                    setAddresses(addressesAPI.data);
-                }
+            if (addressesAPI.status === 200 && addressesAPI?.data) {
+                setAddresses(addressesAPI.data);
             }
             if (OrderByIDAPI.status === 200) {
                 setTotalPrice(OrderByIDAPI.data.total);
@@ -197,40 +193,35 @@ const Pay = () => {
                     <div className="space-y-3 lg:col-span-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
                         <div className="font-semibold text-xl">{t('yourContact')} ?</div>
                         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
-                            <AnimationTran tranY={100}>
+                            <AnimationTran tranY={100} className="space-y-2 font-bold">
+                                <div>{t('payments')}</div>
                                 <Controller
                                     name="paymentType"
                                     control={control}
                                     defaultValue=""
                                     render={({ field }) => (
-                                        <FormControl fullWidth>
-                                            <InputLabel>{t('payments')}</InputLabel>
-                                            <Select
-                                                {...field}
-                                                input={<OutlinedInput label={t('payments')} />}
-                                                error={errors.paymentType ? true : false}
+                                        <ToggleButtonGroup
+                                            {...field}
+                                            exclusive
+                                            fullWidth
+                                            className={`${
+                                                errors.paymentType ? 'border-2 border-red-400' : ''
+                                            } !bg-white dark:!bg-dark-600 min-h-12`}
+                                            color="info"
+                                        >
+                                            <ToggleButton
+                                                className="!normal-case !text-sm"
+                                                value={config.PaymentType.VNPay}
                                             >
-                                                <MenuItem value={config.PaymentType.VNPay} sx={{ height: '50px' }}>
-                                                    <div className="w-full flex justify-between items-center">
-                                                        {t('vnPay')}
-                                                        <Avatar
-                                                            src={imgVNPAY}
-                                                            sx={{
-                                                                height: '100%',
-                                                                width: '70px',
-                                                            }}
-                                                            variant="rounded"
-                                                        />
-                                                    </div>
-                                                </MenuItem>
-                                                <MenuItem
-                                                    value={config.PaymentType.CashOnDelivery}
-                                                    sx={{ height: '50px' }}
-                                                >
-                                                    {t('cashOnDelivery')}
-                                                </MenuItem>
-                                            </Select>
-                                        </FormControl>
+                                                {t('vnPay')}
+                                            </ToggleButton>
+                                            <ToggleButton
+                                                className="!normal-case !text-sm"
+                                                value={config.PaymentType.CashOnDelivery}
+                                            >
+                                                {t('cashOnDelivery')}
+                                            </ToggleButton>
+                                        </ToggleButtonGroup>
                                     )}
                                 />
                                 <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
@@ -243,6 +234,7 @@ const Pay = () => {
                                     <Controller
                                         name="addressId"
                                         control={control}
+                                        defaultValue={addresses.filter((item) => item.isDefault)[0].id}
                                         render={({ field }) => (
                                             <FormControl fullWidth>
                                                 <InputLabel>{t('addressHome')}</InputLabel>
@@ -254,12 +246,20 @@ const Pay = () => {
                                                 >
                                                     {addresses.map((item, index) => (
                                                         <MenuItem value={item.id} key={index}>
-                                                            <div className="text-sm">
-                                                                <div>{item.fullName}</div>
-                                                                <div>{item.phoneNumber}</div>
-                                                                <div>
-                                                                    {item.orderDetails}, {item.ward}, {item.district},{' '}
-                                                                    {item.city}
+                                                            <div className="size-full">
+                                                                <div className="text-sm">
+                                                                    <div className="flex gap-3 items-center font-bold">
+                                                                        {item.fullName} {item.phoneNumber}
+                                                                        {item.isDefault && (
+                                                                            <div className="size-fit text-end text-sm text-primary-500 border-primary-500 border-2 px-1 py-0.5 rounded-lg">
+                                                                                Mặc định
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                    <div className="flex flex-wrap">
+                                                                        {item.orderDetails}, {item.ward},{' '}
+                                                                        {item.district}, {item.city}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </MenuItem>
