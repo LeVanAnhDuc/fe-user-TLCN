@@ -216,7 +216,7 @@ function Header() {
                                             {t('purchaseOrder')}
                                         </Link>
                                         <div
-                                            className="hover:bg-gray-200 hover:text-primary-700 transition p-3"
+                                            className="hover:bg-gray-200 hover:text-primary-700 transition p-3 hover:cursor-pointer"
                                             onClick={handleLogout}
                                         >
                                             {t('logOut')}
