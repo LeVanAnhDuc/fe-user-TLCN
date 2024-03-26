@@ -1,5 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import Image from '../../../../components/Image';
@@ -11,7 +13,6 @@ import AnimationTran from '../../../../components/AnimationTran';
 import ScrollButton from '../../../../components/ScrollButton/ScrollButton';
 import Error404 from '../../../Error404';
 import Loading from '../../../../components/Loading';
-import { useTranslation } from 'react-i18next';
 
 const Detail = () => {
     const navigate = useNavigate();

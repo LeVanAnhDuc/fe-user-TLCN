@@ -25,9 +25,9 @@ const Search = (props: Iprops) => {
     };
 
     useEffect(() => {
-        if (!search.trim()) {
+        if (!search.trim() && locationRouter.pathname === config.Routes.shop && setDoneSearch) {
             setSearch('');
-            locationRouter.pathname === config.Routes.shop && setDoneSearch && setDoneSearch(true);
+            setDoneSearch(true);
             return;
         }
     }, [search]);
@@ -36,19 +36,23 @@ const Search = (props: Iprops) => {
         <div className="relative h-fit w-full text-gray-600 flex items-center">
             <input
                 type="search"
-                className="border-y-2 border-l-2 border-gray-300 bg-white h-10 w-full px-3 py-2 rounded-l-xl text-sm focus:border-primary-900 dark:focus:border-primary-300"
+                className={`${
+                    setDoneSearch ? 'rounded-l-md border-y-2 border-l-2 py-2' : 'rounded border-2 py-6'
+                } border-gray-300 bg-white h-10 w-full px-3 text-sm focus:border-primary-900 dark:bg-dark-400 dark:text-white dark:focus:border-primary-700 dark:border-dark-200`}
                 placeholder={placeholderSearch}
                 required
                 value={search}
                 onChange={handleChange}
             />
-            <button
-                type="submit"
-                className="h-10 w-14 bg-primary-600 flex justify-center items-center rounded-r-xl dark:bg-primary-300"
-                onClick={handleSubmitSearch}
-            >
-                <IconSearch className="text-white dark:text-dark-600" />
-            </button>
+            {setDoneSearch && (
+                <button
+                    type="submit"
+                    className="h-10 w-14 bg-primary-600 flex justify-center items-center rounded-r-md dark:bg-primary-300"
+                    onClick={handleSubmitSearch}
+                >
+                    <IconSearch className="text-white dark:text-dark-600" />
+                </button>
+            )}
         </div>
     );
 };

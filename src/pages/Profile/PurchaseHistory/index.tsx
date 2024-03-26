@@ -18,6 +18,8 @@ import ModalReview from './ModalReview';
 import IProductCart from '../../../interface/productCart';
 import Loading from '../../../components/Loading';
 import { initObjecProductCart } from '../../../constants';
+import Search from '../../../components/Search';
+import useDebounceCustom from '../../../hook/useDebounceCustom';
 
 const PurchaseHistory = () => {
     const navigate = useNavigate();
@@ -34,17 +36,18 @@ const PurchaseHistory = () => {
     const [statusOrder, setStatusOrder] = useState<string>(status);
     const [openReview, setOpenReview] = useState(false);
     const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
+    const [search, setSearch] = useState<string>('');
 
     const handleChangeStatus = (_: React.MouseEvent<HTMLElement>, status: string) => {
         setStatusOrder(status);
     };
 
-    const handleGetListHistory = async (statusParam: string) => {
+    const handleGetListHistory = async (statusParam: string, searchParam: string) => {
         try {
             firstLoadingAPI && setLoadingAPI(true);
 
             const [response] = await Promise.all([
-                searchOrderForUser(statusParam),
+                searchOrderForUser(statusParam, searchParam),
                 firstLoadingAPI && new Promise((resolve) => setTimeout(resolve, 250)),
             ]);
 
@@ -52,7 +55,7 @@ const PurchaseHistory = () => {
 
             if (response?.status === 200) {
                 setFirstLoadingAPI(false);
-                setListHistory(response.data);
+                setListHistory(response.data.content);
             } else {
                 setErrorAPI(true);
             }
@@ -86,7 +89,7 @@ const PurchaseHistory = () => {
                 const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
 
                 if (response.status === 200) {
-                    handleGetListHistory(statusOrder);
+                    handleGetListHistory(statusOrder, search);
                 } else {
                     toast.error(response.data.message || response.data);
                 }
@@ -104,9 +107,11 @@ const PurchaseHistory = () => {
     };
     const handleCloseReview = () => setOpenReview(false);
 
+    const searchDebounce = useDebounceCustom(search, 300);
+
     useEffect(() => {
-        handleGetListHistory(statusOrder);
-    }, [statusOrder, callAPIAgain]);
+        handleGetListHistory(statusOrder, searchDebounce);
+    }, [statusOrder, callAPIAgain, searchDebounce]);
 
     if (errorAPI) {
         return <Error404 />;
@@ -124,36 +129,58 @@ const PurchaseHistory = () => {
                 <Loading />
             ) : (
                 <section className="space-y-4">
-                    <ToggleButtonGroup
-                        value={statusOrder}
-                        exclusive
-                        onChange={handleChangeStatus}
-                        fullWidth
-                        className="!bg-white dark:!bg-dark-600 min-h-12"
-                        color="info"
-                    >
-                        <ToggleButton className="!text-xs" value={''}>
-                            {t('all')}
-                        </ToggleButton>
-                        <ToggleButton className="!text-xs" value={config.StatusOrders.ORDERED}>
-                            {t('ordered')}
-                        </ToggleButton>
-                        <ToggleButton className="!text-xs" value={config.StatusOrders.PROCESSING}>
-                            {t('processing')}
-                        </ToggleButton>
-                        <ToggleButton className="!text-xs" value={config.StatusOrders.SHIPPED}>
-                            {t('shipped')}
-                        </ToggleButton>
-                        <ToggleButton className="!text-xs" value={config.StatusOrders.DELIVERED}>
-                            {t('delivered')}
-                        </ToggleButton>
-                        <ToggleButton className="!text-xs" value={config.StatusOrders.CANCELED}>
-                            {t('canceled')}
-                        </ToggleButton>
-                        <ToggleButton className="!text-xs" value={config.StatusOrders.WAITFORPAY}>
-                            {t('waitForPay')}
-                        </ToggleButton>
-                    </ToggleButtonGroup>
+                    <div className="space-y-2 p-2 rounded bg-white dark:bg-dark-300">
+                        <ToggleButtonGroup
+                            value={statusOrder}
+                            exclusive
+                            onChange={handleChangeStatus}
+                            fullWidth
+                            className="!bg-white dark:!bg-dark-600 min-h-12"
+                            color="info"
+                        >
+                            <ToggleButton className="!text-xs sm:!text-sm !capitalize" value={''}>
+                                {t('all')}
+                            </ToggleButton>
+                            <ToggleButton
+                                className="!text-xs sm:!text-sm !capitalize"
+                                value={config.StatusOrders.ORDERED}
+                            >
+                                {t('ordered')}
+                            </ToggleButton>
+                            <ToggleButton
+                                className="!text-xs sm:!text-sm !capitalize"
+                                value={config.StatusOrders.PROCESSING}
+                            >
+                                {t('processing')}
+                            </ToggleButton>
+                            <ToggleButton
+                                className="!text-xs sm:!text-sm !capitalize"
+                                value={config.StatusOrders.SHIPPED}
+                            >
+                                {t('shipped')}
+                            </ToggleButton>
+                            <ToggleButton
+                                className="!text-xs sm:!text-sm !capitalize"
+                                value={config.StatusOrders.DELIVERED}
+                            >
+                                {t('delivered')}
+                            </ToggleButton>
+                            <ToggleButton
+                                className="!text-xs sm:!text-sm !capitalize"
+                                value={config.StatusOrders.CANCELED}
+                            >
+                                {t('canceled')}
+                            </ToggleButton>
+                            <ToggleButton
+                                className="!text-xs sm:!text-sm !capitalize"
+                                value={config.StatusOrders.WAITFORPAY}
+                            >
+                                {t('waitForPay')}
+                            </ToggleButton>
+                        </ToggleButtonGroup>
+                        <Search search={search} setSearch={setSearch} placeholderSearch={t('searchTitle')} />
+                    </div>
+
                     <div className="space-y-5">
                         {listHistory.map((item, index) => (
                             <AnimationTran

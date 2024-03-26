@@ -79,8 +79,10 @@ function Header() {
         if (isDoneSearch === true) {
             navigate(config.Routes.shop, { state: { searchItem: search } });
         }
+
         return () => setDoneSearch(false);
-    });
+    }, [isDoneSearch]);
+
     return (
         <>
             <header className="sticky top-0 flex flex-col justify-center items-center w-full bg-white shadow z-50 dark:bg-dark-600">
