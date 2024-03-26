@@ -1,18 +1,23 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import Image from '../../../../components/Image';
 import config from '../../../../config';
-import { getOrderByID } from '../../../../apis/orderApi';
+import { getOrderByID, updateOrderStatusByID } from '../../../../apis/orderApi';
 import IOrder from '../../../../interface/order';
 import { convertNumberToVND } from '../../../../utils/convertData';
 import AnimationTran from '../../../../components/AnimationTran';
 import ScrollButton from '../../../../components/ScrollButton/ScrollButton';
 import Error404 from '../../../Error404';
 import Loading from '../../../../components/Loading';
+import Button from '../../../../components/Button';
+import { initObjecProductCart } from '../../../../constants';
+import IProductCart from '../../../../interface/productCart';
+import ModalReview from '../ModalReview';
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -24,6 +29,9 @@ const Detail = () => {
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
     const [order, setOrder] = useState<IOrder>();
+    const [openReview, setOpenReview] = useState(false);
+    const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
+    const [callAPIAgain, setCallAPIAgain] = useState<boolean>(false);
 
     const getOrder = async (id: number) => {
         try {
@@ -57,9 +65,40 @@ const Detail = () => {
         }
     };
 
+    const handlePaymentOrder = async (idOder: number) => {
+        if (idOder) {
+            navigate(config.Routes.checkOut, { state: { idOder: idOder } });
+        }
+    };
+
+    const handleCancelOrder = async (idProduct: number) => {
+        const userConfirmed = window.confirm(t('userConfirmed'));
+        if (userConfirmed) {
+            try {
+                const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
+
+                if (response.status === 200) {
+                    getOrder(+idProduct);
+                } else {
+                    toast.error(response.data.message || response.data);
+                }
+            } catch (error) {
+                setErrorAPI(true);
+            }
+        } else {
+            toast.info(t('cancelDeletion'));
+        }
+    };
+
+    const handleOpenReview = (item: IProductCart) => {
+        setItemReview(item);
+        setOpenReview(true);
+    };
+    const handleCloseReview = () => setOpenReview(false);
+
     useEffect(() => {
         idProduct && getOrder(+idProduct);
-    }, [idProduct]);
+    }, [idProduct, callAPIAgain]);
 
     if (errorAPI) {
         return <Error404 />;
@@ -67,6 +106,12 @@ const Detail = () => {
 
     return (
         <>
+            <ModalReview
+                open={openReview}
+                handleClose={handleCloseReview}
+                orderItem={itemReview}
+                setCallAPIAgain={setCallAPIAgain}
+            />
             {isLoadingAPI ? (
                 <div className=" flex justify-center items-center min-h-[80vh]">
                     <Loading />
@@ -216,12 +261,46 @@ const Detail = () => {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div>
+                                                        {itemProduct.hasReview && (
+                                                            <Button
+                                                                variant="fill"
+                                                                className=" !h-10"
+                                                                onClick={() => handleOpenReview(itemProduct)}
+                                                            >
+                                                                {t('writeAReview')}
+                                                            </Button>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </>
                                     </AnimationTran>
                                 </Fragment>
                             ))}
+                        </div>
+
+                        <div className="flex justify-end gap-2">
+                            {(order?.status === config.StatusOrders.ORDERED ||
+                                order?.status === config.StatusOrders.WAITFORPAY) && (
+                                <Button
+                                    className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
+                                    variant="text"
+                                    onClick={() => handleCancelOrder(order?.id)}
+                                >
+                                    {t('cancelOrder')}
+                                </Button>
+                            )}
+
+                            {order?.status === config.StatusOrders.WAITFORPAY && (
+                                <Button
+                                    className="!min-h-10 min-w-32"
+                                    variant="fill"
+                                    onClick={() => handlePaymentOrder(order?.id)}
+                                >
+                                    {t('payment')}
+                                </Button>
+                            )}
                         </div>
                     </div>
                 </section>
