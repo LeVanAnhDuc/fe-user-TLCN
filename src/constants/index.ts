@@ -37,3 +37,8 @@ export const initObjecProductCart: IProductCart = {
     sku: {} as ISku,
     subTotal: 0,
 };
+
+export const initObjecAddressGHN = {
+    label: '',
+    id: 0,
+};

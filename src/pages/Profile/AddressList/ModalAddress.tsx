@@ -7,15 +7,18 @@ import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
-import IAddress from '../../../interface/address';
+import IAddress, { IAddressGHN } from '../../../interface/address';
 import {
     addNewAddressForCurrentUser,
     getOneAddressByAddressID,
     updateAddressByAddressID,
 } from '../../../apis/addressApi';
-import TextField from '@mui/material/TextField';
 import Button from '../../../components/Button';
+import { getDistrictsAPI, getProvincesAPI, getWardAPI } from '../../../apis/GHN/addressGHN';
+import { initObjecAddressGHN } from '../../../constants';
 
 interface IPropsAddress {
     open: boolean;
@@ -30,6 +33,12 @@ const ModalAddress = (propsCh: IPropsAddress) => {
     const { t } = useTranslation('addressesProfle');
 
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
+    const [provices, setProvices] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [provice, setProvice] = useState<IAddressGHN | null>(null);
+    const [districts, setDistricts] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [district, setDistrict] = useState<IAddressGHN | null>(null);
+    const [wards, setWards] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [ward, setWard] = useState<IAddressGHN | null>(null);
 
     const schema = yup.object().shape({
         fullName: yup.string().required(t('nameIsRequired')),
@@ -42,9 +51,6 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             })
             .min(10, t('phoneLeast10'))
             .max(11, t('phoneLess11')),
-        city: yup.string().required(t('cityIsRequired')),
-        district: yup.string().required(t('districtIsRequired')),
-        ward: yup.string().required(t('wardIsRequired')),
         orderDetails: yup.string().required(t('orderDetailsIsRequired')),
     });
 
@@ -62,17 +68,89 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             const response = await getOneAddressByAddressID(idAddressUpdate);
             setValue('fullName', response.data.fullName);
             setValue('phoneNumber', response.data.phoneNumber);
-            setValue('city', response.data.city);
-            setValue('district', response.data.district);
-            setValue('ward', response.data.ward);
+            setProvice({
+                id: 0,
+                label: response.data.city,
+            });
+            setDistrict({
+                id: 0,
+                label: response.data.district,
+            });
+            setWard({
+                id: 0,
+                label: response.data.ward,
+            });
             setValue('orderDetails', response.data.orderDetails);
         }
+    };
+
+    const getProvinces = async () => {
+        try {
+            const response = await getProvincesAPI();
+
+            const arrayTempo: IAddressGHN[] = [];
+            response.data.data.forEach((item: { ProvinceName: string; ProvinceID: string }) => {
+                arrayTempo.push({ label: item.ProvinceName, id: +item.ProvinceID });
+            });
+            setProvices(arrayTempo);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getDistricts = async (provineParam: IAddressGHN) => {
+        try {
+            const response = await getDistrictsAPI(provineParam.id);
+
+            const arrayTempo: IAddressGHN[] = [];
+            response.data.data.forEach((item: { DistrictName: string; DistrictID: string }) => {
+                arrayTempo.push({ label: item.DistrictName, id: +item.DistrictID });
+            });
+            setDistricts(arrayTempo);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getWards = async (districtParam: IAddressGHN) => {
+        try {
+            const response = await getWardAPI(districtParam.id);
+
+            const arrayTempo: IAddressGHN[] = [];
+            response.data.data.forEach((item: { WardName: string; WardCode: string }) => {
+                arrayTempo.push({ label: item.WardName, id: +item.WardCode });
+            });
+            setWards(arrayTempo);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleChangeProvice = (_: React.SyntheticEvent, value: IAddressGHN | null) => {
+        setProvice(value);
+        setDistrict(initObjecAddressGHN);
+        setWard(initObjecAddressGHN);
+        value && getDistricts(value);
+    };
+
+    const handleChangeDistrict = (_: React.SyntheticEvent, value: IAddressGHN | null) => {
+        setDistrict(value);
+        value && getWards(value);
+    };
+
+    const handleChangeWard = (_: React.SyntheticEvent, value: IAddressGHN | null) => {
+        setWard(value);
     };
 
     const onSubmit: SubmitHandler<IAddress> = async (data) => {
         if (idAddressUpdate) {
             setLoadingAPI(true);
-            const response = await updateAddressByAddressID(idAddressUpdate, data);
+            const response = await updateAddressByAddressID(idAddressUpdate, {
+                ...data,
+                city: provice?.label,
+                district: district?.label,
+                ward: district?.label,
+            });
             setLoadingAPI(false);
 
             if (response) {
@@ -85,7 +163,12 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             }
         } else {
             setLoadingAPI(true);
-            const response = await addNewAddressForCurrentUser(data);
+            const response = await addNewAddressForCurrentUser({
+                ...data,
+                city: provice?.label,
+                district: district?.label,
+                ward: district?.label,
+            });
             setLoadingAPI(false);
 
             if (response) {
@@ -106,10 +189,14 @@ const ModalAddress = (propsCh: IPropsAddress) => {
         }
     }, [idAddressUpdate]);
 
+    useEffect(() => {
+        getProvinces();
+    }, []);
+
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:w-[40rem] bg-white border border-black rounded-lg p-6 dark:bg-dark-600">
+                <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:w-10/12 bg-white border border-black rounded-lg p-6 dark:bg-dark-600">
                     <div className="mb-4 font-bold uppercase">{t('infoAddress')}</div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                         <div className="grid grid-cols-2 gap-5">
@@ -152,52 +239,36 @@ const ModalAddress = (propsCh: IPropsAddress) => {
 
                         <div className="flex gap-5">
                             <div className="size-full">
-                                <Controller
-                                    name="city"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            error={errors.city ? true : false}
-                                            label={t('enterCity')}
-                                            autoComplete="address-level2"
-                                        />
-                                    )}
+                                <Autocomplete
+                                    value={provice}
+                                    onChange={handleChangeProvice}
+                                    options={provices}
+                                    getOptionLabel={(option) => option.label}
+                                    renderInput={(params) => <TextField {...params} label={t('enterCity')} required />}
                                 />
-                                <p className="text-red-600 text-sm mt-1.5 h-4">{errors.city?.message}</p>
+                                <div className="mt-1.5 h-4"></div>
                             </div>
                             <div className="size-full">
-                                <Controller
-                                    name="district"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            error={errors.district ? true : false}
-                                            label={t('enterDistrict')}
-                                            autoComplete="address-level3"
-                                        />
+                                <Autocomplete
+                                    disabled={provice?.id ? false : true}
+                                    value={district}
+                                    onChange={handleChangeDistrict}
+                                    options={districts}
+                                    getOptionLabel={(option) => option.label}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label={t('enterDistrict')} required />
                                     )}
                                 />
-                                <p className="text-red-600 text-sm mt-1.5 h-4">{errors.district?.message}</p>
                             </div>
                             <div className="size-full">
-                                <Controller
-                                    name="ward"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            error={errors.ward ? true : false}
-                                            label={t('enterWard')}
-                                            autoComplete="address-level4"
-                                        />
-                                    )}
+                                <Autocomplete
+                                    disabled={district?.id ? false : true}
+                                    value={ward}
+                                    onChange={handleChangeWard}
+                                    options={wards}
+                                    getOptionLabel={(option) => option.label}
+                                    renderInput={(params) => <TextField {...params} label={t('enterWard')} required />}
                                 />
-                                <p className="text-red-600 text-sm mt-1.5 h-4">{errors.ward?.message}</p>
                             </div>
                         </div>
 
