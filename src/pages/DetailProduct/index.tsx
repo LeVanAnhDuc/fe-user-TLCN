@@ -9,6 +9,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
+import 'react-quill/dist/quill.core.css';
 
 import { getSKUPrice, getSingleProduct } from '../../apis/productApi';
 import IProduct from '../../interface/product';
@@ -328,7 +331,7 @@ const DetailProduct = () => {
                 </div>
                 <div className="bg-white rounded-lg p-5 space-y-5 shadow dark:bg-dark-600">
                     <div className="text-lg font-medium uppercase">{t('description')}</div>
-                    <div>{product?.description}</div>
+                    <div className="view ql-editor" dangerouslySetInnerHTML={{ __html: product?.description || '' }} />
                 </div>
 
                 <ReviewProductCurrent idProduct={id ? +id : 0} rating={ratingProduct} />
