@@ -17,7 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import { setItemsOfCart, setToTalProductCart } from '../Cart/cartSlice';
+import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/cartSlice';
 import config from '../../config';
 import { IOrderCheckOut } from '../../interface/order';
 import IAddress from '../../interface/address';
@@ -137,6 +137,7 @@ const Pay = () => {
                     if (response?.status === 201) {
                         dispatch(setToTalProductCart(0));
                         dispatch(setItemsOfCart([]));
+                        dispatch(setToTalPriceCart(0));
                         toast.success(t('orderIsSuccess'));
                         navigate(`${config.Routes.detailOrder}/${response.data.id}`);
                     } else {
@@ -161,6 +162,7 @@ const Pay = () => {
                 } else {
                     dispatch(setToTalProductCart(0));
                     dispatch(setItemsOfCart([]));
+                    dispatch(setToTalPriceCart(0));
                     const redirectURL = checkOutVNPay(
                         {
                             total: totalPrice,

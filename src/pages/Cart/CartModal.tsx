@@ -48,7 +48,6 @@ const CartModal = (props: Iprops) => {
     const getListProduct = async () => {
         try {
             const response = await getCartByToken();
-            console.log('check');
 
             if (response.status === 200) {
                 dispatch(setItemsOfCart(response?.data?.cartItems));
