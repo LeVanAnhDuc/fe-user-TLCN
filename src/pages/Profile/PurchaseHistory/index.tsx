@@ -190,13 +190,22 @@ const PurchaseHistory = () => {
                             >
                                 <div className="flex items-center justify-between p-5">
                                     <div className="text-sm font-bold">{item.createdDate}</div>
-                                    <div
-                                        className={`
+                                    <div className="flex items-center gap-2">
+                                        {item.isPaidBefore ? (
+                                            <div className="border-r-2 pr-2 text-sm font-medium text-green-500">
+                                                Đơn hàng đã được thanh toán
+                                            </div>
+                                        ) : (
+                                            ''
+                                        )}
+                                        <div
+                                            className={`
                                 ${item.status === config.StatusOrders.DELIVERED && '!text-green-500'}
                                 ${item.status === config.StatusOrders.CANCELED && '!text-red-600'} 
                                 uppercase font-bold text-primary-700 text-lg`}
-                                    >
-                                        {item.status}
+                                        >
+                                            {item.status}
+                                        </div>
                                     </div>
                                 </div>
 
