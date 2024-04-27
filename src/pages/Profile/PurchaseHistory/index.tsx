@@ -20,6 +20,7 @@ import Loading from '../../../components/Loading';
 import { initObjecProductCart } from '../../../constants';
 import Search from '../../../components/Search';
 import useDebounceCustom from '../../../hook/useDebounceCustom';
+import PopConfirm from '../../../components/PopComfirm';
 
 const PurchaseHistory = () => {
     const navigate = useNavigate();
@@ -83,21 +84,17 @@ const PurchaseHistory = () => {
     };
 
     const handleCancelOrder = async (idProduct: number) => {
-        const userConfirmed = window.confirm(t('userConfirmed'));
-        if (userConfirmed) {
-            try {
-                const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
+        try {
+            const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
 
-                if (response.status === 200) {
-                    handleGetListHistory(statusOrder, search);
-                } else {
-                    toast.error(response.data.message || response.data);
-                }
-            } catch (error) {
-                setErrorAPI(true);
+            if (response.status === 200) {
+                handleGetListHistory(statusOrder, search);
+                toast.success(t('successDeletion'));
+            } else {
+                toast.error(response.data.message || response.data);
             }
-        } else {
-            toast.info(t('cancelDeletion'));
+        } catch (error) {
+            setErrorAPI(true);
         }
     };
 
@@ -314,13 +311,19 @@ const PurchaseHistory = () => {
                                         </Button>
                                         {(item.status === config.StatusOrders.ORDERED ||
                                             item.status === config.StatusOrders.WAITFORPAY) && (
-                                            <Button
-                                                className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
-                                                variant="text"
-                                                onClick={() => handleCancelOrder(item.id)}
+                                            <PopConfirm
+                                                title={t('popConfirmDeleteTitle')}
+                                                content={t('popConfirmDeleteContent')}
+                                                onConfirm={() => handleCancelOrder(item.id)}
+                                                onCancel={() => toast.info(t('cancelDeletion'))}
                                             >
-                                                {t('cancelOrder')}
-                                            </Button>
+                                                <Button
+                                                    className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
+                                                    variant="text"
+                                                >
+                                                    {t('cancelOrder')}
+                                                </Button>
+                                            </PopConfirm>
                                         )}
                                     </div>
                                 </div>

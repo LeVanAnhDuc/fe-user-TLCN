@@ -1,5 +1,7 @@
 {
-    "userConfirmed": "Are you sure you want to cancel?",
+    "popConfirmDeleteTitle": "Cancel order",
+    "popConfirmDeleteContent": "Are you sure you want to cancel?",
+    "successDeletion": "Successful delete",
     "cancelDeletion": "Cancel deletion",
     "all": "All",
     "ordered": "Ordered",
