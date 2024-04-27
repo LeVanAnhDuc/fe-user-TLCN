@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Policy = () => {
     return (
         <section className="sm:w-10/12 w-11/12 flex flex-col m-auto py-10 space-y-20">
