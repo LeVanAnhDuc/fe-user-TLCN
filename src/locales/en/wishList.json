@@ -2,6 +2,8 @@
     "noWishList": "No preferred products yet",
     "shop": "Shop",
     "price": "Price",
+    "titleConfirm": "Unfavourite",
+    "contentConfirm": "Remove product from favorites",
     "unFavourite": "Unfavourite",
     "buyNow": "Buy now"
 }

@@ -28,6 +28,7 @@ export const resources = {
         passWordProfile: en.PASSWORDPROFILE_EN,
         addressesProfle: en.ADDRESSESPROFLE_EN,
         sideBarProfile: en.SIDEBARPROFILE_EN,
+        components: en.COMPONENTS_EN,
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
@@ -52,6 +53,7 @@ export const resources = {
         passWordProfile: vi.PASSWORDPROFILE_VI,
         addressesProfle: vi.ADDRESSESPROFLE_VI,
         sideBarProfile: vi.SIDEBARPROFILE_VI,
+        components: vi.COMPONENTS_VI,
     },
 } as const;
 
@@ -83,6 +85,7 @@ i18n.use(initReactI18next).init({
         'addressesProfle',
         'sideBarProfile',
         'purchaseHistory',
+        'components',
     ],
     defaultNS,
     fallbackLng: 'en',

@@ -1,6 +1,7 @@
 import Popover from '@mui/material/Popover';
 import { ReactNode, useState } from 'react';
 import Button from '../Button';
+import { useTranslation } from 'react-i18next';
 interface Iprops {
     title: string;
     content: string;
@@ -11,6 +12,8 @@ interface Iprops {
 
 const PopConfirm = (props: Iprops) => {
     const { title, content, onConfirm, onCancel, children } = props;
+
+    const { t } = useTranslation('components');
 
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [position, setPosition] = useState<HTMLElement | null>(null);
@@ -55,7 +58,7 @@ const PopConfirm = (props: Iprops) => {
                     <div className="text-sm">{content}</div>
                     <div className="flex items-center justify-end gap-3 mt-5">
                         <Button size="small" onClick={handleCancel}>
-                            Hủy
+                            {t('popConfirm.cancel')}
                         </Button>
                         <Button
                             variant="fill"
@@ -63,7 +66,7 @@ const PopConfirm = (props: Iprops) => {
                             className="bg-red-500 hover:bg-red-700"
                             onClick={handleConfirm}
                         >
-                            Xác nhận
+                            {t('popConfirm.confirm')}
                         </Button>
                     </div>
                 </div>

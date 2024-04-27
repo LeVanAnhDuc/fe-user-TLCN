@@ -2,6 +2,8 @@
     "noWishList": "Chưa có sản phẩm ưu thích",
     "shop": "Cửa hàng",
     "price": "Giá",
+    "titleConfirm": "Hủy thích",
+    "contentConfirm": "Xóa sản phẩm khỏi danh sách ưu thích",
     "unFavourite": "Hủy thích",
     "buyNow": "Mua ngay"
 }

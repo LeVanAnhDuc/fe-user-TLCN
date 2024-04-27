@@ -20,6 +20,7 @@ import PASSWORDPROFILE_VI from './passWordProfile.json';
 import ADDRESSESPROFLE_VI from './addressesProfle.json';
 import SIDEBARPROFILE_VI from './sideBarProfile.json';
 import PURCHASEHISTORY_VI from './purchaseHistory.json';
+import COMPONENTS_VI from './components.json';
 
 export {
     SPEEDDIALSETTINGUI_VI,
@@ -44,4 +45,5 @@ export {
     ADDRESSESPROFLE_VI,
     SIDEBARPROFILE_VI,
     PURCHASEHISTORY_VI,
+    COMPONENTS_VI,
 };

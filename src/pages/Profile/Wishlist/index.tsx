@@ -17,6 +17,7 @@ import Button from '../../../components/Button';
 import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import Error404 from '../../Error404';
 import Loading from '../../../components/Loading';
+import PopConfirm from '../../../components/PopComfirm';
 
 const Wishlist = () => {
     const dispatch = useDispatch();
@@ -137,13 +138,15 @@ const Wishlist = () => {
                                                     </span>
                                                 </div>
                                                 <div className="w-full flex items-center gap-3 sm:w-fit justify-between">
-                                                    <Button
-                                                        onClick={() => handleToggleFavourite(item.product.productId)}
-                                                        className="text-sm !p-2 !h-11"
-                                                        variant="text"
+                                                    <PopConfirm
+                                                        title={t('titleConfirm')}
+                                                        content={t('contentConfirm')}
+                                                        onConfirm={() => handleToggleFavourite(item.product.productId)}
                                                     >
-                                                        {t('unFavourite')}
-                                                    </Button>
+                                                        <Button className="text-sm !p-2 !h-11" variant="text">
+                                                            {t('unFavourite')}
+                                                        </Button>
+                                                    </PopConfirm>
                                                     <Button
                                                         onClick={() => handleRedirectDetailItem(item.product.productId)}
                                                         className="text-sm !p-2 !h-11"
