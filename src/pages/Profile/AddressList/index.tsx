@@ -11,6 +11,7 @@ import Button from '../../../components/Button';
 import Error404 from '../../Error404';
 import Loading from '../../../components/Loading';
 import AnimationTran from '../../../components/AnimationTran';
+import PopConfirm from '../../../components/PopComfirm';
 
 const AddressList = () => {
     const { t } = useTranslation('addressesProfle');
@@ -71,18 +72,15 @@ const AddressList = () => {
     };
 
     const deleteAddress = async (idAddress: number) => {
-        const text = t('confirmDelete');
-        if (confirm(text) == true) {
-            try {
-                const response = await deleteAddressByAddressID(idAddress);
-                if (response.status === 200) {
-                    setRequestNewAddresses((prev) => !prev);
-                } else {
-                    toast.error(response.data.message || response.data);
-                }
-            } catch (error) {
-                setErrorAPI(true);
+        try {
+            const response = await deleteAddressByAddressID(idAddress);
+            if (response.status === 200) {
+                setRequestNewAddresses((prev) => !prev);
+            } else {
+                toast.error(response.data.message || response.data);
             }
+        } catch (error) {
+            setErrorAPI(true);
         }
     };
 
@@ -144,12 +142,15 @@ const AddressList = () => {
                                                 {t('update')}
                                             </Button>
                                             {!item.isDefault && (
-                                                <Button
-                                                    className="!p-2 !h-10 text-sm text-red-500 hover:text-red-900"
-                                                    onClick={() => deleteAddress(item.id ? item.id : 0)}
+                                                <PopConfirm
+                                                    title={t('confirmDeleteTitle')}
+                                                    content={t('confirmDeleteContent')}
+                                                    onConfirm={() => deleteAddress(item.id ? item.id : 0)}
                                                 >
-                                                    {t('deleteAddress')}
-                                                </Button>
+                                                    <Button className="!p-2 !h-10 text-sm text-red-500 hover:text-red-900">
+                                                        {t('deleteAddress')}
+                                                    </Button>
+                                                </PopConfirm>
                                             )}
                                         </div>
                                     </div>

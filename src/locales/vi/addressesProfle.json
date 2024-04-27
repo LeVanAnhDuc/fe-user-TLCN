@@ -1,5 +1,6 @@
 {
-    "confirmDelete": "Đồng ý xóa",
+    "confirmDeleteTitle": "Xóa địa chỉ",
+    "confirmDeleteContent": "Xóa địa chỉ khỏi danh sách",
     "addNewAddress": "Thêm địa chỉ",
     "noAddress": "Hix. Không có địa chỉ nào. Bạn tạo mới nhé?",
     "defaultSettings": "Thiết lập mặc định",

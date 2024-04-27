@@ -1,5 +1,6 @@
 {
-    "confirmDelete": "Are you sure delete",
+    "confirmDeleteTitle": "Remove address",
+    "confirmDeleteContent": "Remove address from list",
     "addNewAddress": "New address",
     "noAddress": "Oh. There's no address. Could you create a new one, please?",
     "defaultSettings": "Default settings",
