@@ -18,6 +18,7 @@ import Button from '../../../../components/Button';
 import { initObjecProductCart } from '../../../../constants';
 import IProductCart from '../../../../interface/productCart';
 import ModalReview from '../ModalReview';
+import PopConfirm from '../../../../components/PopComfirm';
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -72,21 +73,17 @@ const Detail = () => {
     };
 
     const handleCancelOrder = async (idProduct: number) => {
-        const userConfirmed = window.confirm(t('userConfirmed'));
-        if (userConfirmed) {
-            try {
-                const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
+        try {
+            const response = await updateOrderStatusByID(idProduct, config.StatusOrders.CANCELED);
 
-                if (response.status === 200) {
-                    getOrder(+idProduct);
-                } else {
-                    toast.error(response.data.message || response.data);
-                }
-            } catch (error) {
-                setErrorAPI(true);
+            if (response.status === 200) {
+                getOrder(+idProduct);
+                toast.success(t('successDeletion'));
+            } else {
+                toast.error(response.data.message || response.data);
             }
-        } else {
-            toast.info(t('cancelDeletion'));
+        } catch (error) {
+            setErrorAPI(true);
         }
     };
 
@@ -283,13 +280,19 @@ const Detail = () => {
                         <div className="flex justify-end gap-2">
                             {(order?.status === config.StatusOrders.ORDERED ||
                                 order?.status === config.StatusOrders.WAITFORPAY) && (
-                                <Button
-                                    className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
-                                    variant="text"
-                                    onClick={() => handleCancelOrder(order?.id)}
+                                <PopConfirm
+                                    title={t('popConfirmDeleteTitle')}
+                                    content={t('popConfirmDeleteContent')}
+                                    onConfirm={() => handleCancelOrder(order?.id)}
+                                    onCancel={() => toast.info(t('cancelDeletion'))}
                                 >
-                                    {t('cancelOrder')}
-                                </Button>
+                                    <Button
+                                        className="!min-h-10 min-w-28 !text-red-500 hover:text-red-800 !border-red-500 "
+                                        variant="outline"
+                                    >
+                                        {t('cancelOrder')}
+                                    </Button>
+                                </PopConfirm>
                             )}
 
                             {order?.status === config.StatusOrders.WAITFORPAY && (
