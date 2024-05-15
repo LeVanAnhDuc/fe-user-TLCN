@@ -91,7 +91,7 @@ const PurchaseHistory = () => {
                 handleGetListHistory(statusOrder, search);
                 toast.success(t('successDeletion'));
             } else {
-                toast.error(response.data.message || response.data);
+                toast.error(t('errorDeletion'));
             }
         } catch (error) {
             setErrorAPI(true);
