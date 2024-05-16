@@ -33,8 +33,8 @@ const ModalAddress = (propsCh: IPropsAddress) => {
     const { t } = useTranslation('addressesProfle');
 
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
-    const [provices, setProvices] = useState<IAddressGHN[]>([initObjecAddressGHN]);
-    const [provice, setProvice] = useState<IAddressGHN | null>(null);
+    const [provinces, setProvinces] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [province, setProvince] = useState<IAddressGHN | null>(null);
     const [districts, setDistricts] = useState<IAddressGHN[]>([initObjecAddressGHN]);
     const [district, setDistrict] = useState<IAddressGHN | null>(null);
     const [wards, setWards] = useState<IAddressGHN[]>([initObjecAddressGHN]);
@@ -68,17 +68,20 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             const response = await getOneAddressByAddressID(idAddressUpdate);
             setValue('fullName', response.data.fullName);
             setValue('phoneNumber', response.data.phoneNumber);
-            setProvice({
+            setProvince({
                 id: 0,
-                label: response.data.city,
+                label: response.data.province,
+                code: '0',
             });
             setDistrict({
                 id: 0,
                 label: response.data.district,
+                code: '0',
             });
             setWard({
                 id: 0,
                 label: response.data.ward,
+                code: '0',
             });
             setValue('orderDetails', response.data.orderDetails);
         }
@@ -89,22 +92,22 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             const response = await getProvincesAPI();
 
             const arrayTempo: IAddressGHN[] = [];
-            response.data.data.forEach((item: { ProvinceName: string; ProvinceID: string }) => {
-                arrayTempo.push({ label: item.ProvinceName, id: +item.ProvinceID });
+            response.data.data.forEach((item: { ProvinceName: string; ProvinceID: string; Code: string }) => {
+                arrayTempo.push({ label: item.ProvinceName, id: +item.ProvinceID, code: item.Code });
             });
-            setProvices(arrayTempo);
+            setProvinces(arrayTempo);
         } catch (error) {
             console.log(error);
         }
     };
 
-    const getDistricts = async (provineParam: IAddressGHN) => {
+    const getDistricts = async (provinceParam: IAddressGHN) => {
         try {
-            const response = await getDistrictsAPI(provineParam.id);
+            const response = await getDistrictsAPI(provinceParam.id);
 
             const arrayTempo: IAddressGHN[] = [];
-            response.data.data.forEach((item: { DistrictName: string; DistrictID: string }) => {
-                arrayTempo.push({ label: item.DistrictName, id: +item.DistrictID });
+            response.data.data.forEach((item: { DistrictName: string; DistrictID: string; Code: string }) => {
+                arrayTempo.push({ label: item.DistrictName, id: +item.DistrictID, code: item.Code });
             });
             setDistricts(arrayTempo);
         } catch (error) {
@@ -118,7 +121,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
 
             const arrayTempo: IAddressGHN[] = [];
             response.data.data.forEach((item: { WardName: string; WardCode: string }) => {
-                arrayTempo.push({ label: item.WardName, id: +item.WardCode });
+                arrayTempo.push({ label: item.WardName, id: +item.WardCode, code: item.WardCode });
             });
             setWards(arrayTempo);
         } catch (error) {
@@ -127,7 +130,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
     };
 
     const handleChangeProvice = (_: React.SyntheticEvent, value: IAddressGHN | null) => {
-        setProvice(value);
+        setProvince(value);
         setDistrict(initObjecAddressGHN);
         setWard(initObjecAddressGHN);
         value && getDistricts(value);
@@ -147,11 +150,15 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             setLoadingAPI(true);
             const response = await updateAddressByAddressID(idAddressUpdate, {
                 ...data,
-                city: provice?.label,
+                province: province?.label,
                 district: district?.label,
-                ward: district?.label,
+                ward: ward?.label,
+                districtId: district?.id,
+                provinceId: province?.id,
+                wardCode: ward?.code,
             });
             setLoadingAPI(false);
+            console.log(response);
 
             if (response) {
                 if (response.status === 200) {
@@ -165,10 +172,14 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             setLoadingAPI(true);
             const response = await addNewAddressForCurrentUser({
                 ...data,
-                city: provice?.label,
+                province: province?.label,
                 district: district?.label,
-                ward: district?.label,
+                ward: ward?.label,
+                districtId: district?.id,
+                provinceId: province?.id,
+                wardCode: ward?.code,
             });
+
             setLoadingAPI(false);
 
             if (response) {
@@ -240,9 +251,9 @@ const ModalAddress = (propsCh: IPropsAddress) => {
                         <div className="flex gap-5">
                             <div className="size-full">
                                 <Autocomplete
-                                    value={provice}
+                                    value={province}
                                     onChange={handleChangeProvice}
-                                    options={provices}
+                                    options={provinces}
                                     getOptionLabel={(option) => option.label}
                                     renderInput={(params) => <TextField {...params} label={t('enterCity')} required />}
                                 />
@@ -250,7 +261,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
                             </div>
                             <div className="size-full">
                                 <Autocomplete
-                                    disabled={provice?.id ? false : true}
+                                    disabled={province?.id ? false : true}
                                     value={district}
                                     onChange={handleChangeDistrict}
                                     options={districts}

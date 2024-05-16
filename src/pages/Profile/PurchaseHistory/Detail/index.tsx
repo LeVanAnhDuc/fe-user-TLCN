@@ -168,7 +168,7 @@ const Detail = () => {
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.04}>
                                             {order?.address.orderDetails}, {order?.address.ward},{' '}
-                                            {order?.address.district},{order?.address.city}
+                                            {order?.address.district},{order?.address.province}
                                         </AnimationTran>
                                     </td>
                                 </tr>
