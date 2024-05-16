@@ -25,6 +25,7 @@ function Home() {
             localStorage.removeItem('infoUser');
             localStorage.removeItem('totalProductInCart');
             localStorage.removeItem('totalWishList');
+            localStorage.removeItem('productPurchaseInCart');
             dispatch(setIsLogin(false));
             navigate('/');
         }
