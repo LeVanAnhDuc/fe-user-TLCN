@@ -23,6 +23,7 @@ import {
     selectToTalPriceCart,
     selectToTalProductCart,
     setItemsOfCart,
+    setProductsPurchase,
     setToTalPriceCart,
 } from './cartSlice';
 import AnimationTran from '../../components/AnimationTran';
@@ -92,6 +93,12 @@ const CartModal = (props: Iprops) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
         }
+    };
+
+    const handleNavigateCheckout = () => {
+        navigate(config.Routes.checkOut);
+        dispatch(setProductsPurchase(products));
+        toggleDrawerCartModal();
     };
 
     return (
@@ -229,10 +236,7 @@ const CartModal = (props: Iprops) => {
                                     variant="fill"
                                     fullWidth
                                     disabled={totalProduct === 0}
-                                    onClick={() => {
-                                        navigate(config.Routes.checkOut);
-                                        toggleDrawerCartModal();
-                                    }}
+                                    onClick={handleNavigateCheckout}
                                 >
                                     {t('checkOut')}
                                 </Button>

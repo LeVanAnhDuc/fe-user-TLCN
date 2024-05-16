@@ -77,9 +77,9 @@ const PurchaseHistory = () => {
         }
     };
 
-    const handlePaymentOrder = async (idOder: number) => {
+    const handlePaymentOrder = async (idOder: number, orderItems: IProductCart[]) => {
         if (idOder) {
-            navigate(config.Routes.checkOut, { state: { idOder: idOder } });
+            navigate(config.Routes.checkOut, { state: { idOder: idOder, orderItems: orderItems } });
         }
     };
 
@@ -297,7 +297,7 @@ const PurchaseHistory = () => {
                                             <Button
                                                 className="!min-h-10 min-w-32"
                                                 variant="fill"
-                                                onClick={() => handlePaymentOrder(item.id)}
+                                                onClick={() => handlePaymentOrder(item.id, item.orderItems)}
                                             >
                                                 {t('payment')}
                                             </Button>

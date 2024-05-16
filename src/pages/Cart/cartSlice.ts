@@ -7,12 +7,14 @@ interface IInitialState {
     totalItem: number;
     totalPrice: number;
     listItemInCart: IProductCart[];
+    listItemPurchaseInCart: IProductCart[];
 }
 
 const initialState: IInitialState = {
     totalItem: 0,
     totalPrice: 0,
     listItemInCart: [],
+    listItemPurchaseInCart: [],
 };
 
 const saveTotal = localStorage.getItem('totalProductInCart');
@@ -28,6 +30,11 @@ if (saveListItemOfCart) {
 const savePrice = localStorage.getItem('totalPriceInCart');
 if (savePrice) {
     initialState.totalPrice = JSON.parse(savePrice);
+}
+
+const saveListItemPurchaseInCart = localStorage.getItem('productPurchaseInCart');
+if (saveListItemPurchaseInCart) {
+    initialState.listItemPurchaseInCart = JSON.parse(saveListItemPurchaseInCart);
 }
 
 export const totalProductInCartSlice = createSlice({
@@ -50,14 +57,19 @@ export const totalProductInCartSlice = createSlice({
             state.totalPrice = action.payload;
             localStorage.setItem('totalPriceInCart', JSON.stringify(state.totalPrice));
         },
+        setProductsPurchase: (state, action: PayloadAction<IProductCart[]>) => {
+            state.listItemPurchaseInCart = action.payload;
+            localStorage.setItem('productPurchaseInCart', JSON.stringify(state.listItemPurchaseInCart));
+        },
     },
 });
 
-export const { setToTalProductCart, deleteNumberProductCart, setItemsOfCart, setToTalPriceCart } =
+export const { setToTalProductCart, deleteNumberProductCart, setItemsOfCart, setToTalPriceCart, setProductsPurchase } =
     totalProductInCartSlice.actions;
 
 export const selectToTalProductCart = (state: RootState) => state.cart.totalItem;
 export const selectToTalPriceCart = (state: RootState) => state.cart.totalPrice;
 export const selectProductsCart = (state: RootState) => state.cart.listItemInCart;
+export const selectProductsPurchaseCart = (state: RootState) => state.cart.listItemPurchaseInCart;
 
 export default totalProductInCartSlice.reducer;
