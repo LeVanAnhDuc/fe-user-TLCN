@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://online-gateway.ghn.vn/shiip/public-api/master-data',
+    baseURL: 'https://dev-online-gateway.ghn.vn/shiip/public-api',
     timeout: 30000,
     headers: {
         'Access-Control-Allow-Origin': '*',
