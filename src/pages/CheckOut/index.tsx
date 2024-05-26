@@ -312,6 +312,12 @@ const Pay = () => {
                                                         </span>
                                                     </div>
                                                     <div className="flex gap-1">
+                                                        <span className="font-bold w-18">{t('quantity')}:</span>
+                                                        <div className="font-medium">
+                                                            {convertNumberToVND(item.quantity)}
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-1">
                                                         <span className="font-bold w-18">{t('totalPrice')}:</span>
                                                         <div className="not-italic font-medium text-red-500 flex gap-1">
                                                             {convertNumberToVND(item.subTotal)}
