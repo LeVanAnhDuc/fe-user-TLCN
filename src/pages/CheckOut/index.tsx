@@ -405,21 +405,21 @@ const Pay = () => {
                                                     >
                                                         {addresses.map((item, index) => (
                                                             <MenuItem value={item.id} key={index}>
-                                                                <div className="size-full">
+                                                                <div className="size-full flex items-center justify-between gap-2 overflow-hidden">
                                                                     <div className="text-sm">
-                                                                        <div className="flex gap-3 items-center font-bold">
+                                                                        <div className="font-bold">
                                                                             {item.fullName} {item.phoneNumber}
-                                                                            {item.isDefault && (
-                                                                                <div className="size-fit text-end text-sm text-primary-500 border-primary-500 border-2 px-1 py-0.5 rounded-lg">
-                                                                                    Mặc định
-                                                                                </div>
-                                                                            )}
                                                                         </div>
                                                                         <div className="flex flex-wrap">
                                                                             {item.orderDetails}, {item.ward},{' '}
                                                                             {item.district}, {item.province}
                                                                         </div>
                                                                     </div>
+                                                                    {item.isDefault && (
+                                                                        <div className="size-fit text-end text-sm text-primary-500 border-primary-500 border-2 px-1.5 py-1 rounded-md">
+                                                                            Mặc định
+                                                                        </div>
+                                                                    )}
                                                                 </div>
                                                             </MenuItem>
                                                         ))}
