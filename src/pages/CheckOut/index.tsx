@@ -5,8 +5,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
-import ToggleButton from '@mui/material/ToggleButton';
+import MuiToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { styled } from '@mui/material/styles';
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -39,6 +40,18 @@ import { getFeeShipping } from '../../apis/GHN/FeeShip';
 import IProductCart from '../../interface/productCart';
 import Image from '../../components/Image';
 import { IProductCheckout } from '../../interface/product';
+
+const ToggleButton = styled(MuiToggleButton)({
+    '&.Mui-selected': {
+        backgroundColor: '#b2ebf2',
+        color: 'black',
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        border: '2px solid #0097a7',
+    },
+    ' &.Mui-selected:hover': {
+        backgroundColor: '#80deea',
+    },
+});
 
 const Pay = () => {
     const location = useLocation();
@@ -270,68 +283,74 @@ const Pay = () => {
             <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
                 <div className="grid lg:grid-cols-5 gap-10">
                     <div className="lg:col-span-3 space-y-4">
-                        {productsPurchase.map((item: IProductCart, index) => (
-                            <div className="flex items-center" key={item.id}>
-                                <AnimationTran
-                                    tranY={100}
-                                    key={index}
-                                    className="size-full grid grid-cols-12 gap-2 bg-white rounded-lg overflow-hidden shadow p-2 dark:bg-dark-600"
-                                    delay={(index % 4) / 20}
-                                >
-                                    <>
-                                        <Image
-                                            src={item.imageUrl}
-                                            alt={'image' + item.product.name}
-                                            className="col-span-3 md:col-span-2 object-cover object-center size-fit m-auto cursor-pointer"
-                                            onClick={() => {
-                                                handleRedirectDetailItem(item.product.id);
-                                            }}
-                                        />
-                                        <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between ">
-                                            <div className="line-clamp-2 font-semibold mb-3">{item.product.name}</div>
-                                            <div className="flex justify-between items-center flex-wrap gap-1">
-                                                <aside>
-                                                    <div className="flex gap-1">
-                                                        <span className="font-bold w-18">{t('classification')}:</span>
-                                                        <span className="font-medium">
-                                                            {item.sku?.optionValues?.map((option, index) => (
-                                                                <React.Fragment key={index}>
-                                                                    {option.valueName}
-                                                                    {index < item.sku.optionValues.length - 1
-                                                                        ? ' - '
-                                                                        : ''}
-                                                                </React.Fragment>
-                                                            ))}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex gap-1">
-                                                        <span className="font-bold w-18">{t('unitPrice')}: </span>
-                                                        <span className="not-italic font-medium text-red-500 flex gap-1">
-                                                            {convertNumberToVND(item.price)}
-                                                            <span className="text-xs"> đ</span>
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex gap-1">
-                                                        <span className="font-bold w-18">{t('quantity')}:</span>
-                                                        <div className="font-medium">
-                                                            {convertNumberToVND(item.quantity)}
+                        <div className="space-y-3 bg-white p-5  rounded-lg dark:bg-dark-600">
+                            {productsPurchase.map((item: IProductCart, index) => (
+                                <div className="flex items-center" key={item.id}>
+                                    <AnimationTran
+                                        tranY={100}
+                                        key={index}
+                                        className="size-full grid grid-cols-12 gap-2 bg-gray-100 rounded-lg overflow-hidden shadow  dark:bg-dark-500"
+                                        delay={(index % 4) / 20}
+                                    >
+                                        <>
+                                            <Image
+                                                src={item.imageUrl}
+                                                alt={'image' + item.product.name}
+                                                className="col-span-3 md:col-span-2 object-cover object-center size-full cursor-pointer"
+                                                onClick={() => {
+                                                    handleRedirectDetailItem(item.product.id);
+                                                }}
+                                            />
+                                            <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between p-2">
+                                                <div className="line-clamp-2 font-semibold mb-3 h-9">
+                                                    {item.product.name}
+                                                </div>
+                                                <div className="flex justify-between items-center flex-wrap gap-1">
+                                                    <aside>
+                                                        <div className="flex gap-1">
+                                                            <span className="font-bold w-18">
+                                                                {t('classification')}:
+                                                            </span>
+                                                            <span className="font-medium">
+                                                                {item.sku?.optionValues?.map((option, index) => (
+                                                                    <React.Fragment key={index}>
+                                                                        {option.valueName}
+                                                                        {index < item.sku.optionValues.length - 1
+                                                                            ? ' - '
+                                                                            : ''}
+                                                                    </React.Fragment>
+                                                                ))}
+                                                            </span>
                                                         </div>
-                                                    </div>
-                                                    <div className="flex gap-1">
-                                                        <span className="font-bold w-18">{t('totalPrice')}:</span>
-                                                        <div className="not-italic font-medium text-red-500 flex gap-1">
-                                                            {convertNumberToVND(item.subTotal)}
-                                                            <span className="text-xs">đ</span>
+                                                        <div className="flex gap-1">
+                                                            <span className="font-bold w-18">{t('unitPrice')}: </span>
+                                                            <span className="not-italic font-medium text-red-500 flex gap-1">
+                                                                {convertNumberToVND(item.price)}
+                                                                <span className="text-xs"> đ</span>
+                                                            </span>
                                                         </div>
-                                                    </div>
-                                                </aside>
+                                                        <div className="flex gap-1">
+                                                            <span className="font-bold w-18">{t('quantity')}:</span>
+                                                            <div className="font-medium">
+                                                                {convertNumberToVND(item.quantity)}
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-1">
+                                                            <span className="font-bold w-18">{t('totalPrice')}:</span>
+                                                            <div className="not-italic font-medium text-red-500 flex gap-1">
+                                                                {convertNumberToVND(item.subTotal)}
+                                                                <span className="text-xs">đ</span>
+                                                            </div>
+                                                        </div>
+                                                    </aside>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </>
-                                </AnimationTran>
-                            </div>
-                        ))}
-                        <div className="space-y-3  bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
+                                        </>
+                                    </AnimationTran>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="space-y-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
                             <div className="font-semibold text-xl">{t('yourContact')} ?</div>
                             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                                 <AnimationTran tranY={100} className="space-y-2 font-bold">
@@ -347,17 +366,16 @@ const Pay = () => {
                                                 fullWidth
                                                 className={`${
                                                     errors.paymentType ? 'border-2 border-red-400' : ''
-                                                } !bg-white dark:!bg-dark-600 min-h-12`}
-                                                color="info"
+                                                } !bg-white dark:!bg-dark-600 min-h-12 space-x-3`}
                                             >
                                                 <ToggleButton
-                                                    className="!normal-case !text-sm"
+                                                    className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
                                                     value={config.PaymentType.VNPay}
                                                 >
                                                     {t('vnPay')}
                                                 </ToggleButton>
                                                 <ToggleButton
-                                                    className="!normal-case !text-sm"
+                                                    className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
                                                     value={config.PaymentType.CashOnDelivery}
                                                 >
                                                     {t('cashOnDelivery')}
