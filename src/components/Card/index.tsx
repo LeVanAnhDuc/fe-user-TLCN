@@ -17,6 +17,7 @@ import Button from '../Button';
 import Skeleton from '../Skeleton';
 import AnimationTran from '../AnimationTran';
 
+<<<<<<< HEAD
 interface Iprops {
     itemProduct: IProduct;
     loading?: boolean;
@@ -25,6 +26,11 @@ interface Iprops {
 
 const Card = (props: Iprops) => {
     const { itemProduct, loading = false, delay = 0 } = props;
+=======
+
+const Card = (props: { itemProduct: IProduct }) => {
+    const { itemProduct } = props;
+>>>>>>> acbca2eab1b040ecc49f61721eabd7274043e2d6
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { t } = useTranslation('card');
@@ -69,6 +75,7 @@ const Card = (props: Iprops) => {
     }, [loading]);
 
     return (
+<<<<<<< HEAD
         <AnimationTran tranY={30} delay={delay}>
             <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[0.98] hover:-translate-y-1 transition dark:bg-dark-600">
                 <div onClick={handleNextDetailPage} className="cursor-pointer">
@@ -147,6 +154,56 @@ const Card = (props: Iprops) => {
                 )}
             </div>
         </AnimationTran>
+=======
+        <div className="shadow-lg p-0 rounded-lg bg-[#FFFF]">
+            <div onClick={handleNextDetailPage} className="cursor-pointer">
+                <Box
+                    sx={{
+                        height: '25vh', // Chiều cao cố định
+                        overflow: 'hidden',
+                        margin: 1,
+                        '&:hover .image': {
+                            transform: 'scale(1.2)',
+                        },
+                    }}
+                >
+                    <CardMedia
+                        className="image"
+                        sx={{
+                            width: '100%',
+                            height: '100%',
+                            transition: 'transform 0.2s',
+                        }}
+                        image={itemProduct.listImages[0]}
+                    />
+                </Box>
+            </div>
+            <CardContent>
+                <div className="font-medium text-base grid gap-1 mb-0">
+                    <div className="two-lines">
+                        {itemProduct.name}
+                    </div>
+                    <div className="flex justify-between mt-3">
+                        <span>
+                            <span className="dong">đ</span>
+                            <span className='list-price'>
+                                {itemProduct.price.toLocaleString('vi-VN')}
+                            </span>
+                        </span>
+                        <Rating defaultValue={itemProduct.rating} precision={0.5} readOnly sx={{ fontSize: '1.2rem' }}/>
+                    </div>
+                </div>
+            </CardContent>
+            <CardActions>
+                <Button fullWidth variant="outlined" onClick={handleNextDetailPage}>
+                    +<ShoppingCart />
+                </Button>
+                <Button onClick={handleChangeFavorite}>
+                    {favourite ? <Favorite sx={{ color: 'black' }} /> : <FavoriteBorder sx={{ color: 'black' }} />}
+                </Button>
+            </CardActions>
+        </div>
+>>>>>>> acbca2eab1b040ecc49f61721eabd7274043e2d6
     );
 };
 

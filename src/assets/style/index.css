@@ -54,8 +54,17 @@
 }
 
 body {
+<<<<<<< HEAD
     line-height: 1.5;
+=======
+    font-family: sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
+    /* font-size: 1.5rem; */
+    /* line-height: 1.5; */
+    /* Tối ưu tải phông chữ */
+>>>>>>> acbca2eab1b040ecc49f61721eabd7274043e2d6
     text-rendering: optimizeSpeed;
+    background-color: rgb(245, 245, 245);
 }
 
 a {
@@ -80,3 +89,136 @@ html *::-webkit-scrollbar-track {
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
+<<<<<<< HEAD
+=======
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Đổi animation tùy theo yêu cầu của bạn */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Đổi animation tùy theo yêu cầu của bạn */
+    }
+}
+
+/* Áp dụng animation cho các phần tử có lớp animate-your-animation-class */
+.animate-your-animation-class {
+    animation: fadeIn 1s ease-in-out; /* Sử dụng animation 'fadeIn' với thời gian 1 giây và hiệu ứng ease-in-out */
+    opacity: 0;
+    transform: translateY(20px); /* Đổi animation tùy theo yêu cầu của bạn */
+    animation-fill-mode: forwards; /* Giữ trạng thái cuối cùng của animation khi kết thúc */
+}
+
+/* Áp dụng cho chữ đ trước số tiền */
+.dong {
+    position: relative;
+    font-size: 12px; 
+    top: -3px; 
+    color: rgb(238,77,45);
+}
+
+.detail-dong {
+    position: relative;
+    font-size: 20px; 
+    top: -6px; 
+    color: rgb(238,77,45);
+}
+
+.black-dong {
+    position: relative;
+    font-size: 12px; 
+    top: -3px; 
+    color: black;
+}
+
+/* Áp dụng cho giá tiền của sản phẩm */
+.list-price {
+    color: rgb(238,77,45);
+    font-size: 16px; 
+}
+
+
+.price {
+    color: rgb(238,77,45);
+    font-size: 24px; 
+}
+
+.detail-price {
+    color: rgb(238,77,45);
+    font-size: 32px; 
+}
+
+.rating-value {
+    color: rgb(238,77,45);
+    font-size: 18px; 
+}
+
+.subtotal-price {
+    color: rgb(238,77,45);
+    font-size: 16px; 
+}
+
+
+/* Custom hiện thị tên sản phẩm */
+.two-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2; /* Số dòng cần hiển thị */
+    line-clamp: 2; /* Số dòng cần hiển thị */
+}
+
+.cart-image-size {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 144px;
+    overflow: hidden;
+}
+
+.cart-image {
+    object-fit: contain;
+    height: 120%; 
+    width: auto;
+}
+
+.video-container {
+    max-width: 91%; /* Điều chỉnh độ rộng tối đa */
+    height: auto; /* Để giữ tỷ lệ khung hình */
+    margin: 0 auto; /* Canh giữa theo chiều ngang */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-image {
+    max-width: 91.5%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.white-bg {
+    background-color: #fff;
+}
+
+.gray-bg {
+    background-color: rgb(245, 245, 245); 
+}
+
+.price-aline {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    border-radius: 4px;
+    height: 56px;
+    /* justify-content: center; */
+  }
+>>>>>>> acbca2eab1b040ecc49f61721eabd7274043e2d6

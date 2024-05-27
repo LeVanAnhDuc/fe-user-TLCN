@@ -1,0 +1,434 @@
+import { SetStateAction, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import CardComp from '../../components/Card';
+import { getAllProductWithinPagination } from '../../apis/productApi';
+import IProduct from '../../interface/product';
+
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import { Fragment } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import NavigateBefore from '@mui/icons-material/NavigateBefore';
+import NavigateNext from '@mui/icons-material/NavigateNext';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
+
+import Rating from '@mui/material/Rating';
+
+import { getSingleProduct } from '../../apis/productApi';
+import IProduct from '../../interface/product';
+import ReviewItem from './Review';
+import RatingButton from './RatingButton';
+import Listproducts from '../Listproducts/Listproducts';
+
+import BootstrapButton from './BootstrapButton';
+import config from '../../config';
+import { addToCart, getCountOfItems } from '../../apis/cartApi';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Image from '../../components/Image';
+import { useDispatch } from 'react-redux';
+import { setToTalProductCart } from '../Cart/totalProducCartSlice';
+
+const DetailProduct = () => {
+    // change page
+    const [data, setData] = useState<Array<IProduct>>([]); // Dữ liệu từ API
+    const [page, setPage] = useState<number>(1); // Trang hiện tại
+    const [totalPages, setTotalPages] = useState<number>(0); // Tổng số trang
+    const [totalProducts, setTotalProducts] = useState<number>(0); // Tổng số san pham
+    const itemsPerPage = 10;
+
+    const getAllProducts = async (pageNo: number) => {
+        try {
+            const response = await getAllProductWithinPagination(pageNo, itemsPerPage);
+            const { content, totalPages, totalElements } = response.data;
+
+            setData(content);
+            setTotalPages(totalPages);
+            setTotalProducts(totalElements);
+        } catch (error) {
+            toast.error('Đang bảo trì quay lại sau');
+        }
+    };
+
+    useEffect(() => {
+        getAllProducts(page);
+    }, [page]);
+
+
+    const reviews = [
+        {
+          avatar: 'https://mcdn.coolmate.me/image/March2023/meme-meo-1.jpg',
+          username: 'User123',
+          rating: 4,
+          date: 'November 23, 2023',
+          sku: 'Trắng - L',
+          content: 'This product is amazing! Highly recommended.'
+        },
+        {
+            avatar: 'https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-102.jpg?fit=690%2C20000&quality=95&ssl=1',
+            username: 'User123',
+            rating: 5,
+            date: 'November 23, 2023',
+            sku: 'Đen - XXL',
+            content: 'This product is amazing! Highly recommended.'
+        },
+        {
+            avatar: 'https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-102.jpg?fit=690%2C20000&quality=95&ssl=1',
+            username: 'User123',
+            rating: 5,
+            date: 'November 23, 2023',
+            sku: 'Đen - XXl',
+            content: 'This product is amazing! Highly recommended.'
+        }
+          
+    ];
+
+
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    // handle get id
+    const location = useLocation();
+    const idProduct = location.hash.substring(1);
+    // handle data
+    const [product, setProduct] = useState<IProduct>(); // Dữ liệu từ API
+
+    const getProduct = async (id: number) => {
+        try {
+            if (idProduct && !isNaN(+idProduct)) {
+                // tồn tai ma san pham và phải là số
+                const response = await getSingleProduct(id);
+
+                if (response && response.data) {
+                    setProduct(response.data);
+                }
+                if (response.status !== 200) {
+                    toast.error(response.data.message);
+                    navigate(config.Routes.listProducts);
+                }
+            } else {
+                navigate(config.Routes.listProducts);
+            }
+        } catch {
+            toast.error('Đang bảo trì');
+        }
+    };
+    useEffect(() => {
+        getProduct(+idProduct);
+    }, [idProduct]);
+
+    //  handle size, color
+    const [color, setColor] = useState<string>('');
+    const [size, setSize] = useState<string>('');
+
+    // const handleChangeSize = (event: { target: { value: SetStateAction<string> } }) => {
+    //     setSize(event.target.value);
+    // };
+
+    // handle handleAddCart
+    const handleAddCart = async () => {
+        // call api day vao gio hang  style
+        if (idProduct) {
+            const quantity: number = 1; // so luong san pham
+            const productId: number = +idProduct; //id san pham
+            const valueNames: Array<string> = [color, size]; //style san pham
+            try {
+                const resonse = await addToCart(quantity, productId, valueNames);
+                // handle số lượng sản phẩm trong giỏ hàng
+                getTotalItemOfCart();
+
+                // handle defaut value
+                setSize('');
+                setColor('');
+
+                if (resonse?.status === 201 && resonse?.data?.product?.name) {
+                    toast.success('Đã thêm vào giỏ hàng');
+                } else {
+                    toast.info(resonse.data.message);
+                }
+            } catch {
+                toast.error('Lỗi không thêm được sản phẩm');
+            }
+        }
+    };
+    // handle số lượng sản phẩm trong giỏ hàng
+    const getTotalItemOfCart = async () => {
+        const totalProductInCart = await getCountOfItems();
+        if (totalProductInCart.status === 200) {
+            dispatch(setToTalProductCart(+totalProductInCart.data));
+        }
+    };
+
+    // handle image
+    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+    const [picColor, setPicColor] = useState<string>('');
+    const images = product?.listImages || [];
+
+    const handleNextClick = () => {
+        setPicColor('');
+        // Xử lý sự kiện khi người dùng bấm nút "Next"
+        const newIndex = (currentImageIndex + 1) % images.length;
+        setCurrentImageIndex(newIndex);
+    };
+    const handlePreviousClick = () => {
+        setPicColor('');
+        if (currentImageIndex === 0) {
+            setCurrentImageIndex(images.length - 1); // Đặt lại thành chỉ số của ảnh cuối cùng
+        } else {
+            // Xử lý sự kiện khi người dùng bấm nút "Previous"
+            setCurrentImageIndex(currentImageIndex - 1);
+        }
+    };
+    const handleChangePic = (index: number) => {
+        setPicColor('');
+        setCurrentImageIndex(index);
+    };
+    // handle change color imgColor
+    const handleChangePicColor = (pic: { valueName: string; imageUrl: string }) => {
+        setPicColor(pic.imageUrl);
+        setColor(pic.valueName);
+    };
+    // handle change size
+    const handleChangeSize = (size: { valueName: string }) => {
+        setSize(size.valueName);
+    };
+
+    return (
+        <div className="w-10/12 m-auto pt-28">
+            <div className="grid grid-flow-row md:grid-flow-col grid-cols-12 gap-2 bg-[#FFFF] p-5 m-auto rounded-md mb-4">
+                {/* Start list image product */}
+                <div className=" hidden col-span-1 lg:flex flex-col gap-2 overflow-y-auto scroll-smooth hide-scrollbar h-auto">
+                    {images.map((item, index) => (
+                        <img
+                            src={item}
+                            key={index}
+                            alt={item}
+                            className="w-full h-21 bg-contain rounded-md hover:opacity-40"
+                            onMouseEnter={() => handleChangePic(index)}
+                        />
+                    ))}
+                </div>
+                {/* End list image product */}
+
+                {/* Start image product */}
+                <div className="col-span-12 md:col-span-5 relative flex gap-1">
+                    <div
+                        className="w-full h-[520px] bg-cover bg-no-repeat bg-center relative rounded-md border-2"
+                        style={{ backgroundImage: picColor ? `url(${picColor})` : `url(${images[currentImageIndex]})` }}
+                    >
+                        <div className="w-full flex justify-end ">
+                            <IconButton onClick={handlePreviousClick}>
+                                <NavigateBefore className="bg-white rounded-full" sx={{ fontSize: 35 }} />
+                            </IconButton>
+                            <IconButton onClick={handleNextClick}>
+                                <NavigateNext className="bg-white rounded-full" sx={{ fontSize: 35 }} />
+                            </IconButton>
+                        </div>
+                    </div>
+                </div>
+                {/* End image product */}
+
+                {/* Start info prođuct */}
+                <div className="col-span-12 md:col-span-6 lg:col-span-6 md:ml-10 ">
+                    <div className="text-xl not-italic font-medium pb-7">{product?.name}</div>
+                    <div className="text-base not-italic font-medium bg-[#fafafa] price-aline">
+                        <span className='detail-dong'>đ</span>
+                        <span className='detail-price'>{product?.price}</span>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <span className='rating-value'>{product?.rating}</span>&nbsp;
+                        <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.2rem' }}/>
+                    </div>
+                    {/* end sỉze */}
+
+                    {/* start list color */}
+                    <div className='rounded mt-8 pl-2 pr-2 pt-1 pb-1 bg-[#fafafa]'>
+                        <div className="mt-4 ml-2">
+                            <span>Kích cỡ</span>
+                        </div>
+                        <div className="grid grid-cols-auto sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-auto gap-2 mb-8">
+                            {product?.options[1].values.map((item, index) => (
+                                <BootstrapButton key={index} onClick={() => handleChangeSize(item)}
+                                    sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                                >
+                                    <Card key={index} 
+                                        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}
+                                    >
+                                        <Box sx={{
+                                                display: 'flex', flexDirection: 'column', fontSize: '16px', 
+                                                flex: '1 1 auto', height: '50px', maxWidth: 'fit-content'}}
+                                        >
+                                            <CardContent>{item.valueName}</CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            ))}
+                        </div>
+                        <div className="mt-4 mb-2 ml-2">
+                            <span>Màu sắc</span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 xl:grid-cols-2 gap-2 mb-8">
+                            {product?.options[0].values.map((item, index) => (
+                                <BootstrapButton key={index} onClick={() => handleChangePicColor(item)}>
+                                    <Card
+                                        key={index}
+                                        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+                                    >
+                                        <Image className="p-[4px] h-[50px]" src={item.imageUrl} alt={item.valueName} />
+                                        <Box sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flex: '1 1 auto',
+                                            height: '50px', 
+                                            maxWidth: 'fit-content', 
+                                        }}>
+                                            <CardContent>{item.valueName}</CardContent>
+                                        </Box>
+                                    </Card>
+                                </BootstrapButton>
+                            ))}
+                        </div>
+                    </div>
+                    {/* end list color */}
+
+                    <div className='grid grid-cols-2 gap-6'>
+                        <Button
+                            disabled={color && size ? false : true}
+                            w-10
+                            variant="contained"
+                            sx={{ height: 50, marginTop: 2, marginLeft: '10px' }}
+                            onClick={handleAddCart}
+                        >
+                            +<ShoppingCart />&nbsp;Thêm vào giỏ hàng
+                        </Button>
+                        {/* <Button
+                            disabled={color && size ? false : true}
+                            fullWidth
+                            variant="contained"
+                            sx={{ height: 50, marginTop: 2, backgroundColor: '#FF0000', '&:hover': { backgroundColor: '#CC0000' } }} 
+                            onClick={handleAddCart}
+                        >
+                            Mua ngay
+                        </Button> */}
+                    </div>
+                    <div className="pt-10">
+                        <Accordion defaultExpanded>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Delivery & Returns</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    Đơn hàng từ 5.000.000₫ trở lên của bạn sẽ được giao hàng tiêu chuẩn miễn phí.
+                                    <br /> <br />
+                                    Giao hàng tiêu chuẩn 4-5 ngày làm việc Chuyển phát nhanh 2-4 ngày làm việc Đơn hàng
+                                    được xử lý và giao từ Thứ Hai đến Thứ Sáu (trừ ngày lễ)
+                                    <br />
+                                    <br />
+                                    Thành viên Duck được hưởng lợi nhuận miễn phí.
+                                </Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                    </div>
+                </div>
+                {/* End info prođuct */}
+            </div>
+
+            {/* Start product description */}
+            <div className="bg-[#FFFF] p-5 m-auto rounded-md mb-4">
+                <div className='bg-[#fafafa] h-10 price-aline ml-2'>
+                    <span>MÔ TẢ SẢN PHẨM</span>
+                </div>
+                <div className='p-5 m-auto rounded-md mt-5'>
+                    <Typography>
+                        <p>{product?.description}</p>
+                    </Typography>
+                </div>
+            </div>
+            {/* End product description */}
+
+            {/* Start product reviews */}
+            <div className="bg-[#FFFF] p-5 m-auto rounded-md mb-4">
+                <div className='h-10 ml-6'>
+                    <span>ĐÁNH GIÁ SẢN PHẨM</span>
+                </div>
+                
+                <div className='bg-[#fffbf8] h-24 ml-2 border border-[#f9ede6]'>
+                    <div className="grid grid-cols-8 sm:grid-cols-8 md:grid-cols-8 xl:grid-cols-6 gap-0 mb-8 ">
+                    <div className='col-span-1'>
+                        <div className='flex items-center justify-center mt-4'>
+                            <span className='text-red-500 text-3xl font-bold'>{product?.rating}&nbsp;</span> 
+                            <span className='text-red-500 text-lg'>trên 5</span>
+                        </div>
+                        <div className='flex items-center justify-center h-10'>
+                            <Rating defaultValue={product?.rating} precision={0.5} readOnly sx={{ fontSize: '1.8rem' }}/>
+                        </div>
+                    </div>
+                        <div className='col-span-5 grid grid-cols-8 sm:grid-cols-8 mb-8 mt-2'>
+                            <RatingButton text="Tất cả" />
+                            <RatingButton text="5 sao (55)" />
+                            <RatingButton text="4 sao (100)" />
+                            <RatingButton text="3 sao (22)" />
+                            <RatingButton text="2 sao (2)" />
+                            <RatingButton text="1 sao (0)" />
+                            <div className='col-span-2 mb-8 w-[70%]'>
+                                <RatingButton text="Có bình luận (10)" />
+                            </div> 
+                        </div>   
+                    </div>
+                </div>
+                <div className='p-5 m-auto rounded-md mt-5'>
+                    <div className="container mx-auto p-4 mb-5">               
+                        {reviews.map((review, index) => (
+                            <Fragment key={index}>
+                                <ReviewItem {...review} />
+                                {index !== reviews.length - 1 && <hr className="my-4 border-t border-gray-300" />}
+                            </Fragment>
+                        ))}
+                    </div>
+                </div>
+            </div>
+             {/* End product reviews */}
+
+            {/* Start same products */}
+            <div className='flex items-center justify-between mt-8 text-gray-500 mb-3'>
+                <div>SẢN PHẨM LIÊN QUAN</div>
+                <a href="/ds-san-pham" className="text-blue-500">Xem tất cả ></a>
+            </div>
+            <div className='h-auto'>
+                    {/* end navigation  */}
+                    {/* start list item */}
+                    <div className="col-span-5 px-3 xl:col-span-4 ">
+                        {data.length !== 0 ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                                {data.map((item, index) => (
+                                    <CardComp key={index} itemProduct={item} />
+                                ))}
+                            </div>
+                        ) : null}
+                    </div>
+                    {/* end list item */}
+                </div>
+             {/* End same products */}
+             <div className="p-5 m-auto rounded-md mb-4 mt-4 w-1/5">
+                <a href='/ds-san-pham' className='bg-[#FFFF] flex justify-center items-center h-12 rounded shadow'>Xem thêm</a>
+             </div>
+        </div>
+    );
+};
+
+export default DetailProduct;
