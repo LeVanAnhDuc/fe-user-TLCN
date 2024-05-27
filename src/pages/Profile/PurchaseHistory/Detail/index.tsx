@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+import ExitToApp from '@mui/icons-material/ExitToApp';
 
 import Image from '../../../../components/Image';
 import config from '../../../../config';
@@ -116,23 +117,28 @@ const Detail = () => {
             ) : (
                 <section className="bg-gray-100 py-10 dark:bg-dark-400">
                     <ScrollButton />
-                    <div className="w-10/12 m-auto space-y-10">
-                        <Breadcrumbs className="!font-medium">
-                            <Link
-                                className="text-primary-700 hover:underline dark:text-primary-500"
-                                to={config.Routes.home}
-                            >
-                                {t('home')}
-                            </Link>
-                            <Link
-                                className="text-primary-700 hover:underline dark:text-primary-500"
-                                to={config.Routes.profileHistoryPaymentProfile}
-                            >
-                                {t('listPurchase')}
-                            </Link>
-                            <AnimationTran tranY={-50}>{t('orderDetails')}</AnimationTran>
-                            <AnimationTran tranY={50}>{idProduct}</AnimationTran>
-                        </Breadcrumbs>
+                    <div className="w-10/12 m-auto space-y-5">
+                        <div className="flex justify-between items-center">
+                            <Breadcrumbs className="!font-medium">
+                                <Link
+                                    className="text-primary-700 hover:underline dark:text-primary-500"
+                                    to={config.Routes.home}
+                                >
+                                    {t('home')}
+                                </Link>
+                                <Link
+                                    className="text-primary-700 hover:underline dark:text-primary-500"
+                                    to={config.Routes.profileHistoryPaymentProfile}
+                                >
+                                    {t('listPurchase')}
+                                </Link>
+                                <AnimationTran tranY={-50}>{t('orderDetails')}</AnimationTran>
+                                <AnimationTran tranY={50}>{idProduct}</AnimationTran>
+                            </Breadcrumbs>
+                            <Button variant="fill" onClick={() => navigate(config.Routes.profileHistoryPaymentProfile)}>
+                                <ExitToApp />
+                            </Button>
+                        </div>
                         <table className="w-full border-collapse border border-gray-300">
                             <thead>
                                 <tr>
@@ -162,7 +168,7 @@ const Detail = () => {
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.04}>
                                             {order?.address.orderDetails}, {order?.address.ward},{' '}
-                                            {order?.address.district},{order?.address.city}
+                                            {order?.address.district},{order?.address.province}
                                         </AnimationTran>
                                     </td>
                                 </tr>

@@ -1,10 +1,14 @@
 import IAddress from './address';
+import { IProductCheckout } from './product';
 import IProductCart from './productCart';
 export interface IOrderCheckOut {
     total?: number;
     paymentType: string; //(VNPay) OR (Cash on Delivery)
     note?: string;
     addressId: number;
+    orderItems?: IProductCheckout[];
+    subTotal?: number;
+    shippingFee?: number;
 }
 
 export default interface IOrder {

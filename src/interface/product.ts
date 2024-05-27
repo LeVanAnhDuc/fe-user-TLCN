@@ -45,3 +45,12 @@ export interface IProductFilter {
     cate: string;
     sort: string;
 }
+
+export interface IProductCheckout {
+    price: number;
+    quantity: number;
+    subTotal: number;
+    productId: number;
+    skuId: number;
+    imageUrl: string;
+}

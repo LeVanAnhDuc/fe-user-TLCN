@@ -37,6 +37,7 @@ const AddressList = () => {
 
             if (response.status === 200 && response?.data) {
                 firstLoadingAPI && setFirstLoadingAPI(false);
+
                 setAddresses(response.data);
             } else {
                 setErrorAPI(true);
@@ -121,7 +122,7 @@ const AddressList = () => {
                                         <div className="font-medium">{item.fullName}</div>
                                         <div>{item.phoneNumber}</div>
                                         <div>
-                                            {item.orderDetails}, {item.ward}, {item.district}, {item.city}
+                                            {item.orderDetails}, {item.ward}, {item.district}, {item.province}
                                         </div>
                                     </div>
                                     <div className="space-y-2">

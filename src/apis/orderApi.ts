@@ -83,6 +83,9 @@ export const addOrderByToken = async (data: IOrderCheckOut) => {
             paymentType: data.paymentType,
             note: data.note,
             addressId: data.addressId,
+            orderItems: data.orderItems,
+            subTotal: data.subTotal,
+            shippingFee: data.shippingFee,
         });
         return response;
     } catch (error) {

@@ -2,6 +2,7 @@
     "popConfirmDeleteTitle": "Hủy đơn hàng",
     "popConfirmDeleteContent": "Bạn có chắc chắn muốn hủy không?",
     "successDeletion": "Hủy thành công",
+    "errorDeletion": "Hủy không thành công",
     "cancelDeletion": "Hủy xóa",
     "all": "Tất cả",
     "ordered": "Đã đặt hàng",

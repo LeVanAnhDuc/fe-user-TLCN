@@ -1,8 +1,7 @@
 /* eslint-disable no-useless-catch */
-import { IOrderCheckOut } from '../interface/order.js';
-export const checkOutVNPay = (data: IOrderCheckOut, userName: string) => {
+export const checkOutVNPay = (orderId: number) => {
     try {
-        const response = `http://54.168.240.99:5000/api/v1/vnpay/submit-order?amount=${data.total}&username=${userName}&addressId=${data.addressId}&note=${data.note}`;
+        const response = `http://54.168.240.99:5000/api/v1/vnpay/submit-order-v2?orderId=${orderId}`;
         return response;
     } catch (error) {
         throw error;

@@ -41,4 +41,5 @@ export const initObjecProductCart: IProductCart = {
 export const initObjecAddressGHN = {
     label: '',
     id: 0,
+    code: '0',
 };

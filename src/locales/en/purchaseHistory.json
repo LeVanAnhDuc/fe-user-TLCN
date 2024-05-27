@@ -2,6 +2,7 @@
     "popConfirmDeleteTitle": "Cancel order",
     "popConfirmDeleteContent": "Are you sure you want to cancel?",
     "successDeletion": "Successful delete",
+    "errorDeletion": "Error delete",
     "cancelDeletion": "Cancel deletion",
     "all": "All",
     "ordered": "Ordered",
