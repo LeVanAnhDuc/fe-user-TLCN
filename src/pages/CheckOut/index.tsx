@@ -40,6 +40,7 @@ import { getFeeShipping } from '../../apis/GHN/FeeShip';
 import IProductCart from '../../interface/productCart';
 import Image from '../../components/Image';
 import { IProductCheckout } from '../../interface/product';
+import { calculateWeight } from '../../utils/calculateData';
 
 const ToggleButton = styled(MuiToggleButton)({
     '&.Mui-selected': {
@@ -99,7 +100,12 @@ const Pay = () => {
 
     const handleGetFeeShipping = async (to_district_id: number, to_ward_code: string) => {
         try {
-            const response = await getFeeShipping(to_district_id, to_ward_code);
+            const response = await getFeeShipping(
+                to_district_id,
+                to_ward_code,
+                calculateWeight(productsPurchase.reduce((sum, current) => sum + current.quantity, 0)),
+            );
+
             if (response.status === 200) {
                 setFeePrice(response.data.data.total);
             }
@@ -114,7 +120,7 @@ const Pay = () => {
 
             if (addressesAPI.status === 200 && addressesAPI?.data) {
                 setAddresses(addressesAPI.data);
-                const address = addressesAPI.data.filter((item: IAddress) => item.id === watchedAddressId)[0];
+                const address = addressesAPI.data.filter((item: IAddress) => item.isDefault === true)[0];
 
                 handleGetFeeShipping(address.districtId, address.wardCode);
             }
@@ -261,14 +267,6 @@ const Pay = () => {
     };
 
     useEffect(() => {
-        if (idOrder) {
-            getAddressesAndOrderForWaiting();
-        } else {
-            getAddresses();
-        }
-    }, []);
-
-    useEffect(() => {
         setTotalPrice(productsPurchase.reduce((sum, value) => sum + value.subTotal, 0));
     }, [productsPurchase]);
 
@@ -277,6 +275,14 @@ const Pay = () => {
 
         handleGetFeeShipping(address?.districtId ?? 0, address?.wardCode ?? '');
     }, [watchedAddressId]);
+
+    useEffect(() => {
+        if (idOrder) {
+            getAddressesAndOrderForWaiting();
+        } else {
+            getAddresses();
+        }
+    }, []);
 
     return (
         <section className="bg-gray-100 py-5 sm:py-10 dark:bg-dark-400">

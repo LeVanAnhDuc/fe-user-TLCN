@@ -12,9 +12,11 @@ const instance = axios.create({
 instance.interceptors.request.use(
     function (config) {
         const token = import.meta.env.VITE_TOKEN_GHN;
+        const shop_id = import.meta.env.VITE_SHOP_ID_GHN;
 
         if (token) {
             config.headers['token'] = token;
+            config.headers['shop_id'] = shop_id;
         }
 
         return config;
