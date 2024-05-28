@@ -190,7 +190,7 @@ const PurchaseHistory = () => {
                                     <div className="flex items-center gap-2">
                                         {item.isPaidBefore ? (
                                             <div className="border-r-2 pr-2 text-sm font-medium text-green-500">
-                                                Đơn hàng đã được thanh toán
+                                                Thanh toán online (VNPay) ✔
                                             </div>
                                         ) : (
                                             ''
