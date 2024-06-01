@@ -115,28 +115,35 @@ const Cart = () => {
 
     return (
         <div className="bg-gray-100 py-16 dark:bg-dark-400">
+            <div
+                className={`${
+                    productsSelect.length <= 0 ? 'hidden' : 'block'
+                } fixed bottom-0 bg-white dark:bg-dark-600 w-full h-20 z-10`}
+            >
+                <div className="w-11/12 sm:w-10/12 m-auto flex items-center h-full">
+                    <Button
+                        className={`${
+                            productsSelect.length <= 0
+                                ? ''
+                                : '!bg-red-500 dark:!bg-red-600 border-2 border-red-500 dark:border-red-600'
+                        }`}
+                        variant="fill"
+                        disabled={productsSelect.length <= 0}
+                        onClick={handleDeleteAllProduct}
+                    >
+                        {t('deleteSelected')}
+                    </Button>
+                </div>
+            </div>
             <div className="grid lg:grid-cols-11 xl:grid-cols-12 gap-5 w-11/12 sm:w-10/12 m-auto">
                 <div className="lg:col-span-8 xl:col-span-9">
                     <div className="space-y-4">
-                        <div className="w-full h-14 flex justify-between gap-1 bg-white rounded-lg dark:bg-dark-600 items-center text-sm px-4">
-                            <div className="flex items-center gap-3 ">
+                        <div className="w-full h-14 flex gap-1 bg-white rounded-lg dark:bg-dark-600 items-center text-sm px-4 font-semibold">
+                            <div className="flex items-center gap-3 whitespace-nowrap">
                                 <Checkbox onChange={handleAddAllProduct} />
-                                Sản phẩm
+                                {t('product')}
                             </div>
-                            <div className="text-center">Thông tin sản phẩm</div>
-                            <Button
-                                className={`${
-                                    productsSelect.length <= 0
-                                        ? ''
-                                        : '!bg-red-500 dark:!bg-red-600 border-2 border-red-500 dark:border-red-600'
-                                }`}
-                                size="small"
-                                variant="fill"
-                                disabled={productsSelect.length <= 0}
-                                onClick={handleDeleteAllProduct}
-                            >
-                                Xóa đã chọn
-                            </Button>
+                            <div className="text-center w-full">{t('productInformation')}</div>
                         </div>
                         {products.map((item: IProductCart, index) => (
                             <div className="flex items-center" key={item.id}>

@@ -1,4 +1,7 @@
 {
+    "deleteSelected": "Xóa đã chọn",
+    "product": "Sản phẩm",
+    "productInformation": "Thông tin sản phẩm",
     "classification": "Phân loại",
     "unitPrice": "Đơn giá",
     "totalPrice": "Tổng giá",
