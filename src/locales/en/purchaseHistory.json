@@ -42,6 +42,7 @@
     "payments": "Payment",
     "note": "Note",
     "totalItem": "Total item",
+    "shippingFee": "Fee shipping",
     "subtotal": "Subtotal",
     "detailedOrderInformation": "Detailed order information"
 }

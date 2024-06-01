@@ -42,6 +42,7 @@
     "payments": "Phương thức thanh toán",
     "note": "Ghi chú",
     "totalItem": "Tổng sản phẩm",
+    "shippingFee": "Phí vận chuyển",
     "subtotal": "Thành tiền",
     "detailedOrderInformation": "Thông tin chi tiết đơn hàng"
 }

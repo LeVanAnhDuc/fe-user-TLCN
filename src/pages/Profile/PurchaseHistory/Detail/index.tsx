@@ -136,7 +136,7 @@ const Detail = () => {
                                 <AnimationTran tranY={50}>{idProduct}</AnimationTran>
                             </Breadcrumbs>
                             <Button variant="fill" onClick={() => navigate(config.Routes.profileHistoryPaymentProfile)}>
-                                <ExitToApp />
+                                <ExitToApp className="rotate-180" />
                             </Button>
                         </div>
                         <table className="w-full border-collapse border border-gray-300">
@@ -168,7 +168,7 @@ const Detail = () => {
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.04}>
                                             {order?.address.orderDetails}, {order?.address.ward},{' '}
-                                            {order?.address.district},{order?.address.province}
+                                            {order?.address.district}, {order?.address.province}
                                         </AnimationTran>
                                     </td>
                                 </tr>
@@ -197,11 +197,24 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">{t('subtotal')}</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('shippingFee')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran
                                             tranY={-50}
                                             delay={0.12}
+                                            className="text-base not-italic font-medium text-red-500 flex gap-1"
+                                        >
+                                            {convertNumberToVND(order?.shippingFee)}
+                                            <span className="text-sm pr-0.5">đ</span>
+                                        </AnimationTran>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('subtotal')}</td>
+                                    <td className="border border-gray-300 p-3 font-bold">
+                                        <AnimationTran
+                                            tranY={-50}
+                                            delay={0.14}
                                             className="text-base not-italic font-medium text-red-500 flex gap-1"
                                         >
                                             {convertNumberToVND(order?.total)}
