@@ -215,7 +215,7 @@ const PurchaseHistory = () => {
                                                     <Image
                                                         src={itemProduct.imageUrl}
                                                         alt={'image' + itemProduct.product.name}
-                                                        className="col-span-3 md:col-span-2 object-cover object-center size-full cursor-pointer rounded"
+                                                        className="col-span-3 md:col-span-2 object-cover object-center size-32 cursor-pointer rounded m-auto"
                                                         onClick={() => handleRedirectDetailItem(itemProduct.product.id)}
                                                     />
                                                     <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between gap-2 p-3 sm:p-4">
