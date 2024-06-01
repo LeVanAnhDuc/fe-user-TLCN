@@ -302,8 +302,7 @@ const Pay = () => {
                                             <Image
                                                 src={item.imageUrl}
                                                 alt={'image' + item.product.name}
-                                                // className="col-span-3 md:col-span-2 py-3 pl-3 object-cover object-center size-full cursor-pointer"
-                                                className="col-span-3 md:col-span-2 aspect-square object-cover cursor-pointer py-3 pl-3 object-cover object-center size-full cursor-pointer"
+                                                className="col-span-3 md:col-span-2 aspect-square object-cover py-3 pl-3 object-center cursor-pointer size-32 m-auto"
                                                 onClick={() => {
                                                     handleRedirectDetailItem(item.product.id);
                                                 }}
@@ -415,25 +414,19 @@ const Pay = () => {
                                                                 <div className="size-full flex items-center justify-between gap-2 overflow-hidden">
                                                                     <div className="text-sm">
                                                                         <div className="font-bold">
-                                                                            {item.fullName} {item.phoneNumber} {item.isDefault && (
-                                                                        <span className="size-fit text-end text-sm font-normal text-primary-500 border-primary-500 border-2 px-1.5 ml-2 rounded-md">
-                                                                            Mặc định 
-                                                                        </span>
-                                                                    )}
-                                                                            
+                                                                            {item.fullName} {item.phoneNumber}{' '}
+                                                                            {item.isDefault && (
+                                                                                <span className="size-fit text-end text-sm font-normal text-primary-500 border-primary-500 border-2 px-2 ml-2 rounded-md">
+                                                                                    {t('default')}
+                                                                                </span>
+                                                                            )}
                                                                         </div>
-                                                                        
+
                                                                         <div className="flex flex-wrap">
                                                                             {item.orderDetails}, {item.ward},{' '}
                                                                             {item.district}, {item.province}
                                                                         </div>
                                                                     </div>
-                                                                    {/* {item.isDefault && (
-                                                                        <div className="size-fit text-end text-sm text-primary-500 border-primary-500 border-2 px-1.5 py-1 rounded-md">
-                                                                            Mặc định 
-                                                                    
-                                                                        </div>
-                                                                    )} */}
                                                                 </div>
                                                             </MenuItem>
                                                         ))}
@@ -503,7 +496,9 @@ const Pay = () => {
                             </AnimationScale>
                         </div>
                         <div className="flex justify-between">
-                            <span className="font-medium">{t('totalDelivery')}</span>
+                            <span className="font-medium">
+                                {t('totalDelivery')} ({t('standard')})
+                            </span>
                             <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                                 {convertNumberToVND(feePrice)}
                                 <span className="text-sm">đ</span>

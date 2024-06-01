@@ -10,7 +10,8 @@
     "payments": "Payments",
     "vnPay": "Online payment with VNPay",
     "cashOnDelivery": "Cash on delivery",
-    "addressHome": "Address Home",
+    "default": "Default",
+    "addressHome": "Delivery address",
     "noAddressHome": "There is currently no address. Click to add",
     "enterNote": "Enter Note",
     "iHaveRead": "I have read and agree to let DUCK process my information according to",
@@ -21,6 +22,7 @@
     "totalCost": "Total cost",
     "totalAmount": "Total amount",
     "totalDelivery": "Total delivery",
+    "standard": "Standard",
     "subtotal": "Subtotal",
     "TotalPriceOfYourOrder": "Total price of your order, including all fees and taxes"
 }
