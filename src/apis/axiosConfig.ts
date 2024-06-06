@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8080/api/v1',
-    timeout: 30000,
+    baseURL: 'http://54.178.182.226:5000/api/v1',
+    // baseURL: 'http://localhost:5000/api/v1',
+    // baseURL: 'http://ec2-18-183-254-95.ap-northeast-1.compute.amazonaws.com:5000/api/v1',
+    timeout: 50000,
     headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
