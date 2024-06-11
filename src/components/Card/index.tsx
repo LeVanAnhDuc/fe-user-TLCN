@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 import config from '../../config';
 import IProduct from '../../interface/product';
@@ -31,6 +32,7 @@ const Card = (props: Iprops) => {
 
     const [favourite, setFavourite] = useState(itemProduct.liked ? true : false);
     const [favoriteCount, setFavouriteCount] = useState(itemProduct.favoriteCount);
+    const [isHovered, setIsHovered] = useState(false);
 
     const handleChangeFavorite = async () => {
         const token = localStorage.getItem('accessToken');
@@ -70,20 +72,35 @@ const Card = (props: Iprops) => {
 
     return (
         <AnimationTran tranY={30} delay={delay}>
-            <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[0.98] hover:-translate-y-1 transition dark:bg-dark-600">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[1.02] hover:-translate-y-0.5 transition dark:bg-dark-600">
                 <div onClick={handleNextDetailPage} className="cursor-pointer">
-                    <div className="h-48 overflow-hidden ">
+                    <div
+                        className="h-52 w-full overflow-hidden relative"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
                         {loading ? (
                             <Skeleton fillFull />
                         ) : (
-                            <img
-                                src={itemProduct.listImages[0]}
-                                alt={itemProduct.name}
-                                className="object-cover object-center size-full"
-                            />
+                            <>
+                                <motion.img
+                                    src={itemProduct.listImages[0]}
+                                    alt={itemProduct.name}
+                                    className={`${
+                                        isHovered && '-translate-y-52'
+                                    } object-cover object-center size-full transition duration-700`}
+                                />
+                                <motion.img
+                                    src={itemProduct.listImages[1]}
+                                    alt={itemProduct.name}
+                                    className={`${
+                                        isHovered && '-translate-y-52'
+                                    } object-cover object-center size-full transition duration-700`}
+                                />
+                            </>
                         )}
                     </div>
-                    <div className="mx-4 my-3 font-medium space-y-3">
+                    <div className="mx-4 my-3 font-medium space-y-2.5">
                         {loading ? (
                             <Skeleton fillFull className="h-9" />
                         ) : (
