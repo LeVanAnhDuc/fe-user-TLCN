@@ -206,7 +206,10 @@ const PurchaseHistory = () => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-3 px-5">
+                                <div
+                                    className="space-y-3 px-5 cursor-pointer select-none"
+                                    onClick={() => handleRedirectDetailOrder(item.id)}
+                                >
                                     {item.orderItems.map((itemProduct, indexProduct) => (
                                         <Fragment key={indexProduct}>
                                             <div className="h-0.5 bg-gray-200"></div>
@@ -216,7 +219,10 @@ const PurchaseHistory = () => {
                                                         src={itemProduct.imageUrl}
                                                         alt={'image' + itemProduct.product.name}
                                                         className="col-span-3 md:col-span-2 object-cover object-center size-32 cursor-pointer rounded m-auto"
-                                                        onClick={() => handleRedirectDetailItem(itemProduct.product.id)}
+                                                        onClick={(e: React.MouseEvent<HTMLImageElement>) => {
+                                                            handleRedirectDetailItem(itemProduct.product.id);
+                                                            e.stopPropagation();
+                                                        }}
                                                     />
                                                     <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between gap-2 p-3 sm:p-4">
                                                         <div className="line-clamp-2 font-medium">
