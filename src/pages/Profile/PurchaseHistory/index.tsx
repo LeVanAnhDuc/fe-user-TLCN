@@ -1,10 +1,11 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { Pagination } from '@mui/material';
 
 import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
 import IOrder from '../../../interface/order';
@@ -28,6 +29,7 @@ const PurchaseHistory = () => {
     const { t } = useTranslation('purchaseHistory');
 
     const status = location.state?.status ? location.state.status : '';
+    const itemsPerPage = useMemo(() => 4, []);
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [listHistory, setListHistory] = useState<Array<IOrder>>([]);
@@ -38,9 +40,20 @@ const PurchaseHistory = () => {
     const [openReview, setOpenReview] = useState(false);
     const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
     const [search, setSearch] = useState<string>('');
+    const [page, setPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     const handleChangeStatus = (_: React.MouseEvent<HTMLElement>, status: string) => {
         setStatusOrder(status);
+        setPage(1);
+    };
+
+    const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
+        setPage(newPage);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
     };
 
     const handleGetListHistory = async (statusParam: string, searchParam: string) => {
@@ -48,7 +61,7 @@ const PurchaseHistory = () => {
             firstLoadingAPI && setLoadingAPI(true);
 
             const [response] = await Promise.all([
-                searchOrderForUser(statusParam, searchParam),
+                searchOrderForUser(statusParam, searchParam, page, itemsPerPage),
                 firstLoadingAPI && new Promise((resolve) => setTimeout(resolve, 250)),
             ]);
 
@@ -57,6 +70,7 @@ const PurchaseHistory = () => {
             if (response?.status === 200) {
                 setFirstLoadingAPI(false);
                 setListHistory(response.data.content);
+                setTotalPages(response.data.totalPages);
             } else {
                 setErrorAPI(true);
             }
@@ -108,7 +122,7 @@ const PurchaseHistory = () => {
 
     useEffect(() => {
         handleGetListHistory(statusOrder, searchDebounce);
-    }, [statusOrder, callAPIAgain, searchDebounce]);
+    }, [statusOrder, callAPIAgain, searchDebounce, page]);
 
     if (errorAPI) {
         return <Error404 />;
@@ -335,6 +349,16 @@ const PurchaseHistory = () => {
                                 </div>
                             </AnimationTran>
                         ))}
+                    </div>
+                    <div className="flex justify-end">
+                        <Pagination
+                            count={totalPages}
+                            page={page}
+                            onChange={handlePageChange}
+                            color="primary"
+                            variant="outlined"
+                            boundaryCount={1}
+                        />
                     </div>
                 </section>
             )}

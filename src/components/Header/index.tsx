@@ -71,6 +71,7 @@ function Header() {
         }
         setMenuResponsive(open);
     };
+
     const toggleDrawerCartModal = useCallback(() => {
         setOpenCartModal((prev) => !prev);
     }, []);
