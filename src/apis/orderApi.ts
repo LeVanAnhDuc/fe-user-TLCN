@@ -2,9 +2,12 @@
 import { IOrderCheckOut } from '../interface/order.js';
 import axios from './axiosConfig.js';
 
-export const searchOrderForUser = async (status: string, key: string) => {
+export const searchOrderForUser = async (status: string, key: string, pageNo: number = 1, pageSize: number = 24) => {
     try {
-        const params: Record<string, string | number | boolean> = {};
+        const params: Record<string, string | number | boolean> = {
+            pageNo,
+            pageSize,
+        };
 
         if (status) {
             params['status'] = status;
