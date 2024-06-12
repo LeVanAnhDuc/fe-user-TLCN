@@ -75,7 +75,7 @@ const Card = (props: Iprops) => {
             <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[1.02] hover:-translate-y-0.5 transition dark:bg-dark-600">
                 <div onClick={handleNextDetailPage} className="cursor-pointer">
                     <div
-                        className="h-52 w-full overflow-hidden relative"
+                        className="h-72 w-full overflow-hidden relative"
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                     >
@@ -87,14 +87,14 @@ const Card = (props: Iprops) => {
                                     src={itemProduct.listImages[0]}
                                     alt={itemProduct.name}
                                     className={`${
-                                        isHovered && '-translate-y-52'
+                                        isHovered && '-translate-y-72'
                                     } object-cover object-center size-full transition duration-700`}
                                 />
                                 <motion.img
                                     src={itemProduct.listImages[1]}
                                     alt={itemProduct.name}
                                     className={`${
-                                        isHovered && '-translate-y-52'
+                                        isHovered && '-translate-y-72'
                                     } object-cover object-center size-full transition duration-700`}
                                 />
                             </>
