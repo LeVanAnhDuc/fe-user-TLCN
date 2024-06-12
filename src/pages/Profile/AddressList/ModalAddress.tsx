@@ -107,6 +107,13 @@ const ModalAddress = (propsCh: IPropsAddress) => {
 
             const arrayTempo: IAddressGHN[] = [];
             response.data.data.forEach((item: { DistrictName: string; DistrictID: string; Code: string }) => {
+                if (
+                    item.DistrictName === '33' ||
+                    item.DistrictName === 'Quận mới' ||
+                    item.DistrictName === 'Thành Phố Thủ Đức 1'
+                )
+                    return;
+
                 arrayTempo.push({ label: item.DistrictName, id: +item.DistrictID, code: item.Code });
             });
             setDistricts(arrayTempo);
