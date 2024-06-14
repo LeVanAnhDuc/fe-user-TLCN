@@ -206,7 +206,7 @@ const LogIn = () => {
                             <Logo />
                         </AnimationScale>
                         <AnimationTran tranY={-100}>
-                            <h5 className="leading-7 tracking-tight text-center">{t('titleLogin')}</h5>
+                            <h5 className="leading-20 tracking-tight text-xl font-semibold text-center">{t('titleLogin')}</h5>
                         </AnimationTran>
                         <div className="bg-login-banner bg-contain bg-no-repeat bg-center w-full h-full "></div>
                     </section>
