@@ -32,7 +32,7 @@ function Listproducts() {
     const location = useLocation();
     const { t } = useTranslation('shop');
 
-    const itemsPerPage = 12;
+    const itemsPerPage = 24;
     const searchItem = location.state?.searchItem ? location.state.searchItem : '';
 
     const [products, setProducts] = useState<Array<IProduct>>([]);

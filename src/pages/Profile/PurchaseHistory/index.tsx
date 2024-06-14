@@ -29,7 +29,7 @@ const PurchaseHistory = () => {
     const { t } = useTranslation('purchaseHistory');
 
     const status = location.state?.status ? location.state.status : '';
-    const itemsPerPage = useMemo(() => 4, []);
+    const itemsPerPage = useMemo(() => 20, []);
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [listHistory, setListHistory] = useState<Array<IOrder>>([]);
