@@ -1,20 +1,29 @@
+// libs
 import IconButton from '@mui/material/IconButton';
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import Checkbox from '@mui/material/Checkbox';
-
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
-import Image from '../../components/Image';
-import config from '../../config';
-import { getCartByToken } from '../../apis/cartApi';
+// types
 import IProductCart from '../../interface/productCart';
-import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
+import { actionProduct } from '../../interface/product';
+// components
+import Image from '../../components/Image';
+import MouseOverPopover from '../../components/MouseOverPopover';
+import Button from '../../components/Button';
+import AnimationTran from '../../components/AnimationTran';
+import AnimationScale from '../../components/AnimationScale';
 import ChangeQuantityProduct from './ChangeQuantityProduct';
+// apis
+import { updateProductAnalysis } from '../../apis/productApi';
+import { getCartByToken } from '../../apis/cartApi';
+import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
+// others
+import config from '../../config';
 import {
     deleteNumberProductCart,
     selectProductsCart,
@@ -24,11 +33,7 @@ import {
     setToTalPriceCart,
     setProductsPurchase,
 } from './cartSlice';
-import MouseOverPopover from '../../components/MouseOverPopover';
 import { convertNumberToVND } from '../../utils/convertData';
-import Button from '../../components/Button';
-import AnimationTran from '../../components/AnimationTran';
-import AnimationScale from '../../components/AnimationScale';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -83,9 +88,11 @@ const Cart = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 
@@ -115,28 +122,35 @@ const Cart = () => {
 
     return (
         <div className="bg-gray-100 py-16 dark:bg-dark-400">
+            <div
+                className={`${
+                    productsSelect.length <= 0 ? 'hidden' : 'block'
+                } fixed bottom-0 bg-white dark:bg-dark-600 w-full h-20 z-10`}
+            >
+                <div className="w-11/12 sm:w-10/12 m-auto flex items-center h-full">
+                    <Button
+                        className={`${
+                            productsSelect.length <= 0
+                                ? ''
+                                : '!bg-red-500 dark:!bg-red-600 border-2 border-red-500 dark:border-red-600'
+                        }`}
+                        variant="fill"
+                        disabled={productsSelect.length <= 0}
+                        onClick={handleDeleteAllProduct}
+                    >
+                        {t('deleteSelected')}
+                    </Button>
+                </div>
+            </div>
             <div className="grid lg:grid-cols-11 xl:grid-cols-12 gap-5 w-11/12 sm:w-10/12 m-auto">
                 <div className="lg:col-span-8 xl:col-span-9">
                     <div className="space-y-4">
-                        <div className="w-full h-14 flex justify-between gap-1 bg-white rounded-lg dark:bg-dark-600 items-center text-sm px-4">
-                            <div className="flex items-center gap-3 ">
+                        <div className="w-full h-14 flex gap-1 bg-white rounded-lg dark:bg-dark-600 items-center text-sm px-4 font-semibold">
+                            <div className="flex items-center gap-3 whitespace-nowrap">
                                 <Checkbox onChange={handleAddAllProduct} />
-                                Sản phẩm
+                                {t('product')}
                             </div>
-                            <div className="text-center">Thông tin sản phẩm</div>
-                            <Button
-                                className={`${
-                                    productsSelect.length <= 0
-                                        ? ''
-                                        : '!bg-red-500 dark:!bg-red-600 border-2 border-red-500 dark:border-red-600'
-                                }`}
-                                size="small"
-                                variant="fill"
-                                disabled={productsSelect.length <= 0}
-                                onClick={handleDeleteAllProduct}
-                            >
-                                Xóa đã chọn
-                            </Button>
+                            <div className="text-center w-full">{t('productInformation')}</div>
                         </div>
                         {products.map((item: IProductCart, index) => (
                             <div className="flex items-center" key={item.id}>

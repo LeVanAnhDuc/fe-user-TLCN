@@ -1,25 +1,30 @@
+// types
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import ExitToApp from '@mui/icons-material/ExitToApp';
-
-import Image from '../../../../components/Image';
-import config from '../../../../config';
-import { getOrderByID, updateOrderStatusByID } from '../../../../apis/orderApi';
+// types
+import IProductCart from '../../../../interface/productCart';
+import { actionProduct } from '../../../../interface/product';
 import IOrder from '../../../../interface/order';
-import { convertNumberToVND } from '../../../../utils/convertData';
+// components
+import Image from '../../../../components/Image';
 import AnimationTran from '../../../../components/AnimationTran';
 import ScrollButton from '../../../../components/ScrollButton/ScrollButton';
-import Error404 from '../../../Error404';
 import Loading from '../../../../components/Loading';
 import Button from '../../../../components/Button';
-import { initObjecProductCart } from '../../../../constants';
-import IProductCart from '../../../../interface/productCart';
-import ModalReview from '../ModalReview';
 import PopConfirm from '../../../../components/PopComfirm';
+import Error404 from '../../../Error404';
+import ModalReview from '../ModalReview';
+// apis
+import { getOrderByID, updateOrderStatusByID } from '../../../../apis/orderApi';
+import { updateProductAnalysis } from '../../../../apis/productApi';
+// others
+import config from '../../../../config';
+import { convertNumberToVND } from '../../../../utils/convertData';
+import { initObjecProductCart } from '../../../../constants';
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -61,9 +66,11 @@ const Detail = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 
@@ -136,7 +143,7 @@ const Detail = () => {
                                 <AnimationTran tranY={50}>{idProduct}</AnimationTran>
                             </Breadcrumbs>
                             <Button variant="fill" onClick={() => navigate(config.Routes.profileHistoryPaymentProfile)}>
-                                <ExitToApp />
+                                <ExitToApp className="rotate-180" />
                             </Button>
                         </div>
                         <table className="w-full border-collapse border border-gray-300">
@@ -168,7 +175,7 @@ const Detail = () => {
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran tranY={-50} delay={0.04}>
                                             {order?.address.orderDetails}, {order?.address.ward},{' '}
-                                            {order?.address.district},{order?.address.province}
+                                            {order?.address.district}, {order?.address.province}
                                         </AnimationTran>
                                     </td>
                                 </tr>
@@ -197,11 +204,24 @@ const Detail = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 p-3 min-w-40">{t('subtotal')}</td>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('shippingFee')}</td>
                                     <td className="border border-gray-300 p-3 font-bold">
                                         <AnimationTran
                                             tranY={-50}
                                             delay={0.12}
+                                            className="text-base not-italic font-medium text-red-500 flex gap-1"
+                                        >
+                                            {convertNumberToVND(order?.shippingFee)}
+                                            <span className="text-sm pr-0.5">đ</span>
+                                        </AnimationTran>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="border border-gray-300 p-3 min-w-40">{t('subtotal')}</td>
+                                    <td className="border border-gray-300 p-3 font-bold">
+                                        <AnimationTran
+                                            tranY={-50}
+                                            delay={0.14}
                                             className="text-base not-italic font-medium text-red-500 flex gap-1"
                                         >
                                             {convertNumberToVND(order?.total)}

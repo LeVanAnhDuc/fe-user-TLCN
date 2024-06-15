@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-catch */
-import { IProductFilter } from '../interface/product.js';
+// typs
+import { IProductFilter, actionProduct } from '../interface/product.js';
+// apis
 import axios from './axiosConfig.js';
 
 export const getAllProductSearchWithinPagination = async (productSearch: IProductFilter) => {
@@ -55,6 +57,28 @@ export const getAllProductWithinPagination = async (pageNo: number, pageSize: nu
 export const getSingleProduct = async (id: number) => {
     try {
         const response = await axios.get(`/products/${id}`);
+
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const updateProductAnalysis = async (product_id: number, type: actionProduct) => {
+    try {
+        const params: Record<string, string | number> = {};
+
+        if (product_id !== undefined) {
+            params['product_id'] = product_id;
+        }
+
+        if (type !== undefined) {
+            params['type'] = type;
+        }
+
+        const url = '/products/analyze?' + new URLSearchParams(params as Record<string, string>).toString();
+
+        const response = await axios.post(url);
 
         return response;
     } catch (error) {

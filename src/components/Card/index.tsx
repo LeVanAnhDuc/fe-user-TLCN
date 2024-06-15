@@ -1,21 +1,25 @@
-import ShoppingCart from '@mui/icons-material/ShoppingCart';
+// libs
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import Rating from '@mui/material/Rating';
-
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
-import config from '../../config';
-import IProduct from '../../interface/product';
-import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
-import { setToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
+import { motion } from 'framer-motion';
+// types
+import IProduct, { actionProduct } from '../../interface/product';
+// components
 import Button from '../Button';
 import Skeleton from '../Skeleton';
 import AnimationTran from '../AnimationTran';
+// apis
+import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
+import { updateProductAnalysis } from '../../apis/productApi';
+// others
+import config from '../../config';
+import { setToTalWishList } from '../../pages/Profile/Wishlist/wishListSlice';
 
 interface Iprops {
     itemProduct: IProduct;
@@ -30,7 +34,7 @@ const Card = (props: Iprops) => {
     const { t } = useTranslation('card');
 
     const [favourite, setFavourite] = useState(itemProduct.liked ? true : false);
-    const [favoriteCount, setFavouriteCount] = useState(itemProduct.favoriteCount);
+    const [isHovered, setIsHovered] = useState(false);
 
     const handleChangeFavorite = async () => {
         const token = localStorage.getItem('accessToken');
@@ -40,11 +44,6 @@ const Card = (props: Iprops) => {
 
                 if (response.status === 200) {
                     const totalFavourite = await getCountItemOfWishList();
-                    if (favourite) {
-                        setFavouriteCount((prev) => prev - 1);
-                    } else {
-                        setFavouriteCount((prev) => prev + 1);
-                    }
                     setFavourite((prev) => !prev);
                     dispatch(setToTalWishList(+totalFavourite.data));
                 }
@@ -57,43 +56,59 @@ const Card = (props: Iprops) => {
         }
     };
 
-    const handleNextDetailPage = () => {
+    const handleNextDetailPage = async () => {
         if (itemProduct.id) {
             navigate(`${config.Routes.detailProduct}/${itemProduct.id}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(+itemProduct.id, actionClick);
         }
     };
 
     useEffect(() => {
         setFavourite(itemProduct.liked ? true : false);
-        setFavouriteCount(itemProduct.favoriteCount);
     }, [loading]);
 
     return (
         <AnimationTran tranY={30} delay={delay}>
-            <div className="bg-white shadow-md rounded-lg overflow-hidden relative hover:shadow-primary-800 hover:scale-[0.98] hover:-translate-y-1 transition dark:bg-dark-600">
+            <div className="bg-white shadow-md rounded-md overflow-hidden relative hover:shadow-primary-800 hover:scale-[1.02] hover:-translate-y-0.5 transition dark:bg-dark-600">
                 <div onClick={handleNextDetailPage} className="cursor-pointer">
-                    <div className="h-48 overflow-hidden ">
+                    <div
+                        className="h-72 w-full overflow-hidden relative flex"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
                         {loading ? (
                             <Skeleton fillFull />
                         ) : (
-                            <img
-                                src={itemProduct.listImages[0]}
-                                alt={itemProduct.name}
-                                className="object-cover object-center size-full"
-                            />
+                            <>
+                                <motion.img
+                                    src={itemProduct.listImages[0]}
+                                    alt={itemProduct.name}
+                                    className={`${
+                                        isHovered && '-translate-x-full'
+                                    } object-cover object-center h-full min-w-full transition duration-[900ms]`}
+                                />
+                                <motion.img
+                                    src={itemProduct.listImages[1]}
+                                    alt={itemProduct.name}
+                                    className={`${
+                                        isHovered && '-translate-x-full'
+                                    } object-cover object-center h-full min-w-full transition duration-[900ms]`}
+                                />
+                            </>
                         )}
                     </div>
-                    <div className="mx-4 my-3 font-medium space-y-3">
+                    <div className="m-4 font-medium space-y-3">
                         {loading ? (
                             <Skeleton fillFull className="h-9" />
                         ) : (
-                            <div className="line-clamp-2 text-sm min-h-10">{itemProduct.name}</div>
+                            <div className="line-clamp-2 text-sm min-h-10 uppercase">{itemProduct.name}</div>
                         )}
-                        <div className="flex justify-between gap-5">
+                        <div className="flex items-center gap-3">
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                <div className="text-base text-red-500 flex gap-0.5">
+                                <div className="text-red-500 flex gap-0.5">
                                     <span className="text-sm">đ</span>
                                     {itemProduct.price.toLocaleString('vi-VN')}
                                 </div>
@@ -101,16 +116,19 @@ const Card = (props: Iprops) => {
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                <Rating value={itemProduct.rating} precision={0.5} readOnly size="small" />
+                                itemProduct.originalPrice && (
+                                    <div className="text-gray-400 flex gap-0.5 line-through">
+                                        <span className="text-sm">đ</span>
+                                        {itemProduct.originalPrice.toLocaleString('vi-VN')}
+                                    </div>
+                                )
                             )}
                         </div>
                         <div className="flex justify-between gap-5">
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                <span className="text-sm text-gray-600 dark:text-gray-300">
-                                    {t('preference')} {favoriteCount}
-                                </span>
+                                <Rating value={itemProduct.rating} precision={0.5} readOnly size="small" />
                             )}
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
@@ -123,18 +141,13 @@ const Card = (props: Iprops) => {
                     </div>
                 </div>
 
-                <div className="m-4">
-                    {loading ? (
-                        <Skeleton className="h-12" fullWidth />
-                    ) : (
-                        <Button fullWidth variant="outline" onClick={handleNextDetailPage}>
-                            <ShoppingCart />
-                        </Button>
-                    )}
-                </div>
-
                 {!loading && (
                     <>
+                        {itemProduct.percentDiscount && (
+                            <div className="absolute top-2 left-2 bg-gray-700 rounded-full text-white size-11 text-sm flex items-center justify-center">
+                                -{itemProduct.percentDiscount}%
+                            </div>
+                        )}
                         <div className="bg-white blur-lg absolute -top-1 right-1.5 size-14 rounded-full"></div>
                         <Button onClick={handleChangeFavorite} className="!absolute top-0 right-0 ">
                             {favourite ? (

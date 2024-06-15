@@ -12,6 +12,7 @@
     "canceled": "Đã hủy",
     "waitForPay": "Chờ thanh toán",
     "searchTitle": "Bạn có thể tìm kiếm theo tên sản phẩm",
+    "textSuccessPayVNPay": "Thanh toán online (VNPay) ✔",
     "classification": "Phân loại",
     "quantity": "Số lượng",
     "unitPrice": "Đơn giá",
@@ -42,6 +43,7 @@
     "payments": "Phương thức thanh toán",
     "note": "Ghi chú",
     "totalItem": "Tổng sản phẩm",
+    "shippingFee": "Phí vận chuyển",
     "subtotal": "Thành tiền",
     "detailedOrderInformation": "Thông tin chi tiết đơn hàng"
 }

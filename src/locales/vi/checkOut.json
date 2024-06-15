@@ -10,7 +10,8 @@
     "payments": "Phương thức thanh toán",
     "vnPay": "Thanh toán với VNPay",
     "cashOnDelivery": "Thanh toán khi nhận hàng",
-    "addressHome": "Địa chỉ nhà",
+    "default": "Mặc định",
+    "addressHome": "Địa chỉ nhận hàng",
     "noAddressHome": "Hiện chưa có địa chỉ. Nhấn để thêm",
     "enterNote": "Nhập ghi chú",
     "iHaveRead": "Tôi đã đọc và đồng ý cho DUCK xử lý thông tin của tôi theo",
@@ -21,6 +22,7 @@
     "totalCost": "Tổng chi phí",
     "totalAmount": "Tổng tiền",
     "totalDelivery": "Phí vận chuyển",
+    "standard": "Tiêu chuẩn",
     "subtotal": "Thành tiền",
     "TotalPriceOfYourOrder": "Tổng cộng giá của đơn hàng của bạn, bao gồm tất cả các chi phí và thuế"
 }

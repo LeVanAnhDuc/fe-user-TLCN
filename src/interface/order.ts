@@ -24,4 +24,5 @@ export default interface IOrder {
     total: number;
     totalItems: number;
     userId: number;
+    shippingFee: number;
 }

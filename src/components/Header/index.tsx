@@ -71,6 +71,7 @@ function Header() {
         }
         setMenuResponsive(open);
     };
+
     const toggleDrawerCartModal = useCallback(() => {
         setOpenCartModal((prev) => !prev);
     }, []);
@@ -110,7 +111,7 @@ function Header() {
                                 <div
                                     className={`${
                                         isActive
-                                            ? 'text-primary-500 dark:text-primary-400'
+                                            ? 'text-primary-200 dark:text-primary-400'
                                             : 'hover:text-primary-700 hover:scale-[1.03] dark:text-white dark:hover:text-primary-400'
                                     } uppercase cursor-pointer transition `}
                                 >

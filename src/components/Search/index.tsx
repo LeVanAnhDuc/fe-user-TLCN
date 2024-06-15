@@ -1,8 +1,9 @@
 import IconSearch from '@mui/icons-material/Search';
 
-import { useEffect } from 'react';
+import { KeyboardEvent, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import useDebounceCustom from '../../hook/useDebounceCustom';
 import config from '../../config';
 
 interface Iprops {
@@ -17,20 +18,31 @@ const Search = (props: Iprops) => {
     const locationRouter = useLocation();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value as string);
+        setSearch(e.target.value);
     };
 
     const handleSubmitSearch = () => {
         setDoneSearch && setDoneSearch(true);
     };
 
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmitSearch();
+        }
+    };
+
+    const keySearch = useDebounceCustom(search, 50);
+
     useEffect(() => {
-        if (!search.trim() && locationRouter.pathname === config.Routes.shop && setDoneSearch) {
+        if (keySearch.trim()) {
+            return;
+        }
+        if (locationRouter.pathname === config.Routes.shop && setDoneSearch) {
             setSearch('');
             setDoneSearch(true);
             return;
         }
-    }, [search]);
+    }, [keySearch]);
 
     return (
         <div className="relative h-fit w-full text-gray-600 flex items-center">
@@ -43,6 +55,7 @@ const Search = (props: Iprops) => {
                 required
                 value={search}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
             />
             {setDoneSearch && (
                 <button

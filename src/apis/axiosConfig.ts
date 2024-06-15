@@ -1,8 +1,10 @@
+// libs
 import axios from 'axios';
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8080/api/v1',
-    timeout: 30000,
+    baseURL: baseURL,
+    timeout: 50000,
     headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',

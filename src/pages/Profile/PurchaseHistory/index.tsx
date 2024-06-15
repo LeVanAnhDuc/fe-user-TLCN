@@ -1,26 +1,33 @@
+// libs
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
-import React, { Fragment, useEffect, useState } from 'react';
+import Pagination from '@mui/material/Pagination';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-
-import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
+// types
 import IOrder from '../../../interface/order';
-import config from '../../../config';
+import IProductCart from '../../../interface/productCart';
+import { actionProduct } from '../../../interface/product';
+// components
 import Image from '../../../components/Image';
 import AnimationTran from '../../../components/AnimationTran';
-import { convertNumberToVND } from '../../../utils/convertData';
+import Loading from '../../../components/Loading';
 import Button from '../../../components/Button';
+import Search from '../../../components/Search';
+import PopConfirm from '../../../components/PopComfirm';
 import Error404 from '../../Error404';
 import ModalReview from './ModalReview';
-import IProductCart from '../../../interface/productCart';
-import Loading from '../../../components/Loading';
-import { initObjecProductCart } from '../../../constants';
-import Search from '../../../components/Search';
+// apis
+import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
+import { updateProductAnalysis } from '../../../apis/productApi';
+// hooks
 import useDebounceCustom from '../../../hook/useDebounceCustom';
-import PopConfirm from '../../../components/PopComfirm';
+// others
+import config from '../../../config';
+import { convertNumberToVND } from '../../../utils/convertData';
+import { initObjecProductCart } from '../../../constants';
 
 const PurchaseHistory = () => {
     const navigate = useNavigate();
@@ -28,6 +35,7 @@ const PurchaseHistory = () => {
     const { t } = useTranslation('purchaseHistory');
 
     const status = location.state?.status ? location.state.status : '';
+    const itemsPerPage = useMemo(() => 5, []);
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [listHistory, setListHistory] = useState<Array<IOrder>>([]);
@@ -38,9 +46,20 @@ const PurchaseHistory = () => {
     const [openReview, setOpenReview] = useState(false);
     const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
     const [search, setSearch] = useState<string>('');
+    const [page, setPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     const handleChangeStatus = (_: React.MouseEvent<HTMLElement>, status: string) => {
         setStatusOrder(status);
+        setPage(1);
+    };
+
+    const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
+        setPage(newPage);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
     };
 
     const handleGetListHistory = async (statusParam: string, searchParam: string) => {
@@ -48,7 +67,7 @@ const PurchaseHistory = () => {
             firstLoadingAPI && setLoadingAPI(true);
 
             const [response] = await Promise.all([
-                searchOrderForUser(statusParam, searchParam),
+                searchOrderForUser(statusParam, searchParam, page, itemsPerPage),
                 firstLoadingAPI && new Promise((resolve) => setTimeout(resolve, 250)),
             ]);
 
@@ -57,6 +76,7 @@ const PurchaseHistory = () => {
             if (response?.status === 200) {
                 setFirstLoadingAPI(false);
                 setListHistory(response.data.content);
+                setTotalPages(response.data.totalPages);
             } else {
                 setErrorAPI(true);
             }
@@ -65,9 +85,11 @@ const PurchaseHistory = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 
@@ -98,7 +120,8 @@ const PurchaseHistory = () => {
         }
     };
 
-    const handleOpenReview = (item: IProductCart) => {
+    const handleOpenReview = (event: React.MouseEvent<HTMLButtonElement>, item: IProductCart) => {
+        event.stopPropagation();
         setItemReview(item);
         setOpenReview(true);
     };
@@ -108,7 +131,7 @@ const PurchaseHistory = () => {
 
     useEffect(() => {
         handleGetListHistory(statusOrder, searchDebounce);
-    }, [statusOrder, callAPIAgain, searchDebounce]);
+    }, [statusOrder, callAPIAgain, searchDebounce, page]);
 
     if (errorAPI) {
         return <Error404 />;
@@ -185,28 +208,29 @@ const PurchaseHistory = () => {
                                 className=" bg-white rounded-lg shadow dark:bg-dark-600"
                                 key={index}
                             >
-                                <div className="flex items-center justify-between p-5">
+                                <div className="flex items-center justify-between px-5 py-4">
                                     <div className="text-sm font-bold">{item.createdDate}</div>
                                     <div className="flex items-center gap-2">
-                                        {item.isPaidBefore ? (
+                                        {item.isPaidBefore && (
                                             <div className="border-r-2 pr-2 text-sm font-medium text-green-500">
-                                                Đơn hàng đã được thanh toán
+                                                {t('textSuccessPayVNPay')}
                                             </div>
-                                        ) : (
-                                            ''
                                         )}
                                         <div
                                             className={`
                                 ${item.status === config.StatusOrders.DELIVERED && '!text-green-500'}
                                 ${item.status === config.StatusOrders.CANCELED && '!text-red-600'} 
-                                uppercase font-bold text-primary-700 text-lg`}
+                                uppercase font-semibold text-primary-700 text-base`}
                                         >
                                             {item.status}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="space-y-3 px-5">
+                                <div
+                                    className="space-y-3 px-5 cursor-pointer select-none"
+                                    onClick={() => handleRedirectDetailOrder(item.id)}
+                                >
                                     {item.orderItems.map((itemProduct, indexProduct) => (
                                         <Fragment key={indexProduct}>
                                             <div className="h-0.5 bg-gray-200"></div>
@@ -215,8 +239,11 @@ const PurchaseHistory = () => {
                                                     <Image
                                                         src={itemProduct.imageUrl}
                                                         alt={'image' + itemProduct.product.name}
-                                                        className="col-span-3 md:col-span-2 object-cover object-center size-full cursor-pointer rounded"
-                                                        onClick={() => handleRedirectDetailItem(itemProduct.product.id)}
+                                                        className="col-span-3 md:col-span-2 object-cover object-center size-32 cursor-pointer rounded m-auto"
+                                                        onClick={(e: React.MouseEvent<HTMLImageElement>) => {
+                                                            handleRedirectDetailItem(itemProduct.product.id);
+                                                            e.stopPropagation();
+                                                        }}
                                                     />
                                                     <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between gap-2 p-3 sm:p-4">
                                                         <div className="line-clamp-2 font-medium">
@@ -268,7 +295,9 @@ const PurchaseHistory = () => {
                                                                     <Button
                                                                         variant="fill"
                                                                         className=" !h-10"
-                                                                        onClick={() => handleOpenReview(itemProduct)}
+                                                                        onClick={(e) =>
+                                                                            handleOpenReview(e, itemProduct)
+                                                                        }
                                                                     >
                                                                         {t('writeAReview')}
                                                                     </Button>
@@ -286,16 +315,15 @@ const PurchaseHistory = () => {
 
                                 <div className="flex flex-wrap gap-3 justify-between items-center p-5 bg-primary-50/40 rounded-b-lg dark:bg-dark-500">
                                     <div className="flex items-center gap-2 text-center">
-                                        <span className="font-medium text">{t('totalAmount')}:</span>
-                                        <div className="not-italic text-xl font-medium text-red-500  flex gap-1">
-                                            {convertNumberToVND(item.total)}
-                                            <span className="text-lg">đ</span>
+                                        <span className="font-medium">{t('totalAmount')}:</span>
+                                        <div className="not-italic font-semibold text-red-500  flex gap-1">
+                                            {convertNumberToVND(item.total)} đ
                                         </div>
                                     </div>
                                     <div className="flex  gap-2">
                                         {item.status === config.StatusOrders.WAITFORPAY && (
                                             <Button
-                                                className="!min-h-10 min-w-32"
+                                                className="!h-9 text-sm !rounded-md whitespace-nowrap"
                                                 variant="fill"
                                                 onClick={() => handlePaymentOrder(item.id, item.orderItems)}
                                             >
@@ -303,7 +331,7 @@ const PurchaseHistory = () => {
                                             </Button>
                                         )}
                                         <Button
-                                            className="!min-h-10 min-w-24"
+                                            className="!h-9 text-sm !rounded-md whitespace-nowrap"
                                             variant="outline"
                                             onClick={() => handleRedirectDetailOrder(item.id)}
                                         >
@@ -318,7 +346,7 @@ const PurchaseHistory = () => {
                                                 onCancel={() => toast.info(t('cancelDeletion'))}
                                             >
                                                 <Button
-                                                    className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
+                                                    className="!h-9 text-sm !rounded-md whitespace-nowrap text-red-500 hover:text-red-800"
                                                     variant="text"
                                                 >
                                                     {t('cancelOrder')}
@@ -329,6 +357,16 @@ const PurchaseHistory = () => {
                                 </div>
                             </AnimationTran>
                         ))}
+                    </div>
+                    <div className="flex justify-end">
+                        <Pagination
+                            count={totalPages}
+                            page={page}
+                            onChange={handlePageChange}
+                            color="primary"
+                            variant="outlined"
+                            boundaryCount={1}
+                        />
                     </div>
                 </section>
             )}

@@ -1,4 +1,7 @@
 {
+    "deleteSelected": "Delete selected",
+    "product": "Product",
+    "productInformation": "Product information",
     "classification": "Classification",
     "unitPrice": "Unit price",
     "totalPrice": "Total price",

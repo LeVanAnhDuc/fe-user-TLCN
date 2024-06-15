@@ -1,3 +1,4 @@
+// libs
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,7 +9,6 @@ import TextField from '@mui/material/TextField';
 import MuiToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,23 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-
+// types
+import { IOrderCheckOut } from '../../interface/order';
+import IAddress from '../../interface/address';
+import IProductCart from '../../interface/productCart';
+import { IProductCheckout, actionProduct } from '../../interface/product';
+// components
+import Button from '../../components/Button';
+import AnimationScale from '../../components/AnimationScale';
+import AnimationTran from '../../components/AnimationTran';
+import Image from '../../components/Image';
+// apis
+import { getListAddressOffCurrentUser } from '../../apis/addressApi';
+import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
+import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
+import { getFeeShipping } from '../../apis/GHN/FeeShip';
+import { updateProductAnalysis } from '../../apis/productApi';
+// others
 import {
     selectProductsCart,
     selectProductsPurchaseCart,
@@ -27,19 +43,7 @@ import {
     setToTalProductCart,
 } from '../Cart/cartSlice';
 import config from '../../config';
-import { IOrderCheckOut } from '../../interface/order';
-import IAddress from '../../interface/address';
-import { getListAddressOffCurrentUser } from '../../apis/addressApi';
-import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
-import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
-import Button from '../../components/Button';
 import { convertNumberToVND } from '../../utils/convertData';
-import AnimationScale from '../../components/AnimationScale';
-import AnimationTran from '../../components/AnimationTran';
-import { getFeeShipping } from '../../apis/GHN/FeeShip';
-import IProductCart from '../../interface/productCart';
-import Image from '../../components/Image';
-import { IProductCheckout } from '../../interface/product';
 import { calculateWeight } from '../../utils/calculateData';
 
 const ToggleButton = styled(MuiToggleButton)({
@@ -152,9 +156,11 @@ const Pay = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 
@@ -289,32 +295,32 @@ const Pay = () => {
             <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
                 <div className="grid lg:grid-cols-5 gap-10">
                     <div className="lg:col-span-3 space-y-4">
-                        <div className="space-y-3 bg-white p-5  rounded-lg dark:bg-dark-600">
+                        <div className="space-y-3 bg-white p-10 rounded-lg dark:bg-dark-600">
                             {productsPurchase.map((item: IProductCart, index) => (
                                 <div className="flex items-center" key={item.id}>
                                     <AnimationTran
                                         tranY={100}
                                         key={index}
-                                        className="size-full grid grid-cols-12 gap-2 bg-gray-100 rounded-lg overflow-hidden shadow  dark:bg-dark-500"
+                                        className="size-full grid grid-cols-12 gap-2 bg-gray-100 rounded-lg overflow-hidden shadow dark:bg-dark-500"
                                         delay={(index % 4) / 20}
                                     >
                                         <>
                                             <Image
                                                 src={item.imageUrl}
                                                 alt={'image' + item.product.name}
-                                                className="col-span-3 md:col-span-2 object-cover object-center size-full cursor-pointer"
+                                                className="col-span-3 md:col-span-2 aspect-square object-cover py-3 pl-3 object-center cursor-pointer size-32 m-auto"
                                                 onClick={() => {
                                                     handleRedirectDetailItem(item.product.id);
                                                 }}
                                             />
                                             <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between p-2">
-                                                <div className="line-clamp-2 font-semibold mb-3 h-9">
+                                                <div className="line-clamp-2 font-normal mb-3 h-5">
                                                     {item.product.name}
                                                 </div>
                                                 <div className="flex justify-between items-center flex-wrap gap-1">
                                                     <aside>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">
+                                                            <span className="font-normal w-18">
                                                                 {t('classification')}:
                                                             </span>
                                                             <span className="font-medium">
@@ -329,20 +335,20 @@ const Pay = () => {
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">{t('unitPrice')}: </span>
+                                                            <span className="font-normal w-18">{t('unitPrice')}: </span>
                                                             <span className="not-italic font-medium text-red-500 flex gap-1">
                                                                 {convertNumberToVND(item.price)}
                                                                 <span className="text-xs"> đ</span>
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">{t('quantity')}:</span>
+                                                            <span className="font-normal w-18">{t('quantity')}:</span>
                                                             <div className="font-medium">
                                                                 {convertNumberToVND(item.quantity)}
                                                             </div>
                                                         </div>
                                                         <div className="flex gap-1">
-                                                            <span className="font-bold w-18">{t('totalPrice')}:</span>
+                                                            <span className="font-medium w-18">{t('totalPrice')}:</span>
                                                             <div className="not-italic font-medium text-red-500 flex gap-1">
                                                                 {convertNumberToVND(item.subTotal)}
                                                                 <span className="text-xs">đ</span>
@@ -414,18 +420,19 @@ const Pay = () => {
                                                                 <div className="size-full flex items-center justify-between gap-2 overflow-hidden">
                                                                     <div className="text-sm">
                                                                         <div className="font-bold">
-                                                                            {item.fullName} {item.phoneNumber}
+                                                                            {item.fullName} {item.phoneNumber}{' '}
+                                                                            {item.isDefault && (
+                                                                                <span className="size-fit text-end text-sm font-normal text-primary-500 border-primary-500 border-2 px-2 ml-2 rounded-md">
+                                                                                    {t('default')}
+                                                                                </span>
+                                                                            )}
                                                                         </div>
+
                                                                         <div className="flex flex-wrap">
                                                                             {item.orderDetails}, {item.ward},{' '}
                                                                             {item.district}, {item.province}
                                                                         </div>
                                                                     </div>
-                                                                    {item.isDefault && (
-                                                                        <div className="size-fit text-end text-sm text-primary-500 border-primary-500 border-2 px-1.5 py-1 rounded-md">
-                                                                            Mặc định
-                                                                        </div>
-                                                                    )}
                                                                 </div>
                                                             </MenuItem>
                                                         ))}
@@ -495,7 +502,9 @@ const Pay = () => {
                             </AnimationScale>
                         </div>
                         <div className="flex justify-between">
-                            <span className="font-medium">{t('totalDelivery')}</span>
+                            <span className="font-medium">
+                                {t('totalDelivery')} ({t('standard')})
+                            </span>
                             <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
                                 {convertNumberToVND(feePrice)}
                                 <span className="text-sm">đ</span>
