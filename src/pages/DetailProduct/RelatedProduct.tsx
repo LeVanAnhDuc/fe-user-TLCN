@@ -59,7 +59,7 @@ const RelatedProduct = (props: Iprops) => {
                     }}
                 >
                     <Button variant="text" className="h-fit">
-                        {t('seeAll')}
+                        {t('seeAll')}>
                     </Button>
                 </Link>
             </div>
