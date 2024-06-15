@@ -1,11 +1,11 @@
 // libs
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Pagination from '@mui/material/Pagination';
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { Pagination } from '@mui/material';
 // types
 import IOrder from '../../../interface/order';
 import IProductCart from '../../../interface/productCart';
@@ -35,7 +35,7 @@ const PurchaseHistory = () => {
     const { t } = useTranslation('purchaseHistory');
 
     const status = location.state?.status ? location.state.status : '';
-    const itemsPerPage = useMemo(() => 20, []);
+    const itemsPerPage = useMemo(() => 5, []);
 
     const [firstLoadingAPI, setFirstLoadingAPI] = useState<boolean>(true);
     const [listHistory, setListHistory] = useState<Array<IOrder>>([]);

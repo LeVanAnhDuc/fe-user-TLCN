@@ -19,7 +19,7 @@ import Error404 from '../../Error404';
 // apis
 import { updateProductAnalysis } from '../../../apis/productApi';
 import { getCountItemOfWishList, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
-
+// others
 import config from '../../../config';
 import { setToTalWishList } from './wishListSlice';
 import { convertNumberToVND } from '../../../utils/convertData';

@@ -1,3 +1,4 @@
+// libs
 import Pagination from '@mui/material/Pagination';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -11,22 +12,24 @@ import Fab from '@mui/material/Fab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import Close from '@mui/icons-material/Close';
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+// types
 import ICategory from '../../interface/category';
-import { getAllCategoryWithPagination } from '../../apis/categoryApii';
-import Card from '../../components/Card';
-import { getAllProductSearchWithinPagination } from '../../apis/productApi';
 import IProduct, { IProductFilter } from '../../interface/product';
-import config from '../../config';
+// components
+import Card from '../../components/Card';
 import ScrollButton from '../../components/ScrollButton/ScrollButton';
 import Button from '../../components/Button';
-import * as constants from '../../constants';
 import Skeleton from '../../components/Skeleton';
 import Error404 from '../Error404';
+// apis
+import { getAllCategoryWithPagination } from '../../apis/categoryApii';
+import { getAllProductSearchWithinPagination } from '../../apis/productApi';
+// other
+import config from '../../config';
+import * as constants from '../../constants';
 
 function Listproducts() {
     const location = useLocation();
@@ -87,6 +90,7 @@ function Listproducts() {
 
     const handleGetFilterSortBy = (event: SelectChangeEvent) => {
         setFilterSortBy(event.target.value as string);
+        setPage(1);
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -99,6 +103,7 @@ function Listproducts() {
             : [...cateFilter, e.target.name];
 
         setCateFilter(updatedSelection);
+        setPage(1);
         window.scrollTo({
             top: 0,
             behavior: 'smooth',

@@ -1,14 +1,16 @@
+// libs
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-
 import Pagination from '@mui/material/Pagination';
 import Rating from '@mui/material/Rating';
-
-import Review from '../../components/Review/Review';
-import { getAllReviewWithPagination } from '../../apis/reviewApi';
+// types
 import Ireview, { IStarNumberOfProduct } from '../../interface/review';
+// components
+import Review from '../../components/Review/Review';
 import Button from '../../components/Button';
+// apis
+import { getAllReviewWithPagination } from '../../apis/reviewApi';
 
 interface Iprops {
     idProduct: number;
