@@ -1,22 +1,31 @@
+// libs
 import Fab from '@mui/material/Fab';
 import Close from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import Drawer from '@mui/material/Drawer';
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-import config from '../../config';
+// types
+import { actionProduct } from '../../interface/product';
+import IProductCart from '../../interface/productCart';
+// components
 import Image from '../../components/Image';
 import MouseOverPopover from '../../components/MouseOverPopover';
-import IProductCart from '../../interface/productCart';
+import AnimationTran from '../../components/AnimationTran';
+import Button from '../../components/Button';
+import AnimationScale from '../../components/AnimationScale';
+import ChangeQuantityProduct from './ChangeQuantityProduct';
+// apis
 import { getCartByToken } from '../../apis/cartApi';
 import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
+import { updateProductAnalysis } from '../../apis/productApi';
+// others
+import config from '../../config';
 import {
     deleteNumberProductCart,
     selectProductsCart,
@@ -26,11 +35,7 @@ import {
     setProductsPurchase,
     setToTalPriceCart,
 } from './cartSlice';
-import AnimationTran from '../../components/AnimationTran';
 import { convertNumberToVND } from '../../utils/convertData';
-import ChangeQuantityProduct from './ChangeQuantityProduct';
-import Button from '../../components/Button';
-import AnimationScale from '../../components/AnimationScale';
 
 interface Iprops {
     openCartModal: boolean;
@@ -89,9 +94,11 @@ const CartModal = (props: Iprops) => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 

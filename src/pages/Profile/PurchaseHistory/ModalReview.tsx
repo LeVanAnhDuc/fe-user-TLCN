@@ -1,23 +1,28 @@
+// libs
 import Modal from '@mui/material/Modal';
 import StarIcon from '@mui/icons-material/Star';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
-
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
+// types
 import { IreviewOrder } from '../../../interface/review';
 import IProductCart from '../../../interface/productCart';
-import { addReview } from '../../../apis/reviewApi';
+import { actionProduct } from '../../../interface/product';
+// components
 import Button from '../../../components/Button';
 import Image from '../../../components/Image';
-import { useNavigate } from 'react-router-dom';
+// apis
+import { addReview } from '../../../apis/reviewApi';
+import { updateProductAnalysis } from '../../../apis/productApi';
+// others
 import config from '../../../config';
-import React from 'react';
 import { convertNumberToVND } from '../../../utils/convertData';
 
 interface IPropsAddress {
@@ -92,9 +97,11 @@ const ModalReview = (propsCh: IPropsAddress) => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 

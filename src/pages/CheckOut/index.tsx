@@ -1,3 +1,4 @@
+// libs
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,7 +9,6 @@ import TextField from '@mui/material/TextField';
 import MuiToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,23 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-
+// types
+import { IOrderCheckOut } from '../../interface/order';
+import IAddress from '../../interface/address';
+import IProductCart from '../../interface/productCart';
+import { IProductCheckout, actionProduct } from '../../interface/product';
+// components
+import Button from '../../components/Button';
+import AnimationScale from '../../components/AnimationScale';
+import AnimationTran from '../../components/AnimationTran';
+import Image from '../../components/Image';
+// apis
+import { getListAddressOffCurrentUser } from '../../apis/addressApi';
+import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
+import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
+import { getFeeShipping } from '../../apis/GHN/FeeShip';
+import { updateProductAnalysis } from '../../apis/productApi';
+// others
 import {
     selectProductsCart,
     selectProductsPurchaseCart,
@@ -27,19 +43,7 @@ import {
     setToTalProductCart,
 } from '../Cart/cartSlice';
 import config from '../../config';
-import { IOrderCheckOut } from '../../interface/order';
-import IAddress from '../../interface/address';
-import { getListAddressOffCurrentUser } from '../../apis/addressApi';
-import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
-import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
-import Button from '../../components/Button';
 import { convertNumberToVND } from '../../utils/convertData';
-import AnimationScale from '../../components/AnimationScale';
-import AnimationTran from '../../components/AnimationTran';
-import { getFeeShipping } from '../../apis/GHN/FeeShip';
-import IProductCart from '../../interface/productCart';
-import Image from '../../components/Image';
-import { IProductCheckout } from '../../interface/product';
 import { calculateWeight } from '../../utils/calculateData';
 
 const ToggleButton = styled(MuiToggleButton)({
@@ -152,9 +156,11 @@ const Pay = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 

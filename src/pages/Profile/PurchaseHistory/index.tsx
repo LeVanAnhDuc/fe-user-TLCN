@@ -9,6 +9,7 @@ import { Pagination } from '@mui/material';
 // types
 import IOrder from '../../../interface/order';
 import IProductCart from '../../../interface/productCart';
+import { actionProduct } from '../../../interface/product';
 // components
 import Image from '../../../components/Image';
 import AnimationTran from '../../../components/AnimationTran';
@@ -20,6 +21,7 @@ import Error404 from '../../Error404';
 import ModalReview from './ModalReview';
 // apis
 import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
+import { updateProductAnalysis } from '../../../apis/productApi';
 // hooks
 import useDebounceCustom from '../../../hook/useDebounceCustom';
 // others
@@ -83,9 +85,11 @@ const PurchaseHistory = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 

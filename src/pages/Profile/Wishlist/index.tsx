@@ -1,23 +1,28 @@
+// libs
 import Pagination from '@mui/material/Pagination';
-
+import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-import Image from '../../../components/Image';
-import { getCountItemOfWishList, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
+// types
 import IFollowProduct from '../../../interface/followProduct';
+import { actionProduct } from '../../../interface/product';
+// components
+import AnimationTran from '../../../components/AnimationTran';
+import Button from '../../../components/Button';
+import Loading from '../../../components/Loading';
+import PopConfirm from '../../../components/PopComfirm';
+import Image from '../../../components/Image';
+import Error404 from '../../Error404';
+// apis
+import { updateProductAnalysis } from '../../../apis/productApi';
+import { getCountItemOfWishList, getWishListWithPagination, putFollowProduct } from '../../../apis/followProductApi';
+
 import config from '../../../config';
 import { setToTalWishList } from './wishListSlice';
 import { convertNumberToVND } from '../../../utils/convertData';
-import AnimationTran from '../../../components/AnimationTran';
-import Button from '../../../components/Button';
-import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
-import Error404 from '../../Error404';
-import Loading from '../../../components/Loading';
-import PopConfirm from '../../../components/PopComfirm';
 
 const Wishlist = () => {
     const dispatch = useDispatch();
@@ -84,9 +89,11 @@ const Wishlist = () => {
         });
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 

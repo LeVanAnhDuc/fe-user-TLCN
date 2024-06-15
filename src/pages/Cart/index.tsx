@@ -1,20 +1,29 @@
+// libs
 import IconButton from '@mui/material/IconButton';
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
 import Checkbox from '@mui/material/Checkbox';
-
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
-import Image from '../../components/Image';
-import config from '../../config';
-import { getCartByToken } from '../../apis/cartApi';
+// types
 import IProductCart from '../../interface/productCart';
-import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
+import { actionProduct } from '../../interface/product';
+// components
+import Image from '../../components/Image';
+import MouseOverPopover from '../../components/MouseOverPopover';
+import Button from '../../components/Button';
+import AnimationTran from '../../components/AnimationTran';
+import AnimationScale from '../../components/AnimationScale';
 import ChangeQuantityProduct from './ChangeQuantityProduct';
+// apis
+import { updateProductAnalysis } from '../../apis/productApi';
+import { getCartByToken } from '../../apis/cartApi';
+import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
+// others
+import config from '../../config';
 import {
     deleteNumberProductCart,
     selectProductsCart,
@@ -24,11 +33,7 @@ import {
     setToTalPriceCart,
     setProductsPurchase,
 } from './cartSlice';
-import MouseOverPopover from '../../components/MouseOverPopover';
 import { convertNumberToVND } from '../../utils/convertData';
-import Button from '../../components/Button';
-import AnimationTran from '../../components/AnimationTran';
-import AnimationScale from '../../components/AnimationScale';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -83,9 +88,11 @@ const Cart = () => {
         }
     };
 
-    const handleRedirectDetailItem = (idProduct: number) => {
+    const handleRedirectDetailItem = async (idProduct: number) => {
         if (idProduct) {
             navigate(`${config.Routes.detailProduct}/${idProduct}`);
+            const actionClick: actionProduct = 'click';
+            await updateProductAnalysis(idProduct, actionClick);
         }
     };
 
