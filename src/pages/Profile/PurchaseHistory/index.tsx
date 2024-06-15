@@ -1,27 +1,31 @@
+// libs
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@mui/material';
-
-import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
+// types
 import IOrder from '../../../interface/order';
-import config from '../../../config';
+import IProductCart from '../../../interface/productCart';
+// components
 import Image from '../../../components/Image';
 import AnimationTran from '../../../components/AnimationTran';
-import { convertNumberToVND } from '../../../utils/convertData';
+import Loading from '../../../components/Loading';
 import Button from '../../../components/Button';
+import Search from '../../../components/Search';
+import PopConfirm from '../../../components/PopComfirm';
 import Error404 from '../../Error404';
 import ModalReview from './ModalReview';
-import IProductCart from '../../../interface/productCart';
-import Loading from '../../../components/Loading';
-import { initObjecProductCart } from '../../../constants';
-import Search from '../../../components/Search';
+// apis
+import { searchOrderForUser, updateOrderStatusByID } from '../../../apis/orderApi';
+// hooks
 import useDebounceCustom from '../../../hook/useDebounceCustom';
-import PopConfirm from '../../../components/PopComfirm';
+// others
+import config from '../../../config';
+import { convertNumberToVND } from '../../../utils/convertData';
+import { initObjecProductCart } from '../../../constants';
 
 const PurchaseHistory = () => {
     const navigate = useNavigate();
@@ -112,7 +116,8 @@ const PurchaseHistory = () => {
         }
     };
 
-    const handleOpenReview = (item: IProductCart) => {
+    const handleOpenReview = (event: React.MouseEvent<HTMLButtonElement>, item: IProductCart) => {
+        event.stopPropagation();
         setItemReview(item);
         setOpenReview(true);
     };
@@ -288,7 +293,9 @@ const PurchaseHistory = () => {
                                                                     <Button
                                                                         variant="fill"
                                                                         className=" !h-10"
-                                                                        onClick={() => handleOpenReview(itemProduct)}
+                                                                        onClick={(e) =>
+                                                                            handleOpenReview(e, itemProduct)
+                                                                        }
                                                                     >
                                                                         {t('writeAReview')}
                                                                     </Button>
