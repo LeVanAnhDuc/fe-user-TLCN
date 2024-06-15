@@ -1,7 +1,9 @@
+// libs
 import axios from 'axios';
+const baseURL = import.meta.env.VITE_BASE_URL_GHN;
 
 const instance = axios.create({
-    baseURL: 'https://dev-online-gateway.ghn.vn/shiip/public-api',
+    baseURL: baseURL,
     timeout: 30000,
     headers: {
         'Access-Control-Allow-Origin': '*',
