@@ -208,21 +208,19 @@ const PurchaseHistory = () => {
                                 className=" bg-white rounded-lg shadow dark:bg-dark-600"
                                 key={index}
                             >
-                                <div className="flex items-center justify-between p-5">
+                                <div className="flex items-center justify-between px-5 py-4">
                                     <div className="text-sm font-bold">{item.createdDate}</div>
                                     <div className="flex items-center gap-2">
-                                        {item.isPaidBefore ? (
+                                        {item.isPaidBefore && (
                                             <div className="border-r-2 pr-2 text-sm font-medium text-green-500">
-                                                Thanh toán online (VNPay) ✔
+                                                {t('textSuccessPayVNPay')}
                                             </div>
-                                        ) : (
-                                            ''
                                         )}
                                         <div
                                             className={`
                                 ${item.status === config.StatusOrders.DELIVERED && '!text-green-500'}
                                 ${item.status === config.StatusOrders.CANCELED && '!text-red-600'} 
-                                uppercase font-bold text-primary-700 text-lg`}
+                                uppercase font-semibold text-primary-700 text-base`}
                                         >
                                             {item.status}
                                         </div>
@@ -317,16 +315,15 @@ const PurchaseHistory = () => {
 
                                 <div className="flex flex-wrap gap-3 justify-between items-center p-5 bg-primary-50/40 rounded-b-lg dark:bg-dark-500">
                                     <div className="flex items-center gap-2 text-center">
-                                        <span className="font-medium text">{t('totalAmount')}:</span>
-                                        <div className="not-italic text-xl font-medium text-red-500  flex gap-1">
-                                            {convertNumberToVND(item.total)}
-                                            <span className="text-lg">đ</span>
+                                        <span className="font-medium">{t('totalAmount')}:</span>
+                                        <div className="not-italic font-semibold text-red-500  flex gap-1">
+                                            {convertNumberToVND(item.total)} đ
                                         </div>
                                     </div>
                                     <div className="flex  gap-2">
                                         {item.status === config.StatusOrders.WAITFORPAY && (
                                             <Button
-                                                className="!min-h-10 min-w-32"
+                                                className="!h-9 text-sm !rounded-md whitespace-nowrap"
                                                 variant="fill"
                                                 onClick={() => handlePaymentOrder(item.id, item.orderItems)}
                                             >
@@ -334,7 +331,7 @@ const PurchaseHistory = () => {
                                             </Button>
                                         )}
                                         <Button
-                                            className="!min-h-10 min-w-24"
+                                            className="!h-9 text-sm !rounded-md whitespace-nowrap"
                                             variant="outline"
                                             onClick={() => handleRedirectDetailOrder(item.id)}
                                         >
@@ -349,7 +346,7 @@ const PurchaseHistory = () => {
                                                 onCancel={() => toast.info(t('cancelDeletion'))}
                                             >
                                                 <Button
-                                                    className="!min-h-10 min-w-28 text-red-500 hover:text-red-800"
+                                                    className="!h-9 text-sm !rounded-md whitespace-nowrap text-red-500 hover:text-red-800"
                                                     variant="text"
                                                 >
                                                     {t('cancelOrder')}

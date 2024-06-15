@@ -12,6 +12,7 @@
     "canceled": "Canceled",
     "waitForPay": "Wait for pay",
     "searchTitle": "You can search by product name",
+    "textSuccessPayVNPay": "Online payment (VNPay) ✔",
     "classification": "Classification",
     "quantity": "Quantity",
     "unitPrice": "Unit price",
