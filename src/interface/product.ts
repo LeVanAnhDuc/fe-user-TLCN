@@ -13,6 +13,8 @@ export default interface IProduct {
     name: string;
     description: string;
     price: number;
+    originalPrice: number;
+    percentDiscount: number;
     quantity: number;
     quantityAvailable: number;
     categoryId: string;
@@ -54,3 +56,5 @@ export interface IProductCheckout {
     skuId: number;
     imageUrl: string;
 }
+
+export type actionProduct = 'click' | 'add_cart' | 'view';
