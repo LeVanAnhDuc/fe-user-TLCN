@@ -1,9 +1,9 @@
+// libs
 import Rating from '@mui/material/Rating';
 import NavigateBefore from '@mui/icons-material/NavigateBefore';
 import NavigateNext from '@mui/icons-material/NavigateNext';
 import Favorite from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,19 +12,22 @@ import { useTranslation } from 'react-i18next';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.core.css';
-
-import { getSKUPrice, getSingleProduct } from '../../apis/productApi';
-import IProduct from '../../interface/product';
-import config from '../../config';
-import { addToCart, getCartByToken } from '../../apis/cartApi';
-import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/cartSlice';
-import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
-import ReviewProductCurrent from './ReviewProduct';
-import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';
-import RelatedProduct from './RelatedProduct';
+// types
+import IProduct, { actionProduct } from '../../interface/product';
+// components
 import Button from '../../components/Button';
-import { convertNumberToVND } from '../../utils/convertData';
+import ReviewProductCurrent from './ReviewProduct';
+import RelatedProduct from './RelatedProduct';
 import ChangeQuantityProduct from './ChangeQuantityProduct';
+// apis
+import { getSKUPrice, getSingleProduct, updateProductAnalysis } from '../../apis/productApi';
+import { addToCart, getCartByToken } from '../../apis/cartApi';
+import { getCountItemOfWishList, putFollowProduct } from '../../apis/followProductApi';
+// others
+import config from '../../config';
+import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';
+import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/cartSlice';
+import { convertNumberToVND } from '../../utils/convertData';
 
 const DetailProduct = () => {
     const dispatch = useDispatch();
@@ -76,7 +79,12 @@ const DetailProduct = () => {
                     const addToCartAPI = await addToCart(quantity, productId, valueNames);
 
                     if (addToCartAPI?.status === 201 && addToCartAPI?.data?.product?.name) {
-                        const itemOfCart = await getCartByToken();
+                        const actionAddToCart: actionProduct = 'add_cart';
+
+                        const [itemOfCart] = await Promise.all([
+                            getCartByToken(),
+                            updateProductAnalysis(productId, actionAddToCart),
+                        ]);
 
                         if (itemOfCart.status === 200) {
                             dispatch(setItemsOfCart(itemOfCart?.data?.cartItems));
@@ -173,6 +181,15 @@ const DetailProduct = () => {
             behavior: 'smooth',
         });
     }, [id]);
+
+    useEffect(() => {
+        const timer = setTimeout(async () => {
+            const actionAddToCart: actionProduct = 'view';
+            id && (await updateProductAnalysis(+id, actionAddToCart));
+        }, 100);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className="bg-gray-100 dark:bg-dark-400">
