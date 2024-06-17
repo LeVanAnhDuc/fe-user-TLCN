@@ -4,7 +4,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 const instance = axios.create({
     baseURL: baseURL,
-    timeout: 50000,
+    timeout: 5000000,
     headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
