@@ -195,7 +195,7 @@ const DetailProduct = () => {
         <div className="bg-gray-100 dark:bg-dark-400">
             <div className="w-11/12 sm:w-10/12 m-auto py-10 space-y-10">
                 <div className="grid lg:grid-cols-12 gap-3">
-                    <div className="hidden col-span-1 lg:block h-[30rem] space-y-2.5 overflow-y-auto hide-scrollbar ">
+                    <div className="hidden col-span-1 lg:block h-[33rem] space-y-2.5 overflow-y-auto hide-scrollbar ">
                         {images.map((item, index) => (
                             <img
                                 src={item}
@@ -207,7 +207,7 @@ const DetailProduct = () => {
                         ))}
                     </div>
                     <div className="lg:col-span-11 grid lg:grid-cols-12 gap-10">
-                        <div className="lg:col-span-7 lg:h-[30rem] flex gap-1 relative">
+                        <div className="lg:col-span-7 xl:col-span-6 lg:h-[33rem] flex gap-1 relative">
                             <img
                                 src={picColor ? picColor : images[currentImageIndex]}
                                 alt="image"
@@ -236,12 +236,20 @@ const DetailProduct = () => {
                                 </Button>
                             </div>
                         </div>
-                        <div className="lg:col-span-5 space-y-7">
+                        <div className="lg:col-span-5 xl:col-span-6 space-y-7">
                             <div className="xl:text-lg font-medium">{product?.name}</div>
-                            <div className="flex items-center justify-between text-sm gap-1 xl:text-base">
-                                <div className="space-x-1 text-red-500 font-medium">
-                                    <span>{convertNumberToVND(product?.price)}</span>
-                                    <span className="text-sm">đ</span>
+                            <div className="flex flex-wrap items-center justify-between text-sm gap-1 xl:text-base">
+                                <div className="flex gap-2 font-medium">
+                                    <div className="space-x-1 text-red-500">
+                                        <span>{convertNumberToVND(product?.price)}</span>
+                                        <span className="text-sm">đ</span>
+                                    </div>
+                                    {!product?.originalPrice && (
+                                        <div className="space-x-1 text-gray-400 line-through">
+                                            <span>{convertNumberToVND(product?.originalPrice)}</span>
+                                            <span className="text-sm">đ</span>
+                                        </div>
+                                    )}
                                 </div>
                                 <span className="text-gray-400">|</span>
                                 <div className="flex items-center gap-1">
@@ -272,7 +280,7 @@ const DetailProduct = () => {
                                                     <Button
                                                         key={index}
                                                         variant={size === item.valueName ? 'fill' : 'outline'}
-                                                        className="!rounded-full !p-1 !size-fit min-h-11 min-w-11 flex justify-center items-center"
+                                                        className="!rounded-lg !p-1 !size-fit min-h-11 min-w-11 flex justify-center items-center"
                                                         onClick={() => handleChangeSize(item.valueName)}
                                                     >
                                                         <span className="text-sm font-medium">{item.valueName}</span>
@@ -298,11 +306,11 @@ const DetailProduct = () => {
                                                     <Button
                                                         key={index}
                                                         variant={color === item.valueName ? 'fill' : 'outline'}
-                                                        className="!rounded-full !p-0 !size-11 overflow-hidden flex justify-center items-center"
+                                                        className="!rounded-lg !p-0 !size-11 overflow-hidden flex justify-center items-center"
                                                         onClick={() => handleChangePicColor(item)}
                                                     >
                                                         <img
-                                                            className="object-cover bg-center p-1 rounded-full"
+                                                            className="object-cover bg-center p-1 rounded-lg"
                                                             src={item.imageUrl}
                                                         />
                                                     </Button>
