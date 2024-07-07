@@ -143,17 +143,19 @@ const Card = (props: Iprops) => {
 
                 {!loading && (
                     <>
-                        {itemProduct.percentDiscount && (
+                        {itemProduct.percentDiscount ? (
                             <div className="absolute top-2 left-2 bg-gray-700 rounded-full text-white size-11 text-sm flex items-center justify-center">
                                 -{itemProduct.percentDiscount}%
                             </div>
+                        ) : (
+                            ''
                         )}
                         <div className="bg-white blur-lg absolute -top-1 right-1.5 size-14 rounded-full"></div>
                         <Button onClick={handleChangeFavorite} className="!absolute top-0 right-0 ">
                             {favourite ? (
-                                <Favorite className="!text-primary-700  rounded-full " fontSize="large" />
+                                <Favorite className="!text-primary-700  rounded-full" fontSize="large" />
                             ) : (
-                                <FavoriteBorder className="!text-primary-700  rounded-full " fontSize="large" />
+                                <FavoriteBorder className="!text-primary-700  rounded-full" fontSize="large" />
                             )}
                         </Button>
                     </>
