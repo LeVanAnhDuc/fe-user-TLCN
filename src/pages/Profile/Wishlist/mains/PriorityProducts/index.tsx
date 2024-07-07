@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 // types
-import IFollowProduct from '@/interface/followProduct';
-import { actionProduct } from '@/interface/product';
+import IFollowProduct from '@/types/followProduct';
+import { actionProduct } from '@/types/product';
 // components
 import AnimationTran from '@/components/AnimationTran';
 import Button from '@/components/Button';

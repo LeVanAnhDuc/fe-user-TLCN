@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 // typs
-import { IProductFilter, actionProduct } from '../interface/product.js';
+import { IProductFilter, actionProduct } from '../types/product.js';
 // apis
 import axios from './axiosConfig.js';
 

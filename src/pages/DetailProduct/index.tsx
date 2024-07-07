@@ -13,7 +13,7 @@ import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.core.css';
 // types
-import IProduct, { actionProduct } from '../../interface/product';
+import IProduct, { actionProduct } from '../../types/product';
 // components
 import Button from '../../components/Button';
 import ReviewProductCurrent from './ReviewProduct';

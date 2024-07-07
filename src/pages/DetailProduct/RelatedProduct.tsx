@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import Card from '../../components/Card';
 import { getAllProductSearchWithinPagination } from '../../apis/productApi';
-import IProduct, { IProductFilter } from '../../interface/product';
+import IProduct, { IProductFilter } from '../../types/product';
 import config from '../../config';
 import * as constants from '../../constants';
 import Button from '../../components/Button';

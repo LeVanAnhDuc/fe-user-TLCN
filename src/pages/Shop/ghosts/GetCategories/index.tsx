@@ -1,7 +1,7 @@
 // libs
 import { useEffect } from 'react';
 // types
-import ICategory from '@/interface/category';
+import ICategory from '@/types/category';
 // apis
 import { getAllCategoryWithPagination } from '@/apis/categoryApii';
 

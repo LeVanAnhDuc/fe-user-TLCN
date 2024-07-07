@@ -1,7 +1,7 @@
 // libs
 import { useEffect, useMemo } from 'react';
 // types
-import IFollowProduct from '@/interface/followProduct';
+import IFollowProduct from '@/types/followProduct';
 // apis
 import { getWishListWithPagination } from '@/apis/followProductApi';
 

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Pagination from '@mui/material/Pagination';
 import Rating from '@mui/material/Rating';
 // types
-import Ireview, { IStarNumberOfProduct } from '../../interface/review';
+import Ireview, { IStarNumberOfProduct } from '../../types/review';
 // components
 import Review from '../../components/Review/Review';
 import Button from '../../components/Button';

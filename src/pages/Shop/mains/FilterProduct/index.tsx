@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
 // types
-import ICategory from '@/interface/category';
+import ICategory from '@/types/category';
 // components
 import Skeleton from '@/components/Skeleton';
 // other

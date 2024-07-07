@@ -10,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 // types
-import { IUserInfoUpdate } from '@/interface/user';
+import { IUserInfoUpdate } from '@/types/user';
 // components
 import Button from '@/components/Button';
 // apis

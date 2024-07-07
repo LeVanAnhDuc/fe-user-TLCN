@@ -1,7 +1,7 @@
 import Rating from '@mui/material/Rating';
 
 import Image from '../Image';
-import Ireview from '../../interface/review';
+import Ireview from '../../types/review';
 import AnimationTran from '../AnimationTran';
 interface Iprops {
     item: Ireview;

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // types
-import { IUserInfoUpdate } from '@/interface/user';
+import { IUserInfoUpdate } from '@/types/user';
 // components
 import Loading from '@/components/Loading';
 import Error404 from '../../Error404';

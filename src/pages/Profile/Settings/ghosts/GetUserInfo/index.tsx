@@ -1,7 +1,7 @@
 // libs
 import { useEffect } from 'react';
 // types
-import { IUserInfoUpdate } from '@/interface/user';
+import { IUserInfoUpdate } from '@/types/user';
 // apis
 import { getUserByUserNameOrEmail } from '@/apis/userApi';
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import { IreviewOrder } from '../interface/review.js';
+import { IreviewOrder } from '../types/review.js';
 import axios from './axiosConfig.js';
 
 export const addReview = async (object: IreviewOrder) => {

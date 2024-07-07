@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
 import ModalAddress from './ModalAddress';
-import IAddress from '../../../interface/address';
+import IAddress from '../../../types/address';
 import { deleteAddressByAddressID, getListAddressOffCurrentUser, setDefaultAddress } from '../../../apis/addressApi';
 import Button from '../../../components/Button';
 import Error404 from '../../Error404';

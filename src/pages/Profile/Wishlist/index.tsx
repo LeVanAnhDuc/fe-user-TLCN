@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // types
-import IFollowProduct from '@/interface/followProduct';
+import IFollowProduct from '@/types/followProduct';
 // components
 import Button from '@/components/Button';
 import Loading from '@/components/Loading';

@@ -11,8 +11,8 @@ import { toast } from 'react-toastify';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 // types
-import { actionProduct } from '../../interface/product';
-import IProductCart from '../../interface/productCart';
+import { actionProduct } from '../../types/product';
+import IProductCart from '../../types/productCart';
 // components
 import Image from '../../components/Image';
 import MouseOverPopover from '../../components/MouseOverPopover';

@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-import IAddress, { IAddressGHN } from '../../../interface/address';
+import IAddress, { IAddressGHN } from '../../../types/address';
 import {
     addNewAddressForCurrentUser,
     getOneAddressByAddressID,

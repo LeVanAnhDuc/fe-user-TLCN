@@ -18,10 +18,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // types
-import { IOrderCheckOut } from '../../interface/order';
-import IAddress from '../../interface/address';
-import IProductCart from '../../interface/productCart';
-import { IProductCheckout, actionProduct } from '../../interface/product';
+import { IOrderCheckOut } from '../../types/order';
+import IAddress from '../../types/address';
+import IProductCart from '../../types/productCart';
+import { IProductCheckout, actionProduct } from '../../types/product';
 // components
 import Button from '../../components/Button';
 import AnimationScale from '../../components/AnimationScale';

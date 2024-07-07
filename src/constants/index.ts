@@ -1,5 +1,5 @@
-import IProduct from '../interface/product';
-import IProductCart, { IProductChildrenCart, ISku } from '../interface/productCart';
+import IProduct from '../types/product';
+import IProductCart, { IProductChildrenCart, ISku } from '../types/productCart';
 
 export const initObjectProduct: IProduct = {
     id: '',

@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // types
-import ICategory from '@/interface/category';
-import IProduct from '@/interface/product';
+import ICategory from '@/types/category';
+import IProduct from '@/types/product';
 // components
 import Card from '@/components/Card';
 import ScrollButton from '@/components/ScrollButton/ScrollButton';

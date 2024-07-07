@@ -12,9 +12,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 // types
-import { IreviewOrder } from '../../../interface/review';
-import IProductCart from '../../../interface/productCart';
-import { actionProduct } from '../../../interface/product';
+import { IreviewOrder } from '../../../types/review';
+import IProductCart from '../../../types/productCart';
+import { actionProduct } from '../../../types/product';
 // components
 import Button from '../../../components/Button';
 import Image from '../../../components/Image';

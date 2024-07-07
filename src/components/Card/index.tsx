@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 // types
-import IProduct, { actionProduct } from '../../interface/product';
+import IProduct, { actionProduct } from '../../types/product';
 // components
 import Button from '../Button';
 import Skeleton from '../Skeleton';

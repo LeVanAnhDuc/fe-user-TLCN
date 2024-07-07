@@ -7,9 +7,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 // types
-import IOrder from '../../../interface/order';
-import IProductCart from '../../../interface/productCart';
-import { actionProduct } from '../../../interface/product';
+import IOrder from '../../../types/order';
+import IProductCart from '../../../types/productCart';
+import { actionProduct } from '../../../types/product';
 // components
 import Image from '../../../components/Image';
 import AnimationTran from '../../../components/AnimationTran';

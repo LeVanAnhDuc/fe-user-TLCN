@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 // types
-import IProductCart from '../../interface/productCart';
-import { actionProduct } from '../../interface/product';
+import IProductCart from '../../types/productCart';
+import { actionProduct } from '../../types/product';
 // components
 import Image from '../../components/Image';
 import MouseOverPopover from '../../components/MouseOverPopover';

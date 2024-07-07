@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import { IUserInfo } from '../interface/user.js';
+import { IUserInfo } from '../types/user.js';
 import axios from './axiosConfig.js';
 
 export const getAllUserWithPagination = async (pageNo: number, pageSize: number) => {

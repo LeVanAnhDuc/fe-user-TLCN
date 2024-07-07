@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import ExitToApp from '@mui/icons-material/ExitToApp';
 // types
-import IProductCart from '../../../../interface/productCart';
-import { actionProduct } from '../../../../interface/product';
-import IOrder from '../../../../interface/order';
+import IProductCart from '../../../../types/productCart';
+import { actionProduct } from '../../../../types/product';
+import IOrder from '../../../../types/order';
 // components
 import Image from '../../../../components/Image';
 import AnimationTran from '../../../../components/AnimationTran';

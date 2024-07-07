@@ -1,7 +1,7 @@
 // libs
 import { useEffect, useMemo } from 'react';
 // types
-import IProduct, { IProductFilter } from '@/interface/product';
+import IProduct, { IProductFilter } from '@/types/product';
 // apis
 import { getAllProductSearchWithinPagination } from '@/apis/productApi';
 

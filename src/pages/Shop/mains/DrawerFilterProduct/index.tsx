@@ -5,7 +5,7 @@ import Close from '@mui/icons-material/Close';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 // types
-import ICategory from '@/interface/category';
+import ICategory from '@/types/category';
 // components
 import Button from '@/components/Button';
 import FilterProduct from '../FilterProduct';
