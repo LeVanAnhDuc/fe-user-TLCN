@@ -1,4 +1,4 @@
-export interface IInfoProfileUser {
+export interface IUserInfo {
     username: string;
     name: string;
     email: string;
@@ -6,3 +6,5 @@ export interface IInfoProfileUser {
     gender: string;
     avatarUrl: string;
 }
+
+export interface IUserInfoUpdate extends Pick<IUserInfo, 'username' | 'name' | 'email' | 'phoneNumber' | 'gender'> {}
