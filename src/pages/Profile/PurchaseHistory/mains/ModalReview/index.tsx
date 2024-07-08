@@ -12,31 +12,31 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 // types
-import { IreviewOrder } from '../../../types/review';
-import IProductCart from '../../../types/productCart';
-import { actionProduct } from '../../../types/product';
+import { IreviewOrder } from '@/types/review';
+import IProductCart from '@/types/productCart';
+import { actionProduct } from '@/types/product';
 // components
-import Button from '../../../components/Button';
-import Image from '../../../components/Image';
+import Button from '@/components/Button';
+import Image from '@/components/Image';
 // apis
-import { addReview } from '../../../apis/reviewApi';
-import { updateProductAnalysis } from '../../../apis/productApi';
+import { addReview } from '@/apis/reviewApi';
+import { updateProductAnalysis } from '@/apis/productApi';
 // others
-import config from '../../../config';
-import { convertNumberToVND } from '../../../utils/convertData';
+import config from '@/config';
+import { convertNumberToVND } from '@/utils/convertData';
 
 interface IPropsAddress {
     open: boolean;
     handleClose: () => void;
     orderItem: IProductCart;
-    setCallAPIAgain: React.Dispatch<React.SetStateAction<boolean>>;
+    setBehaviorGetOrders: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface FormData {
     content?: string;
 }
 
 const ModalReview = (propsCh: IPropsAddress) => {
-    const { open, handleClose, orderItem, setCallAPIAgain } = propsCh;
+    const { open, handleClose, orderItem, setBehaviorGetOrders } = propsCh;
     const navigate = useNavigate();
     const { t } = useTranslation('purchaseHistory');
 
@@ -85,7 +85,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                     toast.success(t('reviewSuccessful'));
                     setValue('content', '');
                     setValueRating(5);
-                    setCallAPIAgain((prev) => !prev);
+                    setBehaviorGetOrders((prev) => !prev);
                 } else {
                     toast.error(response.data.message || response.data);
                 }

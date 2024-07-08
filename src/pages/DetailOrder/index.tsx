@@ -6,27 +6,27 @@ import { toast } from 'react-toastify';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import ExitToApp from '@mui/icons-material/ExitToApp';
 // types
-import IProductCart from '../../../../types/productCart';
-import { actionProduct } from '../../../../types/product';
-import IOrder from '../../../../types/order';
+import IProductCart from '@/types/productCart';
+import { actionProduct } from '@/types/product';
+import IOrder from '@/types/order';
 // components
-import Image from '../../../../components/Image';
-import AnimationTran from '../../../../components/AnimationTran';
-import ScrollButton from '../../../../components/ScrollButton/ScrollButton';
-import Loading from '../../../../components/Loading';
-import Button from '../../../../components/Button';
-import PopConfirm from '../../../../components/PopComfirm';
-import Error404 from '../../../Error404';
-import ModalReview from '../ModalReview';
+import Image from '@/components/Image';
+import AnimationTran from '@/components/AnimationTran';
+import ScrollButton from '@/components/ScrollButton/ScrollButton';
+import Loading from '@/components/Loading';
+import Button from '@/components/Button';
+import PopConfirm from '@/components/PopComfirm';
+import Error404 from '../Error404';
+import ModalReview from '../Profile/PurchaseHistory/mains/ModalReview';
 // apis
-import { getOrderByID, updateOrderStatusByID } from '../../../../apis/orderApi';
-import { updateProductAnalysis } from '../../../../apis/productApi';
+import { getOrderByID, updateOrderStatusByID } from '@/apis/orderApi';
+import { updateProductAnalysis } from '@/apis/productApi';
 // others
-import config from '../../../../config';
-import { convertNumberToVND } from '../../../../utils/convertData';
-import { initObjecProductCart } from '../../../../constants';
+import config from '@/config';
+import { convertNumberToVND } from '@/utils/convertData';
+import { initObjecProductCart } from '@/constants';
 
-const Detail = () => {
+const DetailOrder = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { t } = useTranslation('purchaseHistory');
@@ -38,7 +38,7 @@ const Detail = () => {
     const [order, setOrder] = useState<IOrder>();
     const [openReview, setOpenReview] = useState(false);
     const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
-    const [callAPIAgain, setCallAPIAgain] = useState<boolean>(false);
+    const [behaviorGetOrders, setBehaviorGetOrders] = useState<boolean>(false);
 
     const getOrder = async (id: number) => {
         try {
@@ -103,7 +103,7 @@ const Detail = () => {
 
     useEffect(() => {
         idProduct && getOrder(+idProduct);
-    }, [idProduct, callAPIAgain]);
+    }, [idProduct, behaviorGetOrders]);
 
     if (errorAPI) {
         return <Error404 />;
@@ -115,7 +115,7 @@ const Detail = () => {
                 open={openReview}
                 handleClose={handleCloseReview}
                 orderItem={itemReview}
-                setCallAPIAgain={setCallAPIAgain}
+                setBehaviorGetOrders={setBehaviorGetOrders}
             />
             {isLoadingAPI ? (
                 <div className=" flex justify-center items-center min-h-[80vh]">
@@ -338,4 +338,4 @@ const Detail = () => {
     );
 };
 
-export default Detail;
+export default DetailOrder;
