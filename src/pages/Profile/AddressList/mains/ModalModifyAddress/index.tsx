@@ -1,6 +1,6 @@
+// libs
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
@@ -9,35 +9,35 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+// types
+import IAddress, { IAddressGHN } from '@/types/address';
+// components
+import Button from '@/components/Button';
+// apis
+import { addNewAddressForCurrentUser, getOneAddressByAddressID, updateAddressByAddressID } from '@/apis/addressApi';
+import { getDistrictsAPI, getProvincesAPI, getWardAPI } from '@/apis/GHN/addressGHN';
+// others
+import { initObjectAddressGHN } from '@/constants';
 
-import IAddress, { IAddressGHN } from '../../../types/address';
-import {
-    addNewAddressForCurrentUser,
-    getOneAddressByAddressID,
-    updateAddressByAddressID,
-} from '../../../apis/addressApi';
-import Button from '../../../components/Button';
-import { getDistrictsAPI, getProvincesAPI, getWardAPI } from '../../../apis/GHN/addressGHN';
-import { initObjecAddressGHN } from '../../../constants';
-
-interface IPropsAddress {
+const ModalModifyAddress = ({
+    open,
+    handleClose,
+    idAddressUpdate,
+    setBehaviorGetAddresses,
+}: {
     open: boolean;
     handleClose: () => void;
     idAddressUpdate: number | null;
-    setRequestNewAddresses: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const ModalAddress = (propsCh: IPropsAddress) => {
-    const { open, handleClose, idAddressUpdate, setRequestNewAddresses } = propsCh;
-
+    setBehaviorGetAddresses: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
     const { t } = useTranslation('addressesProfle');
 
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
-    const [provinces, setProvinces] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [provinces, setProvinces] = useState<IAddressGHN[]>([initObjectAddressGHN]);
     const [province, setProvince] = useState<IAddressGHN | null>(null);
-    const [districts, setDistricts] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [districts, setDistricts] = useState<IAddressGHN[]>([initObjectAddressGHN]);
     const [district, setDistrict] = useState<IAddressGHN | null>(null);
-    const [wards, setWards] = useState<IAddressGHN[]>([initObjecAddressGHN]);
+    const [wards, setWards] = useState<IAddressGHN[]>([initObjectAddressGHN]);
     const [ward, setWard] = useState<IAddressGHN | null>(null);
 
     const schema = yup.object().shape({
@@ -138,8 +138,8 @@ const ModalAddress = (propsCh: IPropsAddress) => {
 
     const handleChangeProvice = (_: React.SyntheticEvent, value: IAddressGHN | null) => {
         setProvince(value);
-        setDistrict(initObjecAddressGHN);
-        setWard(initObjecAddressGHN);
+        setDistrict(initObjectAddressGHN);
+        setWard(initObjectAddressGHN);
         value && getDistricts(value);
     };
 
@@ -170,7 +170,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             if (response) {
                 if (response.status === 200) {
                     toast.success(t('updateSuccessful'));
-                    setRequestNewAddresses((prev) => !prev);
+                    setBehaviorGetAddresses((prev) => !prev);
                 } else {
                     toast.error(response.data.message || response.data);
                 }
@@ -192,7 +192,7 @@ const ModalAddress = (propsCh: IPropsAddress) => {
             if (response) {
                 if (response.status === 200) {
                     toast.success(t('addSuccessful'));
-                    setRequestNewAddresses((prev) => !prev);
+                    setBehaviorGetAddresses((prev) => !prev);
                 } else {
                     toast.error(response.data.message || response.data);
                 }
@@ -323,4 +323,4 @@ const ModalAddress = (propsCh: IPropsAddress) => {
     );
 };
 
-export default ModalAddress;
+export default ModalModifyAddress;

@@ -24,7 +24,7 @@ import { updateProductAnalysis } from '@/apis/productApi';
 // others
 import config from '@/config';
 import { convertNumberToVND } from '@/utils/convertData';
-import { initObjecProductCart } from '@/constants';
+import { initObjectProductCart } from '@/constants';
 
 const DetailOrder = () => {
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const DetailOrder = () => {
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
     const [order, setOrder] = useState<IOrder>();
     const [openReview, setOpenReview] = useState(false);
-    const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
+    const [itemReview, setItemReview] = useState<IProductCart>(initObjectProductCart);
     const [behaviorGetOrders, setBehaviorGetOrders] = useState<boolean>(false);
 
     const getOrder = async (id: number) => {

@@ -1,17 +1,20 @@
+// libs
 import ContentPasteSearch from '@mui/icons-material/ContentPasteSearch';
-
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-
-import ModalAddress from './ModalAddress';
-import IAddress from '../../../types/address';
-import { deleteAddressByAddressID, getListAddressOffCurrentUser, setDefaultAddress } from '../../../apis/addressApi';
-import Button from '../../../components/Button';
+// types
+import IAddress from '@/types/address';
+// components
+import Button from '@/components/Button';
+import Loading from '@/components/Loading';
+import AnimationTran from '@/components/AnimationTran';
+import PopConfirm from '@/components/PopComfirm';
+import ModalModifyAddress from './mains/ModalModifyAddress';
 import Error404 from '../../Error404';
-import Loading from '../../../components/Loading';
-import AnimationTran from '../../../components/AnimationTran';
-import PopConfirm from '../../../components/PopComfirm';
+// apis
+import { deleteAddressByAddressID, setDefaultAddress } from '@/apis/addressApi';
+import GetAddresses from './ghosts/GetAddresses';
 
 const AddressList = () => {
     const { t } = useTranslation('addressesProfle');
@@ -20,32 +23,9 @@ const AddressList = () => {
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
     const [addresses, setAddresses] = useState<Array<IAddress>>([]);
-    const [requestNewAddresses, setRequestNewAddresses] = useState<boolean>(false);
+    const [behaviorGetAddresses, setBehaviorGetAddresses] = useState<boolean>(false);
     const [idAddressUpdate, setIDAddressUpdate] = useState<number | null>(null);
     const [open, setOpen] = useState(false);
-
-    const getListAddress = async () => {
-        try {
-            firstLoadingAPI && setLoadingAPI(true);
-
-            const [response] = await Promise.all([
-                getListAddressOffCurrentUser(),
-                firstLoadingAPI && new Promise((resolve) => setTimeout(resolve, 250)),
-            ]);
-
-            firstLoadingAPI && setLoadingAPI(false);
-
-            if (response.status === 200 && response?.data) {
-                firstLoadingAPI && setFirstLoadingAPI(false);
-
-                setAddresses(response.data);
-            } else {
-                setErrorAPI(true);
-            }
-        } catch (error) {
-            setErrorAPI(true);
-        }
-    };
 
     const handleCreateNew = useCallback(() => {
         setOpen(true);
@@ -63,7 +43,7 @@ const AddressList = () => {
         try {
             const response = await setDefaultAddress(idAddress);
             if (response.status === 200) {
-                setRequestNewAddresses((prev) => !prev);
+                setBehaviorGetAddresses((prev) => !prev);
             } else {
                 toast.error(response.data.message || response.data);
             }
@@ -76,7 +56,7 @@ const AddressList = () => {
         try {
             const response = await deleteAddressByAddressID(idAddress);
             if (response.status === 200) {
-                setRequestNewAddresses((prev) => !prev);
+                setBehaviorGetAddresses((prev) => !prev);
             } else {
                 toast.error(response.data.message || response.data);
             }
@@ -85,16 +65,30 @@ const AddressList = () => {
         }
     };
 
-    useEffect(() => {
-        getListAddress();
-    }, [requestNewAddresses]);
-
     if (errorAPI) {
         return <Error404 />;
     }
 
     return (
         <>
+            <GetAddresses
+                {...{
+                    firstLoadingAPI,
+                    setLoadingAPI,
+                    setFirstLoadingAPI,
+                    setAddresses,
+                    setErrorAPI,
+                    behaviorGetAddresses,
+                }}
+            />
+
+            <ModalModifyAddress
+                open={open}
+                handleClose={handleClose}
+                idAddressUpdate={idAddressUpdate}
+                setBehaviorGetAddresses={setBehaviorGetAddresses}
+            />
+
             {isLoadingAPI ? (
                 <Loading />
             ) : (
@@ -160,15 +154,6 @@ const AddressList = () => {
                         </div>
                     )}
                 </div>
-            )}
-
-            {open && (
-                <ModalAddress
-                    open={open}
-                    handleClose={handleClose}
-                    idAddressUpdate={idAddressUpdate}
-                    setRequestNewAddresses={setRequestNewAddresses}
-                />
             )}
         </>
     );

@@ -14,7 +14,7 @@ import ViewOrder from './mains/ViewOrder';
 // ghosts
 import GetPurchaseHistory from './ghosts/GetPurchaseHistory';
 // others
-import { initObjecProductCart } from '@/constants';
+import { initObjectProductCart } from '@/constants';
 
 const PurchaseHistory = () => {
     const location = useLocation();
@@ -27,7 +27,7 @@ const PurchaseHistory = () => {
     const [errorAPI, setErrorAPI] = useState<boolean>(false);
     const [statusOrder, setStatusOrder] = useState<string>(status);
     const [openReview, setOpenReview] = useState(false);
-    const [itemReview, setItemReview] = useState<IProductCart>(initObjecProductCart);
+    const [itemReview, setItemReview] = useState<IProductCart>(initObjectProductCart);
     const [search, setSearch] = useState<string>('');
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
