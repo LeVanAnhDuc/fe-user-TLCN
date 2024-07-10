@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import IProduct, { actionProduct } from '@/types/product';
 // components
 import Button from '@/components/Button';
-import ChangeQuantityProduct from './ChangeQuantityProduct';
+import ChangeQuantity from './components/ChangeQuantity';
 import RelatedProduct from './mains/RelatedProduct';
 import DescriptionProduct from './mains/DescriptionProduct';
 import ReviewProduct from './mains/ReviewProduct';
@@ -233,7 +233,7 @@ const DetailProduct = () => {
                                 <div className="space-y-2">
                                     <span className="font-medium">{t('quantity')}</span>
                                     <div className="flex items-center gap-10">
-                                        <ChangeQuantityProduct quantity={quantity} setQuantity={setQuantity} />
+                                        <ChangeQuantity quantity={quantity} setQuantity={setQuantity} />
                                         <div className="whitespace-nowrap space-x-2">
                                             <span className="font-medium">{quantityAvailableItem}</span>
                                             <span className="text-gray-500 dark:text-gray-300 text-sm">

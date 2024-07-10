@@ -1,17 +1,17 @@
+// libs
 import HorizontalRule from '@mui/icons-material/HorizontalRule';
 import Add from '@mui/icons-material/Add';
 import { useCallback, useEffect, useState } from 'react';
+// components
+import Button from '@/components/Button';
 
-import Button from '../../components/Button';
-
-interface IProps {
+const ChangeQuantity = ({
+    quantity,
+    setQuantity,
+}: {
     quantity: number;
     setQuantity: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const ChangeQuantityProduct = (props: IProps) => {
-    const { quantity, setQuantity } = props;
-
+}) => {
     const [disableDecrease, setDisableDecrease] = useState<boolean>(true);
 
     const handleDecrease = useCallback(() => {
@@ -58,4 +58,4 @@ const ChangeQuantityProduct = (props: IProps) => {
     );
 };
 
-export default ChangeQuantityProduct;
+export default ChangeQuantity;
