@@ -1,10 +1,12 @@
+// libs
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-import config from '../../config';
-import images from '../../assets/img';
-import Image from '../../components/Image';
-import Button from '../../components/Button';
+// components
+import Image from '@/components/Image';
+import Button from '@/components/Button';
+// others
+import config from '@/config';
+import images from '@/assets/img';
 
 function Error404() {
     const { t } = useTranslation('error404');

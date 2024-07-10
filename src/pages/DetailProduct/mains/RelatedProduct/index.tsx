@@ -1,13 +1,17 @@
+// libs
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-import Card from '../../components/Card';
-import { getAllProductSearchWithinPagination } from '../../apis/productApi';
-import IProduct, { IProductFilter } from '../../types/product';
-import config from '../../config';
-import * as constants from '../../constants';
-import Button from '../../components/Button';
+// types
+import IProduct, { IProductFilter } from '@/types/product';
+// components
+import Card from '@/components/Card';
+import Button from '@/components/Button';
+// apis
+import { getAllProductSearchWithinPagination } from '@/apis/productApi';
+// others
+import config from '@/config';
+import * as constants from '@/constants';
 
 interface Iprops {
     categoryName: string;
@@ -49,7 +53,7 @@ const RelatedProduct = (props: Iprops) => {
     }, [categoryName]);
 
     return (
-        <section className="space-y-3">
+        <section>
             <div className="flex flex-wrap justify-between items-center bg-white p-5 rounded-t-lg dark:bg-dark-600">
                 <div className="text-lg font-medium uppercase">{t('relatedProducts')}</div>
                 <Link

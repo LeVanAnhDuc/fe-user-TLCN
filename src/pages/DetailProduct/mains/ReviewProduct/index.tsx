@@ -5,12 +5,14 @@ import { useTranslation } from 'react-i18next';
 import Pagination from '@mui/material/Pagination';
 import Rating from '@mui/material/Rating';
 // types
-import Ireview, { IStarNumberOfProduct } from '../../types/review';
+import Ireview, { IStarNumberOfProduct } from '@/types/review';
 // components
-import Review from '../../components/Review/Review';
-import Button from '../../components/Button';
+import Review from '@/components/Review/Review';
+import Button from '@/components/Button';
 // apis
-import { getAllReviewWithPagination } from '../../apis/reviewApi';
+import { getAllReviewWithPagination } from '@/apis/reviewApi';
+// hooks
+import useUpdateEffect from '@/hook/useUpdateEffect';
 
 interface Iprops {
     idProduct: number;
@@ -59,7 +61,9 @@ const ReviewProduct = (props: Iprops) => {
 
     useEffect(() => {
         getAllReviewOfProduct();
+    }, [page, starActive]);
 
+    useUpdateEffect(() => {
         const scrollToComponent = () => {
             if (targetComponentRef.current) {
                 targetComponentRef.current.scrollIntoView({
@@ -68,7 +72,7 @@ const ReviewProduct = (props: Iprops) => {
             }
         };
         scrollToComponent();
-    }, [idProduct, page, starActive]);
+    }, [page, starActive]);
 
     return (
         <div ref={targetComponentRef} className="rounded-lg bg-white dark:bg-dark-600">
