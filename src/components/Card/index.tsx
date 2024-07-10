@@ -116,7 +116,7 @@ const Card = (props: Iprops) => {
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                itemProduct.originalPrice && (
+                                itemProduct.percentDiscount !== 0 && (
                                     <div className="text-gray-400 flex gap-0.5 line-through">
                                         <span className="text-sm">đ</span>
                                         {itemProduct.originalPrice.toLocaleString('vi-VN')}
@@ -143,12 +143,10 @@ const Card = (props: Iprops) => {
 
                 {!loading && (
                     <>
-                        {itemProduct.percentDiscount ? (
+                        {itemProduct.percentDiscount !== 0 && (
                             <div className="absolute top-2 left-2 bg-gray-700 rounded-full text-white size-11 text-sm flex items-center justify-center">
                                 -{itemProduct.percentDiscount}%
                             </div>
-                        ) : (
-                            ''
                         )}
                         <div className="bg-white blur-lg absolute -top-1 right-1.5 size-14 rounded-full"></div>
                         <Button onClick={handleChangeFavorite} className="!absolute top-0 right-0 ">

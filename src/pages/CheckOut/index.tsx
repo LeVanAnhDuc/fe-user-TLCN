@@ -18,21 +18,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // types
-import { IOrderCheckOut } from '../../types/order';
-import IAddress from '../../types/address';
-import IProductCart from '../../types/productCart';
-import { IProductCheckout, actionProduct } from '../../types/product';
+import { IOrderCheckOut } from '@/types/order';
+import IAddress from '@/types/address';
+import IProductCart from '@/types/productCart';
+import { IProductCheckout, actionProduct } from '@/types/product';
 // components
-import Button from '../../components/Button';
-import AnimationScale from '../../components/AnimationScale';
-import AnimationTran from '../../components/AnimationTran';
-import Image from '../../components/Image';
+import Button from '@/components/Button';
+import AnimationScale from '@/components/AnimationScale';
+import AnimationTran from '@/components/AnimationTran';
+import Image from '@/components/Image';
 // apis
-import { getListAddressOffCurrentUser } from '../../apis/addressApi';
-import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '../../apis/orderApi';
-import { checkOutVNPay, makePaymentVNPay } from '../../apis/vnpayApi';
-import { getFeeShipping } from '../../apis/GHN/FeeShip';
-import { updateProductAnalysis } from '../../apis/productApi';
+import { getListAddressOffCurrentUser } from '@/apis/addressApi';
+import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '@/apis/orderApi';
+import { checkOutVNPay, makePaymentVNPay } from '@/apis/vnpayApi';
+import { getFeeShipping } from '@/apis/GHN/FeeShip';
+import { updateProductAnalysis } from '@/apis/productApi';
 // others
 import {
     selectProductsCart,
@@ -42,9 +42,9 @@ import {
     setToTalPriceCart,
     setToTalProductCart,
 } from '../Cart/cartSlice';
-import config from '../../config';
-import { convertNumberToVND } from '../../utils/convertData';
-import { calculateWeight } from '../../utils/calculateData';
+import config from '@/config';
+import { convertNumberToVND } from '@/utils/convertData';
+import { calculateWeight } from '@/utils/calculateData';
 
 const ToggleButton = styled(MuiToggleButton)({
     '&.Mui-selected': {
