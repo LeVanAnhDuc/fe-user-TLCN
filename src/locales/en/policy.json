@@ -1,0 +1,11 @@
+{
+    "title": "Payment Methods",
+    "description": "Customers can refer to the following payment methods and choose the appropriate method:",
+    "methods": {
+        "1": "Method 1: Pay on delivery (COD – cash on delivery).",
+        "2": "Method 2: Online payment via international credit card.",
+        "3": "Method 3: Online payment via domestic bank card with Internet Banking registration.",
+        "4": "Method 4: Payment via e-wallets (MoMo, ZaloPay, ShopeePay, VNPay)."
+    },
+    "confirmation": "DUCK will confirm the order with you via text message or send information via the email you provide."
+}

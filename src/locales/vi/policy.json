@@ -1,0 +1,11 @@
+{
+    "title": "Phương thức thanh toán",
+    "description": "Khách hàng có thể tham khảo các phương thức thanh toán sau đây và lựa chọn áp dụng phương thức phù hợp:",
+    "methods": {
+        "1": "Cách 1: Thanh toán khi nhận hàng (COD – giao hàng và thu tiền tận nơi).",
+        "2": "Cách 2: Thanh toán trực tuyến thông qua thẻ tín dụng quốc tế.",
+        "3": "Cách 3: Thanh toán trực tuyến thông qua thẻ ngân hàng trong nước có đăng kí Internet Banking.",
+        "4": "Cách 4: Thanh toán qua các ví điện tử (MoMo, ZaloPay, ShopeePay, VNPay)."
+    },
+    "confirmation": "DUCK sẽ xác nhận việc đặt hàng với Quý khách bằng hình thức nhắn tin qua số điện thoại hoặc gửi thông tin qua email Quý khách cung cấp."
+}

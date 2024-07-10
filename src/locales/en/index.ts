@@ -21,6 +21,7 @@ import ADDRESSESPROFLE_EN from './addressesProfle.json';
 import SIDEBARPROFILE_EN from './sideBarProfile.json';
 import PURCHASEHISTORY_EN from './purchaseHistory.json';
 import COMPONENTS_EN from './components.json';
+import POLICY_EN from './policy.json';
 
 export {
     SPEEDDIALSETTINGUI_EN,
@@ -46,4 +47,5 @@ export {
     SIDEBARPROFILE_EN,
     PURCHASEHISTORY_EN,
     COMPONENTS_EN,
+    POLICY_EN,
 };
