@@ -1,5 +1,5 @@
+// libs
 import TextField from '@mui/material/TextField';
-
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -8,28 +8,30 @@ import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-
-import { useAppDispatch } from '../../redux/hook';
+import { useAppDispatch } from '@/redux/hook';
+// components
+import InputPassword from '@/components/InputPassword';
+import Button from '@/components/Button';
+import SnackBarLoading from '@/components/SnackBarLoading';
+import AnimationTran from '@/components/AnimationTran';
+import AnimationScale from '@/components/AnimationScale';
+import Logo from '@/components/Logo';
+// apis
+import { getCartByToken } from '@/apis/cartApi';
+import { getCountItemOfWishList } from '@/apis/followProductApi';
+import { loginApi } from '@/apis/authApi';
+// redux
 import { setInfoUser, setIsLogin } from './loginSlice';
-import { getCartByToken } from '../../apis/cartApi';
-import { getCountItemOfWishList } from '../../apis/followProductApi';
 import { setItemsOfCart, setToTalPriceCart, setToTalProductCart } from '../Cart/cartSlice';
 import { setToTalWishList } from '../Profile/Wishlist/wishListSlice';
-import config from '../../config';
-import { loginApi } from '../../apis/authApi';
-import InputPassword from '../../components/InputPassword';
-import Button from '../../components/Button';
-import SnackBarLoading from '../../components/SnackBarLoading';
-import AnimationTran from '../../components/AnimationTran';
-import AnimationScale from '../../components/AnimationScale';
-import Logo from '../../components/Logo';
+// others
+import config from '@/config';
+import { MESS_ACCURACY } from '@/constants';
 
 type FormDataLogin = {
     emailOrUserName: string;
     passWord: string;
 };
-
-const MESS_XACTHUC = 'Tài khoản chưa được xác thực';
 
 const LogIn = () => {
     const navigate = useNavigate();
@@ -88,7 +90,7 @@ const LogIn = () => {
                 );
                 getTotalItemOfCartAndTotalWishList();
                 navigate(config.Routes.home);
-            } else if (response.data.message === MESS_XACTHUC) {
+            } else if (response.data.message === MESS_ACCURACY) {
                 toast.error(t('accountNotAuthenticated'));
                 navigate(config.Routes.getOTPLogIn);
             } else {
@@ -206,7 +208,9 @@ const LogIn = () => {
                             <Logo />
                         </AnimationScale>
                         <AnimationTran tranY={-100}>
-                            <h5 className="leading-20 tracking-tight text-xl font-semibold text-center">{t('titleLogin')}</h5>
+                            <h5 className="leading-20 tracking-tight text-xl font-semibold text-center">
+                                {t('titleLogin')}
+                            </h5>
                         </AnimationTran>
                         <div className="bg-login-banner bg-contain bg-no-repeat bg-center w-full h-full "></div>
                     </section>

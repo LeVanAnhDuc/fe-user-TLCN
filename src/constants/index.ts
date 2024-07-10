@@ -43,3 +43,5 @@ export const initObjectAddressGHN = {
     id: 0,
     code: '0',
 };
+
+export const MESS_ACCURACY = 'Tài khoản chưa được xác thực';
