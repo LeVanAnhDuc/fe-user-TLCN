@@ -13,5 +13,6 @@
     "star": "star",
     "relatedProducts": "RELATED PRODUCTS",
     "seeAll": "See all",
-    "noProductRelated": "Hix. There are no related products!!"
+    "noProductRelated": "Hix. There are no related products!!",
+    "insufficientProduct": "Insufficient product"
 }

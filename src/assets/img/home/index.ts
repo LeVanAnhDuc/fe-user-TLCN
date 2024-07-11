@@ -6,6 +6,10 @@ import CAROUSEL5 from './Carousel-5.jpg';
 import CAROUSEL6 from './Carousel-6.jpg';
 import CAROUSEL7 from './Carousel-7.jpg';
 import CAROUSEL8 from './Carousel-8.jpg';
+import CAROUSEL9 from './Carousel-9.jpg';
+import CAROUSEL10 from './Carousel-10.jpg';
+import CAROUSEL11 from './Carousel-11.jpg';
+import CAROUSEL12 from './Carousel-12.jpg';
 import catogoryMen from './catogory-men.png';
 import catogoryWomen from './catogory-women.png';
 import catogoryChildren from './catogory-children.png';
@@ -20,6 +24,10 @@ export {
     CAROUSEL6,
     CAROUSEL7,
     CAROUSEL8,
+    CAROUSEL9,
+    CAROUSEL10,
+    CAROUSEL11,
+    CAROUSEL12,
     catogoryMen,
     catogoryWomen,
     catogoryChildren,

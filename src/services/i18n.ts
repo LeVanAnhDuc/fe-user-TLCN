@@ -29,6 +29,7 @@ export const resources = {
         addressesProfle: en.ADDRESSESPROFLE_EN,
         sideBarProfile: en.SIDEBARPROFILE_EN,
         components: en.COMPONENTS_EN,
+        policy: en.POLICY_EN,
     },
     vi: {
         speedDialSettingUI: vi.SPEEDDIALSETTINGUI_VI,
@@ -54,6 +55,7 @@ export const resources = {
         addressesProfle: vi.ADDRESSESPROFLE_VI,
         sideBarProfile: vi.SIDEBARPROFILE_VI,
         components: vi.COMPONENTS_VI,
+        policy: vi.POLICY_VI,
     },
 } as const;
 

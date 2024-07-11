@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 // typs
-import { IProductFilter, actionProduct } from '../interface/product.js';
+import { IProductFilter, actionProduct } from '../types/product.js';
 // apis
 import axios from './axiosConfig.js';
 
@@ -34,7 +34,7 @@ export const getAllProductSearchWithinPagination = async (productSearch: IProduc
     }
 };
 
-export const getSKUPrice = async (productId: number, color: string, size: string) => {
+export const getSKU = async (productId: number, color: string, size: string) => {
     try {
         const response = await axios.get(`/products/sku?product_id=${productId}&value_names=${color},${size}`);
 

@@ -8,24 +8,24 @@ import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // types
-import { actionProduct } from '../../interface/product';
-import IProductCart from '../../interface/productCart';
+import { actionProduct } from '@/types/product';
+import IProductCart from '@/types/productCart';
 // components
-import Image from '../../components/Image';
-import MouseOverPopover from '../../components/MouseOverPopover';
-import AnimationTran from '../../components/AnimationTran';
-import Button from '../../components/Button';
-import AnimationScale from '../../components/AnimationScale';
-import ChangeQuantityProduct from './ChangeQuantityProduct';
+import Image from '@/components/Image';
+import MouseOverPopover from '@/components/MouseOverPopover';
+import AnimationTran from '@/components/AnimationTran';
+import Button from '@/components/Button';
+import AnimationScale from '@/components/AnimationScale';
+import QuantityProduct from './components/QuantityProduct';
 // apis
-import { getCartByToken } from '../../apis/cartApi';
-import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
-import { updateProductAnalysis } from '../../apis/productApi';
+import { getCartByToken } from '@/apis/cartApi';
+import { changeItemQuantity, deleteCartItemByID } from '@/apis/cartItemApi';
+import { getSKU, updateProductAnalysis } from '@/apis/productApi';
 // others
-import config from '../../config';
+import config from '@/config';
 import {
     deleteNumberProductCart,
     selectProductsCart,
@@ -35,7 +35,8 @@ import {
     setProductsPurchase,
     setToTalPriceCart,
 } from './cartSlice';
-import { convertNumberToVND } from '../../utils/convertData';
+import { convertNumberToVND } from '@/utils/convertData';
+import Error404 from '../Error404';
 
 interface Iprops {
     openCartModal: boolean;
@@ -51,11 +52,21 @@ const CartModal = (props: Iprops) => {
     const products = useSelector(selectProductsCart);
     const { t } = useTranslation('cart');
 
+    const [errorAPI, setErrorAPI] = useState<boolean>(false);
+    const [productsQuantityFull, setProductsQuantityFull] = useState<
+        {
+            id: number;
+            quantityAvailable: number;
+        }[]
+    >([]);
+    const [behaviorsGetProducts, setBehaviorsGetProducts] = useState<boolean>(false);
+
     const getListProduct = async () => {
         try {
             const response = await getCartByToken();
 
             if (response.status === 200) {
+                setBehaviorsGetProducts((prev) => !prev);
                 dispatch(setItemsOfCart(response?.data?.cartItems));
                 dispatch(setToTalPriceCart(response?.data?.totalPrice));
             } else {
@@ -103,14 +114,59 @@ const CartModal = (props: Iprops) => {
     };
 
     const handleNavigateCheckout = () => {
+        let isError = false;
+
+        products.map((item) => {
+            productsQuantityFull.map((product) => {
+                if (isError) return;
+                if (product.id === item.id && product.quantityAvailable < item.quantity) {
+                    isError = true;
+                    toast.error('Số lượng hiện đang không đủ');
+                    return;
+                }
+            });
+            if (isError) return;
+        });
+
+        if (isError) return;
+
         navigate(config.Routes.checkOut);
         dispatch(setProductsPurchase(products));
         toggleDrawerCartModal();
     };
 
+    useEffect(() => {
+        try {
+            const fetchProductQuantities = async () => {
+                const promises = products.map(async (item) => {
+                    const response = await getSKU(
+                        item.product.id,
+                        item.sku.optionValues[0].valueName,
+                        item.sku.optionValues[1].valueName,
+                    );
+
+                    setProductsQuantityFull((prev) => [
+                        ...prev,
+                        { id: item.id, quantityAvailable: response.data.quantityAvailable },
+                    ]);
+                });
+
+                await Promise.all(promises);
+            };
+
+            fetchProductQuantities();
+        } catch (error) {
+            setErrorAPI(true);
+        }
+    }, [behaviorsGetProducts]);
+
+    if (errorAPI) {
+        <Error404 />;
+    }
+
     return (
         <Drawer anchor={'right'} open={openCartModal} onClose={toggleDrawerCartModal}>
-            <div className="w-screen sm:w-[34rem] min-h-screen  bg-gray-100 dark:bg-dark-400">
+            <div className="w-screen sm:w-[37rem] min-h-screen  bg-gray-100 dark:bg-dark-400">
                 <div className="relative h-full flex flex-col justify-between">
                     <div className="sticky top-0 z-10">
                         <div className="bg-primary-200 w-full h-14 rounded-b-xl dark:bg-primary-900">
@@ -195,10 +251,15 @@ const CartModal = (props: Iprops) => {
                                                         </div>
                                                     </aside>
                                                     <div className="w-full flex items-center gap-3 sm:w-fit justify-between">
-                                                        <ChangeQuantityProduct
+                                                        <QuantityProduct
                                                             valueQuantity={item.quantity}
                                                             idItem={item.id}
                                                             handleChangeItemQuantity={handleChangeItemQuantity}
+                                                            productQuantityFull={
+                                                                productsQuantityFull.filter(
+                                                                    (product) => product.id === item.id,
+                                                                )[0]
+                                                            }
                                                         />
                                                         <MouseOverPopover content={t('deleteProduct')}>
                                                             <IconButton onClick={() => handleDeleteProduct(item.id)}>

@@ -1,5 +1,5 @@
-import IProduct from '../interface/product';
-import IProductCart, { IProductChildrenCart, ISku } from '../interface/productCart';
+import IProduct from '../types/product';
+import IProductCart, { IProductChildrenCart, ISku } from '../types/productCart';
 
 export const initObjectProduct: IProduct = {
     id: '',
@@ -26,7 +26,7 @@ export const initObjectProduct: IProduct = {
     options: [],
 };
 
-export const initObjecProductCart: IProductCart = {
+export const initObjectProductCart: IProductCart = {
     hasReview: false,
     id: 0,
     orderId: 0,
@@ -38,8 +38,10 @@ export const initObjecProductCart: IProductCart = {
     subTotal: 0,
 };
 
-export const initObjecAddressGHN = {
+export const initObjectAddressGHN = {
     label: '',
     id: 0,
     code: '0',
 };
+
+export const MESS_ACCURACY = 'Tài khoản chưa được xác thực';

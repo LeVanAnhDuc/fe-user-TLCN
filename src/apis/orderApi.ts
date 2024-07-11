@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import { IOrderCheckOut } from '../interface/order.js';
+import { IOrderCheckOut } from '../types/order.js';
 import axios from './axiosConfig.js';
 
 export const searchOrderForUser = async (status: string, key: string, pageNo: number = 1, pageSize: number = 24) => {
