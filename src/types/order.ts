@@ -11,6 +11,14 @@ export interface IOrderCheckOut {
     shippingFee?: number;
 }
 
+export interface ITrackingDTO {
+    id: number;
+    time: string;
+    status: string;
+    description: string;
+    orderId: number;
+  }
+
 export default interface IOrder {
     address: IAddress;
     createdDate: string;
@@ -25,4 +33,7 @@ export default interface IOrder {
     totalItems: number;
     userId: number;
     shippingFee: number;
+    trackingDTOs: ITrackingDTO[];
 }
+
+
