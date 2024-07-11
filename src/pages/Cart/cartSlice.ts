@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../redux/store';
-import IProductCart from '../../interface/productCart';
+import IProductCart from '../../types/productCart';
 
 interface IInitialState {
     totalItem: number;

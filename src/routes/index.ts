@@ -1,23 +1,22 @@
 import { ReactNode } from 'react';
 
-import config from '../config/index';
-import Error404 from '../pages/Error404';
-import Home from '../pages/Home';
-import Shop from '../pages/Shop';
-import DetailProduct from '../pages/DetailProduct';
-import LogIn from '../pages/LogIn';
-import Register from '../pages/Register';
-import CheckOut from '../pages/CheckOut';
-import Cart from '../pages/Cart';
-import GetOTPRegister from '../pages/GetOTPRegister';
-import GetOTPLogin from '../pages/GetOTPLogin';
-import ForgotPassWord from '../pages/ForgotPassWord';
-
-import Detail from '../pages/Profile/PurchaseHistory/Detail';
-import { AddressList, Dashboard, ManagerPass, PurchaseHistory, Settings, Wishlist } from '../pages/Profile';
-import ProfileUserLayout from '../layouts/ProfileUserLayout';
-import TableSize from '../pages/TableSize';
-import Policy from '../pages/Policy';
+import config from '@/config/index';
+import Error404 from '@/pages/Error404';
+import Home from '@/pages/Home';
+import Shop from '@/pages/Shop';
+import DetailProduct from '@/pages/DetailProduct';
+import LogIn from '@/pages/LogIn';
+import Register from '@/pages/Register';
+import CheckOut from '@/pages/CheckOut';
+import Cart from '@/pages/Cart';
+import GetOTPRegister from '@/pages/GetOTPRegister';
+import GetOTPLogin from '@/pages/GetOTPLogin';
+import ForgotPassWord from '@/pages/ForgotPassWord';
+import { AddressList, Dashboard, ManagerPass, PurchaseHistory, Settings, Wishlist } from '@/pages/Profile';
+import ProfileUserLayout from '@/layouts/ProfileUserLayout';
+import TableSize from '@/pages/TableSize';
+import Policy from '@/pages/Policy';
+import DetailOrder from '@/pages/DetailOrder';
 
 type TRouters = {
     path: string;
@@ -44,7 +43,7 @@ const publishRoute: Array<TRouters> = [
     { path: config.Routes.profileFavouriteProfile, component: Wishlist, layout: ProfileUserLayout },
     { path: config.Routes.profileHistoryPaymentProfile, component: PurchaseHistory, layout: ProfileUserLayout },
     { path: config.Routes.profilePassWordProfile, component: ManagerPass, layout: ProfileUserLayout },
-    { path: config.Routes.detailOrderID, component: Detail },
+    { path: config.Routes.detailOrderID, component: DetailOrder },
     { path: config.Routes.error, component: Error404 },
 ];
 

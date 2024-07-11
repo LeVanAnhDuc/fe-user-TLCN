@@ -1,5 +1,5 @@
+// libs
 import TextField from '@mui/material/TextField';
-
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,17 +7,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { useAppSelector } from '../../redux/hook';
+// components
+import AnimationTran from '@/components/AnimationTran';
+import Button from '@/components/Button';
+import SnackBarLoading from '@/components/SnackBarLoading';
+import Logo from '@/components/Logo';
+// apis
+import { loginApi, sendOTPRegister, verifyOTPRegister } from '@/apis/authApi';
+// redux
+import { useAppSelector } from '@/redux/hook';
 import { clearRegister, getDataRegister } from '../Register/registerSlice';
-import { loginApi, sendOTPRegister, verifyOTPRegister } from '../../apis/authApi';
-import { useAppDispatch } from '../../redux/hook';
+import { useAppDispatch } from '@/redux/hook';
 import { setInfoUser, setIsLogin } from '../LogIn/loginSlice';
-import config from '../../config';
-import AnimationTran from '../../components/AnimationTran';
-import Button from '../../components/Button';
-import SnackBarLoading from '../../components/SnackBarLoading';
-import Logo from '../../components/Logo';
+// others
+import config from '@/config';
 
 type FormDataGetOTPRegister = {
     otp: string;

@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 // types
-import IProduct, { actionProduct } from '../../interface/product';
+import IProduct, { actionProduct } from '../../types/product';
 // components
 import Button from '../Button';
 import Skeleton from '../Skeleton';
@@ -116,7 +116,7 @@ const Card = (props: Iprops) => {
                             {loading ? (
                                 <Skeleton className="h-6" fullWidth />
                             ) : (
-                                itemProduct.originalPrice && (
+                                itemProduct.percentDiscount !== 0 && (
                                     <div className="text-gray-400 flex gap-0.5 line-through">
                                         <span className="text-sm">đ</span>
                                         {itemProduct.originalPrice.toLocaleString('vi-VN')}
@@ -143,7 +143,7 @@ const Card = (props: Iprops) => {
 
                 {!loading && (
                     <>
-                        {itemProduct.percentDiscount && (
+                        {itemProduct.percentDiscount !== 0 && (
                             <div className="absolute top-2 left-2 bg-gray-700 rounded-full text-white size-11 text-sm flex items-center justify-center">
                                 -{itemProduct.percentDiscount}%
                             </div>
@@ -151,9 +151,9 @@ const Card = (props: Iprops) => {
                         <div className="bg-white blur-lg absolute -top-1 right-1.5 size-14 rounded-full"></div>
                         <Button onClick={handleChangeFavorite} className="!absolute top-0 right-0 ">
                             {favourite ? (
-                                <Favorite className="!text-primary-700  rounded-full " fontSize="large" />
+                                <Favorite className="!text-primary-700  rounded-full" fontSize="large" />
                             ) : (
-                                <FavoriteBorder className="!text-primary-700  rounded-full " fontSize="large" />
+                                <FavoriteBorder className="!text-primary-700  rounded-full" fontSize="large" />
                             )}
                         </Button>
                     </>

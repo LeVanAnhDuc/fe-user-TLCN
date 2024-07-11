@@ -21,6 +21,7 @@ import ADDRESSESPROFLE_VI from './addressesProfle.json';
 import SIDEBARPROFILE_VI from './sideBarProfile.json';
 import PURCHASEHISTORY_VI from './purchaseHistory.json';
 import COMPONENTS_VI from './components.json';
+import POLICY_VI from './policy.json';
 
 export {
     SPEEDDIALSETTINGUI_VI,
@@ -46,4 +47,5 @@ export {
     SIDEBARPROFILE_VI,
     PURCHASEHISTORY_VI,
     COMPONENTS_VI,
+    POLICY_VI,
 };

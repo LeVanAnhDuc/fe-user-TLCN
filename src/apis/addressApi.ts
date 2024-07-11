@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import IAddress from '../interface/address.js';
+import IAddress from '../types/address.js';
 import axios from './axiosConfig.js';
 
 export const getListAddressOffCurrentUser = async () => {

@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import { IInfoProfileUser } from '../interface/user.js';
+import { IUserInfo } from '../types/user.js';
 import axios from './axiosConfig.js';
 
 export const getAllUserWithPagination = async (pageNo: number, pageSize: number) => {
@@ -49,7 +49,7 @@ export const forgotPassWord = async (email: string, newPassword: string) => {
     }
 };
 
-export const updateAccountProfileOfSignedinAccount = async (data: IInfoProfileUser) => {
+export const updateAccountProfileOfSignedinAccount = async (data: IUserInfo) => {
     try {
         const response = await axios.put(`/users/profile`, {
             username: data.username,

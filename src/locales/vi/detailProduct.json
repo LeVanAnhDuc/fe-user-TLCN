@@ -13,5 +13,6 @@
     "star": "sao",
     "relatedProducts": "SẢN PHẨM LIÊN QUAN",
     "seeAll": "Xem tất cả",
-    "noProductRelated": "Hix. Không có sản phẩm nào liên quan !!"
+    "noProductRelated": "Hix. Không có sản phẩm nào liên quan !!",
+    "insufficientProduct": "Sản phẩm không đủ"
 }

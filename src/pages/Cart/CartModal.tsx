@@ -11,21 +11,21 @@ import { toast } from 'react-toastify';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 // types
-import { actionProduct } from '../../interface/product';
-import IProductCart from '../../interface/productCart';
+import { actionProduct } from '@/types/product';
+import IProductCart from '@/types/productCart';
 // components
-import Image from '../../components/Image';
-import MouseOverPopover from '../../components/MouseOverPopover';
-import AnimationTran from '../../components/AnimationTran';
-import Button from '../../components/Button';
-import AnimationScale from '../../components/AnimationScale';
-import ChangeQuantityProduct from './ChangeQuantityProduct';
+import Image from '@/components/Image';
+import MouseOverPopover from '@/components/MouseOverPopover';
+import AnimationTran from '@/components/AnimationTran';
+import Button from '@/components/Button';
+import AnimationScale from '@/components/AnimationScale';
+import QuantityProduct from './components/QuantityProduct';
 // apis
-import { getCartByToken } from '../../apis/cartApi';
-import { changeItemQuantity, deleteCartItemByID } from '../../apis/cartItemApi';
-import { updateProductAnalysis } from '../../apis/productApi';
+import { getCartByToken } from '@/apis/cartApi';
+import { changeItemQuantity, deleteCartItemByID } from '@/apis/cartItemApi';
+import { updateProductAnalysis } from '@/apis/productApi';
 // others
-import config from '../../config';
+import config from '@/config';
 import {
     deleteNumberProductCart,
     selectProductsCart,
@@ -35,7 +35,7 @@ import {
     setProductsPurchase,
     setToTalPriceCart,
 } from './cartSlice';
-import { convertNumberToVND } from '../../utils/convertData';
+import { convertNumberToVND } from '@/utils/convertData';
 
 interface Iprops {
     openCartModal: boolean;
@@ -195,7 +195,7 @@ const CartModal = (props: Iprops) => {
                                                         </div>
                                                     </aside>
                                                     <div className="w-full flex items-center gap-3 sm:w-fit justify-between">
-                                                        <ChangeQuantityProduct
+                                                        <QuantityProduct
                                                             valueQuantity={item.quantity}
                                                             idItem={item.id}
                                                             handleChangeItemQuantity={handleChangeItemQuantity}
