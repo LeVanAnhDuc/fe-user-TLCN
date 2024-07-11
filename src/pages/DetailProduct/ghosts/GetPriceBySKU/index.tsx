@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import IProduct from '@/types/product';
 // apis
-import { getSKUPrice } from '@/apis/productApi';
+import { getSKU } from '@/apis/productApi';
 
 const GetPriceBySKU = ({
     color,
@@ -27,7 +27,7 @@ const GetPriceBySKU = ({
     const handleGetPrice = async () => {
         if (color && size && id) {
             try {
-                const response = await getSKUPrice(+id, color, size);
+                const response = await getSKU(+id, color, size);
                 if (response.status === 200 && product) {
                     setProduct({
                         ...product,

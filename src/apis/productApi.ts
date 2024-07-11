@@ -34,7 +34,7 @@ export const getAllProductSearchWithinPagination = async (productSearch: IProduc
     }
 };
 
-export const getSKUPrice = async (productId: number, color: string, size: string) => {
+export const getSKU = async (productId: number, color: string, size: string) => {
     try {
         const response = await axios.get(`/products/sku?product_id=${productId}&value_names=${color},${size}`);
 

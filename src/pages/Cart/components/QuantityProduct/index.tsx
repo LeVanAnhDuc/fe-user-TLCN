@@ -1,22 +1,30 @@
+// libs
 import HorizontalRule from '@mui/icons-material/HorizontalRule';
 import Add from '@mui/icons-material/Add';
 import { useCallback, useEffect, useState } from 'react';
+// components
+import Button from '@/components/Button';
+// hooks
+import useDebounceCustom from '@/hook/useDebounceCustom';
 
-import Button from '../../components/Button';
-import useDebounceCustom from '../../hook/useDebounceCustom';
-
-interface IProps {
+const QuantityProduct = ({
+    valueQuantity,
+    idItem,
+    handleChangeItemQuantity,
+    productQuantityFull,
+}: {
     valueQuantity: number;
     idItem: number;
     handleChangeItemQuantity: (idItemInCart: number, quantity: number) => Promise<void>;
-}
-
-const ChangeQuantityProduct = (props: IProps) => {
-    const { valueQuantity, idItem, handleChangeItemQuantity } = props;
-
+    productQuantityFull: {
+        id: number;
+        quantityAvailable: number;
+    };
+}) => {
     const [quantity, setQuantity] = useState<number>(valueQuantity);
     const [disableDecrease, setDisableDecrease] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [errorInput, setErrorInput] = useState<boolean>(false);
 
     const handleDecrease = useCallback(() => {
         setQuantity((prev) => {
@@ -47,8 +55,15 @@ const ChangeQuantityProduct = (props: IProps) => {
         return () => setIsLoading(false);
     }, [debounce]);
 
+    useEffect(() => {
+        productQuantityFull && quantity > productQuantityFull.quantityAvailable
+            ? setErrorInput(true)
+            : setErrorInput(false);
+    }, [productQuantityFull, quantity]);
+
     return (
         <div className="flex place-items-center gap-2">
+            {errorInput && <span className="text-red-500 font-semibold">Số lượng không đủ</span>}
             <Button
                 variant="text"
                 onClick={handleDecrease}
@@ -58,7 +73,9 @@ const ChangeQuantityProduct = (props: IProps) => {
                 <HorizontalRule fontSize="small" />
             </Button>
             <input
-                className="rounded border-2 px-1 py-1 w-[50px] text-center dark:bg-dark-300"
+                className={`${
+                    errorInput ? 'border-red-500 text-red-500' : ''
+                } rounded border-2 px-1 py-1 w-[50px] text-center dark:bg-dark-300`}
                 value={quantity}
                 onChange={handleChange}
             />
@@ -69,4 +86,4 @@ const ChangeQuantityProduct = (props: IProps) => {
     );
 };
 
-export default ChangeQuantityProduct;
+export default QuantityProduct;
