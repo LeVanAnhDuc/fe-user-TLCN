@@ -20,6 +20,7 @@ import AnimationTran from '@/components/AnimationTran';
 import Button from '@/components/Button';
 import AnimationScale from '@/components/AnimationScale';
 import QuantityProduct from './components/QuantityProduct';
+import Error404 from '../Error404';
 // apis
 import { getCartByToken } from '@/apis/cartApi';
 import { changeItemQuantity, deleteCartItemByID } from '@/apis/cartItemApi';
@@ -36,7 +37,6 @@ import {
     setToTalPriceCart,
 } from './cartSlice';
 import { convertNumberToVND } from '@/utils/convertData';
-import Error404 from '../Error404';
 
 interface Iprops {
     openCartModal: boolean;
@@ -121,7 +121,7 @@ const CartModal = (props: Iprops) => {
                 if (isError) return;
                 if (product.id === item.id && product.quantityAvailable < item.quantity) {
                     isError = true;
-                    toast.error('Số lượng hiện đang không đủ');
+                    toast.error(t('quantityInsufficient'));
                     return;
                 }
             });

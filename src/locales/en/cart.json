@@ -12,5 +12,8 @@
     "totalAmount": "Total amount",
     "subtotal": "Subtotal",
     "checkOut": "Check out",
-    "cart": "Cart"
+    "cart": "Cart",
+    "selectedProduct": "Please select the product you want to buy",
+    "quantityInsufficient": "Quantity is currently insufficient",
+    "quantityNotEnough": "Quantity is not enough"
 }
