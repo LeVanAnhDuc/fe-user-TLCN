@@ -70,7 +70,7 @@ const Card = (props: Iprops) => {
 
     return (
         <AnimationTran tranY={30} delay={delay}>
-            <div className="bg-white shadow-md rounded-md overflow-hidden relative hover:shadow-primary-800 hover:scale-[1.02] hover:-translate-y-0.5 transition dark:bg-dark-600">
+            <div className="bg-white shadow-md rounded-md overflow-hidden relative hover:shadow-primary-800 hover:scale-[1.02] hover:-translate-y-0.5 transition dark:bg-dark-500">
                 <div onClick={handleNextDetailPage} className="cursor-pointer">
                     <div
                         className="h-72 w-full overflow-hidden relative flex"

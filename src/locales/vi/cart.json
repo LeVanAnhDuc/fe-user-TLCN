@@ -12,5 +12,8 @@
     "totalAmount": "Tổng tiền",
     "subtotal": "Thành tiền",
     "checkOut": "Thanh toán",
-    "cart": "Giỏ hàng"
+    "cart": "Giỏ hàng",
+    "selectedProduct": "Vui lòng chọn sản phẩm muốn mua",
+    "quantityInsufficient": "Số lượng hiện đang không đủ",
+    "quantityNotEnough": "Số lượng không đủ"
 }
