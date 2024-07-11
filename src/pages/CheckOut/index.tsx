@@ -1,5 +1,4 @@
 // libs
-import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -9,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import MuiToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -21,19 +20,17 @@ import { useTranslation } from 'react-i18next';
 import { IOrderCheckOut } from '@/types/order';
 import IAddress from '@/types/address';
 import IProductCart from '@/types/productCart';
-import { IProductCheckout, actionProduct } from '@/types/product';
+import { IProductCheckout } from '@/types/product';
 // components
 import Button from '@/components/Button';
 import AnimationScale from '@/components/AnimationScale';
 import AnimationTran from '@/components/AnimationTran';
-import Image from '@/components/Image';
+import ProductsPurchase from './mains/ProductsPurchase';
+import PriceTotal from './mains/PriceTotal';
 // apis
-import { getListAddressOffCurrentUser } from '@/apis/addressApi';
-import { addOrderByToken, getOrderByID, makePaymentAgainByToken } from '@/apis/orderApi';
+import { addOrderByToken, makePaymentAgainByToken } from '@/apis/orderApi';
 import { checkOutVNPay, makePaymentVNPay } from '@/apis/vnpayApi';
-import { getFeeShipping } from '@/apis/GHN/FeeShip';
-import { updateProductAnalysis } from '@/apis/productApi';
-// others
+// redux
 import {
     selectProductsCart,
     selectProductsPurchaseCart,
@@ -42,9 +39,12 @@ import {
     setToTalPriceCart,
     setToTalProductCart,
 } from '../Cart/cartSlice';
+// ghosts
+import GetAddressOrInfoOderWaiting from './ghosts/GetAddressOrInfoOderWaiting';
+import GetPriceProduct from './ghosts/GetPriceProduct';
+import GetFeeShipping from './ghosts/GetFeeShipping';
+// others
 import config from '@/config';
-import { convertNumberToVND } from '@/utils/convertData';
-import { calculateWeight } from '@/utils/calculateData';
 
 const ToggleButton = styled(MuiToggleButton)({
     '&.Mui-selected': {
@@ -72,7 +72,6 @@ const Pay = () => {
         dispatch(setProductsPurchase(location.state.orderItems));
     }
 
-    const [isChecked, setIsChecked] = useState(false);
     const [addresses, setAddresses] = useState<Array<IAddress>>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [feePrice, setFeePrice] = useState<number>(0);
@@ -86,83 +85,14 @@ const Pay = () => {
     const {
         control,
         handleSubmit,
-        setValue,
         watch,
         formState: { errors },
+        setValue,
     } = useForm<IOrderCheckOut>({
         resolver: yupResolver(schema),
     });
 
     const watchedAddressId = watch('addressId');
-
-    const handleCheckboxChange = useCallback(
-        (event: { target: { checked: boolean | ((prevState: boolean) => boolean) } }) => {
-            setIsChecked(event.target.checked);
-        },
-        [],
-    );
-
-    const handleGetFeeShipping = async (to_district_id: number, to_ward_code: string) => {
-        try {
-            const response = await getFeeShipping(
-                to_district_id,
-                to_ward_code,
-                calculateWeight(productsPurchase.reduce((sum, current) => sum + current.quantity, 0)),
-            );
-
-            if (response.status === 200) {
-                setFeePrice(response.data.data.total);
-            }
-        } catch (error) {
-            console.log(`${error}`);
-        }
-    };
-
-    const getAddresses = async () => {
-        try {
-            const [addressesAPI] = await Promise.all([getListAddressOffCurrentUser()]);
-
-            if (addressesAPI.status === 200 && addressesAPI?.data) {
-                setAddresses(addressesAPI.data);
-                const address = addressesAPI.data.filter((item: IAddress) => item.isDefault === true)[0];
-
-                handleGetFeeShipping(address.districtId, address.wardCode);
-            }
-        } catch (error) {
-            console.log(`${error}`);
-        }
-    };
-
-    const getAddressesAndOrderForWaiting = async () => {
-        try {
-            const [addressesAPI, OrderByIDAPI] = await Promise.all([
-                getListAddressOffCurrentUser(),
-                getOrderByID(+idOrder),
-            ]);
-
-            if (addressesAPI.status === 200 && addressesAPI?.data) {
-                setAddresses(addressesAPI.data);
-            }
-            if (OrderByIDAPI.status === 200) {
-                setTotalPrice(OrderByIDAPI.data.total);
-                setValue('addressId', OrderByIDAPI.data.address.id);
-                setValue('note', OrderByIDAPI.data.note);
-                setValue('paymentType', OrderByIDAPI.data.paymentType);
-
-                handleGetFeeShipping(OrderByIDAPI.data.address.districtId, OrderByIDAPI.data.address.wardCode);
-            }
-        } catch (error) {
-            console.log(`${error}`);
-        }
-    };
-
-    const handleRedirectDetailItem = async (idProduct: number) => {
-        if (idProduct) {
-            navigate(`${config.Routes.detailProduct}/${idProduct}`);
-            const actionClick: actionProduct = 'click';
-            await updateProductAnalysis(idProduct, actionClick);
-        }
-    };
 
     const handleCreateOrder = async (
         subTotal: number = 0,
@@ -272,263 +202,160 @@ const Pay = () => {
         }
     };
 
-    useEffect(() => {
-        setTotalPrice(productsPurchase.reduce((sum, value) => sum + value.subTotal, 0));
-    }, [productsPurchase]);
-
-    useEffect(() => {
-        const address = addresses.filter((item: IAddress) => item.id === watchedAddressId)[0];
-
-        handleGetFeeShipping(address?.districtId ?? 0, address?.wardCode ?? '');
-    }, [watchedAddressId]);
-
-    useEffect(() => {
-        if (idOrder) {
-            getAddressesAndOrderForWaiting();
-        } else {
-            getAddresses();
-        }
-    }, []);
-
     return (
-        <section className="bg-gray-100 py-5 sm:py-10 dark:bg-dark-400">
-            <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
-                <div className="grid lg:grid-cols-5 gap-10">
-                    <div className="lg:col-span-3 space-y-4">
-                        <div className="space-y-3 bg-white p-10 rounded-lg dark:bg-dark-600">
-                            {productsPurchase.map((item: IProductCart, index) => (
-                                <div className="flex items-center" key={item.id}>
-                                    <AnimationTran
-                                        tranY={100}
-                                        key={index}
-                                        className="size-full grid grid-cols-12 gap-2 bg-gray-100 rounded-lg overflow-hidden shadow dark:bg-dark-500"
-                                        delay={(index % 4) / 20}
-                                    >
-                                        <>
-                                            <Image
-                                                src={item.imageUrl}
-                                                alt={'image' + item.product.name}
-                                                className="col-span-3 md:col-span-2 aspect-square object-cover py-3 pl-3 object-center cursor-pointer size-32 m-auto"
-                                                onClick={() => {
-                                                    handleRedirectDetailItem(item.product.id);
-                                                }}
-                                            />
-                                            <div className="col-span-9 md:col-span-10 text-sm flex flex-col justify-between p-2">
-                                                <div className="line-clamp-2 font-normal mb-3 h-5">
-                                                    {item.product.name}
-                                                </div>
-                                                <div className="flex justify-between items-center flex-wrap gap-1">
-                                                    <aside>
-                                                        <div className="flex gap-1">
-                                                            <span className="font-normal w-18">
-                                                                {t('classification')}:
-                                                            </span>
-                                                            <span className="font-medium">
-                                                                {item.sku?.optionValues?.map((option, index) => (
-                                                                    <React.Fragment key={index}>
-                                                                        {option.valueName}
-                                                                        {index < item.sku.optionValues.length - 1
-                                                                            ? ' - '
-                                                                            : ''}
-                                                                    </React.Fragment>
-                                                                ))}
-                                                            </span>
-                                                        </div>
-                                                        <div className="flex gap-1">
-                                                            <span className="font-normal w-18">{t('unitPrice')}: </span>
-                                                            <span className="not-italic font-medium text-red-500 flex gap-1">
-                                                                {convertNumberToVND(item.price)}
-                                                                <span className="text-xs"> đ</span>
-                                                            </span>
-                                                        </div>
-                                                        <div className="flex gap-1">
-                                                            <span className="font-normal w-18">{t('quantity')}:</span>
-                                                            <div className="font-medium">
-                                                                {convertNumberToVND(item.quantity)}
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex gap-1">
-                                                            <span className="font-medium w-18">{t('totalPrice')}:</span>
-                                                            <div className="not-italic font-medium text-red-500 flex gap-1">
-                                                                {convertNumberToVND(item.subTotal)}
-                                                                <span className="text-xs">đ</span>
-                                                            </div>
-                                                        </div>
-                                                    </aside>
-                                                </div>
-                                            </div>
-                                        </>
-                                    </AnimationTran>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="space-y-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
-                            <div className="font-semibold text-xl">{t('yourContact')} ?</div>
-                            <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
-                                <AnimationTran tranY={100} className="space-y-2 font-bold">
-                                    <div>{t('payments')}</div>
-                                    <Controller
-                                        name="paymentType"
-                                        control={control}
-                                        defaultValue=""
-                                        render={({ field }) => (
-                                            <ToggleButtonGroup
-                                                {...field}
-                                                exclusive
-                                                fullWidth
-                                                className={`${
-                                                    errors.paymentType ? 'border-2 border-red-400' : ''
-                                                } !bg-white dark:!bg-dark-600 min-h-12 space-x-3`}
-                                            >
-                                                <ToggleButton
-                                                    className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
-                                                    value={config.PaymentType.VNPay}
-                                                >
-                                                    {t('vnPay')}
-                                                </ToggleButton>
-                                                <ToggleButton
-                                                    className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
-                                                    value={config.PaymentType.CashOnDelivery}
-                                                >
-                                                    {t('cashOnDelivery')}
-                                                </ToggleButton>
-                                            </ToggleButtonGroup>
-                                        )}
-                                    />
-                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
-                                        {errors.paymentType?.message}
-                                    </p>
-                                </AnimationTran>
+        <>
+            <GetAddressOrInfoOderWaiting
+                {...{
+                    setAddresses,
+                    idOrder,
+                    setTotalPrice,
+                    setValue,
+                }}
+            />
+            <GetPriceProduct {...{ setTotalPrice, productsPurchase }} />
 
-                                {addresses.length > 0 ? (
-                                    <AnimationTran tranY={100} delay={0.05}>
+            <GetFeeShipping
+                {...{
+                    addresses,
+                    watchedAddressId,
+                    productsPurchase,
+                    setFeePrice,
+                }}
+            />
+
+            <section className="bg-gray-100 py-5 sm:py-10 dark:bg-dark-400">
+                <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
+                    <div className="grid lg:grid-cols-5 gap-10">
+                        <div className="lg:col-span-3 space-y-4">
+                            <ProductsPurchase />
+
+                            <div className="space-y-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
+                                <div className="font-semibold text-xl">{t('yourContact')} ?</div>
+                                <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                                    <AnimationTran tranY={100} className="space-y-2 font-bold">
+                                        <div>{t('payments')}</div>
                                         <Controller
-                                            name="addressId"
+                                            name="paymentType"
                                             control={control}
-                                            defaultValue={addresses.filter((item) => item.isDefault)[0].id}
+                                            defaultValue=""
                                             render={({ field }) => (
-                                                <FormControl fullWidth>
-                                                    <InputLabel>{t('addressHome')}</InputLabel>
-                                                    <Select
-                                                        {...field}
-                                                        input={<OutlinedInput label={t('addressHome')} />}
-                                                        fullWidth
-                                                        error={errors.addressId ? true : false}
+                                                <ToggleButtonGroup
+                                                    {...field}
+                                                    exclusive
+                                                    fullWidth
+                                                    className={`${
+                                                        errors.paymentType ? 'border-2 border-red-400' : ''
+                                                    } !bg-white dark:!bg-dark-600 min-h-12 space-x-3`}
+                                                >
+                                                    <ToggleButton
+                                                        className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
+                                                        value={config.PaymentType.VNPay}
                                                     >
-                                                        {addresses.map((item, index) => (
-                                                            <MenuItem value={item.id} key={index}>
-                                                                <div className="size-full flex items-center justify-between gap-2 overflow-hidden">
-                                                                    <div className="text-sm">
-                                                                        <div className="font-bold">
-                                                                            {item.fullName} {item.phoneNumber}{' '}
-                                                                            {item.isDefault && (
-                                                                                <span className="size-fit text-end text-sm font-normal text-primary-500 border-primary-500 border-2 px-2 ml-2 rounded-md">
-                                                                                    {t('default')}
-                                                                                </span>
-                                                                            )}
-                                                                        </div>
-
-                                                                        <div className="flex flex-wrap">
-                                                                            {item.orderDetails}, {item.ward},{' '}
-                                                                            {item.district}, {item.province}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
+                                                        {t('vnPay')}
+                                                    </ToggleButton>
+                                                    <ToggleButton
+                                                        className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
+                                                        value={config.PaymentType.CashOnDelivery}
+                                                    >
+                                                        {t('cashOnDelivery')}
+                                                    </ToggleButton>
+                                                </ToggleButtonGroup>
                                             )}
                                         />
                                         <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
-                                            {errors.addressId?.message}
+                                            {errors.paymentType?.message}
                                         </p>
                                     </AnimationTran>
-                                ) : (
-                                    <Link to={config.Routes.profileAddressProfile}>
-                                        <Button fullWidth variant="outline">
-                                            {t('noAddressHome')}
-                                        </Button>
-                                    </Link>
-                                )}
 
-                                <AnimationTran tranY={100} delay={0.1}>
-                                    <Controller
-                                        name="note"
-                                        control={control}
-                                        defaultValue=""
-                                        render={({ field }) => (
-                                            <TextField
-                                                {...field}
-                                                error={errors.note ? true : false}
-                                                fullWidth
-                                                multiline
-                                                rows={9}
-                                                label={t('enterNote')}
+                                    {addresses.length > 0 ? (
+                                        <AnimationTran tranY={100} delay={0.05}>
+                                            <Controller
+                                                name="addressId"
+                                                control={control}
+                                                defaultValue={0}
+                                                render={({ field }) => (
+                                                    <FormControl fullWidth>
+                                                        <InputLabel>{t('addressHome')}</InputLabel>
+                                                        <Select
+                                                            {...field}
+                                                            input={<OutlinedInput label={t('addressHome')} />}
+                                                            fullWidth
+                                                            error={errors.addressId ? true : false}
+                                                        >
+                                                            {addresses.map((item, index) => (
+                                                                <MenuItem value={item.id} key={index}>
+                                                                    <div className="size-full flex items-center justify-between gap-2 overflow-hidden">
+                                                                        <div className="text-sm">
+                                                                            <div className="font-bold">
+                                                                                {item.fullName} {item.phoneNumber}{' '}
+                                                                                {item.isDefault && (
+                                                                                    <span className="size-fit text-end text-sm font-normal text-primary-500 border-primary-500 border-2 px-2 ml-2 rounded-md">
+                                                                                        {t('default')}
+                                                                                    </span>
+                                                                                )}
+                                                                            </div>
+
+                                                                            <div className="flex flex-wrap">
+                                                                                {item.orderDetails}, {item.ward},{' '}
+                                                                                {item.district}, {item.province}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+                                                )}
                                             />
-                                        )}
-                                    />
-                                    <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
-                                        {errors.note?.message}
-                                    </p>
-                                </AnimationTran>
+                                            <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                                {errors.addressId?.message}
+                                            </p>
+                                        </AnimationTran>
+                                    ) : (
+                                        <Link to={config.Routes.profileAddressProfile}>
+                                            <Button fullWidth variant="outline">
+                                                {t('noAddressHome')}
+                                            </Button>
+                                        </Link>
+                                    )}
 
-                                <div className="grid grid-cols-10 pb-5">
-                                    <span>
-                                        <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
-                                    </span>
-                                    <span className="col-span-9 text-gray-400 dark:text-gray-300">
-                                        {t('iHaveRead')}
-                                        <span className="underline ml-0.5">{t('privacyPolicy')}</span> {t('and')}
-                                        <span className="underline ml-0.5">{t('cookiePolicy')}</span>.
-                                    </span>
-                                </div>
-                                <AnimationScale scale={0.4}>
-                                    <Button type="submit" variant="fill" fullWidth disabled={!isChecked}>
-                                        {t('placeAnOrder')}
-                                    </Button>
-                                </AnimationScale>
-                            </form>
-                        </div>
-                    </div>
+                                    <AnimationTran tranY={100} delay={0.1}>
+                                        <Controller
+                                            name="note"
+                                            control={control}
+                                            defaultValue=""
+                                            render={({ field }) => (
+                                                <TextField
+                                                    {...field}
+                                                    error={errors.note ? true : false}
+                                                    fullWidth
+                                                    multiline
+                                                    rows={9}
+                                                    label={t('enterNote')}
+                                                />
+                                            )}
+                                        />
+                                        <p className="text-red-600 text-sm py-1 h-6 dark:text-red-500">
+                                            {errors.note?.message}
+                                        </p>
+                                    </AnimationTran>
 
-                    <div className="space-y-5 lg:col-span-2 bg-white h-fit p-5 sm:p-10 rounded-lg sticky top-20 dark:bg-dark-600">
-                        <h1 className="text-xl font-bold text-center">{t('totalCost')}</h1>
-                        <div className="flex justify-between">
-                            <span className="font-medium">{t('totalAmount')}</span>
-                            <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
-                                {convertNumberToVND(totalPrice)}
-                                <span className="text-sm">đ</span>
-                            </AnimationScale>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="font-medium">
-                                {t('totalDelivery')} ({t('standard')})
-                            </span>
-                            <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
-                                {convertNumberToVND(feePrice)}
-                                <span className="text-sm">đ</span>
-                            </AnimationScale>
-                        </div>
-                        <div className="h-0.5 bg-gray-200 w-full"></div>
-
-                        <div className="flex justify-between relative">
-                            <span className="font-medium">{t('subtotal')}</span>
-                            <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
-                                {convertNumberToVND(totalPrice + feePrice)}
-                                <span className="text-sm">đ</span>
-                            </AnimationScale>
+                                    <AnimationScale scale={0.4}>
+                                        <Button type="submit" variant="fill" fullWidth>
+                                            {t('placeAnOrder')}
+                                        </Button>
+                                    </AnimationScale>
+                                </form>
+                            </div>
                         </div>
 
-                        <div className="h-0.5 bg-gray-200 w-full"></div>
-
-                        <div className="text-center text-gray-600 dark:text-gray-300">
-                            ({t('TotalPriceOfYourOrder')})
+                        <div className="space-y-5 lg:col-span-2 bg-white h-fit p-5 sm:p-10 rounded-lg sticky top-20 dark:bg-dark-600">
+                            <PriceTotal {...{ totalPrice, feePrice }} />
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 
