@@ -12,6 +12,8 @@ const GetPriceBySKU = ({
     product,
     setProduct,
     setQuantityAvailableItem,
+    quantity,
+    setQuantity,
 }: {
     color: string;
     size: string;
@@ -19,6 +21,8 @@ const GetPriceBySKU = ({
     product?: IProduct;
     setProduct: React.Dispatch<React.SetStateAction<IProduct | undefined>>;
     setQuantityAvailableItem: React.Dispatch<React.SetStateAction<number>>;
+    quantity: number;
+    setQuantity: React.Dispatch<React.SetStateAction<number>>;
 }) => {
     const handleGetPrice = async () => {
         if (color && size && id) {
@@ -31,6 +35,7 @@ const GetPriceBySKU = ({
                         originalPrice: response.data.originalPrice as number,
                     });
                     setQuantityAvailableItem(response.data.quantityAvailable);
+                    quantity > response.data.quantityAvailable && setQuantity(1);
                 } else {
                     toast.error(response.data.message || response.data);
                 }

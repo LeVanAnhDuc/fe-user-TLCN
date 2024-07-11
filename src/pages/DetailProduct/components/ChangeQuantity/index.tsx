@@ -2,17 +2,24 @@
 import HorizontalRule from '@mui/icons-material/HorizontalRule';
 import Add from '@mui/icons-material/Add';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 // components
 import Button from '@/components/Button';
 
 const ChangeQuantity = ({
     quantity,
     setQuantity,
+    quantityAvailableItem,
 }: {
     quantity: number;
     setQuantity: React.Dispatch<React.SetStateAction<number>>;
+    quantityAvailableItem: number;
 }) => {
-    const [disableDecrease, setDisableDecrease] = useState<boolean>(true);
+    const { t } = useTranslation('detailProduct');
+
+    const [disableDecrease, setDisableDecrease] = useState<boolean>(false);
+    const [disableIncrease, setDisableIncrease] = useState<boolean>(false);
 
     const handleDecrease = useCallback(() => {
         setQuantity((prev) => {
@@ -24,26 +31,28 @@ const ChangeQuantity = ({
         });
     }, []);
 
-    const handleIncrease = useCallback(() => {
-        setQuantity((prev) => prev + 1);
-    }, []);
+    const handleIncrease = () => {
+        quantity < quantityAvailableItem && setQuantity((prev) => prev + 1);
+    };
 
-    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setQuantity(+e.target.value);
-    }, []);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        quantity < quantityAvailableItem && setQuantity(+e.target.value);
+    };
 
     useEffect(() => {
-        +quantity <= 1 ? setDisableDecrease(false) : setDisableDecrease(true);
-    }, [quantity]);
+        quantity <= 1 ? setDisableDecrease(true) : setDisableDecrease(false);
+
+        quantity >= quantityAvailableItem ? setDisableIncrease(true) : setDisableIncrease(false);
+
+        if (quantityAvailableItem < quantity && quantity > 0 && quantityAvailableItem > 0) {
+            setQuantity(quantityAvailableItem);
+            toast.error(t('insufficientProduct'));
+        }
+    }, [quantity, quantityAvailableItem]);
 
     return (
         <div className="flex place-items-center gap-2">
-            <Button
-                variant="text"
-                onClick={handleDecrease}
-                disabled={disableDecrease ? false : true}
-                className="!p-0 !border-0"
-            >
+            <Button variant="text" onClick={handleDecrease} disabled={disableDecrease} className="!p-0 !border-0">
                 <HorizontalRule />
             </Button>
             <input
@@ -51,7 +60,13 @@ const ChangeQuantity = ({
                 value={quantity}
                 onChange={handleChange}
             />
-            <Button className="!p-0" variant="text" size="small" onClick={handleIncrease}>
+            <Button
+                disabled={disableIncrease}
+                className="!p-0 !border-0"
+                variant="text"
+                size="small"
+                onClick={handleIncrease}
+            >
                 <Add />
             </Button>
         </div>
