@@ -69,8 +69,6 @@ const Cart = () => {
         dispatch(setProductsPurchase(productsSelect));
     };
 
-    console.log(productsSelect);
-
     useEffect(() => {
         try {
             const fetchProductQuantities = async () => {
