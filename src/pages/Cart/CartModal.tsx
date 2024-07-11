@@ -136,29 +136,31 @@ const CartModal = (props: Iprops) => {
     };
 
     useEffect(() => {
-        try {
-            const fetchProductQuantities = async () => {
-                const promises = products.map(async (item) => {
-                    const response = await getSKU(
-                        item.product.id,
-                        item.sku.optionValues[0].valueName,
-                        item.sku.optionValues[1].valueName,
-                    );
+        if (openCartModal) {
+            try {
+                const fetchProductQuantities = async () => {
+                    const promises = products.map(async (item) => {
+                        const response = await getSKU(
+                            item.product.id,
+                            item.sku.optionValues[0].valueName,
+                            item.sku.optionValues[1].valueName,
+                        );
 
-                    setProductsQuantityFull((prev) => [
-                        ...prev,
-                        { id: item.id, quantityAvailable: response.data.quantityAvailable },
-                    ]);
-                });
+                        setProductsQuantityFull((prev) => [
+                            ...prev,
+                            { id: item.id, quantityAvailable: response.data.quantityAvailable },
+                        ]);
+                    });
 
-                await Promise.all(promises);
-            };
+                    await Promise.all(promises);
+                };
 
-            fetchProductQuantities();
-        } catch (error) {
-            setErrorAPI(true);
+                fetchProductQuantities();
+            } catch (error) {
+                setErrorAPI(true);
+            }
         }
-    }, [behaviorsGetProducts]);
+    }, [behaviorsGetProducts, openCartModal]);
 
     if (errorAPI) {
         <Error404 />;
