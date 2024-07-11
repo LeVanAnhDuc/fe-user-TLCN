@@ -2,6 +2,7 @@
 import HorizontalRule from '@mui/icons-material/HorizontalRule';
 import Add from '@mui/icons-material/Add';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 // components
 import Button from '@/components/Button';
 // hooks
@@ -21,6 +22,8 @@ const QuantityProduct = ({
         quantityAvailable: number;
     };
 }) => {
+    const { t } = useTranslation('cart');
+
     const [quantity, setQuantity] = useState<number>(valueQuantity);
     const [disableDecrease, setDisableDecrease] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -63,7 +66,7 @@ const QuantityProduct = ({
 
     return (
         <div className="space-y-1">
-            {errorInput && <span className="text-red-500 font-semibold text-xs">Số lượng không đủ</span>}
+            {errorInput && <span className="text-red-500 font-semibold text-xs">{t('quantityNotEnough')}</span>}
             <div className="flex place-items-center gap-2">
                 <Button
                     variant="text"

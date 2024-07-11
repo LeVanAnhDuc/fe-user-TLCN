@@ -45,7 +45,7 @@ const Cart = () => {
 
     const handleNavigateCheckout = async () => {
         if (productsSelect.length <= 0) {
-            toast.error('Vui lòng chọn sản phẩm');
+            toast.error(t('selectedProduct'));
             return;
         }
 
@@ -56,7 +56,7 @@ const Cart = () => {
                 if (isError) return;
                 if (product.id === item.id && product.quantityAvailable < item.quantity) {
                     isError = true;
-                    toast.error('Số lượng hiện đang không đủ');
+                    toast.error(t('quantityInsufficient'));
                     return;
                 }
             });

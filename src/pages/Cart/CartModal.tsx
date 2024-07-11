@@ -20,6 +20,7 @@ import AnimationTran from '@/components/AnimationTran';
 import Button from '@/components/Button';
 import AnimationScale from '@/components/AnimationScale';
 import QuantityProduct from './components/QuantityProduct';
+import Error404 from '../Error404';
 // apis
 import { getCartByToken } from '@/apis/cartApi';
 import { changeItemQuantity, deleteCartItemByID } from '@/apis/cartItemApi';
@@ -36,7 +37,6 @@ import {
     setToTalPriceCart,
 } from './cartSlice';
 import { convertNumberToVND } from '@/utils/convertData';
-import Error404 from '../Error404';
 
 interface Iprops {
     openCartModal: boolean;
@@ -121,7 +121,7 @@ const CartModal = (props: Iprops) => {
                 if (isError) return;
                 if (product.id === item.id && product.quantityAvailable < item.quantity) {
                     isError = true;
-                    toast.error('Số lượng hiện đang không đủ');
+                    toast.error(t('quantityInsufficient'));
                     return;
                 }
             });
@@ -136,29 +136,31 @@ const CartModal = (props: Iprops) => {
     };
 
     useEffect(() => {
-        try {
-            const fetchProductQuantities = async () => {
-                const promises = products.map(async (item) => {
-                    const response = await getSKU(
-                        item.product.id,
-                        item.sku.optionValues[0].valueName,
-                        item.sku.optionValues[1].valueName,
-                    );
+        if (openCartModal) {
+            try {
+                const fetchProductQuantities = async () => {
+                    const promises = products.map(async (item) => {
+                        const response = await getSKU(
+                            item.product.id,
+                            item.sku.optionValues[0].valueName,
+                            item.sku.optionValues[1].valueName,
+                        );
 
-                    setProductsQuantityFull((prev) => [
-                        ...prev,
-                        { id: item.id, quantityAvailable: response.data.quantityAvailable },
-                    ]);
-                });
+                        setProductsQuantityFull((prev) => [
+                            ...prev,
+                            { id: item.id, quantityAvailable: response.data.quantityAvailable },
+                        ]);
+                    });
 
-                await Promise.all(promises);
-            };
+                    await Promise.all(promises);
+                };
 
-            fetchProductQuantities();
-        } catch (error) {
-            setErrorAPI(true);
+                fetchProductQuantities();
+            } catch (error) {
+                setErrorAPI(true);
+            }
         }
-    }, [behaviorsGetProducts]);
+    }, [behaviorsGetProducts, openCartModal]);
 
     if (errorAPI) {
         <Error404 />;

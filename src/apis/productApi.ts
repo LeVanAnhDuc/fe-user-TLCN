@@ -85,3 +85,60 @@ export const updateProductAnalysis = async (product_id: number, type: actionProd
         throw error;
     }
 };
+
+export const getProductsHot = async () => {
+    try {
+        const params: Record<string, string | number | boolean> = {
+            sell: true,
+            pageNo: 1,
+            pageSize: 7,
+            sort: 'random',
+        };
+
+        const url = '/products/search?' + new URLSearchParams(params as Record<string, string>).toString();
+
+        const response = await axios.get(url);
+
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getProductsSelling = async () => {
+    try {
+        const params: Record<string, string | number | boolean> = {
+            sell: true,
+            pageNo: 2,
+            pageSize: 7,
+            sort: 'random',
+        };
+
+        const url = '/products/search?' + new URLSearchParams(params as Record<string, string>).toString();
+
+        const response = await axios.get(url);
+
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getProductsFavorite = async () => {
+    try {
+        const params: Record<string, string | number | boolean> = {
+            sell: true,
+            pageNo: 3,
+            pageSize: 7,
+            sort: 'random',
+        };
+
+        const url = '/products/search?' + new URLSearchParams(params as Record<string, string>).toString();
+
+        const response = await axios.get(url);
+
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
