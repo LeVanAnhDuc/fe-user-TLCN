@@ -48,6 +48,10 @@ const CarouselSection = () => {
                                 homeImg.CAROUSEL6,
                                 homeImg.CAROUSEL7,
                                 homeImg.CAROUSEL8,
+                                homeImg.CAROUSEL9,
+                                homeImg.CAROUSEL10,
+                                homeImg.CAROUSEL11,
+                                homeImg.CAROUSEL12,
                             ]}
                             className="w-80 h-80 lg:h-96 lg:w-96 xl:h-[26rem] xl:w-[26rem]"
                         />
