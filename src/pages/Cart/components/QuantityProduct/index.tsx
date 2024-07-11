@@ -62,26 +62,28 @@ const QuantityProduct = ({
     }, [productQuantityFull, quantity]);
 
     return (
-        <div className="flex place-items-center gap-2">
-            {errorInput && <span className="text-red-500 font-semibold">Số lượng không đủ</span>}
-            <Button
-                variant="text"
-                onClick={handleDecrease}
-                disabled={disableDecrease ? false : true}
-                className="!p-0 !border-0"
-            >
-                <HorizontalRule fontSize="small" />
-            </Button>
-            <input
-                className={`${
-                    errorInput ? 'border-red-500 text-red-500' : ''
-                } rounded border-2 px-1 py-1 w-[50px] text-center dark:bg-dark-300`}
-                value={quantity}
-                onChange={handleChange}
-            />
-            <Button className="!p-0" variant="text" size="small" onClick={handleIncrease}>
-                <Add fontSize="small" />
-            </Button>
+        <div className="space-y-1">
+            {errorInput && <span className="text-red-500 font-semibold text-xs">Số lượng không đủ</span>}
+            <div className="flex place-items-center gap-2">
+                <Button
+                    variant="text"
+                    onClick={handleDecrease}
+                    disabled={disableDecrease ? false : true}
+                    className="!p-0 !border-0"
+                >
+                    <HorizontalRule fontSize="small" />
+                </Button>
+                <input
+                    className={`${
+                        errorInput ? 'border-red-500 text-red-500' : ''
+                    } rounded border-2 px-1 py-1 w-[50px] text-center dark:bg-dark-300`}
+                    value={quantity}
+                    onChange={handleChange}
+                />
+                <Button className="!p-0" variant="text" size="small" onClick={handleIncrease}>
+                    <Add fontSize="small" />
+                </Button>
+            </div>
         </div>
     );
 };
