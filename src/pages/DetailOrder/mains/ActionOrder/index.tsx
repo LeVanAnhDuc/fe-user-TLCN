@@ -26,7 +26,7 @@ const ActionOrder = ({
 
     const handlePaymentOrder = async (idOder: number) => {
         if (idOder) {
-            navigate(config.Routes.checkOut, { state: { idOder: idOder } });
+            navigate(config.Routes.checkOut, { state: { idOder: idOder, orderItems: order?.orderItems } });
         }
     };
 
