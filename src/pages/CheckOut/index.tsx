@@ -23,6 +23,7 @@ import IProductCart from '@/types/productCart';
 import { IProductCheckout } from '@/types/product';
 // components
 import Button from '@/components/Button';
+import PageLoading from '@/components/PageLoading';
 import AnimationScale from '@/components/AnimationScale';
 import AnimationTran from '@/components/AnimationTran';
 import ProductsPurchase from './mains/ProductsPurchase';
@@ -75,6 +76,7 @@ const Pay = () => {
     const [addresses, setAddresses] = useState<Array<IAddress>>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [feePrice, setFeePrice] = useState<number>(0);
+    const [loadingAPIs, setLoadingAPIs] = useState<boolean>(false);
 
     const schema = yup.object().shape({
         paymentType: yup.string().required(t('paymentsIsRequired')),
@@ -128,10 +130,12 @@ const Pay = () => {
             });
 
             if (response?.status === 201) {
+                toast.success(t('orderIsSuccess'));
                 dispatch(setToTalProductCart(productsInCart.length));
                 dispatch(setItemsOfCart(productsInCart));
                 dispatch(setToTalPriceCart(priceCart));
                 dispatch(setProductsPurchase([]));
+                navigate(`${config.Routes.detailOrder}/${response.data.id}`);
             } else {
                 toast.error(response?.data.message || response?.data);
             }
@@ -143,15 +147,16 @@ const Pay = () => {
     };
 
     const onSubmit: SubmitHandler<IOrderCheckOut> = async (data) => {
-        let PaymentType: string = '';
+        let PAYMENT_TYPE: string = '';
 
         if (data.paymentType === config.PaymentType.CashOnDelivery) {
-            PaymentType = 'COD';
+            PAYMENT_TYPE = 'COD';
             try {
+                setLoadingAPIs(true);
                 if (idOrder) {
                     const response = await makePaymentAgainByToken(+idOrder, {
                         total: totalPrice,
-                        paymentType: PaymentType,
+                        paymentType: PAYMENT_TYPE,
                         note: data.note,
                         addressId: data.addressId,
                     });
@@ -163,30 +168,31 @@ const Pay = () => {
                         toast.error(response?.data.message || response?.data);
                     }
                 } else {
-                    const response = await handleCreateOrder(
+                    await handleCreateOrder(
                         totalPrice,
-                        PaymentType,
+                        PAYMENT_TYPE,
                         data.note,
                         data.addressId,
                         feePrice,
                         feePrice + totalPrice,
                     );
-                    toast.success(t('orderIsSuccess'));
-                    navigate(`${config.Routes.detailOrder}/${response.id}`);
                 }
             } catch (error) {
                 toast.error(`${error}`);
+            } finally {
+                setLoadingAPIs(false);
             }
         } else {
-            PaymentType = 'VN_PAY';
+            PAYMENT_TYPE = 'VN_PAY';
             try {
+                setLoadingAPIs(true);
                 if (idOrder) {
                     const redirectURL = makePaymentVNPay(totalPrice, +idOrder, data.addressId, data.note);
                     window.location.href = redirectURL;
                 } else {
                     const response = await handleCreateOrder(
                         totalPrice,
-                        PaymentType,
+                        PAYMENT_TYPE,
                         data.note,
                         data.addressId,
                         feePrice,
@@ -198,6 +204,8 @@ const Pay = () => {
                 }
             } catch (error) {
                 toast.error(`${error}`);
+            } finally {
+                setLoadingAPIs(false);
             }
         }
     };
@@ -223,8 +231,10 @@ const Pay = () => {
                 }}
             />
 
-            <section className="bg-gray-100 py-5 sm:py-10 dark:bg-dark-400">
-                <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
+            <section className="bg-gray-100 dark:bg-dark-400">
+                {loadingAPIs && <PageLoading />}
+
+                <div className="sm:w-10/12 w-11/12 m-auto flex justify-center py-5 sm:py-10">
                     <div className="grid lg:grid-cols-5 gap-10">
                         <div className="lg:col-span-3 space-y-4">
                             <ProductsPurchase />
