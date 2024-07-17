@@ -42,7 +42,7 @@ const OrdersDetail = ({
     };
 
     return (
-        <div className="space-y-5">
+        <div className="space-y-4 max-w-4xl mx-auto bg-white rounded-lg mt-8">
             {order?.orderItems.map((itemProduct, indexProduct) => (
                 <Fragment key={indexProduct}>
                     <AnimationTran

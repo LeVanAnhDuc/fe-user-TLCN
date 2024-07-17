@@ -24,5 +24,7 @@
     "totalDelivery": "Total delivery",
     "standard": "Standard",
     "subtotal": "Subtotal",
-    "TotalPriceOfYourOrder": "Total price of your order, including all fees and taxes"
+    "TotalPriceOfYourOrder": "Total price of your order, including all fees and taxes",
+    "deliveryAddress": "Delivery address",
+    "feeDiscount": "Shippiong discount subtotal ⓘ"
 }

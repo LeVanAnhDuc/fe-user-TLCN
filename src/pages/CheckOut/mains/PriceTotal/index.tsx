@@ -26,6 +26,17 @@ const PriceTotal = ({ totalPrice, feePrice }: { totalPrice: number; feePrice: nu
                     {convertNumberToVND(feePrice)}
                     <span className="text-sm">đ</span>
                 </AnimationScale>
+                
+            </div>
+            <div className="flex justify-between">
+                <span className="font-medium">
+                    {t('feeDiscount')}
+                </span>
+                <AnimationScale scale={0.1} className="flex justify-end gap-1 text-red-500 font-medium">
+                    -{convertNumberToVND(0)}
+                    <span className="text-sm">đ</span>
+                </AnimationScale>
+                
             </div>
             <div className="h-0.5 bg-gray-200 w-full"></div>
             <div className="flex justify-between relative">

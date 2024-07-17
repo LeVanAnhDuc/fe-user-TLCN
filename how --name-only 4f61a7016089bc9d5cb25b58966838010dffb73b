@@ -1,0 +1,1389 @@
+[33mcommit 4f61a7016089bc9d5cb25b58966838010dffb73b[m[33m ([m[1;36mHEAD -> [m[1;32mhua[m[33m, [m[1;32mcustom[m[33m)[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Fri Jul 12 04:21:08 2024 +0700
+
+    custom: some page
+
+[33mcommit 91e43582e302e538165dcef590c304638dcf3a5a[m
+Merge: e9dec0a 1c5d29f
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Fri Jul 12 01:21:14 2024 +0700
+
+    Merge branch 'dev' of github.com:LeVanAnhDuc/fe-user-TLCN into dev
+
+[33mcommit 1c5d29ffaae7d593fa9fa83b2a4bbabb01c241c2[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 23:13:05 2024 +0700
+
+    optimize call api
+
+[33mcommit 5810e19d262deb8b9e1ddf75de1392df6ece3231[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 23:06:53 2024 +0700
+
+    mock data and create UI home page
+
+[33mcommit 30f7bacafe05aaaedb86fb56f2d047a71f7bc9ac[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 21:55:23 2024 +0700
+
+    international cart page
+
+[33mcommit ad089fa647821ee667568434ca147dc8ddc0170a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 20:18:14 2024 +0700
+
+    rename title header
+
+[33mcommit fb17607113708a35d9e75272499da579b60d10b3[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 20:16:25 2024 +0700
+
+    update image Carousel
+
+[33mcommit ca7f3ef2b180bc2019590b66f79590e283c11ab4[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 20:08:13 2024 +0700
+
+    update check quantity cart ajax
+
+[33mcommit e9dec0aaa9d88cd2d5cea51ae2f9c55e787c7acc[m
+Merge: 55ac8c4 00a596b
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Thu Jul 11 19:43:48 2024 +0700
+
+    Merge branch 'dev' of github.com:LeVanAnhDuc/fe-user-TLCN into dev
+
+[33mcommit 00a596b7058bb92cffe7a5fdcbec3af50992dca5[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 19:34:05 2024 +0700
+
+    refactor code
+
+[33mcommit 4c02333f76747647581f95292df05d24d93646f8[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 19:33:35 2024 +0700
+
+    update logic cart
+
+[33mcommit 87051e6ce9c3bd852f624fd64612f6cb34c1405e[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 11:07:18 2024 +0700
+
+    refactor checkout page
+
+[33mcommit 23bef67bb3a3f97ec88a39cbc4d3be8235b3141a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 09:55:36 2024 +0700
+
+    refactor code detail order
+
+[33mcommit 25930c3b4752d3716867fb534c484f0940d84d72[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 09:34:10 2024 +0700
+
+    check quantity when input and refactor code
+
+[33mcommit 5a760d8beb02983df3441f16caa1a66527460831[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 00:20:45 2024 +0700
+
+    update UI card percentDiscount
+
+[33mcommit ba4736106a638a6b615470bd73eec1074d68d53f[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 00:17:07 2024 +0700
+
+    rename file
+
+[33mcommit 090af890390f950d1acc977140b4f79fef7ab23c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Jul 11 00:13:31 2024 +0700
+
+    refactor code and check quantityAvailable
+
+[33mcommit 7a8eff8e6017fac80c0a63eebfd072ad5c8d7aa6[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jul 10 22:41:36 2024 +0700
+
+    refactor code and check expire token
+
+[33mcommit 0939c81316e942c20f6696019a92ebad1bee9080[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jul 10 22:21:41 2024 +0700
+
+    update international policy
+
+[33mcommit f1c069aa5efcaf604f22fe388682f908188e4955[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jul 8 22:30:31 2024 +0700
+
+    refactor code manager address
+
+[33mcommit 9d94d6f34a50bb3e2d9c95c8116f40fa36229f09[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jul 8 22:13:50 2024 +0700
+
+    update dashboard and manager password
+
+[33mcommit 45a33360c143738a19a53ef4a0b949d39e52b2eb[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jul 8 22:00:50 2024 +0700
+
+    refactor purchase history orders
+
+[33mcommit 4870631c8cedb02ccf04bcfecd32ac5a56803bb9[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jul 8 00:17:14 2024 +0700
+
+    rename folder interfaces to types
+
+[33mcommit 1b0465e1590ee36f245f57b66e92e1900b928c27[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jul 8 00:15:41 2024 +0700
+
+    refactor code setting profile
+
+[33mcommit 097dab4dab89f23a6b5e9e4760689d76a81f9061[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Jul 7 22:57:34 2024 +0700
+
+    refactor wishlist page
+
+[33mcommit f9c4e042d754ae2e07c25951c586e59024fa3de6[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Jul 7 22:38:10 2024 +0700
+
+    refactor code register
+
+[33mcommit e92b053a7ef446ec03541048004746b3e703367a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Jul 7 22:27:15 2024 +0700
+
+    refactor code shop page
+
+[33mcommit cd2b1f625532c5321cdac44202ba7ddbe8e48d6e[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Jul 7 22:27:01 2024 +0700
+
+    import component pagination
+
+[33mcommit 68586f56787e16d836421f3fb81e4864572c4760[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Jul 7 21:44:17 2024 +0700
+
+    fix UI detail product
+
+[33mcommit 4702fd9f8d996001db63c2c917f6a760b9e16b0d[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Jul 7 21:43:45 2024 +0700
+
+    custom import file and fix UI card
+
+[33mcommit c36eced5c12b5ecc5470f31150459adde67eb16d[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jun 17 19:58:46 2024 +0700
+
+    update timeout call api
+
+[33mcommit 55ac8c4b4e6dd36814c22ea54d75296c3f36bda1[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: f69251c 00e8d31
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 23:28:25 2024 +0700
+
+    Merge branch 'dev' of https://github.com/LeVanAnhDuc/fe-user-TLCN
+
+[33mcommit 00e8d312a32c286a8b6c3ddf819c1df4bad1f50b[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 23:26:14 2024 +0700
+
+    refactor code and handle prev page 1 when change filter
+
+[33mcommit 16a64f471dcc21de7c13729ac6f0cdb4669b4a31[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 23:15:49 2024 +0700
+
+    refactor and fix css
+
+[33mcommit 898810e1232c61a88259c516b96815e036ce4f75[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 23:02:28 2024 +0700
+
+    refactor code
+
+[33mcommit 35d5c4e24bcefffe972d9c6563ccfac866119d5c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 22:33:46 2024 +0700
+
+    update action view in 15s and add_to_cart
+
+[33mcommit cac8321dadc16826b10799be4f756dc669ae29e4[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 22:23:02 2024 +0700
+
+    refactor code and add handle click for statics
+
+[33mcommit 453cac082aec00cea4402dc5bb6f27568af80c52[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 21:57:01 2024 +0700
+
+    refactor code and resolve bug click
+
+[33mcommit 619314830a397a1a3f2c6945a190904f12bbf7f4[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 21:35:24 2024 +0700
+
+    resolve conflict
+
+[33mcommit a636ce580e261f0a7cd65166658ccc55d2c2e152[m
+Merge: bb7e82b a3edfeb
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 21:33:22 2024 +0700
+
+    Merge branch 'dev' of https://github.com/LeVanAnhDuc/fe-user-TLCN into dev
+
+[33mcommit bb7e82bdd16995f548f93e92ffe916e37d6c6007[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 21:31:32 2024 +0700
+
+    resolve conflict
+
+[33mcommit c95a068e54c0c67a00ad1c364295f78d830f2ddf[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 15 21:15:47 2024 +0700
+
+    update card anh add more api
+
+[33mcommit a3edfeb84faccc4ced644c33bb42b13004188d33[m
+Merge: 4e993a5 9d5d816
+Author: Chhin Hua <86371524+chhinhua@users.noreply.github.com>
+Date:   Fri Jun 14 16:12:24 2024 +0700
+
+    Merge pull request #39 from LeVanAnhDuc/hua
+    
+    custom purchase history page
+
+[33mcommit 9d5d816fb3195c2ed6b18c4906b66cfd6f4e9eef[m[33m ([m[1;31morigin/hua[m[33m)[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Fri Jun 14 16:10:35 2024 +0700
+
+    update purchase history page
+
+[33mcommit 23643694458d08a2272dd496a8377879ad77c825[m
+Merge: 467e11a 4e993a5
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Wed Jun 12 23:16:14 2024 +0700
+
+    Merge branch 'dev' of github.com:LeVanAnhDuc/fe-user-TLCN into deploy
+
+[33mcommit 4e993a510a116bb5455fde22f46ceedf49661f9b[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jun 12 21:08:58 2024 +0700
+
+    pagination purchase history
+
+[33mcommit 755b52138e415b6263b19f95523a9c267c0c7d7d[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jun 12 20:41:55 2024 +0700
+
+    update fix DistrictName in address
+
+[33mcommit 16eb62f7f16f4a67d41bffe61df02e57203a829e[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jun 12 20:30:37 2024 +0700
+
+    import title login
+
+[33mcommit a5f986687e174dbb116f7f87129804e0a5338c69[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jun 12 20:25:30 2024 +0700
+
+    handle fix call api search
+
+[33mcommit 7adfe8362a6ed9cbff5af312ca4f0fe3a2ee79b3[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Jun 12 20:25:08 2024 +0700
+
+    handle animation card product
+
+[33mcommit 8653be2251bfd17b03ec4f4cb86e9d5d417f6a02[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Jun 11 21:21:15 2024 +0700
+
+    upgrade card products
+
+[33mcommit 467e11a0c84d3320975d8ebc680b875dd377afc8[m
+Merge: 8194848 43f8695
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Tue Jun 11 09:49:10 2024 +0700
+
+    Merge branch 'dev' of github.com:LeVanAnhDuc/fe-user-TLCN into deploy
+
+[33mcommit 43f8695a4bbeb95b2e9baa37d9de64adc321597a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Jun 10 20:26:44 2024 +0700
+
+    handleRedirectDetailOrder when click area order
+
+[33mcommit 8194848d1d0520ba2bfdc0a6bbaccc8a3b76a21d[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Fri Jun 7 00:16:48 2024 +0700
+
+    config production environment
+
+[33mcommit a4933399f991fff9077840b96e6d989b1dde2052[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 1 13:56:46 2024 +0700
+
+    fixed UI delete product
+
+[33mcommit ed4c6118aed9afaea1a86ce5427909d401569ccb[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 1 13:11:20 2024 +0700
+
+    update checkout
+
+[33mcommit ee5dfcbdb6615ae096acc746e1236768911703e4[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 1 12:45:40 2024 +0700
+
+    fix size image
+
+[33mcommit ed185a7a946e9c348de85982f44fecb924a33d11[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Jun 1 12:45:29 2024 +0700
+
+    fix UI and add fee ship
+
+[33mcommit c80fcdd128aa92129b824e12051d109165b23a8d[m
+Merge: f69251c c58bbfd
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue May 28 21:39:54 2024 +0700
+
+    Merge branch 'dev' of https://github.com/LeVanAnhDuc/fe-user-TLCN into dev
+
+[33mcommit c58bbfd4567cf7271cb6e0beb7a1f6db8043b768[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Mon May 27 18:26:34 2024 +0700
+
+    update: checkout page
+
+[33mcommit f69251cc2b6499e5623d9131f83d117b0944b48a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon May 27 12:32:51 2024 +0700
+
+    update fee ship by address
+
+[33mcommit d0618a9786c5ef1ae1ee5b61b28f9778ca4a977a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun May 26 14:26:04 2024 +0700
+
+    fix: UI default address
+
+[33mcommit bbbd78782294a2cfe3e2c0f72b21397a3d58a57f[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun May 26 14:21:20 2024 +0700
+
+    fix : UI checkout
+
+[33mcommit 42dfd1e88f10c101e1fcc24bc18798c36c74dd88[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun May 26 13:13:44 2024 +0700
+
+    feat: update quantity product in cart
+
+[33mcommit c01009f1e9e56882722af91e3ce69aa6243788a1[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu May 16 21:33:39 2024 +0700
+
+    update remove localStorage
+
+[33mcommit 6076779b0a1dffbd94d1e0fbefed02fd8ae20f7a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu May 16 21:19:19 2024 +0700
+
+    update select cart and checkout with new api
+
+[33mcommit da21b7ede4a1ade03f46fb2ee864918a453b0870[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu May 16 21:06:53 2024 +0700
+
+    international more
+
+[33mcommit 1b491740521fb522b6d504b84f034f97cb511cf3[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu May 16 20:41:21 2024 +0700
+
+    update interface and constant
+
+[33mcommit 3ce4b9e404d253e672e986c8ac443a9104ae2694[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu May 16 20:40:32 2024 +0700
+
+    update api
+
+[33mcommit 3b2eb2651e5f03946d4babbd9174ae60161f5bfd[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu May 16 16:18:13 2024 +0700
+
+    update api address
+
+[33mcommit 70f3461339d1f05332847372aa7c1f28e10fef07[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed May 15 22:06:21 2024 +0700
+
+    feat : handle back purchase history
+
+[33mcommit 18cdf936cee1378f8a3c89dc044ef6082f624b97[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed May 15 21:58:17 2024 +0700
+
+    fix : update toast when delete order error
+
+[33mcommit 48201ecd38842b73918fd349de1624f462a52dd1[m
+Merge: 9b6448b b73b3ba
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 15:44:34 2024 +0700
+
+    Merge branch 'main' into dev
+
+[33mcommit b73b3ba612420cdb4ed207c2672413c91389aff8[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 15:32:19 2024 +0700
+
+    build : update code to build
+
+[33mcommit 9b6448b736f3a403d5cde64bf150ab59cd673930[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 15:19:41 2024 +0700
+
+    feat (detail history purchase page): pop confirm delete order and notify cancel order
+
+[33mcommit c3b881e3d2cc8d24ef751d786688ad79351b7b20[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 15:13:57 2024 +0700
+
+    feat (list history purchase page): pop confirm delete order
+
+[33mcommit 1d9499ded0b0301fddf4d2af72fa4636bdf811fe[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 15:03:46 2024 +0700
+
+    feat (list address page): pop confirm remove address
+
+[33mcommit a1e666ee18cd0d69e5a98ae42a14c0240111a795[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 14:57:41 2024 +0700
+
+    feat (wish list page): confirm unfavourite and international components PopConfirm
+
+[33mcommit 636bd883321c09ad108ba58a6b07c75af32cafe7[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Apr 27 14:44:01 2024 +0700
+
+    feat : add pop confirm
+
+[33mcommit e487f1e9e8bc1b61008a27e216a013e64901bf6b[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Apr 24 10:51:18 2024 +0700
+
+    fix (HistoryPurchase): add text for order payed
+
+[33mcommit e9647e4be09f65a7c9d7e132fa31c45931559ebf[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Apr 24 10:21:14 2024 +0700
+
+    fix (cart): handle update price in cart when checkout
+
+[33mcommit 74ad7bd9d7751ff6cbac9f6475578cee1020824f[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Apr 14 22:41:49 2024 +0700
+
+    feat (autocomplete address): call api address of GiaoHangNhanh
+
+[33mcommit cf35ab53f7f9637f065e34e5dd381be6396f4c2c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Apr 14 20:28:27 2024 +0700
+
+    fix (description product): fix UI
+    
+    import css react-quill
+    overwrite css element heading tailwind css
+
+[33mcommit c7e062b7e7f210667bbf8c1663fd7477937acd58[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Apr 4 22:46:00 2024 +0700
+
+    refactor: replace utils  objectsAreEqual
+
+[33mcommit 7b72131bd3d41aaafa8a1f8dd360b054d7746a9e[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 26 21:59:41 2024 +0700
+
+    feat (detail order): update action #34
+
+[33mcommit 58a9c252313c70c484205d25fa8460c974a2927c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 26 21:43:18 2024 +0700
+
+    feat (purchase history profile):  search order #30
+
+[33mcommit a457ea42cd0431ec2b77512aa5a947b7729e1d66[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 16:09:40 2024 +0700
+
+    feat (history purchase profile): international language
+
+[33mcommit 01f8346359ae2975fa50913442b4bcedccd91f99[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 15:35:32 2024 +0700
+
+    feat (sidebar profile): international language
+
+[33mcommit a1a86b34fe50705e60b318594a029d04840bc29c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 15:26:17 2024 +0700
+
+    feat (address profile): international language
+
+[33mcommit cbe992dc076fb2ace0bee4379c78f73453780794[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 14:22:16 2024 +0700
+
+    fix : Custom checkout page #32
+
+[33mcommit 96260bbe2637eb0ca75bd19f0f01d48dfed52a79[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 13:52:38 2024 +0700
+
+    fix (side bar profile): Fix chữ 🈵 #33
+
+[33mcommit b6422e26bdc66ae32d0ff326e55a27ca55105a50[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 13:50:00 2024 +0700
+
+    fix (dash board): Link to detail data (good to have) #31
+
+[33mcommit c8df74f00eb2f618f6d8ea87d5d2a9ba8f0d07e6[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 13:29:06 2024 +0700
+
+    feat (header):Trỏ vào nút đăng xuất #25
+
+[33mcommit 50bf036c988bf96a556bf1523a867e55eccdc2a6[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 13:25:01 2024 +0700
+
+    fix (history purchase): Tách trạng thái lọc đơn hàng #24
+
+[33mcommit 5e1d838ea382061e82a998839fcd06979ed251ef[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 16 13:03:06 2024 +0700
+
+    feat (change password): international language
+
+[33mcommit ad307af11029c40d4145b529961ae178de1f0a88[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Mar 15 21:22:30 2024 +0700
+
+    feat (account profile): international language
+
+[33mcommit 51b46a3cbc17e12ade958fa9f549804217f034dc[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Mar 15 20:43:53 2024 +0700
+
+    feat (404): international language
+
+[33mcommit c99f84ba2da764165513e6f868c53cfc5a693a3c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 22:51:16 2024 +0700
+
+    feat (wish list): da ngon ngu
+
+[33mcommit 2fa86b409c1b94cfa5861b5ff3e43c35e5eea8fc[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 22:45:13 2024 +0700
+
+    feat (mypage): da ngon ngu
+
+[33mcommit a8e4fd84639222c38d38b258b2a0c9635883ea9a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 22:25:44 2024 +0700
+
+    feat (checkout): da ngon ngu
+
+[33mcommit cf4309e9c80bea73b5f337d684889e841d5584a5[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 21:58:51 2024 +0700
+
+    feat (cart): international language
+
+[33mcommit 5fc800f0d06a66e0a00e08f87fc2758fe52edfea[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 21:24:42 2024 +0700
+
+    feat (detail product): international language
+
+[33mcommit 442501f8b445b44e575af7fbe87e5978bc901715[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 21:09:22 2024 +0700
+
+    feat (card): international language
+
+[33mcommit b2bc180376df6d54c5d6409cbf00d92a6a0a544f[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 20:54:18 2024 +0700
+
+    feat (shop): international language
+
+[33mcommit 7ae2ca7cc6a246437bd684988b95c72de41347a7[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 17:24:58 2024 +0700
+
+    feat (home): international language
+
+[33mcommit 54fe8d752cad8ea3590dfd1da6fa8ee7f5d90e50[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 17:12:58 2024 +0700
+
+    feat (footer): international language
+
+[33mcommit ec15998f211e1a539b9d5cda6f5fafa67686e1b7[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 16:46:13 2024 +0700
+
+    feat (header): add international
+
+[33mcommit c1dfff91b7a59a0b6e60daa0ef1481195ac0e7bd[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 10:45:57 2024 +0700
+
+    feat : international forgot password
+
+[33mcommit fbc133daff5cff1f43aa0d97c5f43c8dbef6726d[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Mar 12 10:08:41 2024 +0700
+
+    feat : international (OTP auth)
+
+[33mcommit 8afe3d99830667af96946f56082bf6622e9c896b[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Mar 11 22:33:32 2024 +0700
+
+    feat (register): international vi-en
+
+[33mcommit 01ba8e03c2f328c01c74a0d6ca0781051b8fd610[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Mar 11 22:04:55 2024 +0700
+
+    feat (login): international vi-en
+
+[33mcommit 8fb32b6b291894c15e567df09daab80b4c9078ea[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Mar 11 21:44:15 2024 +0700
+
+    feat : international language
+    
+    import i18next, react-i18next
+    custom translate language
+    international menu setting UI
+
+[33mcommit 1c92e1a4718cac56e61705d3d30f7e9ecc0a29e0[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 9 16:45:23 2024 +0700
+
+    feat : done dark mode
+
+[33mcommit 735cc968be93ed64ceaec6f3a36c80d34709a9f1[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 9 16:21:52 2024 +0700
+
+    feat : add css dark mode
+    
+    detail product
+
+[33mcommit 9471c05945beb654f2d5a6c19a090d09468992bd[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 9 16:00:12 2024 +0700
+
+    feat : add css dark mode
+    
+    cart
+    cart ajax
+    checkout
+
+[33mcommit 85e92231009963a44f6aabb639883e34d0636c4e[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 9 15:38:07 2024 +0700
+
+    feat : add css dark mode
+    
+    home
+    shop
+    card
+    button scroll
+    button setting
+    skeleton
+
+[33mcommit 2172a7bf798cab5e22bec18822da57bbacd7a99e[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 9 15:05:19 2024 +0700
+
+    feat : add css dark mode
+    
+    login
+    register
+    forgot
+    send otp login
+    send otp register
+    snackbar  loading
+    button
+
+[33mcommit ed6b2f0db160c9f08e4cc0c59ad7d01504ea2ac5[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 9 14:40:56 2024 +0700
+
+    feat : add dark mode
+    
+    add dark mode header
+    add button setting theme
+
+[33mcommit 5a0b8cb492ff5f918220dc809bd3f290494092a9[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Mar 8 01:14:28 2024 +0700
+
+    feat : table size and policy
+
+[33mcommit 9c7c80a8ae577b0f813d802e7d4d34f3b8b20645[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Mar 8 00:43:37 2024 +0700
+
+    Fix : chữ #23
+
+[33mcommit da87cb44b21c86c325e2d07747bb8f9cee88f713[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Mar 8 00:35:00 2024 +0700
+
+    fix (profiile): fix UI/UX, improve code, responsive
+    
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit 63fac90f140c632d69358140a8b17830345ee35c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Mar 7 22:42:19 2024 +0700
+
+    fix (setting page): fix UI/UX, improve code, change avatar
+    
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit b58bf9964c3bbba8f735f8bf15f88814c7c73d28[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Mar 7 10:26:03 2024 +0700
+
+    fix (detail order): fix UI/UX, improve code
+    
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit a800cbcc0b2e34105b454644854222b6ddef0796[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Mar 7 09:01:56 2024 +0700
+
+    fix (lish purchase history): fix UI/UX, improve code
+    
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit 8d21a6f673de993be133750d4acbf3c37516d770[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Mar 6 15:54:45 2024 +0700
+
+    fix (checkout, wishlist, addresses)
+
+[33mcommit 0d132cb5933c4e73bf0d1c27d304adf38fde26ad[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Mar 4 15:29:25 2024 +0700
+
+    fix (detail item page): fix UI/UX, improve code
+    
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit 2a078241d7f2405274a8ed405744968f23136e6c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Mar 2 15:03:29 2024 +0700
+
+    fix (cart page): fix UI/UX, improve code. add ajax cart
+    
+    add ajax cart
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit 753dd5b2463182b41a95551022d1759399a5eed1[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Feb 28 21:32:23 2024 +0700
+
+    fix (shop Page) : fix UI/UX, improve code.
+    
+    custom Card component
+    add Skeleton for Card
+    add animation.
+    improve call api.
+    clean code.
+
+[33mcommit 4f2a7fb8715afbf36bf76e6fc4ec10212efe9d95[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Feb 26 15:06:17 2024 +0700
+
+    fix : update Button component
+
+[33mcommit 190f1d57a5f54d9371bc966b759950ce42d018fd[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Feb 22 16:11:30 2024 +0700
+
+    fix (Login Page) : fix UI/UX, improve code.
+    
+    remove library classnames, sass.
+    add more library swiper.
+    add animation for code.
+    improve code.
+    update image.
+
+[33mcommit d25fa2f1d246dff550260955f2ac880a4df22f5d[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Feb 22 14:14:29 2024 +0700
+
+    fix (footer): update UI
+
+[33mcommit 2edfaeb80c03c3a3c40c6ceb96e72e0fe1d7fb1b[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Feb 22 11:07:43 2024 +0700
+
+    fix (Header): fix UI/UX, improve code.
+    
+    add animation for code.
+    optimize search.
+    add more responsive header
+    clean code.
+
+[33mcommit a9f592c164677dcdd96610072148e7c6258420e3[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Feb 21 21:39:21 2024 +0700
+
+    fix (forgot password): fix UI/UX, improve code.
+    
+    add animation for code.
+    clean code.
+
+[33mcommit de08f038c0257811e4e8967c25d852dadd343cf5[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Feb 21 20:46:47 2024 +0700
+
+    fix (GetOTP Email): fix UI/UX, improve code.
+    add animation for code.
+    clean code.
+
+[33mcommit e0621ec047b5ba9cb2fa0bd05236551b3827e83a[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Feb 21 20:05:26 2024 +0700
+
+    fix (GetOTP Register): fix UI/UX, improve code.
+    
+    add animation for code.
+    clean code.
+
+[33mcommit 57355ee8f3f4257137f762ab4eb55508b6bcb55c[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Feb 21 16:31:47 2024 +0700
+
+    fix (Register Page) : fix UI/UX, improve code.
+    add animation for code.
+    clean code.
+
+[33mcommit 754501002f46110a9d327ba53dea475d626afc10[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Feb 21 15:29:27 2024 +0700
+
+    fix (Login Page) : fix UI/UX, improve code.
+    
+    add animation for code.
+    improve call api.
+    clean code.
+
+[33mcommit eab4b1fe387f98734bd05041128d68b37c08acaa[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Dec 21 23:17:52 2023 +0700
+
+    fix: fix bug footer under bottom
+
+[33mcommit ff547a4ca540e579467f1ffa05faff0096ca2c3b[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Dec 19 10:21:39 2023 +0700
+
+    fix: #21 Bo tròn khung avatar
+
+[33mcommit f5bc11debe012091dbd124372e06c3d270239676[m
+Merge: ddd1a3b 347f96a
+Author: LeVanAnhDuc <138034754+LeVanAnhDuc@users.noreply.github.com>
+Date:   Sat Dec 16 20:36:47 2023 +0700
+
+    Merge pull request #20 from LeVanAnhDuc/feature/custom
+    
+    show description with pre-line
+
+[33mcommit 347f96a9edf8baabd2d97ef1a274141ea59b44df[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Sat Dec 16 15:23:57 2023 +0700
+
+    show description with pre-line
+
+[33mcommit ddd1a3bb0ed03209fb03e5eea342d85c25ade660[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Dec 15 23:54:06 2023 +0700
+
+    update code to deloy
+
+[33mcommit 4abe49b4b0ea551772d563b7b0a0db47a48773ff[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Dec 13 16:05:45 2023 +0700
+
+    fix : bug UI
+
+[33mcommit aaac78c6eb5cb02f7d989198f4037d4a12a16f51[m
+Merge: 6acf24a 81963e7
+Author: LeVanAnhDuc <138034754+LeVanAnhDuc@users.noreply.github.com>
+Date:   Wed Dec 13 11:02:56 2023 +0700
+
+    Merge pull request #5 from LeVanAnhDuc/feature/custom
+    
+    custom UI purchase history
+
+[33mcommit 81963e7dadb51633fc648c5b71f685dff7525c77[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Sun Dec 10 16:48:53 2023 +0700
+
+    custom purchase history
+
+[33mcommit 6acf24abb0e3d0932863c78f004e41f0414afb28[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Dec 9 13:09:37 2023 +0700
+
+    detail bill
+
+[33mcommit 0fc360367ed44953b94129bca853e134311b18c4[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Dec 8 20:20:40 2023 +0700
+
+    update UI and done payment bill
+
+[33mcommit df02edfaf58a61fd62247cc4073e79aff28a72f9[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Dec 6 09:55:11 2023 +0700
+
+    update code payment for status waiting, fix scroll UX, custom again footer
+
+[33mcommit f596be988982a63a2d32bee3ea4c75e8d2a9e046[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Dec 5 20:37:42 2023 +0700
+
+    update code UI 'show favoriteCount'
+
+[33mcommit b4be65c7d7fa875b7f6868046624c14685aba007[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Dec 4 21:32:27 2023 +0700
+
+    update code footer
+
+[33mcommit 15f9558703f8fced9f086084afa7f8423608e105[m
+Author: LrVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Dec 4 21:13:49 2023 +0700
+
+    update api and fix bug scroll
+
+[33mcommit 1d110aaa84debdea6df33468be14c89a617aca58[m
+Merge: 7f500ec 6bd2189
+Author: LeVanAnhDuc <138034754+LeVanAnhDuc@users.noreply.github.com>
+Date:   Mon Dec 4 20:15:17 2023 +0700
+
+    Merge pull request #4 from LeVanAnhDuc/feature/product-detail
+    
+    fix: show optionvalues failed
+
+[33mcommit 6bd2189ee70b020b31e7681b5e2bb89026c4f6f8[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Sun Dec 3 01:41:31 2023 +0700
+
+    fix: show optionvalues failed
+
+[33mcommit 7f500ec4a9ffb5573657c574a8fe86895d010839[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Dec 2 12:54:51 2023 +0700
+
+    updaUI Video
+
+[33mcommit d84833307aa01ae11a35a01bcc22ac3cb0f6cf54[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Dec 1 16:10:22 2023 +0700
+
+    check token
+
+[33mcommit b98ce8c0660a5ad4c4c52a46817f26769e3a8a54[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Dec 1 15:52:20 2023 +0700
+
+    handle Logic next page listProduct with cateName
+
+[33mcommit d395b2cd9fd45da2ce7582f1cabb1fe46c98fc06[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Dec 1 15:03:18 2023 +0700
+
+    Lấy danh sách sản phẩm liên quan trong trang chi tiết sản phẩm, gọi hàm search product → đưa tên category của product hiện tại vô param cate ?(tên category lúc trả ra sản phẩm có) → cho hiện thị tầm 12 hoặc 16 sản phẩm (3 or 4 hàng theo loại 4 cột 1 hàng)
+
+[33mcommit f0dbc3ec74f752835d5293d3dd50ce5331a7cc3d[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Dec 1 14:30:57 2023 +0700
+
+    update UI
+    -khi yêu thích sản phẩm thì kiểm tra có đăng nhập hay chưa để đưa đến trang đăng nhập
+    - Thêm phân loại cho mỗi review → giá trị lấy từ thuộc tính sku của review
+    - - [x]  Chữ khách hàng này để phần họ và tên nó vô thuộc tính → user.name
+    - - [x]  Lúc đang load danh sách sản phẩm thì cho cái animate quay quay để người dùng biết
+    - đổi thành chữ lưu bên trang đổi mật khẩu + handle số lượng ký tự không nhỏ hơn 8 từ phía fe
+    - đổi thành, Email hoặc tên tài khoản, với cả mấy cái sang tiếng việt (login) ,,.. trang đăng ký cũng v → username để là tên tài khoản
+    - Trang chủ user phần mens womens sang tiếng việt\
+    - Lúc bấm quên mật khẩu thì chuyển tới trang chỉ có chổ nhập email thôi  → gửi mã thành công thì có chổ nhập opt , chổ nhập email. → xác thực otp thành công thì hiện thêm 2 chổ để nhập mật khẩu, 1 chổ là chưa đủ
+
+[33mcommit 27011d73d9a160db3d443518b759f7da4f988330[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 29 10:25:34 2023 +0700
+
+    fix bug update avatar
+
+[33mcommit ecbc65847014c750fe321601510609bfc9f04e10[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Nov 28 23:28:51 2023 +0700
+
+    handle number of icon cart and wishlist
+
+[33mcommit 58a1c8c20630ecfa8ee332b02024244e8bff1626[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Nov 28 23:08:25 2023 +0700
+
+    update upload avatar, forgot pass, and UI
+
+[33mcommit 299701b99fccbb5469f244d19e9b8fb24d5713e3[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Nov 28 17:54:35 2023 +0700
+
+    update v2
+
+[33mcommit 2324e1167d10e5d58ec226113f28e2c0d1e5bf0d[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Nov 27 20:22:22 2023 +0700
+
+    update UI
+
+[33mcommit a7ed44efa7bc0180082628dd6303b248c831f228[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Nov 27 15:28:20 2023 +0700
+
+    Review product
+
+[33mcommit 72a3ee783913d49a1173190488072e46e6b0ba27[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Nov 27 11:16:28 2023 +0700
+
+    update code
+
+[33mcommit f1ce546a168a4885ce5922ded479f247354e3ca9[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Nov 27 11:14:53 2023 +0700
+
+    filter user
+
+[33mcommit c5b781eab3697dacc9125d1b489508a4b1cfc862[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Nov 26 11:31:39 2023 +0700
+
+    update HistoryPurchase UI
+
+[33mcommit d6c2130ee8409d7505d10f15cf411fceb30c3e19[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Nov 26 10:56:58 2023 +0700
+
+    update filter order
+
+[33mcommit dc188de54b632d5833e4b68cf3ad518040bc3146[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Nov 26 10:24:44 2023 +0700
+
+    handle addreview
+
+[33mcommit 470f83150fca06f3feb9974f9b55209c91608b20[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Nov 24 23:08:41 2023 +0700
+
+    update v2
+
+[33mcommit 56563659305f204342b986ea61e13ec1f3710282[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Nov 24 22:09:20 2023 +0700
+
+    handle logic khi không có địa chỉ
+    handle favourite
+    handle change price khi đổi size và color
+
+[33mcommit 6719e82e378af0214be331386800952bda5d7dc6[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Nov 24 11:51:59 2023 +0700
+
+    update UI
+
+[33mcommit 300656ed16dbe5bb6abd468c0dfd613c7786333c[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Nov 19 00:21:21 2023 +0700
+
+    call total price
+    handle gender
+    status in history order
+    warnning change pass Page
+    disable nut thanh toan khi khong co san pham
+    trang khong co san pham thi handle thong bao
+
+[33mcommit 217074e924919f5082db3800fda7186553c2e55f[m
+Merge: 30e9dfb 67cfa3c
+Author: Chhin Hua <86371524+chhinhua@users.noreply.github.com>
+Date:   Sat Nov 18 22:39:52 2023 +0700
+
+    Merge pull request #3 from LeVanAnhDuc/hua
+    
+    merge branch hua
+
+[33mcommit 67cfa3c0e4386d365c144f04ea0331ba739c4e99[m
+Author: Chhin Hua <86371524+chhinhua@users.noreply.github.com>
+Date:   Sat Nov 18 22:39:24 2023 +0700
+
+    Update CheckOut.tsx
+
+[33mcommit 1c98fe7dfc591da6c9846cc59bebfaec497fd502[m
+Merge: c1d6ce5 30e9dfb
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Sat Nov 18 22:24:45 2023 +0700
+
+    update somthing
+
+[33mcommit 30e9dfb2e2f78262b22f80e6bbd668e6f640dce0[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Nov 18 13:19:15 2023 +0700
+
+    handle change Pass, call api update address, handle VNP in checkout, detail product in cart, update title and icon web
+
+[33mcommit c1d6ce5a2642f88f60a3b8d4a6609c5122a452d8[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Sat Nov 18 12:03:12 2023 +0700
+
+    custom message change pass
+
+[33mcommit de54c1d2d7ec1c168625dc4a5abec5ecc2b51337[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Sat Nov 18 00:05:14 2023 +0700
+
+    update somthing
+
+[33mcommit b31db7ff3dfd28ee34bf05f2c1d248ba0daf420c[m
+Author: Chhin Hua <chhinhua@gmail.com>
+Date:   Fri Nov 17 20:16:13 2023 +0700
+
+    handle vnpay checkout
+
+[33mcommit 84087160075bbfca0aabca064d06b43a8ef512aa[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Nov 17 13:13:38 2023 +0700
+
+    update UI
+
+[33mcommit 82d9fa39c205620665a9559abb3506d780bc01f9[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Fri Nov 17 09:44:28 2023 +0700
+
+    add delete address
+
+[33mcommit e4a125ded5d99b4d7e32cf287b23421a62391670[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Nov 16 17:15:32 2023 +0700
+
+    update UI
+
+[33mcommit aba9cd370f9710a627f30cb92068ffeee7bc2da7[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Nov 16 16:28:22 2023 +0700
+
+    done checkoutPage
+
+[33mcommit 4067862916ea0158f9fcdf21aebf3b43ab87a5b5[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Nov 16 11:10:16 2023 +0700
+
+    update v2 setting info
+
+[33mcommit bf80b10b16c006c00019c05c5c5475165c548ce9[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Nov 16 11:08:56 2023 +0700
+
+    setting Profile
+
+[33mcommit ce9d7ff9961a906ee9baa205b564170e2992d421[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Nov 16 00:48:05 2023 +0700
+
+    done page PurchaseHistory
+
+[33mcommit 9778cbafc90dd29063722ee9476af52518825f8f[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 15 23:59:23 2023 +0700
+
+    create , update , get list pageAddress
+
+[33mcommit 75992305ac7a792aa25e42b20caeea40eb8d593b[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 15 21:52:30 2023 +0700
+
+    handle totalItemOfCart and logic login
+
+[33mcommit 06ca2fe789674f6bd7d8755ff0c43bc03ef61356[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 15 20:29:06 2023 +0700
+
+    done cartPage
+
+[33mcommit 729e892541dd5745c7a9025dfec8e8eed0d4758e[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 15 17:10:52 2023 +0700
+
+    insert deleteProductCart and changeQuantity
+
+[33mcommit aa69e18a48d586c67dedde6b93b066bc6df5cc22[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 15 01:09:25 2023 +0700
+
+    update Ui cart
+
+[33mcommit 6f9fc89d3d0bde8490fdee00ea0f07f6e883f4f4[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Nov 14 23:23:49 2023 +0700
+
+    done Page detailProduct and fix cardProduct
+
+[33mcommit 629ea6d6b5e28338a5835c3d7812647a09254715[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Nov 14 22:02:28 2023 +0700
+
+    repair UI checkout page
+    call api addToCart in CardProduct
+
+[33mcommit 5cc52bccc49f2a18a7d594613074f2d31f542518[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Nov 13 22:13:14 2023 +0700
+
+    update lan  2 (loi)
+
+[33mcommit 1856c5966ee7fb5ccd64e9fdfba2789bd684c034[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sun Nov 12 10:47:36 2023 +0700
+
+    login register
+
+[33mcommit 104d50a8d1d69558c14328b6f1b885094705c2b4[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Nov 8 16:06:55 2023 +0700
+
+    update code
+
+[33mcommit 8637bc4ca2ee2387ec64bad06b747821013b8478[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Nov 6 09:52:48 2023 +0700
+
+    done UI page manager user
+
+[33mcommit 663e5139cde723faade2b7b30383cea5631ac905[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Oct 25 01:35:33 2023 +0700
+
+    Done UI and Responsive Checkout Pag
+
+[33mcommit 520ea530fb9847f79ff7abdb0e9445772c70a8d2[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Oct 25 00:17:47 2023 +0700
+
+    done UI and responsive Page Cart
+
+[33mcommit 75dcf5eb2bbfffefa41fe9f584321771645e891b[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Tue Oct 24 22:48:34 2023 +0700
+
+    done UI and validate of Page LogIn and Register
+
+[33mcommit e37b9c87e6d31b687d1a68fb379265c4d3488fb7[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Oct 23 15:23:55 2023 +0700
+
+    Restructuring the entire project
+
+[33mcommit 6ac58640efab3fdcce076691464e1928748aaa13[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Oct 19 21:40:42 2023 +0700
+
+    Done DetailProduct Page
+
+[33mcommit a5e509304fc8986f0278b1f4f8ceb2c80ff33932[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Oct 18 22:47:23 2023 +0700
+
+    Done Page ListProducts
+    create componant Card and Button
+
+[33mcommit d94045117d1e7d108410f1f8a8944c97f228a15a[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Wed Oct 11 00:18:22 2023 +0700
+
+    - Update UI LandingPage by animation
+    - Create Page ListProducts
+
+[33mcommit 4a4aba7796d098b1869f6c2b9032dfeae41c926e[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Sat Oct 7 01:18:49 2023 +0700
+
+    Done figure LandingPage
+
+[33mcommit 86f140f3c4fd9ffa339fd962d615791dfa475dc1[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Oct 5 23:17:57 2023 +0700
+
+    - Create footer (responsive)
+
+[33mcommit 21094ae0b52326a2de2081fe5ab3e857d090d3f5[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Thu Oct 5 20:52:36 2023 +0700
+
+    - import tailwind and mui
+    - Create header (responsive)
+
+[33mcommit cf23345cb8631277c02430ba42dde458b90515c4[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Oct 2 21:56:25 2023 +0700
+
+    Cấu hình web theo chiều dọc
+
+[33mcommit dca0c3b919573a23cb15ba2aed9c7818e4f29674[m
+Author: LeVanAnhDuc <levananhduc1804@gmail.com>
+Date:   Mon Oct 2 21:28:58 2023 +0700
+
+    first commit

@@ -28,9 +28,6 @@ const BreadcrumbsAction = ({ idProduct }: { idProduct?: string }) => {
                 <AnimationTran tranY={-50}>{t('orderDetails')}</AnimationTran>
                 <AnimationTran tranY={50}>{idProduct}</AnimationTran>
             </Breadcrumbs>
-            <Button variant="fill" onClick={() => navigate(config.Routes.profileHistoryPaymentProfile)}>
-                <ExitToApp className="rotate-180" />
-            </Button>
         </div>
     );
 };
