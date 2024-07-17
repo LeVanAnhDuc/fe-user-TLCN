@@ -2,8 +2,7 @@
 import Modal from '@mui/material/Modal';
 import StarIcon from '@mui/icons-material/Star';
 import Rating from '@mui/material/Rating';
-import TextField from '@mui/material/TextField';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,6 +17,7 @@ import { actionProduct } from '@/types/product';
 // components
 import Button from '@/components/Button';
 import Image from '@/components/Image';
+import TextEditer from '@/components/TextEditer';
 // apis
 import { addReview } from '@/apis/reviewApi';
 import { updateProductAnalysis } from '@/apis/productApi';
@@ -58,20 +58,16 @@ const ModalReview = (propsCh: IPropsAddress) => {
     const [valueRating, setValueRating] = useState<number>(5);
     const [hoverRating, setHoverRating] = useState(-1);
     const [isLoadingAPI, setLoadingAPI] = useState<boolean>(false);
+    const [description, setDescription] = useState<string>('');
 
-    const {
-        control,
-        handleSubmit,
-        setValue,
-        formState: { errors },
-    } = useForm<FormData>({
+    const { handleSubmit, setValue } = useForm<FormData>({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const onSubmit: SubmitHandler<FormData> = async () => {
         if (orderItem) {
             const objectUpdate: IreviewOrder = {
-                content: data.content || '',
+                content: description || '',
                 stars: valueRating,
                 itemId: orderItem.id,
                 productId: orderItem.product.id,
@@ -107,9 +103,20 @@ const ModalReview = (propsCh: IPropsAddress) => {
 
     return (
         <div>
+            <style>
+                {` /* Trình soạn thảo ReactQuill */
+                    .ql-editor {
+                        min-height: 16rem;
+                        overflow-y: auto;
+                        border: 1px solid #ccc;
+                        padding: 1rem;
+                        font-size: 1rem;
+                        background: #fff;
+                }`}
+            </style>
             <Modal open={open} onClose={handleClose}>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 lg:w-8/12 bg-white rounded-lg p-8 space-y-10 dark:bg-dark-500">
-                    <div className="size-full grid grid-cols-12 gap-1 overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 lg:w-10/12 overflow-y-auto max-h-[90%] bg-white rounded-lg p-8 space-y-10 dark:bg-dark-500">
+                    <div className="size-full grid grid-cols-12 gap-1">
                         <Image
                             src={orderItem?.imageUrl || ''}
                             alt={'image' + orderItem?.product.name}
@@ -153,7 +160,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                             </div>
                         </div>
                     </div>
-                    <form onSubmit={handleSubmit(onSubmit)} className=" space-y-5">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                         <div className="flex items-center gap-5">
                             <span>{t('rate')}:</span>
                             <Rating
@@ -176,23 +183,7 @@ const ModalReview = (propsCh: IPropsAddress) => {
                             )}
                         </div>
 
-                        <>
-                            <Controller
-                                name="content"
-                                control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        error={errors.content ? true : false}
-                                        multiline
-                                        minRows={9}
-                                        fullWidth
-                                        label={t('productReview')}
-                                    />
-                                )}
-                            />
-                            <p className="text-red-600 text-sm mt-1.5">{errors.content?.message}</p>
-                        </>
+                        <TextEditer value={description} setValue={setDescription} />
 
                         <div className="flex justify-end">
                             <Button className="w-40" variant="text" onClick={handleClose}>
