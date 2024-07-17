@@ -1,32 +1,19 @@
 // libs
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import MuiToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // types
 import { IOrderCheckOut } from '@/types/order';
 import IAddress from '@/types/address';
-import IProductCart from '@/types/productCart';
-import { IProductCheckout } from '@/types/product';
 // components
-import Button from '@/components/Button';
-import AnimationScale from '@/components/AnimationScale';
-import AnimationTran from '@/components/AnimationTran';
+import PageLoading from '@/components/PageLoading';
 import ProductsPurchase from './mains/ProductsPurchase';
 import PriceTotal from './mains/PriceTotal';
+
 
 import VnpayIcon from '@/components/icons/VnpayIcon';
 import CodIcon from '@/components/icons/CodIcon';
@@ -34,38 +21,19 @@ import CodIcon from '@/components/icons/CodIcon';
 // apis
 import { addOrderByToken, makePaymentAgainByToken } from '@/apis/orderApi';
 import { checkOutVNPay, makePaymentVNPay } from '@/apis/vnpayApi';
+
 // redux
-import {
-    selectProductsCart,
-    selectProductsPurchaseCart,
-    setItemsOfCart,
-    setProductsPurchase,
-    setToTalPriceCart,
-    setToTalProductCart,
-} from '../Cart/cartSlice';
+import { selectProductsCart, selectProductsPurchaseCart, setProductsPurchase } from '../Cart/cartSlice';
 // ghosts
 import GetAddressOrInfoOderWaiting from './ghosts/GetAddressOrInfoOderWaiting';
 import GetPriceProduct from './ghosts/GetPriceProduct';
 import GetFeeShipping from './ghosts/GetFeeShipping';
 // others
-import config from '@/config';
-
-const ToggleButton = styled(MuiToggleButton)({
-    '&.Mui-selected': {
-        backgroundColor: '#b2ebf2',
-        color: 'black',
-        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        border: '2px solid #0097a7',
-    },
-    ' &.Mui-selected:hover': {
-        backgroundColor: '#80deea',
-    },
-});
+import CheckoutForm from './mains/CheckoutForm';
 
 const Pay = () => {
     const location = useLocation();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const productsPurchase = useSelector(selectProductsPurchaseCart);
     const productsCart = useSelector(selectProductsCart);
     const { t } = useTranslation('checkOut');
@@ -79,6 +47,7 @@ const Pay = () => {
     const [addresses, setAddresses] = useState<Array<IAddress>>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [feePrice, setFeePrice] = useState<number>(0);
+    const [loadingAPIs, setLoadingAPIs] = useState<boolean>(false);
 
     const schema = yup.object().shape({
         paymentType: yup.string().required(t('paymentsIsRequired')),
@@ -97,114 +66,6 @@ const Pay = () => {
     });
 
     const watchedAddressId = watch('addressId');
-
-    const handleCreateOrder = async (
-        subTotal: number = 0,
-        paymentType: string = '',
-        note: string = '',
-        addressId: number = 0,
-        shippingFee: number = 0,
-        total: number = 0,
-    ) => {
-        try {
-            const orderItems: IProductCheckout[] = productsPurchase.map((item) => ({
-                price: item.price,
-                quantity: item.quantity,
-                subTotal: item.subTotal,
-                productId: item.product.id,
-                skuId: item.sku.skuId,
-                imageUrl: item.imageUrl,
-            }));
-
-            const productsInCart: IProductCart[] = productsCart.filter(
-                (item1) => !productsPurchase.some((item2) => item1.id === item2.id),
-            );
-            const priceCart = productsInCart.reduce((sum, value) => sum + value.subTotal, 0);
-
-            const response = await addOrderByToken({
-                subTotal,
-                paymentType,
-                note,
-                addressId,
-                shippingFee,
-                total,
-                orderItems,
-            });
-
-            if (response?.status === 201) {
-                dispatch(setToTalProductCart(productsInCart.length));
-                dispatch(setItemsOfCart(productsInCart));
-                dispatch(setToTalPriceCart(priceCart));
-                dispatch(setProductsPurchase([]));
-            } else {
-                toast.error(response?.data.message || response?.data);
-            }
-
-            return response.data;
-        } catch (error) {
-            console.log(`${error}`);
-        }
-    };
-
-    const onSubmit: SubmitHandler<IOrderCheckOut> = async (data) => {
-        let PaymentType: string = '';
-
-        if (data.paymentType === config.PaymentType.CashOnDelivery) {
-            PaymentType = 'COD';
-            try {
-                if (idOrder) {
-                    const response = await makePaymentAgainByToken(+idOrder, {
-                        total: totalPrice,
-                        paymentType: PaymentType,
-                        note: data.note,
-                        addressId: data.addressId,
-                    });
-
-                    if (response?.status === 200) {
-                        toast.success(t('orderIsSuccess'));
-                        navigate(`${config.Routes.detailOrder}/${response.data.id}`);
-                    } else {
-                        toast.error(response?.data.message || response?.data);
-                    }
-                } else {
-                    const response = await handleCreateOrder(
-                        totalPrice,
-                        PaymentType,
-                        data.note,
-                        data.addressId,
-                        feePrice,
-                        feePrice + totalPrice,
-                    );
-                    toast.success(t('orderIsSuccess'));
-                    navigate(`${config.Routes.detailOrder}/${response.id}`);
-                }
-            } catch (error) {
-                toast.error(`${error}`);
-            }
-        } else {
-            PaymentType = 'VN_PAY';
-            try {
-                if (idOrder) {
-                    const redirectURL = makePaymentVNPay(totalPrice, +idOrder, data.addressId, data.note);
-                    window.location.href = redirectURL;
-                } else {
-                    const response = await handleCreateOrder(
-                        totalPrice,
-                        PaymentType,
-                        data.note,
-                        data.addressId,
-                        feePrice,
-                        feePrice + totalPrice,
-                    );
-
-                    const redirectURL = await checkOutVNPay(response.id);
-                    window.location.href = redirectURL;
-                }
-            } catch (error) {
-                toast.error(`${error}`);
-            }
-        }
-    };
 
     return (
         <>
@@ -227,11 +88,14 @@ const Pay = () => {
                 }}
             />
 
-            <section className="bg-gray-100 py-5 sm:py-10 dark:bg-dark-400">
-                <div className="sm:w-10/12 w-11/12 m-auto flex justify-center">
+            <section className="bg-gray-100 dark:bg-dark-400">
+                {loadingAPIs && <PageLoading />}
+
+                <div className="sm:w-10/12 w-11/12 m-auto flex justify-center py-5 sm:py-10">
                     <div className="grid lg:grid-cols-5 gap-10">
                         <div className="lg:col-span-3 space-y-4">
                             <ProductsPurchase />
+
 
                             <div className="space-y-3 bg-white p-5 sm:p-10 rounded-lg dark:bg-dark-600">
                                 <div className="font-semibold text-xl">{t('yourContact')} ?</div>
@@ -355,6 +219,22 @@ const Pay = () => {
                                     </AnimationScale>
                                 </form>
                             </div>
+
+                            <CheckoutForm
+                                {...{
+                                    productsPurchase,
+                                    productsCart,
+                                    setLoadingAPIs,
+                                    idOrder,
+                                    feePrice,
+                                    totalPrice,
+                                    handleSubmit,
+                                    control,
+                                    errors,
+                                    addresses,
+                                }}
+                            />
+
                         </div>
 
                         <div className="space-y-5 lg:col-span-2 bg-white h-fit p-5 sm:p-10 rounded-lg sticky top-20 dark:bg-dark-600">

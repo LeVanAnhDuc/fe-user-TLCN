@@ -75,7 +75,7 @@ const Form = ({
                 toast.success(t('registerSuccessful'));
                 navigate(config.Routes.getOTPRegister);
             } else {
-                toast.error(t('registerFailed'));
+                toast.error(response.data.message || response.data);
             }
         } catch (error) {
             toast.error(t('registerFailed'));
