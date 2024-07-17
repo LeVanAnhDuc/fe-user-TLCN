@@ -27,6 +27,10 @@ import AnimationScale from '@/components/AnimationScale';
 import AnimationTran from '@/components/AnimationTran';
 import ProductsPurchase from './mains/ProductsPurchase';
 import PriceTotal from './mains/PriceTotal';
+
+import VnpayIcon from '@/components/icons/VnpayIcon';
+import CodIcon from '@/components/icons/CodIcon';
+
 // apis
 import { addOrderByToken, makePaymentAgainByToken } from '@/apis/orderApi';
 import { checkOutVNPay, makePaymentVNPay } from '@/apis/vnpayApi';
@@ -245,19 +249,21 @@ const Pay = () => {
                                                     fullWidth
                                                     className={`${
                                                         errors.paymentType ? 'border-2 border-red-400' : ''
-                                                    } !bg-white dark:!bg-dark-600 min-h-12 space-x-3`}
+                                                    } !bg-white dark:!bg-dark-600 max-h-10 min-h-10 space-x-6`}
                                                 >
                                                     <ToggleButton
                                                         className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
                                                         value={config.PaymentType.VNPay}
                                                     >
-                                                        {t('vnPay')}
+                                                        <span className='font-md text-black'>{t('vnPay')}</span> 
+                                                        <VnpayIcon/>
                                                     </ToggleButton>
                                                     <ToggleButton
                                                         className="!normal-case !text-sm h-14 !rounded-md !border-2 !border-gray-300 dark:!border-gray-600"
                                                         value={config.PaymentType.CashOnDelivery}
                                                     >
-                                                        {t('cashOnDelivery')}
+                                                        <span className='font-md text-black'>{t('cashOnDelivery')}</span> 
+                                                        <CodIcon/>
                                                     </ToggleButton>
                                                 </ToggleButtonGroup>
                                             )}
@@ -267,6 +273,7 @@ const Pay = () => {
                                         </p>
                                     </AnimationTran>
 
+                                    <div className="space-y-2 my-5 font-bold">{t('deliveryAddress')}</div>
                                     {addresses.length > 0 ? (
                                         <AnimationTran tranY={100} delay={0.05}>
                                             <Controller
@@ -329,8 +336,9 @@ const Pay = () => {
                                                     {...field}
                                                     error={errors.note ? true : false}
                                                     fullWidth
+                                                    
                                                     multiline
-                                                    rows={9}
+                                                    rows={4}
                                                     label={t('enterNote')}
                                                 />
                                             )}
